@@ -633,3 +633,60 @@ test('MCP Discovery: GET /.well-known/mcp.json serves Model Context Protocol too
   assert.strictEqual(names.includes('solana_risk'), true);
 });
 
+test('MCP Streamable Server: POST /mcp answers JSON-RPC initialize handshake', async () => {
+  const req = new Request('http://localhost/mcp', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'initialize',
+      params: { protocolVersion: '2024-11-05', clientInfo: { name: 'claude-code', version: '1.0' } }
+    })
+  });
+  const res = await worker.fetch(req, { LIGHTNING_ADDRESS: 'diogenesagent@coinos.io' });
+  assert.strictEqual(res.status, 200);
+  const rpc = await res.json();
+  assert.strictEqual(rpc.jsonrpc, '2.0');
+  assert.strictEqual(rpc.id, 1);
+  assert.strictEqual(rpc.result.protocolVersion, '2024-11-05');
+  assert.strictEqual(rpc.result.serverInfo.name, 'diogenes-edge-gateway');
+});
+
+test('MCP Streamable Server: POST /mcp answers tools/list and tools/call', async () => {
+  // tools/list
+  const listReq = new Request('http://localhost/mcp', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ jsonrpc: '2.0', id: 2, method: 'tools/list', params: {} })
+  });
+  const listRes = await worker.fetch(listReq, { LIGHTNING_ADDRESS: 'diogenesagent@coinos.io' });
+  assert.strictEqual(listRes.status, 200);
+  const listBody = await listRes.json();
+  assert.strictEqual(Array.isArray(listBody.result.tools), true);
+  assert.strictEqual(listBody.result.tools.length >= 9, true);
+
+  // tools/call
+  const callReq = new Request('http://localhost/mcp', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 3,
+      method: 'tools/call',
+      params: { name: 'guardrail_verify', arguments: { payload: 'echo hello' } }
+    })
+  });
+  const callRes = await worker.fetch(callReq, { LIGHTNING_ADDRESS: 'diogenesagent@coinos.io' });
+  assert.strictEqual(callRes.status, 200);
+  const callBody = await callRes.json();
+  assert.strictEqual(callBody.jsonrpc, '2.0');
+  assert.strictEqual(callBody.id, 3);
+  assert.strictEqual(Array.isArray(callBody.result.content), true);
+  assert.strictEqual(callBody.result.content[0].type, 'text');
+  const parsed = JSON.parse(callBody.result.content[0].text);
+  assert.strictEqual(parsed.verdict, 'APPROVED');
+  assert.strictEqual(parsed.allowed, true);
+});
+
+
