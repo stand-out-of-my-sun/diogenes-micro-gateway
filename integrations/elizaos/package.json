@@ -1,0 +1,25 @@
+{
+  "name": "@elizaos/plugin-diogenes",
+  "version": "1.0.0",
+  "description": "Diogenes Autonomous Multi-Protocol Security & Verification Plugin for ElizaOS agents",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "dependencies": {},
+  "peerDependencies": {
+    "@elizaos/core": ">=0.1.8"
+  },
+  "keywords": [
+    "elizaos",
+    "elizaos-plugin",
+    "ai-agent",
+    "solana",
+    "security",
+    "honeypot",
+    "l402",
+    "guardrails"
+  ],
+  "author": "Diogenes Autonomous System",
+  "license": "MIT"
+}

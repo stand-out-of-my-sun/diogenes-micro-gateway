@@ -3,7 +3,9 @@
 [![Gateway Live](https://img.shields.io/badge/Gateway-Live%20on%20Cloudflare-06b6d4?style=flat-square&logo=cloudflare)](https://diogenes-l402-gateway.corinth.workers.dev)
 [![Endpoints](https://img.shields.io/badge/Endpoints-35%20Microservices-10b981?style=flat-square)](https://diogenes-l402-gateway.corinth.workers.dev)
 [![Protocols](https://img.shields.io/badge/Protocols-L402%20%7C%20x402%20%7C%20MPP%20%7C%20MCP-f59e0b?style=flat-square)](https://diogenes-l402-gateway.corinth.workers.dev)
+[![MCP PR #2108](https://img.shields.io/badge/Awesome--MCP--Servers-PR%20%232108-blue?style=flat-square&logo=github)](https://github.com/punkpeye/awesome-remote-mcp-servers/pull/2108)
 [![402Index Verified](https://img.shields.io/badge/402Index-Domain%20Verified-8b5cf6?style=flat-square)](https://402index.io)
+[![Nostr NIP-05](https://img.shields.io/badge/Nostr-Verified%20NIP--05-9333ea?style=flat-square&logo=nostr)](https://primal.net/e/note1zgyzaxyjzedu6c04mk63sdehvfv3w35jvm02ywcdpweq7jf54nxseaueh9)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gray?style=flat-square)](LICENSE)
 
 > **Zero API keys. Zero subscriptions. Instant pay-per-request intelligence for autonomous AI agents.**  
@@ -18,12 +20,13 @@
    - **L402 (Lightning)**: Instant micro-satoshi payments via BOLT11 preimage verification.
    - **x402 (Solana)**: Stateless HTTP 402 micropayments in USDC or SOL.
    - **MPP (Base EVM)**: Machine Payments Protocol streaming and session metering.
-3. **Model Context Protocol (MCP) Native**: Direct tool ingestion for Claude, Cursor, and LangChain via `/.well-known/mcp.json`.
-4. **Instant Zero-Token Demo Mode**: Every single endpoint includes `?demo=true` for local testing, integration validation, and unit tests without spending funds.
+3. **Model Context Protocol (MCP) Native**: Streamable JSON-RPC 2.0 server at `https://diogenes-l402-gateway.corinth.workers.dev/mcp` and tool manifest at `/.well-known/mcp.json`.
+4. **Agent Framework Ecosystem**: First-class drop-in plugins for **ElizaOS** (`integrations/elizaos`) and **LangChain / CrewAI** (`integrations/langchain`).
+5. **Instant Zero-Token Demo Mode**: Every single endpoint includes `?demo=true` for local testing, integration validation, and unit tests without spending funds.
 
 ---
 
-## ⚡ Quickstart
+## ⚡ Integrations & Quickstart
 
 ### 1. Model Context Protocol (Claude Desktop / Cursor / Antigravity)
 Add this to your Claude Desktop configuration (`claude_desktop_config.json`) or Cursor MCP settings:
@@ -32,14 +35,60 @@ Add this to your Claude Desktop configuration (`claude_desktop_config.json`) or 
 {
   "mcpServers": {
     "diogenes": {
-      "url": "https://diogenes-l402-gateway.corinth.workers.dev/.well-known/mcp.json"
+      "url": "https://diogenes-l402-gateway.corinth.workers.dev/mcp"
     }
   }
 }
 ```
 
-### 2. Python SDK (`diogenes_client.py`)
-Drop [`diogenes_client.py`](diogenes_client.py) into your project. Zero external dependencies:
+Verify streamable handshake with cURL:
+```bash
+curl -s -X POST "https://diogenes-l402-gateway.corinth.workers.dev/mcp" \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2024-11-05"}}'
+```
+
+---
+
+### 2. ElizaOS Agent Plugin (`@elizaos/plugin-diogenes`)
+Equip your ElizaOS autonomous agents with Diogenes security guardrails and Solana token risk evaluations:
+
+```typescript
+import { diogenesPlugin } from "./integrations/elizaos";
+
+export const character = {
+  name: "AutonomousTrader",
+  plugins: [diogenesPlugin],
+  // ...
+};
+```
+
+---
+
+### 3. LangChain & CrewAI Tools (`integrations/langchain`)
+Import ready-to-use tools for Python agent workflows:
+
+```python
+from integrations.langchain.diogenes_tools import (
+    DiogenesGuardrailTool,
+    DiogenesContractAuditTool,
+    DiogenesSolanaRiskTool,
+    DiogenesJSONRepairTool,
+)
+
+guardrail_tool = DiogenesGuardrailTool(demo=True)
+audit_tool = DiogenesContractAuditTool(demo=True)
+solana_oracle = DiogenesSolanaRiskTool(demo=True)
+
+# Pre-execution safety gate
+verdict = guardrail_tool.run(action="transfer 5 SOL to unknown recipient")
+print(verdict)
+```
+
+---
+
+### 4. Zero-Dependency Python SDK (`diogenes_client.py`)
+Drop [`diogenes_client.py`](diogenes_client.py) into your project:
 
 ```python
 from diogenes_client import DiogenesClient
@@ -51,30 +100,28 @@ result = client.guardrail_verify("rm -rf /", demo=True)
 print(result)
 
 # 2. Smart contract rugpull & honeypot audit
-audit = client.contract_audit("contract Token { ... }", network="base", demo=True)
+audit = client.contract_audit("contract Token { ... }", demo=True)
 print(audit)
 
 # 3. Solana SPL Token Risk & Freeze Authority Oracle
 risk = client.solana_risk("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", demo=True)
 print(risk)
-
-# 4. Synthesize ReDoS-safe Regular Expression
-regex = client.regex_oracle("parse standard ISO 8601 timestamps", demo=True)
-print(regex)
 ```
 
-### 3. cURL (Instant Demo Preview)
+---
+
+### 5. cURL (Instant Demo Preview)
 
 ```bash
 # Guardrail Security Gate
 curl -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/agent/guardrail-verify?demo=true" \
   -H "Content-Type: application/json" \
-  -d '{"payload": "check system safety"}'
+  -d '{"action": "check system safety"}'
 
 # Smart Contract Security Auditor
 curl -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/agent/contract-audit?demo=true" \
   -H "Content-Type: application/json" \
-  -d '{"code": "contract Vulnerable { function withdraw() public { ... } }"}'
+  -d '{"contract_source": "contract Vulnerable { function withdraw() public { ... } }"}'
 ```
 
 ---
@@ -129,6 +176,7 @@ curl -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/agent/con
 
 - **Developer Portal**: [https://diogenes-l402-gateway.corinth.workers.dev](https://diogenes-l402-gateway.corinth.workers.dev)
 - **Model Context Protocol (MCP)**: [/.well-known/mcp.json](https://diogenes-l402-gateway.corinth.workers.dev/.well-known/mcp.json)
+- **Nostr NIP-05 Identity**: `_@diogenes-l402-gateway.corinth.workers.dev` ([npub1pdxfc9pdzv4ajypnf2827fwm4asjfmccawhnc5c9s3gtaxeswdxstajkk6](https://primal.net/e/note1zgyzaxyjzedu6c04mk63sdehvfv3w35jvm02ywcdpweq7jf54nxseaueh9))
 - **OpenAPI 3.1.0 Spec**: [/openapi.json](https://diogenes-l402-gateway.corinth.workers.dev/openapi.json)
 - **LLM Crawler Manifest**: [/llms.txt](https://diogenes-l402-gateway.corinth.workers.dev/llms.txt)
 - **L402 Services Catalog**: [/.well-known/l402-services](https://diogenes-l402-gateway.corinth.workers.dev/.well-known/l402-services)
