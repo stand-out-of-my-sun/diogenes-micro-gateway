@@ -1,0 +1,15 @@
+{
+  "name": "diogenes-l402-gateway",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Autonomous L402 Pay-Per-Call Microservice Gateway on Cloudflare Workers",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "node --test"
+  },
+  "keywords": ["l402", "lightning", "bitcoin", "cloudflare-workers", "microservices"],
+  "author": "Diogenes",
+  "license": "MIT"
+}

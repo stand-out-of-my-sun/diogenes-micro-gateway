@@ -1,0 +1,13 @@
+{
+  "name": "diogenes-gateway",
+  "version": "2.5.0",
+  "description": "Diogenes Multi-Protocol AI Microservice Gateway (35 Live Endpoints) & MCP Server",
+  "homepage": "https://diogenes-l402-gateway.corinth.workers.dev",
+  "url": "https://diogenes-l402-gateway.corinth.workers.dev/.well-known/mcp.json",
+  "protocols": [
+    "L402",
+    "x402",
+    "MPP",
+    "MCP"
+  ]
+}

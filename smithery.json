@@ -1,0 +1,8 @@
+{
+  "startCommand": {
+    "type": "http",
+    "config": {
+      "url": "https://diogenes-l402-gateway.corinth.workers.dev/.well-known/mcp.json"
+    }
+  }
+}

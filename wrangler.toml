@@ -1,0 +1,14 @@
+name = "diogenes-l402-gateway"
+main = "src/index.ts"
+compatibility_date = "2024-04-05"
+compatibility_flags = ["nodejs_compat"]
+
+[triggers]
+crons = ["*/30 * * * *"]
+
+[vars]
+LIGHTNING_ADDRESS = "diogenesagent@coinos.io"
+COLD_STORAGE_BTC = "YOUR_BITCOIN_COLD_STORAGE_ADDRESS"
+SERVER_SECRET = "YOUR_EDGE_L402_SECRET_KEY"
+COINOS_TOKEN = "YOUR_COINOS_TOKEN_OR_SECRET"
+GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_OR_SECRET"

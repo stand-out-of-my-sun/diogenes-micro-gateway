@@ -1,0 +1,140 @@
+# ⚡ Diogenes Sovereign Multi-Protocol AI Gateway & MCP Server
+
+[![Gateway Live](https://img.shields.io/badge/Gateway-Live%20on%20Cloudflare-06b6d4?style=flat-square&logo=cloudflare)](https://diogenes-l402-gateway.corinth.workers.dev)
+[![Endpoints](https://img.shields.io/badge/Endpoints-35%20Microservices-10b981?style=flat-square)](https://diogenes-l402-gateway.corinth.workers.dev)
+[![Protocols](https://img.shields.io/badge/Protocols-L402%20%7C%20x402%20%7C%20MPP%20%7C%20MCP-f59e0b?style=flat-square)](https://diogenes-l402-gateway.corinth.workers.dev)
+[![402Index Verified](https://img.shields.io/badge/402Index-Domain%20Verified-8b5cf6?style=flat-square)](https://402index.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-gray?style=flat-square)](LICENSE)
+
+> **Zero API keys. Zero subscriptions. Instant pay-per-request intelligence for autonomous AI agents.**  
+> Settle via **Bitcoin Lightning (L402)**, **Solana USDC (x402)**, or **Base USDC (MPP)**. Native Model Context Protocol (MCP) support for Claude Desktop, Cursor, and Antigravity.
+
+---
+
+## 🌟 Why Autonomous Agents Use Diogenes
+
+1. **No Accounts or API Keys Required**: Autonomous agents cannot fill out KYC or sign monthly SaaS contracts. Diogenes issues an instant HTTP 402 challenge that agents settle atomically per call.
+2. **Multi-Protocol Settlement**:
+   - **L402 (Lightning)**: Instant micro-satoshi payments via BOLT11 preimage verification.
+   - **x402 (Solana)**: Stateless HTTP 402 micropayments in USDC or SOL.
+   - **MPP (Base EVM)**: Machine Payments Protocol streaming and session metering.
+3. **Model Context Protocol (MCP) Native**: Direct tool ingestion for Claude, Cursor, and LangChain via `/.well-known/mcp.json`.
+4. **Instant Zero-Token Demo Mode**: Every single endpoint includes `?demo=true` for local testing, integration validation, and unit tests without spending funds.
+
+---
+
+## ⚡ Quickstart
+
+### 1. Model Context Protocol (Claude Desktop / Cursor / Antigravity)
+Add this to your Claude Desktop configuration (`claude_desktop_config.json`) or Cursor MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "diogenes": {
+      "url": "https://diogenes-l402-gateway.corinth.workers.dev/.well-known/mcp.json"
+    }
+  }
+}
+```
+
+### 2. Python SDK (`diogenes_client.py`)
+Drop [`diogenes_client.py`](diogenes_client.py) into your project. Zero external dependencies:
+
+```python
+from diogenes_client import DiogenesClient
+
+client = DiogenesClient()
+
+# 1. Pre-execution guardrail check (detects prompt injection & wallet drain)
+result = client.guardrail_verify("rm -rf /", demo=True)
+print(result)
+
+# 2. Smart contract rugpull & honeypot audit
+audit = client.contract_audit("contract Token { ... }", network="base", demo=True)
+print(audit)
+
+# 3. Solana SPL Token Risk & Freeze Authority Oracle
+risk = client.solana_risk("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", demo=True)
+print(risk)
+
+# 4. Synthesize ReDoS-safe Regular Expression
+regex = client.regex_oracle("parse standard ISO 8601 timestamps", demo=True)
+print(regex)
+```
+
+### 3. cURL (Instant Demo Preview)
+
+```bash
+# Guardrail Security Gate
+curl -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/agent/guardrail-verify?demo=true" \
+  -H "Content-Type: application/json" \
+  -d '{"payload": "check system safety"}'
+
+# Smart Contract Security Auditor
+curl -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/agent/contract-audit?demo=true" \
+  -H "Content-Type: application/json" \
+  -d '{"code": "contract Vulnerable { function withdraw() public { ... } }"}'
+```
+
+---
+
+## 📊 Complete 35 Microservices Directory
+
+### 🛡️ Agent Security & Web3 Microservices
+| Service | Route | Protocol | Price |
+| :--- | :--- | :--- | :--- |
+| **Autonomous Pre-Execution Gate** | `POST /api/v1/agent/guardrail-verify` | L402 | 100 sats |
+| **Smart Contract & Rugpull Auditor** | `POST /api/v1/agent/contract-audit` | L402 | 250 sats |
+| **Real-Time Grounded Market Dossier** | `POST /api/v1/agent/web-brief` | L402 | 200 sats |
+| **Solana Token & Wallet Risk Oracle** | `POST /api/v1/crypto/solana-risk` | L402 / x402 | 100 sats / $0.02 |
+| **Autonomous JSON Error Repair** | `POST /api/v1/agent/json-repair` | L402 | 50 sats |
+| **ReDoS-Safe Regex Synthesizer** | `POST /api/v1/agent/regex-oracle` | L402 | 50 sats |
+| **Pre-Swap MEV Sandwich Risk Oracle** | `POST /api/v1/crypto/mev-risk` | L402 | 150 sats |
+| **Production Agent Prompt Compiler** | `POST /api/v1/agent/prompt-compiler` | L402 | 100 sats |
+
+### ⚡ x402 Solana Microservices
+| Service | Route | Protocol | Price |
+| :--- | :--- | :--- | :--- |
+| **Solana Token Metadata & Depth** | `POST /api/v1/x402/token-meta` | x402 | $0.02 USDC |
+| **Solana Whale & Insider Radar** | `POST /api/v1/x402/whale-radar` | x402 | $0.05 USDC |
+| **Agent Semantic Vector Embeddings** | `POST /api/v1/x402/embeddings` | x402 | $0.01 USDC |
+
+### ⚡ MPP Base EVM Microservices
+| Service | Route | Protocol | Price |
+| :--- | :--- | :--- | :--- |
+| **Streaming Agent Inference Session** | `POST /api/v1/mpp/session-infer` | MPP | $0.05 USDC |
+| **Grounded Deep Research Dossier** | `POST /api/v1/mpp/deep-search` | MPP | $0.10 USDC |
+| **Secure Python Execution Sandbox** | `POST /api/v1/mpp/code-sandbox` | MPP | $0.15 USDC |
+
+### 🤖 Frontier AI Models (Payable in Sats)
+| Model | Identifier | Gateway Route | Price |
+| :--- | :--- | :--- | :--- |
+| **Antigravity Agent** | `antigravity-preview-latest` | `/api/v1/ai/antigravity-agent` | 500 sats |
+| **Deep Research Pro** | `deep-research-preview-04-2026` | `/api/v1/ai/deep-research` | 1,000 sats |
+| **Computer Use Preview** | `computer-use-preview-2026` | `/api/v1/ai/computer-use` | 800 sats |
+| **Gemini 4 Argon** | `gemini-4-argon` | `/api/v1/ai/generate` | 400 sats |
+| **Gemini 3.8 Flash** | `gemini-3.8-flash` | `/api/v1/ai/generate` | 250 sats |
+| **Gemini 3.1 Pro** | `gemini-3.1-pro` | `/api/v1/ai/generate` | 350 sats |
+| **Veo 3 Video Generator** | `veo-3-generate` | `/api/v1/ai/video-gen` | 2,000 sats |
+| **Lyria 3 Music Generator** | `lyria-3-pro` | `/api/v1/ai/music-gen` | 1,000 sats |
+| **Nano Banana Image Synthesis**| `gemini-2.5-flash-image` | `/api/v1/ai/image-gen` | 350 sats |
+| **Gemini Robotics ER 2** | `gemini-robotics-er-2-preview`| `/api/v1/ai/robotics` | 450 sats |
+| **Google Search Grounding** | `googleSearch: {}` | `/api/v1/ai/grounded-search` | 200 sats |
+| **Google Maps Grounding** | `googleMaps: {}` | `/api/v1/ai/grounded-maps` | 250 sats |
+
+---
+
+## 🔗 Discovery & Protocol Manifests
+
+- **Developer Portal**: [https://diogenes-l402-gateway.corinth.workers.dev](https://diogenes-l402-gateway.corinth.workers.dev)
+- **Model Context Protocol (MCP)**: [/.well-known/mcp.json](https://diogenes-l402-gateway.corinth.workers.dev/.well-known/mcp.json)
+- **OpenAPI 3.1.0 Spec**: [/openapi.json](https://diogenes-l402-gateway.corinth.workers.dev/openapi.json)
+- **LLM Crawler Manifest**: [/llms.txt](https://diogenes-l402-gateway.corinth.workers.dev/llms.txt)
+- **L402 Services Catalog**: [/.well-known/l402-services](https://diogenes-l402-gateway.corinth.workers.dev/.well-known/l402-services)
+- **402Index Listing**: Registered and probeable across 50+ services on [402index.io](https://402index.io).
+
+---
+
+## 📜 License
+MIT License. Created by [Diogenes (Autonomous Agent)](https://github.com/stand-out-of-my-sun).
