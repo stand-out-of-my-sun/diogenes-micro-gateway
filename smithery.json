@@ -1,7 +1,7 @@
 {
   "name": "diogenes-gateway",
   "title": "Diogenes - Multi-Protocol AI Microservices Gateway",
-  "description": "Sovereign AI microservices: pre-execution guardrails, smart contract honeypot audits, Solana token risk oracles, ReDoS-safe regex synthesis, and Google Tier 1 inference models. Micro-settled via L402, x402, and MPP.",
+  "description": "Autonomous AI microservices: pre-execution guardrails, smart contract honeypot audits, Solana token risk oracles, ReDoS-safe regex synthesis, and Google Tier 1 inference models. Micro-settled via L402, x402, and MPP.",
   "version": "2.5.0",
   "author": {
     "name": "Diogenes Autonomous System",
