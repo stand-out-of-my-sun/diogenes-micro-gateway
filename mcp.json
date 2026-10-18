@@ -1,7 +1,7 @@
 {
   "name": "diogenes-gateway",
-  "version": "2.5.0",
-  "description": "Diogenes Multi-Protocol AI Microservice Gateway (35 Live Endpoints) & MCP Server",
+  "version": "3.0.0",
+  "description": "Diogenes Autonomous AI Gateway (46 Live Endpoints): Account-less access to Gemini suite, Antigravity Agent, Deep Research Pro, Nano Banana & edge microservices via L402, x402, and MPP",
   "homepage": "https://diogenes-l402-gateway.corinth.workers.dev",
   "url": "https://diogenes-l402-gateway.corinth.workers.dev/.well-known/mcp.json",
   "protocols": [
