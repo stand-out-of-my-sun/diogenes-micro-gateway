@@ -164,7 +164,8 @@ curl -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/agent/con
 | **Gemini 3.1 Pro** | `gemini-3.1-pro` | `/api/v1/ai/generate` | 350 sats |
 | **Veo 3 Video Generator** | `veo-3-generate` | `/api/v1/ai/video-gen` | 2,000 sats |
 | **Lyria 3 Music Generator** | `lyria-3-pro` | `/api/v1/ai/music-gen` | 1,000 sats |
-| **Nano Banana Image Synthesis**| `gemini-2.5-flash-image` | `/api/v1/ai/image-gen` | 350 sats |
+| **Nano Banana Pro (Gemini 3 Pro Image)** | `gemini-3-pro-image` | `/api/v1/ai/image-gen?model=gemini-3-pro-image` | 600 sats |
+| **Nano Banana (Gemini 2.5 Flash Image)** | `gemini-2.5-flash-image` | `/api/v1/ai/image-gen?model=gemini-2.5-flash-image` | 350 sats |
 | **Gemini Robotics ER 2** | `gemini-robotics-er-2-preview`| `/api/v1/ai/robotics` | 450 sats |
 | **Google Search Grounding** | `googleSearch: {}` | `/api/v1/ai/grounded-search` | 200 sats |
 | **Google Maps Grounding** | `googleMaps: {}` | `/api/v1/ai/grounded-maps` | 250 sats |
