@@ -1,8 +1,8 @@
 # Diogenes // Autonomous Multi-Protocol AI Gateway & MCP Server
 
-[![Gateway Live](https://img.shields.io/badge/Gateway-Live%20on%20Edge-22c55e?style=flat-square&logo=cloudflare)](https://diogenes-l402-gateway.corinth.workers.dev)
-[![Endpoints](https://img.shields.io/badge/Endpoints-46%20Live%20Microservices-a855f7?style=flat-square)](https://diogenes-l402-gateway.corinth.workers.dev)
-[![Protocols](https://img.shields.io/badge/Protocols-L402%20%7C%20x402%20%7C%20MPP%20%7C%20MCP-f97316?style=flat-square)](https://diogenes-l402-gateway.corinth.workers.dev)
+[![Gateway Live](https://img.shields.io/badge/Gateway-Live%20on%20Edge-22c55e?style=flat-square&logo=cloudflare)](https://diogenes-micro-gateway.corinth.workers.dev)
+[![Endpoints](https://img.shields.io/badge/Endpoints-46%20Live%20Microservices-a855f7?style=flat-square)](https://diogenes-micro-gateway.corinth.workers.dev)
+[![Protocols](https://img.shields.io/badge/Protocols-L402%20%7C%20x402%20%7C%20MPP%20%7C%20MCP-f97316?style=flat-square)](https://diogenes-micro-gateway.corinth.workers.dev)
 [![402Index Verified](https://img.shields.io/badge/402Index-Domain%20Verified-8b5cf6?style=flat-square)](https://402index.io)
 [![Nostr NIP-05](https://img.shields.io/badge/Nostr-Verified%20NIP--05-9333ea?style=flat-square&logo=nostr)](https://primal.net/e/note1zgyzaxyjzedu6c04mk63sdehvfv3w35jvm02ywcdpweq7jf54nxseaueh9)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gray?style=flat-square)](LICENSE)
@@ -19,7 +19,7 @@
    - **L402 (Lightning)**: Instant micro-satoshi payments via BOLT11 preimage verification.
    - **x402 (Solana)**: Stateless HTTP 402 micropayments in USDC or SOL.
    - **MPP (Base EVM)**: Machine Payments Protocol streaming and session metering.
-3. **Model Context Protocol (MCP) Native**: Streamable JSON-RPC 2.0 server at `https://diogenes-l402-gateway.corinth.workers.dev/mcp` and tool manifest at `/.well-known/mcp.json`.
+3. **Model Context Protocol (MCP) Native**: Streamable JSON-RPC 2.0 server at `https://diogenes-micro-gateway.corinth.workers.dev/mcp` and tool manifest at `/.well-known/mcp.json`.
 4. **Agent Framework Ecosystem**: First-class drop-in plugins for **ElizaOS** (`integrations/elizaos`) and **LangChain / CrewAI** (`integrations/langchain`).
 5. **Instant Zero-Token Demo Mode**: Every single endpoint includes `?demo=true` for local testing, integration validation, and unit tests without spending funds.
 
@@ -34,7 +34,7 @@ Add this to your Claude Desktop configuration (`claude_desktop_config.json`) or 
 {
   "mcpServers": {
     "diogenes": {
-      "url": "https://diogenes-l402-gateway.corinth.workers.dev/mcp"
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp"
     }
   }
 }
@@ -42,7 +42,7 @@ Add this to your Claude Desktop configuration (`claude_desktop_config.json`) or 
 
 Verify streamable handshake with cURL:
 ```bash
-curl -s -X POST "https://diogenes-l402-gateway.corinth.workers.dev/mcp" \
+curl -s -X POST "https://diogenes-micro-gateway.corinth.workers.dev/mcp" \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2024-11-05"}}'
 ```
@@ -113,12 +113,12 @@ print(risk)
 
 ```bash
 # Guardrail Security Gate
-curl -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/agent/guardrail-verify?demo=true" \
+curl -X POST "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/agent/guardrail-verify?demo=true" \
   -H "Content-Type: application/json" \
   -d '{"action": "check system safety"}'
 
 # Smart Contract Security Auditor
-curl -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/agent/contract-audit?demo=true" \
+curl -X POST "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/agent/contract-audit?demo=true" \
   -H "Content-Type: application/json" \
   -d '{"contract_source": "contract Vulnerable { function withdraw() public { ... } }"}'
 ```
@@ -174,12 +174,12 @@ curl -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/agent/con
 
 ## Discovery & Protocol Manifests
 
-- **Developer Portal**: [https://diogenes-l402-gateway.corinth.workers.dev](https://diogenes-l402-gateway.corinth.workers.dev)
-- **Model Context Protocol (MCP)**: [/.well-known/mcp.json](https://diogenes-l402-gateway.corinth.workers.dev/.well-known/mcp.json)
-- **Nostr NIP-05 Identity**: `_@diogenes-l402-gateway.corinth.workers.dev` ([npub1pdxfc9pdzv4ajypnf2827fwm4asjfmccawhnc5c9s3gtaxeswdxstajkk6](https://primal.net/e/note1zgyzaxyjzedu6c04mk63sdehvfv3w35jvm02ywcdpweq7jf54nxseaueh9))
-- **OpenAPI 3.1.0 Spec**: [/openapi.json](https://diogenes-l402-gateway.corinth.workers.dev/openapi.json)
-- **LLM Crawler Manifest**: [/llms.txt](https://diogenes-l402-gateway.corinth.workers.dev/llms.txt)
-- **L402 Services Catalog**: [/.well-known/l402-services](https://diogenes-l402-gateway.corinth.workers.dev/.well-known/l402-services)
+- **Developer Portal**: [https://diogenes-micro-gateway.corinth.workers.dev](https://diogenes-micro-gateway.corinth.workers.dev)
+- **Model Context Protocol (MCP)**: [/.well-known/mcp.json](https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp.json)
+- **Nostr NIP-05 Identity**: `_@diogenes-micro-gateway.corinth.workers.dev` ([npub1pdxfc9pdzv4ajypnf2827fwm4asjfmccawhnc5c9s3gtaxeswdxstajkk6](https://primal.net/e/note1zgyzaxyjzedu6c04mk63sdehvfv3w35jvm02ywcdpweq7jf54nxseaueh9))
+- **OpenAPI 3.1.0 Spec**: [/openapi.json](https://diogenes-micro-gateway.corinth.workers.dev/openapi.json)
+- **LLM Crawler Manifest**: [/llms.txt](https://diogenes-micro-gateway.corinth.workers.dev/llms.txt)
+- **L402 Services Catalog**: [/.well-known/l402-services](https://diogenes-micro-gateway.corinth.workers.dev/.well-known/l402-services)
 - **402Index Listing**: Registered and probeable across 50+ services on [402index.io](https://402index.io).
 
 ---
