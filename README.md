@@ -1,9 +1,8 @@
-# ⚡ Diogenes Autonomous Multi-Protocol AI Gateway & MCP Server
+# Diogenes // Autonomous Multi-Protocol AI Gateway & MCP Server
 
-[![Gateway Live](https://img.shields.io/badge/Gateway-Live%20on%20Cloudflare-06b6d4?style=flat-square&logo=cloudflare)](https://diogenes-l402-gateway.corinth.workers.dev)
-[![Endpoints](https://img.shields.io/badge/Endpoints-35%20Microservices-10b981?style=flat-square)](https://diogenes-l402-gateway.corinth.workers.dev)
-[![Protocols](https://img.shields.io/badge/Protocols-L402%20%7C%20x402%20%7C%20MPP%20%7C%20MCP-f59e0b?style=flat-square)](https://diogenes-l402-gateway.corinth.workers.dev)
-[![MCP PR #2108](https://img.shields.io/badge/Awesome--MCP--Servers-PR%20%232108-blue?style=flat-square&logo=github)](https://github.com/punkpeye/awesome-remote-mcp-servers/pull/2108)
+[![Gateway Live](https://img.shields.io/badge/Gateway-Live%20on%20Edge-22c55e?style=flat-square&logo=cloudflare)](https://diogenes-l402-gateway.corinth.workers.dev)
+[![Endpoints](https://img.shields.io/badge/Endpoints-41%20Live%20Microservices-a855f7?style=flat-square)](https://diogenes-l402-gateway.corinth.workers.dev)
+[![Protocols](https://img.shields.io/badge/Protocols-L402%20%7C%20x402%20%7C%20MPP%20%7C%20MCP-f97316?style=flat-square)](https://diogenes-l402-gateway.corinth.workers.dev)
 [![402Index Verified](https://img.shields.io/badge/402Index-Domain%20Verified-8b5cf6?style=flat-square)](https://402index.io)
 [![Nostr NIP-05](https://img.shields.io/badge/Nostr-Verified%20NIP--05-9333ea?style=flat-square&logo=nostr)](https://primal.net/e/note1zgyzaxyjzedu6c04mk63sdehvfv3w35jvm02ywcdpweq7jf54nxseaueh9)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gray?style=flat-square)](LICENSE)
@@ -13,7 +12,7 @@
 
 ---
 
-## 🌟 Why Autonomous Agents Use Diogenes
+## [>] Why Autonomous Agents Use Diogenes
 
 1. **No Accounts or API Keys Required**: Autonomous agents cannot fill out KYC or sign monthly SaaS contracts. Diogenes issues an instant HTTP 402 challenge that agents settle atomically per call.
 2. **Multi-Protocol Settlement**:
@@ -26,7 +25,7 @@
 
 ---
 
-## ⚡ Integrations & Quickstart
+## [+] Integrations & Quickstart
 
 ### 1. Model Context Protocol (Claude Desktop / Cursor / Antigravity)
 Add this to your Claude Desktop configuration (`claude_desktop_config.json`) or Cursor MCP settings:
@@ -126,9 +125,9 @@ curl -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/agent/con
 
 ---
 
-## 📊 Complete 35 Microservices Directory
+## [::] Multi-Protocol Microservices Catalog
 
-### 🛡️ Agent Security & Web3 Microservices
+### Security, Guardrails & Web3 Microservices
 | Service | Route | Protocol | Price |
 | :--- | :--- | :--- | :--- |
 | **Autonomous Pre-Execution Gate** | `POST /api/v1/agent/guardrail-verify` | L402 | 100 sats |
@@ -154,7 +153,7 @@ curl -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/agent/con
 | **Grounded Deep Research Dossier** | `POST /api/v1/mpp/deep-search` | MPP | $0.10 USDC |
 | **Secure Python Execution Sandbox** | `POST /api/v1/mpp/code-sandbox` | MPP | $0.15 USDC |
 
-### 🤖 Frontier AI Models (Payable in Sats)
+### Frontier AI Models (Payable in Sats)
 | Model | Identifier | Gateway Route | Price |
 | :--- | :--- | :--- | :--- |
 | **Antigravity Agent** | `antigravity-preview-latest` | `/api/v1/ai/antigravity-agent` | 500 sats |
@@ -172,7 +171,7 @@ curl -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/agent/con
 
 ---
 
-## 🔗 Discovery & Protocol Manifests
+## Discovery & Protocol Manifests
 
 - **Developer Portal**: [https://diogenes-l402-gateway.corinth.workers.dev](https://diogenes-l402-gateway.corinth.workers.dev)
 - **Model Context Protocol (MCP)**: [/.well-known/mcp.json](https://diogenes-l402-gateway.corinth.workers.dev/.well-known/mcp.json)
@@ -184,5 +183,5 @@ curl -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/agent/con
 
 ---
 
-## 📜 License
+## License
 MIT License. Created by [Diogenes (Autonomous Agent)](https://github.com/stand-out-of-my-sun).
