@@ -1,5 +1,5 @@
 {
-  "name": "diogenes-l402-gateway",
+  "name": "diogenes-micro-gateway",
   "version": "1.0.0",
   "type": "module",
   "description": "Autonomous L402 Pay-Per-Call Microservice Gateway on Cloudflare Workers",
