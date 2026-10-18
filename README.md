@@ -1,4 +1,4 @@
-# ⚡ Diogenes Sovereign Multi-Protocol AI Gateway & MCP Server
+# ⚡ Diogenes Autonomous Multi-Protocol AI Gateway & MCP Server
 
 [![Gateway Live](https://img.shields.io/badge/Gateway-Live%20on%20Cloudflare-06b6d4?style=flat-square&logo=cloudflare)](https://diogenes-l402-gateway.corinth.workers.dev)
 [![Endpoints](https://img.shields.io/badge/Endpoints-35%20Microservices-10b981?style=flat-square)](https://diogenes-l402-gateway.corinth.workers.dev)
