@@ -1,8 +1,8 @@
 {
   "name": "diogenes-gateway",
-  "title": "Diogenes - Multi-Protocol AI Microservices Gateway",
-  "description": "Autonomous AI microservices: pre-execution guardrails, smart contract honeypot audits, Solana token risk oracles, ReDoS-safe regex synthesis, and Google Tier 1 inference models. Micro-settled via L402, x402, and MPP.",
-  "version": "2.5.0",
+  "title": "Diogenes Autonomous AI Gateway & MCP Server",
+  "description": "Account-less access to Google Gemini suite, Antigravity Agent, Deep Research Pro, Nano Banana, security guardrails, smart contract audits, and 46 edge microservices via L402, x402, and MPP.",
+  "version": "3.0.0",
   "author": {
     "name": "Diogenes Autonomous System",
     "github": "stand-out-of-my-sun"
@@ -51,45 +51,79 @@
       "name": "guardrail_verify",
       "description": "Pre-execution security gate to detect prompt injection, wallet drain, and key exfiltration",
       "parameters": {
-        "action": { "type": "string", "required": true, "description": "Action or prompt to verify" },
-        "context": { "type": "string", "description": "Surrounding agent context" }
+        "action": {
+          "type": "string",
+          "required": true,
+          "description": "Action or prompt to verify"
+        },
+        "context": {
+          "type": "string",
+          "description": "Surrounding agent context"
+        }
       }
     },
     {
       "name": "contract_audit",
       "description": "Smart contract vulnerability, honeypot, and reentrancy audit for EVM/Solana",
       "parameters": {
-        "contract_source": { "type": "string", "required": true, "description": "Source code of contract" },
-        "chain": { "type": "string", "description": "Blockchain target ('evm', 'solana')" }
+        "contract_source": {
+          "type": "string",
+          "required": true,
+          "description": "Source code of contract"
+        },
+        "chain": {
+          "type": "string",
+          "description": "Blockchain target ('evm', 'solana')"
+        }
       }
     },
     {
       "name": "solana_risk_oracle",
       "description": "Solana Base58 SPL token mint risk, freeze authority, and honeypot evaluation",
       "parameters": {
-        "mint_address": { "type": "string", "required": true, "description": "Solana Base58 token mint" }
+        "mint_address": {
+          "type": "string",
+          "required": true,
+          "description": "Solana Base58 token mint"
+        }
       }
     },
     {
       "name": "regex_oracle",
       "description": "Synthesizes certified ReDoS-safe regular expressions from natural language specs",
       "parameters": {
-        "specification": { "type": "string", "required": true, "description": "Natural language regex requirement" }
+        "specification": {
+          "type": "string",
+          "required": true,
+          "description": "Natural language regex requirement"
+        }
       }
     },
     {
       "name": "json_repair",
       "description": "Autonomously repairs malformed, truncated, or unescaped JSON text",
       "parameters": {
-        "broken_json": { "type": "string", "required": true, "description": "Broken JSON string" }
+        "broken_json": {
+          "type": "string",
+          "required": true,
+          "description": "Broken JSON string"
+        }
       }
     },
     {
       "name": "tier1_inference",
       "description": "Google Tier 1 model inference (Gemini 2.5 Pro, Flash, Deep Research, Computer Use)",
       "parameters": {
-        "model": { "type": "string", "required": true, "description": "Model ID" },
-        "prompt": { "type": "string", "required": true, "description": "Inference prompt" }
+        "model": {
+          "type": "string",
+          "required": true,
+          "description": "Model ID"
+        },
+        "prompt": {
+          "type": "string",
+          "required": true,
+          "description": "Inference prompt"
+        }
       }
     }
   ]
