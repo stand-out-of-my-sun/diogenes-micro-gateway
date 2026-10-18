@@ -497,7 +497,7 @@ Allow: /.well-known/l402-services
 Allow: /.well-known/mcp.json
 Allow: /.well-known/nostr.json
 Allow: /.well-known/ai-plugin.json
-Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
+Sitemap: https://diogenes-micro-gateway.corinth.workers.dev/sitemap.xml
 `;
       return new Response(robots, {
         headers: {
@@ -511,12 +511,12 @@ Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
     if (path === "/sitemap.xml") {
       const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://diogenes-l402-gateway.corinth.workers.dev/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://diogenes-l402-gateway.corinth.workers.dev/api/v1/models</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
-  <url><loc>https://diogenes-l402-gateway.corinth.workers.dev/openapi.json</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://diogenes-l402-gateway.corinth.workers.dev/llms.txt</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
-  <url><loc>https://diogenes-l402-gateway.corinth.workers.dev/.well-known/mcp.json</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
-  <url><loc>https://diogenes-l402-gateway.corinth.workers.dev/.well-known/l402-services</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://diogenes-micro-gateway.corinth.workers.dev/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://diogenes-micro-gateway.corinth.workers.dev/api/v1/models</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://diogenes-micro-gateway.corinth.workers.dev/openapi.json</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://diogenes-micro-gateway.corinth.workers.dev/llms.txt</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp.json</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://diogenes-micro-gateway.corinth.workers.dev/.well-known/l402-services</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
 </urlset>`;
       return new Response(sitemap, {
         headers: {
@@ -901,9 +901,9 @@ Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
         version: "2.5.0",
         description: "Diogenes Autonomous Multi-Protocol L402 / x402 / MPP AI Microservice Gateway (41 Live Endpoints)",
         protocol: "mcp-2024-11-05",
-        homepage: "https://diogenes-l402-gateway.corinth.workers.dev",
+        homepage: "https://diogenes-micro-gateway.corinth.workers.dev",
         endpoints: {
-          mcp_streamable_http: "https://diogenes-l402-gateway.corinth.workers.dev/mcp",
+          mcp_streamable_http: "https://diogenes-micro-gateway.corinth.workers.dev/mcp",
           l402_lightning: lightningAddress,
           x402_solana: "9fhZHnT3DdvmPcWm5oyWQs3ZUu26EjBsfC8rzLtuafc",
           mpp_base_evm: "0x14dbc1Efd68C4c4Fc7a46fA804b849372eB7319b"
@@ -1724,7 +1724,7 @@ Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
           <span style="font-weight: 700; color: #fbbf24; font-size: 0.85rem;">Account-Less Test: Call Antigravity Agent via cURL (Zero-cost demo preview):</span>
           <span style="color: var(--muted); font-size: 0.78rem;">cURL / REST API</span>
         </div>
-        <pre class="eve-code-pre"><code>curl -s -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/ai/antigravity-agent?demo=true" \
+        <pre class="eve-code-pre"><code>curl -s -X POST "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/ai/antigravity-agent?demo=true" \
   -H "Content-Type: application/json" \
   -d '{
     "goal": "Audit smart contract bytecode and generate security report"
@@ -1809,7 +1809,7 @@ Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
           <span style="font-weight: 700; color: #fbbf24; font-size: 0.85rem;">Instant EVE Frontier Live Test (Zero-cost demo preview):</span>
           <span style="color: var(--muted); font-size: 0.78rem;">cURL / REST API</span>
         </div>
-        <pre class="eve-code-pre"><code>curl -s -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/eve-frontier/gate-route-planner?demo=true" \
+        <pre class="eve-code-pre"><code>curl -s -X POST "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/eve-frontier/gate-route-planner?demo=true" \
   -H "Content-Type: application/json" \
   -d '{
     "origin_system": "Jita-F",
@@ -2064,7 +2064,7 @@ Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
 > Autonomous pay-per-call microservices for AI agents, payable via Bitcoin Lightning (L402), Solana (x402), and Base EVM (MPP).
 
 ## Host
-https://diogenes-l402-gateway.corinth.workers.dev
+https://diogenes-micro-gateway.corinth.workers.dev
 
 ## Multi-Protocol Settlement Rails
 - L402 (Bitcoin Lightning): Settlement via BOLT11 invoice preimage (${lightningAddress})
@@ -2120,11 +2120,11 @@ https://diogenes-l402-gateway.corinth.workers.dev
 ${lines}
 
 ## Machine Discovery
-- Model Context Protocol (MCP): https://diogenes-l402-gateway.corinth.workers.dev/.well-known/mcp.json
-- Complete Models API: https://diogenes-l402-gateway.corinth.workers.dev/api/v1/models
-- L402 Manifest: https://diogenes-l402-gateway.corinth.workers.dev/.well-known/l402-services
-- OpenAPI 3.1 Spec: https://diogenes-l402-gateway.corinth.workers.dev/openapi.json
-- AI Plugin: https://diogenes-l402-gateway.corinth.workers.dev/.well-known/ai-plugin.json
+- Model Context Protocol (MCP): https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp.json
+- Complete Models API: https://diogenes-micro-gateway.corinth.workers.dev/api/v1/models
+- L402 Manifest: https://diogenes-micro-gateway.corinth.workers.dev/.well-known/l402-services
+- OpenAPI 3.1 Spec: https://diogenes-micro-gateway.corinth.workers.dev/openapi.json
+- AI Plugin: https://diogenes-micro-gateway.corinth.workers.dev/.well-known/ai-plugin.json
 `;
       return new Response(llmsTxt, {
         headers: { "Content-Type": "text/markdown; charset=utf-8", "Access-Control-Allow-Origin": "*" },
