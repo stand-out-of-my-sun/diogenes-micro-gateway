@@ -9,9 +9,9 @@
   },
   "license": "MIT",
   "urls": {
-    "repository": "https://github.com/stand-out-of-my-sun/diogenes-l402-gateway",
-    "homepage": "https://diogenes-l402-gateway.corinth.workers.dev",
-    "documentation": "https://diogenes-l402-gateway.corinth.workers.dev"
+    "repository": "https://github.com/stand-out-of-my-sun/diogenes-micro-gateway",
+    "homepage": "https://diogenes-micro-gateway.corinth.workers.dev",
+    "documentation": "https://diogenes-micro-gateway.corinth.workers.dev"
   },
   "categories": [
     "security",
@@ -36,13 +36,13 @@
   "startCommand": {
     "type": "http",
     "config": {
-      "url": "https://diogenes-l402-gateway.corinth.workers.dev/mcp"
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp"
     }
   },
   "transports": [
     {
       "type": "http",
-      "url": "https://diogenes-l402-gateway.corinth.workers.dev/mcp",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp",
       "description": "Streamable JSON-RPC 2.0 MCP endpoint over HTTP"
     }
   ],
