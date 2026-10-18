@@ -1,14 +1,14 @@
 # Diogenes // Autonomous Multi-Protocol AI Gateway & MCP Server
 
 [![Gateway Live](https://img.shields.io/badge/Gateway-Live%20on%20Edge-22c55e?style=flat-square&logo=cloudflare)](https://diogenes-l402-gateway.corinth.workers.dev)
-[![Endpoints](https://img.shields.io/badge/Endpoints-41%20Live%20Microservices-a855f7?style=flat-square)](https://diogenes-l402-gateway.corinth.workers.dev)
+[![Endpoints](https://img.shields.io/badge/Endpoints-46%20Live%20Microservices-a855f7?style=flat-square)](https://diogenes-l402-gateway.corinth.workers.dev)
 [![Protocols](https://img.shields.io/badge/Protocols-L402%20%7C%20x402%20%7C%20MPP%20%7C%20MCP-f97316?style=flat-square)](https://diogenes-l402-gateway.corinth.workers.dev)
 [![402Index Verified](https://img.shields.io/badge/402Index-Domain%20Verified-8b5cf6?style=flat-square)](https://402index.io)
 [![Nostr NIP-05](https://img.shields.io/badge/Nostr-Verified%20NIP--05-9333ea?style=flat-square&logo=nostr)](https://primal.net/e/note1zgyzaxyjzedu6c04mk63sdehvfv3w35jvm02ywcdpweq7jf54nxseaueh9)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gray?style=flat-square)](LICENSE)
 
-> **Zero API keys. Zero subscriptions. Instant pay-per-request intelligence for autonomous AI agents.**  
-> Settle via **Bitcoin Lightning (L402)**, **Solana USDC (x402)**, or **Base USDC (MPP)**. Native Model Context Protocol (MCP) support for Claude Desktop, Cursor, and Antigravity.
+> **Account-less access to the complete Google Gemini model suite, Antigravity Agent, Deep Research Pro, Nano Banana (Pro), and proprietary autonomous microservices.**  
+> Zero API keys. Zero accounts. Zero subscriptions. Settle per request via **Bitcoin Lightning (L402)**, **Solana USDC (x402)**, or **Base USDC (MPP)**. Native Model Context Protocol (MCP) support for Claude Desktop, Cursor, and Antigravity.
 
 ---
 
@@ -139,14 +139,14 @@ curl -X POST "https://diogenes-l402-gateway.corinth.workers.dev/api/v1/agent/con
 | **Pre-Swap MEV Sandwich Risk Oracle** | `POST /api/v1/crypto/mev-risk` | L402 | 150 sats |
 | **Production Agent Prompt Compiler** | `POST /api/v1/agent/prompt-compiler` | L402 | 100 sats |
 
-### ⚡ x402 Solana Microservices
+### [::] x402 Solana Microservices
 | Service | Route | Protocol | Price |
 | :--- | :--- | :--- | :--- |
 | **Solana Token Metadata & Depth** | `POST /api/v1/x402/token-meta` | x402 | $0.02 USDC |
 | **Solana Whale & Insider Radar** | `POST /api/v1/x402/whale-radar` | x402 | $0.05 USDC |
 | **Agent Semantic Vector Embeddings** | `POST /api/v1/x402/embeddings` | x402 | $0.01 USDC |
 
-### ⚡ MPP Base EVM Microservices
+### [::] MPP Base EVM Microservices
 | Service | Route | Protocol | Price |
 | :--- | :--- | :--- | :--- |
 | **Streaming Agent Inference Session** | `POST /api/v1/mpp/session-infer` | MPP | $0.05 USDC |
