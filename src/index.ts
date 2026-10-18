@@ -1,5 +1,5 @@
 /**
- * Diogenes Autonomous L402 Microservice Gateway & Edge Sweeper
+ * Diogenes Autonomous Microservice Gateway & Edge Sweeper
  * Cloudflare Worker Implementation (Edge Serverless + Cron Trigger)
  *
  * Full Google AI Studio Tier 1 Model Allocation (All 5 Screenshots / 45 Models + Grounding Tools)
@@ -999,7 +999,7 @@ Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="/diogenes_avatar.svg">
-  <title>Diogenes Autonomous L402 Gateway — Multi-Protocol Terminal Hub</title>
+  <title>Diogenes Autonomous Microservice Gateway — Multi-Protocol Terminal Hub</title>
   <style>
     :root {
       --bg: #090514;
@@ -1153,9 +1153,9 @@ Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
       border-color: var(--purple-border);
     }
     .badge.eve-badge {
-      background: var(--orange-dim) !important;
-      color: var(--orange-light) !important;
-      border-color: var(--orange-border) !important;
+      background: rgba(239, 68, 68, 0.15) !important;
+      color: #fca5a5 !important;
+      border-color: rgba(239, 68, 68, 0.45) !important;
       font-weight: 700;
     }
     .eve-frontier-box {
@@ -1166,6 +1166,11 @@ Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
       margin-bottom: 3rem;
       box-shadow: 0 12px 48px -10px var(--purple-glow);
       position: relative;
+    }
+    #eve-frontier.eve-frontier-box {
+      background: radial-gradient(circle at top right, rgba(239, 68, 68, 0.14) 0%, rgba(20, 8, 12, 0.98) 70%), #0d0407;
+      border: 2px solid rgba(239, 68, 68, 0.4);
+      box-shadow: 0 12px 48px -10px rgba(239, 68, 68, 0.25);
     }
     .eve-frontier-header {
       margin-bottom: 1.5rem;
@@ -1184,15 +1189,25 @@ Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       box-shadow: 0 0 14px var(--purple-glow);
     }
+    .eve-pill-badge.eve-pill-badge-red {
+      background: linear-gradient(135deg, #ef4444 0%, #000000 100%);
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      box-shadow: 0 0 14px rgba(239, 68, 68, 0.45);
+    }
     .eve-card {
-      background: #150e26 !important;
-      border: 1px solid var(--border) !important;
+      background: #14080c !important;
+      border: 1px solid rgba(239, 68, 68, 0.2) !important;
       transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
     .eve-card:hover {
-      border-color: var(--orange-border) !important;
+      border-color: rgba(239, 68, 68, 0.6) !important;
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px -4px var(--orange-glow);
+      box-shadow: 0 8px 24px -4px rgba(239, 68, 68, 0.3);
+    }
+    .eve-card .price-pill {
+      background: rgba(239, 68, 68, 0.15) !important;
+      color: #fca5a5 !important;
+      border-color: rgba(239, 68, 68, 0.4) !important;
     }
     .eve-grid {
       display: grid;
@@ -1265,15 +1280,29 @@ Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
       color: var(--purple-light);
       box-shadow: 0 0 12px var(--purple-glow);
     }
-    .nav-pill.eve-nav-pill {
-      background: var(--orange-dim);
-      border-color: var(--orange-border);
-      color: var(--orange-light);
+    .nav-pill.gemini-nav-pill {
+      background: linear-gradient(135deg, #a855f7 0%, #f97316 100%);
+      color: #fff !important;
       font-weight: 700;
+      border: 1px solid rgba(168, 85, 247, 0.5);
+      box-shadow: 0 0 14px var(--purple-glow);
+    }
+    .nav-pill.gemini-nav-pill:hover {
+      background: linear-gradient(135deg, #c084fc 0%, #fb923c 100%);
+      box-shadow: 0 0 18px rgba(168, 85, 247, 0.5);
+      color: #fff !important;
+    }
+    .nav-pill.eve-nav-pill {
+      background: linear-gradient(135deg, #ef4444 0%, #000000 100%);
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      color: #fff !important;
+      font-weight: 700;
+      box-shadow: 0 0 14px rgba(239, 68, 68, 0.4);
     }
     .nav-pill.eve-nav-pill:hover {
-      background: rgba(249, 115, 22, 0.25);
-      box-shadow: 0 0 16px var(--orange-glow);
+      background: linear-gradient(135deg, #f87171 0%, #150608 100%);
+      box-shadow: 0 0 18px rgba(239, 68, 68, 0.6);
+      color: #fff !important;
     }
     .price-pill {
       display: inline-flex;
@@ -1554,10 +1583,10 @@ Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
     <header>
       <div class="header-main">
         <div>
-          <h1>Diogenes Autonomous L402 Gateway</h1>
+          <h1>Diogenes Autonomous Microservice Gateway</h1>
           <p class="subtitle">Account-less access to Google Gemini models, Antigravity Agent, Deep Research Pro, Nano Banana (Pro), and 46 autonomous microservices (L402, x402, MPP)</p>
           <div class="nav-pills">
-            <a href="#gemini-suite" class="nav-pill" style="border-color: var(--purple-border); color: var(--purple-light);">Gemini Suite &amp; Frontier AI</a>
+            <a href="#gemini-suite" class="nav-pill gemini-nav-pill">Gemini Suite</a>
             <a href="#eve-frontier" class="nav-pill eve-nav-pill">EVE Frontier services</a>
             <a href="#featured-microservices" class="nav-pill">Agent Security &amp; Tools</a>
             <a href="#mpp-x402" class="nav-pill">MPP &amp; x402</a>
@@ -1573,13 +1602,13 @@ Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
     <section id="gemini-suite" class="eve-frontier-box">
       <div class="eve-frontier-header">
         <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.6rem;">
-          <span class="eve-pill-badge">COMPLETE GEMINI SUITE &amp; FRONTIER AI</span>
+          <span class="eve-pill-badge">COMPLETE GEMINI SUITE</span>
           <span class="badge active">Account-Less Access</span>
           <span class="badge purple">45 Models</span>
           <span class="badge eve-badge">Zero API Keys</span>
         </div>
         <h2 style="margin: 0.4rem 0 0.35rem 0; font-size: 1.5rem; color: #fff; letter-spacing: -0.01em;">
-          Google Gemini Model Suite &amp; Autonomous Frontier AI
+          Google Gemini Model Suite
         </h2>
         <p style="margin: 0; color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; max-width: 950px;">
           Frictionless, account-less access to Google's complete frontier intelligence catalog alongside Diogenes' proprietary microservices. Settle each query atomically via Bitcoin Lightning (L402), Solana USDC (x402), or Base USDC (MPP)—no Google accounts, credit card pre-authorizations, or monthly subscriptions required.
@@ -1710,10 +1739,9 @@ Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
     <section id="eve-frontier" class="eve-frontier-box">
       <div class="eve-frontier-header">
         <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.6rem;">
-          <span class="eve-pill-badge">DEDICATED EVE FRONTIER ORACLE SUITE</span>
+          <span class="eve-pill-badge eve-pill-badge-red">DEDICATED EVE FRONTIER MICROSERVICES</span>
           <span class="badge eve-badge">Sui Move</span>
           <span class="badge active">Lightning L402</span>
-          <span class="badge cyan">Services</span>
         </div>
         <h2 style="margin: 0.4rem 0 0.35rem 0; font-size: 1.5rem; color: #fff; letter-spacing: -0.01em;">
           EVE Frontier Autonomous Smart Assembly & Survival Protocol
@@ -2032,7 +2060,7 @@ Sitemap: https://diogenes-l402-gateway.corinth.workers.dev/sitemap.xml
     // 3. LLMs Discovery Manifest (GET /llms.txt)
     if (path === "/llms.txt") {
       const lines = TIER1_MODELS_REGISTRY.map(m => `- ${m.name} (${m.model}): ${m.price_sats} sats. ${m.description}`).join("\n");
-      const llmsTxt = `# Diogenes Autonomous L402 Microservice Gateway & Multi-Protocol Hub (46 Live Microservices)
+      const llmsTxt = `# Diogenes Autonomous Microservice Gateway & Multi-Protocol Hub (46 Live Microservices)
 > Autonomous pay-per-call microservices for AI agents, payable via Bitcoin Lightning (L402), Solana (x402), and Base EVM (MPP).
 
 ## Host
@@ -2296,7 +2324,7 @@ ${lines}
           {
             status: "healthy",
             platform: "Cloudflare Workers (Edge Serverless)",
-            service: "Diogenes Complete Tier 1 Autonomous L402 Gateway",
+            service: "Diogenes Complete Tier 1 Autonomous Microservice Gateway",
             tier: "Google AI Studio Tier 1 (Credit Funded)",
             lightning_endpoint: lightningAddress,
             wallets: {
