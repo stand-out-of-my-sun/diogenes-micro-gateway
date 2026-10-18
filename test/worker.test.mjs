@@ -7,7 +7,7 @@ test('L402 Worker: /api/v1/health returns 200 without payment and includes all e
   const res = await worker.fetch(req, {
     LIGHTNING_ADDRESS: 'diogenesagent@coinos.io',
     SERVER_SECRET: 'test_secret_key_123',
-    COLD_STORAGE_BTC: 'bc1q_placeholder_cold_storage_address',
+    COLD_STORAGE_BTC: 'bc1q_test_mock_cold_storage_address_0000',
   });
 
   assert.strictEqual(res.status, 200);
@@ -17,7 +17,7 @@ test('L402 Worker: /api/v1/health returns 200 without payment and includes all e
   assert.strictEqual(data.endpoints.length >= 7, true);
   // Ensure cold storage address is NEVER exposed in the public health check
   const rawBody = JSON.stringify(data);
-  assert.strictEqual(rawBody.includes('bc1q_placeholder_cold_storage_address'), false);
+  assert.strictEqual(rawBody.includes('bc1q_test_mock_cold_storage_address_0000'), false);
 });
 
 test('L402 Worker: GET / serves HTML developer portal with HTTP 200', async () => {
@@ -29,9 +29,18 @@ test('L402 Worker: GET / serves HTML developer portal with HTTP 200', async () =
   assert.strictEqual(res.status, 200);
   assert.strictEqual(res.headers.get('Content-Type')?.includes('text/html'), true);
   const text = await res.text();
-  assert.strictEqual(text.includes('Diogenes Autonomous L402 Gateway'), true);
+  assert.strictEqual(text.includes('Diogenes Autonomous Microservice Gateway'), true);
   assert.strictEqual(text.includes('/api/v1/mempool-fee'), true);
   assert.strictEqual(text.includes('/openapi.json'), true);
+  assert.strictEqual(text.includes('id="gemini-suite"'), true);
+  assert.strictEqual(text.includes('Antigravity Agent'), true);
+  assert.strictEqual(text.includes('Deep Research Pro Preview'), true);
+  assert.strictEqual(text.includes('Nano Banana Pro'), true);
+  assert.strictEqual(text.includes('id="eve-frontier"'), true);
+  assert.strictEqual(text.includes('EVE Frontier Autonomous Smart Assembly & Survival Protocol'), true);
+  assert.strictEqual(text.includes('/api/v1/eve-frontier/move-assembly-coder'), true);
+  assert.strictEqual(text.includes('/api/v1/eve-frontier/gate-route-planner'), true);
+  assert.strictEqual(text.includes('/api/v1/eve-frontier/network-node-gj-optimizer'), true);
 });
 
 test('L402 Worker: GET /llms.txt serves LLM crawler markdown with HTTP 200', async () => {
@@ -43,7 +52,15 @@ test('L402 Worker: GET /llms.txt serves LLM crawler markdown with HTTP 200', asy
   assert.strictEqual(res.status, 200);
   assert.strictEqual(res.headers.get('Content-Type')?.includes('text/markdown'), true);
   const text = await res.text();
-  assert.strictEqual(text.includes('Diogenes Autonomous L402 Microservice Gateway'), true);
+  assert.strictEqual(text.includes('Diogenes Autonomous Microservice Gateway'), true);
+  assert.strictEqual(text.includes('46 Live Microservices'), true);
+  assert.strictEqual(text.includes('## Frontier AI Models & Autonomous Agents (Account-Less Access)'), true);
+  assert.strictEqual(text.includes('/api/v1/ai/antigravity-agent'), true);
+  assert.strictEqual(text.includes('/api/v1/ai/deep-research'), true);
+  assert.strictEqual(text.includes('Nano Banana Pro'), true);
+  assert.strictEqual(text.includes('## EVE Frontier Services'), true);
+  assert.strictEqual(text.includes('/api/v1/eve-frontier/move-assembly-coder'), true);
+  assert.strictEqual(text.includes('/api/v1/eve-frontier/killmail-threat-intel'), true);
   assert.strictEqual(text.includes('L402'), true);
 });
 
@@ -168,11 +185,11 @@ test('L402 Worker: Edge Sweeper checks Coinos API and reports zero balance grace
   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE4OWM1Y2EwLWU4ZTctNGVmMy05YzNkLTM2YTkyYmI2ZTNiMCIsImlhdCI6MTc5MjIzMDA3OH0.6wUlaL9UkAiJB9utGRC3dTRS8ohOsxBBnxHvyP_y_tY';
   const sweepRes = await sweepBalanceToBitcoin({
     COINOS_TOKEN: token,
-    COLD_STORAGE_BTC: 'bc1q_placeholder_cold_storage_address',
+    COLD_STORAGE_BTC: 'bc1q_test_mock_cold_storage_address_0000',
   });
 
   assert.strictEqual(typeof sweepRes.balance, 'number');
-  assert.strictEqual(JSON.stringify(sweepRes).includes('bc1q_placeholder_cold_storage_address'), false);
+  assert.strictEqual(JSON.stringify(sweepRes).includes('bc1q_test_mock_cold_storage_address_0000'), false);
 });
 
 test('L402 Worker: GET /.well-known/402index-verify.txt returns domain verification token hash', async () => {
@@ -461,7 +478,7 @@ test('L402 Worker: /api/v1/crypto/solana-risk returns 402 (100 sats) and demo mo
   assert.strictEqual(demoData.preview.should_transact, true);
 });
 
-test('L402 Worker: /api/v1/health reports 35 total endpoints including proprietary microservices', async () => {
+test('L402 Worker: /api/v1/health reports 46 total endpoints including proprietary microservices', async () => {
   const req = new Request('http://localhost/api/v1/health');
   const res = await worker.fetch(req, {
     LIGHTNING_ADDRESS: 'diogenesagent@coinos.io',
@@ -469,7 +486,7 @@ test('L402 Worker: /api/v1/health reports 35 total endpoints including proprieta
   });
   assert.strictEqual(res.status, 200);
   const data = await res.json();
-  assert.strictEqual(data.endpoints_count, 35);
+  assert.strictEqual(data.endpoints_count, 46);
   const paths = data.endpoints.map(e => e.path);
   assert.strictEqual(paths.includes('/api/v1/agent/guardrail-verify'), true);
   assert.strictEqual(paths.includes('/api/v1/agent/contract-audit'), true);
