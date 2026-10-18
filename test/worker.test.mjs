@@ -394,7 +394,7 @@ test('L402 Worker: GET /sitemap.xml serves valid sitemap XML with HTTP 200', asy
   assert.strictEqual(res.headers.get('Content-Type')?.includes('application/xml'), true);
   const text = await res.text();
   assert.strictEqual(text.includes('<urlset'), true);
-  assert.strictEqual(text.includes('https://diogenes-l402-gateway.corinth.workers.dev/'), true);
+  assert.strictEqual(text.includes('https://diogenes-micro-gateway.corinth.workers.dev/'), true);
 });
 
 test('L402 Worker: /api/v1/agent/guardrail-verify returns 402 (100 sats) and demo mode returns structured guardrail check', async () => {
