@@ -1,14 +1,14 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.stand-out-of-my-sun/diogenes-gateway",
-  "title": "Diogenes Gateway",
-  "description": "Multi-protocol AI microservices: pre-execution guardrails, smart contract audits, and EVE Frontier.",
+  "title": "Diogenes Autonomous AI Gateway",
+  "description": "Account-less access to Google Gemini suite, Antigravity Agent, Deep Research Pro, Nano Banana, security guardrails, smart contract audits, and 46 edge microservices.",
   "websiteUrl": "https://diogenes-l402-gateway.corinth.workers.dev",
   "repository": {
     "url": "https://github.com/stand-out-of-my-sun/diogenes-l402-gateway",
     "source": "github"
   },
-  "version": "1.0.0",
+  "version": "3.0.0",
   "remotes": [
     {
       "type": "streamable-http",
