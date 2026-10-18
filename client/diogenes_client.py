@@ -28,7 +28,7 @@ import urllib.parse
 import urllib.request
 from typing import Any, Dict, Optional
 
-DEFAULT_GATEWAY_URL = "https://diogenes-l402-gateway.corinth.workers.dev"
+DEFAULT_GATEWAY_URL = "https://diogenes-micro-gateway.corinth.workers.dev"
 
 
 class DiogenesClient:
