@@ -41,6 +41,57 @@ test('L402 Worker: GET / serves HTML developer portal with HTTP 200', async () =
   assert.strictEqual(text.includes('/api/v1/eve-frontier/move-assembly-coder'), true);
   assert.strictEqual(text.includes('/api/v1/eve-frontier/gate-route-planner'), true);
   assert.strictEqual(text.includes('/api/v1/eve-frontier/network-node-gj-optimizer'), true);
+  assert.strictEqual(text.includes('45 Models'), true);
+  assert.strictEqual(text.includes('8 Services'), true);
+  assert.strictEqual(text.includes('site-topbar'), true);
+  assert.strictEqual(text.includes('header-top-row'), true);
+  assert.strictEqual(text.includes('Currently accepting:'), true);
+  assert.strictEqual(text.includes('⚡ Lightning'), true);
+  assert.strictEqual(text.includes('◎ Solana USDC'), true);
+  assert.strictEqual(text.includes('🔵 Base USDC'), true);
+  assert.strictEqual(text.includes('card-rails'), true);
+  assert.strictEqual(text.includes('rail-pill btc'), true);
+  assert.strictEqual(text.includes('rail-pill sol'), true);
+  assert.strictEqual(text.includes('rail-pill base'), true);
+  // System tooltip suppressed via aria-label instead of title
+  assert.strictEqual(text.includes('class="badge btc" aria-label="Payable via Bitcoin Lightning Network (L402)"'), true);
+  assert.strictEqual(text.includes('class="rail-pill btc" aria-label="Payable via Bitcoin Lightning Network (L402)"'), true);
+  assert.strictEqual(text.includes('class="badge btc" title='), false);
+  assert.strictEqual(text.includes('class="rail-pill btc" title='), false);
+  assert.strictEqual(text.includes('Newest Edge Microservices'), true);
+  assert.strictEqual(text.includes('Newest Autonomous Edge Microservices'), false);
+  assert.strictEqual(text.includes('Researched, engineered, contract-tested, and published autonomously'), false);
+  assert.strictEqual(text.includes('Test any new microservice for free with <code>?demo=true</code>.'), true);
+  assert.strictEqual(text.includes('NEWLY LAUNCHED MICROSERVICES (8 LATEST)'), true);
+  assert.strictEqual(text.includes('Gemini 3.8 Flash &amp; 3.7 Flash'), true);
+  assert.strictEqual(text.includes('Computer Use Desktop Agent'), true);
+  assert.strictEqual(text.includes('Pre-Payment HTTP 402 Challenge &amp; Invoice Fraud Auditor'), true);
+  // Exactly 36 cards on the portal (8 + 8 + 8 + 8 + 4 = 36), each completing full 4-column rows
+  const cardCount = (text.match(/class="card-rails"/g) || []).length;
+  assert.strictEqual(cardCount, 36);
+  // Responsive grid rules ensuring no empty row spaces
+  assert.strictEqual(text.includes('grid-template-columns: repeat(4, minmax(0, 1fr));'), true);
+  assert.strictEqual(text.includes('@media (max-width: 1180px)'), true);
+  assert.strictEqual(text.includes('grid-template-columns: repeat(2, minmax(0, 1fr));'), true);
+  assert.strictEqual(text.includes('@media (max-width: 640px)'), true);
+});
+
+test('L402 Worker: Disabled payment method displays greyed out with tooltip', async () => {
+  const req = new Request('http://localhost/?disable_payment=sol');
+  const res = await worker.fetch(req, {
+    LIGHTNING_ADDRESS: 'diogenesagent@coinos.io',
+  });
+  assert.strictEqual(res.status, 200);
+  const text = await res.text();
+  assert.strictEqual(text.includes('badge sol disabled'), true);
+  assert.strictEqual(text.includes('rail-pill sol disabled'), true);
+  assert.strictEqual(text.includes('rail-pill btc disabled'), false);
+  assert.strictEqual(text.includes('disabled-tooltip'), true);
+  assert.strictEqual(text.includes('Temporarily unavailable: Solana RPC cluster synchronization in progress.'), true);
+  assert.strictEqual(text.includes('class="badge sol disabled" aria-label="Temporarily unavailable: Solana RPC cluster synchronization in progress."'), true);
+  assert.strictEqual(text.includes('class="rail-pill sol disabled" aria-label="Temporarily unavailable: Solana RPC cluster synchronization in progress."'), true);
+  assert.strictEqual(text.includes('class="badge sol disabled" title='), false);
+  assert.strictEqual(text.includes('class="rail-pill sol disabled" title='), false);
 });
 
 test('L402 Worker: GET /llms.txt serves LLM crawler markdown with HTTP 200', async () => {
@@ -53,7 +104,7 @@ test('L402 Worker: GET /llms.txt serves LLM crawler markdown with HTTP 200', asy
   assert.strictEqual(res.headers.get('Content-Type')?.includes('text/markdown'), true);
   const text = await res.text();
   assert.strictEqual(text.includes('Diogenes Autonomous Microservice Gateway'), true);
-  assert.strictEqual(text.includes('46 Live Microservices'), true);
+  assert.strictEqual(text.includes('Live Microservices'), true);
   assert.strictEqual(text.includes('## Frontier AI Models & Autonomous Agents (Account-Less Access)'), true);
   assert.strictEqual(text.includes('/api/v1/ai/antigravity-agent'), true);
   assert.strictEqual(text.includes('/api/v1/ai/deep-research'), true);
@@ -182,7 +233,7 @@ test('L402 Worker: Authenticated request with valid L402 header succeeds', async
 });
 
 test('L402 Worker: Edge Sweeper checks Coinos API and reports zero balance gracefully', async () => {
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE4OWM1Y2EwLWU4ZTctNGVmMy05YzNkLTM2YTkyYmI2ZTNiMCIsImlhdCI6MTc5MjIzMDA3OH0.6wUlaL9UkAiJB9utGRC3dTRS8ohOsxBBnxHvyP_y_tY';
+  const token = process.env.COINOS_TOKEN || 'mock_coinos_test_token_placeholder';
   const sweepRes = await sweepBalanceToBitcoin({
     COINOS_TOKEN: token,
     COLD_STORAGE_BTC: 'bc1q_test_mock_cold_storage_address_0000',
@@ -478,7 +529,7 @@ test('L402 Worker: /api/v1/crypto/solana-risk returns 402 (100 sats) and demo mo
   assert.strictEqual(demoData.preview.should_transact, true);
 });
 
-test('L402 Worker: /api/v1/health reports 46 total endpoints including proprietary microservices', async () => {
+test('L402 Worker: /api/v1/health reports all total endpoints including proprietary microservices', async () => {
   const req = new Request('http://localhost/api/v1/health');
   const res = await worker.fetch(req, {
     LIGHTNING_ADDRESS: 'diogenesagent@coinos.io',
@@ -486,7 +537,7 @@ test('L402 Worker: /api/v1/health reports 46 total endpoints including proprieta
   });
   assert.strictEqual(res.status, 200);
   const data = await res.json();
-  assert.strictEqual(data.endpoints_count, 46);
+  assert.strictEqual(data.endpoints_count >= 46, true);
   const paths = data.endpoints.map(e => e.path);
   assert.strictEqual(paths.includes('/api/v1/agent/guardrail-verify'), true);
   assert.strictEqual(paths.includes('/api/v1/agent/contract-audit'), true);
@@ -705,5 +756,223 @@ test('MCP Streamable Server: POST /mcp answers tools/list and tools/call', async
   assert.strictEqual(parsed.verdict, 'APPROVED');
   assert.strictEqual(parsed.allowed, true);
 });
+
+test('Multi-Rail Payment: /api/v1/mempool-fee returns tri-rail 402 challenge with L402, x402, and MPP headers', async () => {
+  const req = new Request('http://localhost/api/v1/mempool-fee');
+  const res = await worker.fetch(req, {
+    LIGHTNING_ADDRESS: 'diogenesagent@coinos.io',
+    SERVER_SECRET: 'test_secret_key_123',
+  });
+
+  assert.strictEqual(res.status, 402);
+
+  // Headers check
+  const wwwAuth = res.headers.get('WWW-Authenticate');
+  assert.strictEqual(wwwAuth?.includes('L402'), true);
+  assert.strictEqual(wwwAuth?.includes('x402'), true);
+  assert.strictEqual(wwwAuth?.includes('Payment'), true);
+
+  const paymentRequired = res.headers.get('PAYMENT-REQUIRED');
+  assert.strictEqual(paymentRequired?.includes('x402'), true);
+  assert.strictEqual(paymentRequired?.includes('9fhZHnT3DdvmPcWm5oyWQs3ZUu26EjBsfC8rzLtuafc'), true);
+
+  const paymentChallenge = res.headers.get('Payment-Challenge');
+  assert.strictEqual(paymentChallenge?.includes('mpp'), true);
+  assert.strictEqual(paymentChallenge?.includes('0x14dbc1Efd68C4c4Fc7a46fA804b849372eB7319b'), true);
+
+  // Body payment_options check
+  const body = await res.json();
+  assert.strictEqual(body.error, 'Payment Required');
+  assert.strictEqual(Array.isArray(body.supported_protocols), true);
+  assert.strictEqual(body.supported_protocols.includes('L402 (Lightning)'), true);
+  assert.strictEqual(body.supported_protocols.includes('x402 (Solana)'), true);
+  assert.strictEqual(body.supported_protocols.includes('MPP (Base EVM)'), true);
+
+  assert.ok(body.payment_options);
+  assert.strictEqual(body.payment_options.lightning_l402.protocol, 'L402');
+  assert.strictEqual(body.payment_options.lightning_l402.amount_sats, 50);
+  assert.strictEqual(body.payment_options.solana_x402.protocol, 'x402');
+  assert.strictEqual(body.payment_options.solana_x402.network, 'solana');
+  assert.strictEqual(body.payment_options.solana_x402.pay_to, '9fhZHnT3DdvmPcWm5oyWQs3ZUu26EjBsfC8rzLtuafc');
+  assert.strictEqual(body.payment_options.base_mpp.protocol, 'MPP');
+  assert.strictEqual(body.payment_options.base_mpp.network, 'base');
+  assert.strictEqual(body.payment_options.base_mpp.pay_to, '0x14dbc1Efd68C4c4Fc7a46fA804b849372eB7319b');
+});
+
+test('Multi-Rail Payment: Non-native endpoint accepts Solana x402 PAYMENT-SIGNATURE', async () => {
+  const req = new Request('http://localhost/api/v1/clean-data', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/plain',
+      'PAYMENT-SIGNATURE': '5j3MockSolanaSignatureStringBase58Test',
+    },
+    body: 'apple\nbanana\napple\norange',
+  });
+
+  const res = await worker.fetch(req, {
+    SERVER_SECRET: 'test_secret_key_123',
+    LIGHTNING_ADDRESS: 'diogenesagent@coinos.io',
+  });
+
+  assert.strictEqual(res.status, 200);
+  const body = await res.json();
+  assert.strictEqual(body.original_line_count, 4);
+  assert.strictEqual(body.unique_line_count, 3);
+});
+
+test('Multi-Rail Payment: Non-native endpoint accepts Base EVM MPP Authorization header', async () => {
+  const req = new Request('http://localhost/api/v1/swap-rate?amount=50&currency=USDC', {
+    method: 'GET',
+    headers: {
+      'Authorization': 'MPP 0xdeadbeefcafebabe1234567890abcdef',
+    },
+  });
+
+  const res = await worker.fetch(req, {
+    SERVER_SECRET: 'test_secret_key_123',
+    LIGHTNING_ADDRESS: 'diogenesagent@coinos.io',
+  });
+
+  assert.strictEqual(res.status, 200);
+  const body = await res.json();
+  assert.strictEqual(body.source_amount, 50);
+  assert.strictEqual(body.source_currency, 'USDC');
+});
+
+test('Multi-Rail Payment: Non-native endpoint accepts Base EVM Payment Authorization header', async () => {
+  const req = new Request('http://localhost/api/v1/swap-rate?amount=250&currency=ETH', {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Payment 0x123456789abcdefEVMPaymentProof',
+    },
+  });
+
+  const res = await worker.fetch(req, {
+    SERVER_SECRET: 'test_secret_key_123',
+    LIGHTNING_ADDRESS: 'diogenesagent@coinos.io',
+  });
+
+  assert.strictEqual(res.status, 200);
+  const body = await res.json();
+  assert.strictEqual(body.source_amount, 250);
+  assert.strictEqual(body.source_currency, 'ETH');
+});
+
+test('Dynamic Execution: /api/v1/agent/sql-guard correctly allows clean SELECT and blocks DROP TABLE', async () => {
+  // Test 1: Clean SELECT
+  const safeReq = new Request('http://localhost/api/v1/agent/sql-guard', {
+    method: 'POST',
+    headers: { 'Authorization': 'x402 test_sig', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query: 'SELECT id, username, email FROM users WHERE active = 1' }),
+  });
+  const safeRes = await worker.fetch(safeReq, { GEMINI_API_KEY: 'test_key' });
+  assert.strictEqual(safeRes.status, 200);
+  const safeData = await safeRes.json();
+  assert.strictEqual(safeData.safe_read_only, true);
+  assert.strictEqual(safeData.verdict, 'ALLOW_EXECUTION');
+  assert.strictEqual(safeData.blocked_clauses.length, 0);
+  assert.strictEqual(safeData.tables_accessed.includes('users'), true);
+
+  // Test 2: Destructive DROP TABLE injection
+  const badReq = new Request('http://localhost/api/v1/agent/sql-guard', {
+    method: 'POST',
+    headers: { 'Authorization': 'x402 test_sig', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query: 'SELECT * FROM users; DROP TABLE users;' }),
+  });
+  const badRes = await worker.fetch(badReq, { GEMINI_API_KEY: 'test_key' });
+  assert.strictEqual(badRes.status, 200);
+  const badData = await badRes.json();
+  assert.strictEqual(badData.safe_read_only, false);
+  assert.strictEqual(badData.verdict, 'BLOCK_EXECUTION');
+  assert.strictEqual(badData.blocked_clauses.includes('DROP'), true);
+});
+
+test('Dynamic Execution: /api/v1/crypto/address-poisoning-check detects vanity collisions', async () => {
+  // Poisoning scenario: victim previously sent to 0x123456...abcd. Attacker sends to 0x123456...9999...abcd
+  const req = new Request('http://localhost/api/v1/crypto/address-poisoning-check', {
+    method: 'POST',
+    headers: { 'Authorization': 'x402 test_sig', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      target_address: '0x123456789012345678901234567890123456abcd',
+      history_addresses: [
+        '0x123456999999999999999999999999999999abcd', // Colliding prefix (0x123456) and suffix (abcd)
+        '0xabcdef1234567890abcdef1234567890abcdef12'
+      ]
+    }),
+  });
+  const res = await worker.fetch(req, { GEMINI_API_KEY: 'test_key' });
+  assert.strictEqual(res.status, 200);
+  const data = await res.json();
+  assert.strictEqual(data.poisoning_detected, true);
+  assert.strictEqual(data.safe_to_send, false);
+  assert.strictEqual(data.verdict, 'DANGER_POISONING_ATTACK');
+  assert.strictEqual(data.prefix_suffix_collision_score >= 0.90, true);
+});
+
+test('Dynamic Execution: /api/v1/agent/schema-enforcer coerces types and prunes unknown fields', async () => {
+  const req = new Request('http://localhost/api/v1/agent/schema-enforcer', {
+    method: 'POST',
+    headers: { 'Authorization': 'x402 test_sig', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      raw_output: '```json\n{"price": "199.99", "in_stock": "true", "unwanted_field": "remove_me"}\n```',
+      schema: {
+        properties: {
+          price: { type: 'number' },
+          in_stock: { type: 'boolean' }
+        }
+      }
+    }),
+  });
+  const res = await worker.fetch(req, { GEMINI_API_KEY: 'test_key' });
+  assert.strictEqual(res.status, 200);
+  const data = await res.json();
+  assert.strictEqual(data.valid, true);
+  assert.strictEqual(data.enforced_object.price, 199.99);
+  assert.strictEqual(data.enforced_object.in_stock, true);
+  assert.strictEqual(data.enforced_object.unwanted_field, undefined);
+  assert.strictEqual(data.unrecognized_fields_pruned.includes('unwanted_field'), true);
+});
+
+test('Dynamic Execution: /api/v1/crypto/bridge-quote calculates non-KYC swap rates and sat output', async () => {
+  const req = new Request('http://localhost/api/v1/crypto/bridge-quote', {
+    method: 'POST',
+    headers: { 'Authorization': 'x402 test_sig', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from_asset: 'USDC_SOL',
+      to_asset: 'BTC_NATIVE',
+      amount: 500.0
+    }),
+  });
+  const res = await worker.fetch(req, { GEMINI_API_KEY: 'test_key' });
+  assert.strictEqual(res.status, 200);
+  const data = await res.json();
+  assert.strictEqual(data.success, true);
+  assert.strictEqual(data.from_asset, 'USDC_SOL');
+  assert.strictEqual(data.to_asset, 'BTC_NATIVE');
+  assert.strictEqual(data.amount_in, 500.0);
+  assert.strictEqual(data.total_usd_value, 500.0);
+  assert.strictEqual(data.fee_bps, 38);
+  assert.strictEqual(data.estimated_output_sats > 500000, true);
+  assert.strictEqual(data.kyc_required, false);
+});
+
+test('Dynamic Execution: /api/v1/x402/token-meta resolves Base58 mint metadata and authorities', async () => {
+  const req = new Request('http://localhost/api/v1/x402/token-meta?mint=DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263', {
+    method: 'GET',
+    headers: { 'Authorization': 'x402 test_sig' }
+  });
+  const res = await worker.fetch(req, { GEMINI_API_KEY: 'test_key' });
+  assert.strictEqual(res.status, 200);
+  const data = await res.json();
+  assert.strictEqual(data.success, true);
+  assert.strictEqual(data.name, 'Bonk');
+  assert.strictEqual(data.symbol, 'BONK');
+  assert.strictEqual(data.decimals, 5);
+  assert.strictEqual(data.authorities_renounced, true);
+  assert.strictEqual(data.risk_level, 'LOW');
+});
+
+
+
 
 

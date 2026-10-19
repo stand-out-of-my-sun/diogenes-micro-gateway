@@ -1,7 +1,7 @@
 # Diogenes // Autonomous Multi-Protocol AI Gateway & MCP Server
 
 [![Gateway Live](https://img.shields.io/badge/Gateway-Live%20on%20Edge-22c55e?style=flat-square&logo=cloudflare)](https://diogenes-micro-gateway.corinth.workers.dev)
-[![Endpoints](https://img.shields.io/badge/Endpoints-46%20Live%20Microservices-a855f7?style=flat-square)](https://diogenes-micro-gateway.corinth.workers.dev)
+[![Endpoints](https://img.shields.io/badge/Endpoints-55%20Live%20Microservices-a855f7?style=flat-square)](https://diogenes-micro-gateway.corinth.workers.dev)
 [![Protocols](https://img.shields.io/badge/Protocols-L402%20%7C%20x402%20%7C%20MPP%20%7C%20MCP-f97316?style=flat-square)](https://diogenes-micro-gateway.corinth.workers.dev)
 [![402Index Verified](https://img.shields.io/badge/402Index-Domain%20Verified-8b5cf6?style=flat-square)](https://402index.io)
 [![Nostr NIP-05](https://img.shields.io/badge/Nostr-Verified%20NIP--05-9333ea?style=flat-square&logo=nostr)](https://primal.net/e/note1zgyzaxyjzedu6c04mk63sdehvfv3w35jvm02ywcdpweq7jf54nxseaueh9)
@@ -131,14 +131,24 @@ curl -X POST "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/agent/co
 ### Security, Guardrails & Web3 Microservices
 | Service | Route | Protocol | Price |
 | :--- | :--- | :--- | :--- |
-| **Autonomous Pre-Execution Gate** | `POST /api/v1/agent/guardrail-verify` | L402 | 100 sats |
-| **Smart Contract & Rugpull Auditor** | `POST /api/v1/agent/contract-audit` | L402 | 250 sats |
-| **Real-Time Grounded Market Dossier** | `POST /api/v1/agent/web-brief` | L402 | 200 sats |
-| **Solana Token & Wallet Risk Oracle** | `POST /api/v1/crypto/solana-risk` | L402 / x402 | 100 sats / $0.02 |
-| **Autonomous JSON Error Repair** | `POST /api/v1/agent/json-repair` | L402 | 50 sats |
-| **ReDoS-Safe Regex Synthesizer** | `POST /api/v1/agent/regex-oracle` | L402 | 50 sats |
-| **Pre-Swap MEV Sandwich Risk Oracle** | `POST /api/v1/crypto/mev-risk` | L402 | 150 sats |
-| **Production Agent Prompt Compiler** | `POST /api/v1/agent/prompt-compiler` | L402 | 100 sats |
+| **Autonomous Pre-Execution Gate** | `POST /api/v1/agent/guardrail-verify` | L402 / x402 / MPP | 100 sats / $0.02 |
+| **SQL AST Injection & Mutation Guard** | `POST /api/v1/agent/sql-guard` | L402 / x402 / MPP | 100 sats / $0.02 |
+| **Address Vanity & Poisoning Checker** | `POST /api/v1/crypto/address-poisoning-check` | L402 / x402 / MPP | 75 sats / $0.015 |
+| **EIP-712 Permit & Permit2 Decoder** | `POST /api/v1/crypto/eip712-permit-decoder` | L402 / x402 / MPP | 150 sats / $0.03 |
+| **Cross-Chain Bridge Rate & Route Engine** | `POST /api/v1/crypto/bridge-quote` | L402 / x402 / MPP | 100 sats / $0.02 |
+| **Sui Move Smart Assembly Coder** | `POST /api/v1/frontier/move-assembly-coder` | L402 / x402 / MPP | 300 sats / $0.06 |
+| **MCP Manifest & Prompt-Injection Auditor**| `POST /api/v1/agent/mcp-manifest-auditor` | L402 / x402 / MPP | 150 sats / $0.03 |
+| **AI Hallucination & Citation Verifier** | `POST /api/v1/agent/hallucination-auditor` | L402 / x402 / MPP | 200 sats / $0.04 |
+| **Context Compaction & Memory Auditor** | `POST /api/v1/agent/context-compaction-verifier` | L402 / x402 / MPP | 150 sats / $0.03 |
+| **Smart Contract & Rugpull Auditor** | `POST /api/v1/agent/contract-audit` | L402 / x402 / MPP | 250 sats / $0.05 |
+| **Real-Time Grounded Market Dossier** | `POST /api/v1/agent/web-brief` | L402 / x402 / MPP | 200 sats / $0.04 |
+| **Solana Token & Wallet Risk Oracle** | `POST /api/v1/crypto/solana-risk` | L402 / x402 / MPP | 100 sats / $0.02 |
+| **Solana Dynamic Priority Fee Oracle** | `POST /api/v1/crypto/solana-priority-fee-oracle` | L402 / x402 / MPP | 50 sats / $0.01 |
+| **Autonomous JSON Schema Enforcer** | `POST /api/v1/agent/schema-enforcer` | L402 / x402 / MPP | 50 sats / $0.01 |
+| **Autonomous JSON Error Repair** | `POST /api/v1/agent/json-repair` | L402 / x402 / MPP | 50 sats / $0.01 |
+| **ReDoS-Safe Regex Synthesizer** | `POST /api/v1/agent/regex-oracle` | L402 / x402 / MPP | 50 sats / $0.01 |
+| **Pre-Swap MEV Sandwich Risk Oracle** | `POST /api/v1/crypto/mev-risk` | L402 / x402 / MPP | 150 sats / $0.03 |
+| **Production Agent Prompt Compiler** | `POST /api/v1/agent/prompt-compiler` | L402 / x402 / MPP | 100 sats / $0.02 |
 
 ### [::] x402 Solana Microservices
 | Service | Route | Protocol | Price |

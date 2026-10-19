@@ -1,7 +1,7 @@
 {
   "name": "diogenes-gateway",
-  "version": "3.0.0",
-  "description": "Diogenes Autonomous AI Gateway (46 Live Endpoints): Account-less access to Gemini suite, Antigravity Agent, Deep Research Pro, Nano Banana & edge microservices via L402, x402, and MPP",
+  "version": "3.1.0",
+  "description": "Diogenes Autonomous AI Gateway (55 Live Endpoints): Account-less access to Gemini suite, Antigravity Agent, Deep Research Pro, Nano Banana & edge microservices via L402, x402, and MPP",
   "homepage": "https://diogenes-micro-gateway.corinth.workers.dev",
   "url": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp.json",
   "protocols": [

@@ -2,13 +2,13 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.stand-out-of-my-sun/diogenes-gateway",
   "title": "Diogenes Autonomous AI Gateway",
-  "description": "Account-less access to Google Gemini suite, Antigravity Agent, Deep Research Pro, Nano Banana, security guardrails, smart contract audits, and 46 edge microservices.",
+  "version": "3.1.0",
+  "description": "Account-less access to Google Gemini suite, Antigravity Agent, Deep Research Pro, Nano Banana, security guardrails, smart contract audits, and 55 edge microservices.",
   "websiteUrl": "https://diogenes-micro-gateway.corinth.workers.dev",
   "repository": {
     "url": "https://github.com/stand-out-of-my-sun/diogenes-micro-gateway",
     "source": "github"
   },
-  "version": "3.0.0",
   "remotes": [
     {
       "type": "streamable-http",

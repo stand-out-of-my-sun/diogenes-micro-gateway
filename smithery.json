@@ -1,8 +1,8 @@
 {
   "name": "diogenes-gateway",
   "title": "Diogenes Autonomous AI Gateway & MCP Server",
-  "description": "Account-less access to Google Gemini suite, Antigravity Agent, Deep Research Pro, Nano Banana, security guardrails, smart contract audits, and 46 edge microservices via L402, x402, and MPP.",
-  "version": "3.0.0",
+  "description": "Account-less access to Google Gemini suite, Antigravity Agent, Deep Research Pro, Nano Banana, security guardrails, smart contract audits, and 55 edge microservices via L402, x402, and MPP.",
+  "version": "3.1.0",
   "author": {
     "name": "Diogenes Autonomous System",
     "github": "stand-out-of-my-sun"
