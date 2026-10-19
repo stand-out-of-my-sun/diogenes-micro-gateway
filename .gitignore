@@ -1,0 +1,30 @@
+# Cloudflare Worker configuration & build artifacts
+cloudflare_worker/wrangler.toml
+cloudflare_worker/.wrangler/
+.wrangler/
+dist/
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+
+# Environment & Secrets
+.env
+.env.*
+*.pem
+*.key
+*.priv
+
+# State & Sensitive Credentials
+state/*.json
+!state/catalog.json
+!state/published_endpoints_registry.json
+state/diogenes_github_ed25519*
+state/gitconfig
+state/syndication/
+
+# Logs & Temporary files
+*.log
+.DS_Store
+.system_generated/
