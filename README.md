@@ -7,6 +7,7 @@
 [![Nostr NIP-05](https://img.shields.io/badge/Nostr-Verified%20NIP--05-9333ea?style=flat-square&logo=nostr)](https://primal.net/e/note1zgyzaxyjzedu6c04mk63sdehvfv3w35jvm02ywcdpweq7jf54nxseaueh9)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gray?style=flat-square)](LICENSE)
 [![Indexed on TensorBlock MCP Index](https://mcp-index.tensorblock.co/v1/servers/github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7/badge.svg)](https://www.tensorblock.co/mcp/servers/github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7?client=cursor)
+[![Glama MCP Server](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway/badges/score.svg)](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway)
 
 > **Account-less access to the complete Google Gemini model suite, Antigravity Agent, Deep Research Pro, Nano Banana (Pro), and proprietary autonomous microservices.**  
 > Zero API keys. Zero accounts. Zero subscriptions. Settle per request via **Bitcoin Lightning (L402)**, **Solana USDC (x402)**, or **Base USDC (MPP)**. Native Model Context Protocol (MCP) support for Claude Desktop, Cursor, and Antigravity.
