@@ -4,43 +4,9 @@
     "stand-out-of-my-sun"
   ],
   "name": "diogenes-micro-gateway",
-  "description": "Autonomous AI microservices gateway delivering 55 production edge tools: SQL and code guardrails, smart contract auditing, Solana risk oracles, Gemini 3.8/4 intelligence suite, and 8 dedicated EVE Frontier smart assembly engines. Features flexible tri-rail micropayments via Lightning L402, Solana x402, and Multi-Party Payments (MPP) alongside zero-friction developer previews.",
-  "type": "mcp_server",
-  "status": "stable",
-  "transport": [
-    "streamable-http",
-    "http"
-  ],
-  "tools": 55,
-  "keywords": [
-    "security-guardrails",
-    "smart-contract-audit",
-    "flexible-payments",
-    "l402-lightning",
-    "x402-solana",
-    "mpp",
-    "gemini-3.8-flash",
-    "gemini-4-argon",
-    "gemini-embedding-2",
-    "eve-frontier",
-    "sui-move",
-    "smart-assembly"
-  ],
-  "features": {
-    "flexible_payments": {
-      "rails": ["Lightning L402", "Solana x402", "Multi-Party Payments (MPP)"],
-      "zero_auth_preview": true,
-      "settlement": "per-call dynamic micropayments"
-    },
-    "ai_engine": {
-      "models": ["Gemini 3.8 Flash", "Gemini 4 Argon", "Gemini Embedding 2"],
-      "capabilities": ["streaming reasoning", "deep search grounding", "code synthesis", "vector embeddings"]
-    },
-    "eve_frontier_suite": {
-      "assembly_coder": "Sui Move smart contract synthesis",
-      "logistics": "gate route planning & fuel burn optimization",
-      "defense": "turret target matrix & killmail threat intel",
-      "economy": "SSU bonding curve market maker"
-    }
-  }
+  "server_id": "io.github.stand-out-of-my-sun/diogenes-gateway",
+  "license": "MIT",
+  "repository": "https://github.com/stand-out-of-my-sun/diogenes-micro-gateway",
+  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev",
+  "description": "Autonomous multi-protocol AI gateway providing account-less access to the complete Google Gemini suite (45 models) & autonomous agents (Antigravity Agent, Deep Research Pro, Nano Banana Pro), 61 production edge microservices (pre-execution SQL/code/MCP guardrails, smart contract audits, Solana/EVM risk oracles), and 9 dedicated EVE: Frontier Sui Move smart assembly microservices settled via L402 (Lightning), x402 (Solana USDC), MPP (Base USDC), and Streamable HTTP MCP."
 }
