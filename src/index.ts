@@ -724,6 +724,25 @@ export default {
       });
     }
 
+    // Glama MCP Connector / Domain Verification Endpoint (GET /.well-known/glama.json)
+    if (path === "/.well-known/glama.json") {
+      return new Response(JSON.stringify({
+        "$schema": "https://glama.ai/mcp/schemas/connector.json",
+        "maintainers": ["stand-out-of-my-sun"],
+        "name": "diogenes-micro-gateway",
+        "server_id": "io.github.stand-out-of-my-sun/diogenes-gateway",
+        "description": "Autonomous AI microservices gateway delivering 55 production edge tools: SQL/code guardrails, smart contract auditing, Solana risk oracles, Gemini 3.8/4 model suite, and 8 dedicated EVE Frontier smart assembly engines via flexible L402/x402/MPP micropayments.",
+        "remote_url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp",
+        "flexible_payments": ["Lightning L402", "Solana x402", "Base MPP"],
+        "models": ["Gemini 3.8 Flash", "Gemini 4 Argon", "Gemini Embedding 2"]
+      }, null, 2), {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+    }
+
     // Nostr NIP-05 Verification (GET /.well-known/nostr.json)
     if (path === "/.well-known/nostr.json") {
       const nostrPubkey = "0b4c9c142d132bd910334a8eaf25dbaf6124ef18ebaf3c53058450be9b30734d";
