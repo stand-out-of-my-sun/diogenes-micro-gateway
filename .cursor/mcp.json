@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "diogenes": {
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp"
+    }
+  }
+}
