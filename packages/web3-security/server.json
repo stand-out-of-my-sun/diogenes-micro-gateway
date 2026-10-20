@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.stand-out-of-my-sun/diogenes-web3-security",
+  "description": "Autonomous Web3 & HTTP 402 security suite: EVM/Solana/Move smart contract honeypot auditor, Solana SPL risk oracle, MEV sandwich evaluator, vanity address poisoning detector, HTTP 402 invoice fraud ve",
+  "version": "1.4.0",
+  "license": "MIT",
+  "maintainer": "@stand-out-of-my-sun",
+  "category": "Blockchain & Web3",
+  "auth": {
+    "type": "none",
+    "accountless": true,
+    "optional_payment_headers": [
+      "Authorization: L402",
+      "X-Payment-Signature",
+      "X-Payment-TxHash"
+    ]
+  },
+  "install_confidence": "high",
+  "verification": {
+    "status": "verified",
+    "package_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/web3-security.json",
+    "tensorblock_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/tensorblock.json",
+    "health_check": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health"
+  },
+  "repository": {
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "transport_type": "streamable-http",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/web3-security",
+      "auth": "none"
+    }
+  ]
+}
