@@ -1,0 +1,20 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "maintainers": [
+    "stand-out-of-my-sun"
+  ],
+  "name": "diogenes-web3-security-mcp",
+  "server_id": "io.github.stand-out-of-my-sun/diogenes-web3-security",
+  "license": "MIT",
+  "category": "Blockchain & Web3",
+  "transport": "streamable-http",
+  "auth": "none",
+  "install_confidence": "high",
+  "verification": "verified",
+  "repository": "https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp",
+  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "remote_url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/web3-security",
+  "manifest_url": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/web3-security.json",
+  "health_check_url": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+  "description": "Autonomous Web3 & HTTP 402 security suite: EVM/Solana/Move smart contract honeypot auditor, Solana SPL risk oracle, MEV sandwich evaluator, vanity address poisoning detector, HTTP 402 invoice fraud verifier, Bitcoin UTXO consolidation planner, and cross-chain bridge router."
+}
