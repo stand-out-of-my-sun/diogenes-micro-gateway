@@ -1,15 +1,38 @@
 {
-  "name": "diogenes-micro-gateway",
-  "version": "1.0.0",
-  "type": "module",
-  "description": "Autonomous L402 Pay-Per-Call Microservice Gateway on Cloudflare Workers",
-  "main": "src/index.ts",
-  "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "test": "node --test"
+  "name": "@stand-out-of-my-sun/diogenes-micro-gateway",
+  "version": "1.3.0",
+  "description": "Autonomous AI Gateway: Account-less access to 45 Gemini models & autonomous agents (Antigravity, Deep Research Pro, Nano Banana), 61 edge microservices & 9 EVE: Frontier APIs",
+  "license": "MIT",
+  "author": "@stand-out-of-my-sun",
+  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-micro-gateway.git"
   },
-  "keywords": ["l402", "lightning", "bitcoin", "cloudflare-workers", "microservices"],
-  "author": "Diogenes",
-  "license": "MIT"
+  "bugs": {
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-micro-gateway/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "streamable-http",
+    "tensorblock",
+    "glama",
+    "l402",
+    "x402",
+    "gemini",
+    "eve-frontier",
+    "security"
+  ],
+  "mcp": {
+    "serverId": "io.github.stand-out-of-my-sun/diogenes-gateway",
+    "tensorblockProfileId": "github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7",
+    "transport": "streamable-http",
+    "endpoint": "https://diogenes-micro-gateway.corinth.workers.dev/mcp",
+    "healthEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+    "auth": "none",
+    "installConfidence": "high",
+    "verification": "verified",
+    "toolsCount": 61
+  }
 }
