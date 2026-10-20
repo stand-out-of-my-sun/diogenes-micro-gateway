@@ -1,0 +1,20 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "maintainers": [
+    "stand-out-of-my-sun"
+  ],
+  "name": "diogenes-eve-frontier-mcp",
+  "server_id": "io.github.stand-out-of-my-sun/diogenes-eve-frontier",
+  "license": "MIT",
+  "category": "Gaming",
+  "transport": "streamable-http",
+  "auth": "none",
+  "install_confidence": "high",
+  "verification": "verified",
+  "repository": "https://github.com/stand-out-of-my-sun/diogenes-eve-frontier-mcp",
+  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "remote_url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/eve-frontier",
+  "manifest_url": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/eve-frontier.json",
+  "health_check_url": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+  "description": "Dedicated MCP suite for CCP Games' EVE: Frontier on Sui Move: 9 purpose-built tools for Smart Assembly Move contracts, Smart Gate route & toll planning, Lagrange Network Node gigajoule (GJ) optimization, Smart Turret targeting, Killmail intel, SSU AMM pricing, zkLogin verification, Sovereignty fuel radar, and Sui PTB drain simulation."
+}

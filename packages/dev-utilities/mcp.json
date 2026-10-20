@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "diogenes-dev-utilities": {
+      "transport": "streamable-http",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/dev-utilities",
+      "auth": "none",
+      "description": "Deterministic developer & data reliability MCP utilities: malformed JSON syntax healer, linear-time O(n) ReDoS-safe regex synthesizer, XML system prompt compiler, strict JSON Schema enforcer, context compaction verifier, hallucination factuality auditor, and CSV/JSON data sanitizer.",
+      "headers": {}
+    }
+  }
+}

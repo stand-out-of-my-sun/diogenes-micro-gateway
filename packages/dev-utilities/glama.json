@@ -1,0 +1,20 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "maintainers": [
+    "stand-out-of-my-sun"
+  ],
+  "name": "diogenes-dev-utilities-mcp",
+  "server_id": "io.github.stand-out-of-my-sun/diogenes-dev-utilities",
+  "license": "MIT",
+  "category": "Developer Tools",
+  "transport": "streamable-http",
+  "auth": "none",
+  "install_confidence": "high",
+  "verification": "verified",
+  "repository": "https://github.com/stand-out-of-my-sun/diogenes-dev-utilities-mcp",
+  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "remote_url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/dev-utilities",
+  "manifest_url": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/dev-utilities.json",
+  "health_check_url": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+  "description": "Deterministic developer & data reliability MCP utilities: malformed JSON syntax healer, linear-time O(n) ReDoS-safe regex synthesizer, XML system prompt compiler, strict JSON Schema enforcer, context compaction verifier, hallucination factuality auditor, and CSV/JSON data sanitizer."
+}

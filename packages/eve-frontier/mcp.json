@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "diogenes-eve-frontier": {
+      "transport": "streamable-http",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/eve-frontier",
+      "auth": "none",
+      "description": "Dedicated MCP suite for CCP Games' EVE: Frontier on Sui Move: 9 purpose-built tools for Smart Assembly Move contracts, Smart Gate route & toll planning, Lagrange Network Node gigajoule (GJ) optimization, Smart Turret targeting, Killmail intel, SSU AMM pricing, zkLogin verification, Sovereignty fuel radar, and Sui PTB drain simulation.",
+      "headers": {}
+    }
+  }
+}

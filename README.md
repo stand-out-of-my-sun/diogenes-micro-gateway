@@ -3,7 +3,7 @@
 [![Indexed on TensorBlock MCP Index](https://mcp-index.tensorblock.co/v1/servers/github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7/badge.svg)](https://www.tensorblock.co/mcp/servers/github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7?client=cursor)
 [![Glama MCP Server](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway/badges/score.svg)](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway)
 
-**Diogenes Autonomous Microservice Gateway** (`https://diogenes-micro-gateway.corinth.workers.dev`) is an account-less, multi-protocol AI & Web3 edge gateway delivering **106 Total Live Capabilities**:
+**Diogenes Autonomous Microservice Gateway** (`https://diogenes-micro-gateway.corinth.workers.dev`) is an account-less, multi-protocol AI & Web3 edge gateway delivering:
 1. **Account-Less Access to the Complete Google Gemini Suite (45 Models) & Autonomous Agents**: Instant pay-per-request access to **Antigravity Agent**, **Deep Research Pro**, **Nano Banana Pro (Gemini 3 Pro Image)**, **Nano Banana**, **Gemini 4 Argon**, and **Gemini 3.1 Pro** with zero API keys, zero accounts, and zero monthly subscriptions.
 2. **61 Live Autonomous Edge Microservices**: Pre-execution SQL/code/MCP security guardrails, smart contract vulnerability audits, Solana/EVM token risk oracles, HTTP 402 invoice fraud verification, and cross-chain bridge routing settled via **Bitcoin Lightning (L402)**, **Solana USDC (x402)**, **Base EVM USDC (MPP)**, and **Streamable HTTP MCP (`/mcp`)**.
 3. **9 Dedicated EVE: Frontier Sui Move Microservices**: Sui Move Smart Assembly coder & auditor, Smart Gate route & toll planner, Lagrange Network Node gigajoule (GJ) optimizer, SSU Automated Market Maker, Killmail threat intelligence, Smart Turret target matrix, Vault zkLogin character verifier, Constellation sovereignty fuel radar, and Sui Programmable Transaction Block (PTB) simulator.
@@ -25,9 +25,24 @@
 
 ---
 
+## 1-Click Modular MCP Packages (Install Only What You Need)
+
+Instead of loading all 61 gateway endpoints into your LLM's context window at once, connect Cursor, Claude Desktop, Zed, or Windsurf to a **purpose-built domain package**:
+
+| Domain Package | Scoped 1-Click MCP Endpoint | Dedicated Spoke Repository | Scope |
+| :--- | :--- | :--- | :--- |
+| **1. Gemini Suite & Autonomous Agents** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/gemini-suite` | [`stand-out-of-my-sun/diogenes-gemini-suite-mcp`](https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp) | 18 Tools (All 45 Gemini Models, Antigravity, Deep Research, Nano Banana Pro, Veo 3, Lyria 3) |
+| **2. Agent Guardrails & Sandbox** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails` | [`stand-out-of-my-sun/diogenes-agent-guardrails-mcp`](https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp) | 11 Tools (Pre-exec bash gate, MCP rugpull diff, sampling guard, output firewall, loop breaker, SQL guard, Python sandbox, PII scrubber) |
+| **3. Web3, DeFi & 402 Security** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/web3-security` | [`stand-out-of-my-sun/diogenes-web3-security-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp) | 13 Tools (Contract audit, Solana risk, MEV risk, EIP-712 decoder, address poisoning, HTTP 402 verifier, UTXO planner, bridge quote, whale radar) |
+| **4. EVE: Frontier Sui Move Suite** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/eve-frontier` | [`stand-out-of-my-sun/diogenes-eve-frontier-mcp`](https://github.com/stand-out-of-my-sun/diogenes-eve-frontier-mcp) | 9 Tools (All 9 dedicated EVE: Frontier Sui Move Smart Assembly, Gate, Lagrange GJ, SSU, Turret, Killmail, zkLogin & PTB tools) |
+| **5. Dev & Data Utilities** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/dev-utilities` | [`stand-out-of-my-sun/diogenes-dev-utilities-mcp`](https://github.com/stand-out-of-my-sun/diogenes-dev-utilities-mcp) | 10 Tools (JSON healer, O(n) ReDoS regex, XML prompt compiler, schema enforcer, MCP router, compaction verifier, hallucination auditor, CSV cleaner) |
+| **6. Full Master Gateway** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp` | [`stand-out-of-my-sun/diogenes-micro-gateway`](https://github.com/stand-out-of-my-sun/diogenes-micro-gateway) | All 61 Tools |
+
+---
+
 ## Model Context Protocol (MCP) & Public Directory Profiles
 
-Diogenes Gateway exposes **21 production autonomous tools** natively via **Streamable HTTP** (`https://diogenes-micro-gateway.corinth.workers.dev/mcp`) for Cursor, Claude Desktop, Windsurf, VS Code, and autonomous agents:
+Diogenes Gateway exposes **61 production autonomous tools** natively via **Streamable HTTP** (`https://diogenes-micro-gateway.corinth.workers.dev/mcp`) for Cursor, Claude Desktop, Windsurf, VS Code, and autonomous agents:
 
 - **Glama MCP Directory Profile**: [https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway)
 - **TensorBlock MCP Index Profile**: [https://www.tensorblock.co/mcp/servers/github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7?client=cursor](https://www.tensorblock.co/mcp/servers/github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7?client=cursor)

@@ -18,5 +18,5 @@
   "health_check_url": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
   "docs_url": "https://diogenes-micro-gateway.corinth.workers.dev/llms.txt",
   "support_url": "https://github.com/stand-out-of-my-sun/diogenes-micro-gateway/issues",
-  "description": "Autonomous multi-protocol AI gateway providing account-less access to 106 total capabilities: the complete Google Gemini suite (45 models) & autonomous agents (Antigravity Agent, Deep Research Pro, Nano Banana Pro), 61 production edge microservices (pre-execution SQL/code/MCP guardrails, smart contract audits, Solana/EVM risk oracles), and 9 dedicated EVE: Frontier Sui Move smart assembly microservices settled via L402 (Lightning), x402 (Solana USDC), MPP (Base USDC), and Streamable HTTP MCP."
+  "description": "Autonomous multi-protocol AI gateway providing account-less access to the complete Google Gemini suite (45 models) & autonomous agents (Antigravity Agent, Deep Research Pro, Nano Banana Pro), 61 production edge microservices (pre-execution SQL/code/MCP guardrails, smart contract audits, Solana/EVM risk oracles), and 9 dedicated EVE: Frontier Sui Move smart assembly microservices settled via L402 (Lightning), x402 (Solana USDC), MPP (Base USDC), and Streamable HTTP MCP."
 }

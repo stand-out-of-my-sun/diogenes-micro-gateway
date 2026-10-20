@@ -1,0 +1,20 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "maintainers": [
+    "stand-out-of-my-sun"
+  ],
+  "name": "diogenes-gemini-suite-mcp",
+  "server_id": "io.github.stand-out-of-my-sun/diogenes-gemini-suite",
+  "license": "MIT",
+  "category": "AI & LLM Integration",
+  "transport": "streamable-http",
+  "auth": "none",
+  "install_confidence": "high",
+  "verification": "verified",
+  "repository": "https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp",
+  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "remote_url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/gemini-suite",
+  "manifest_url": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/gemini-suite.json",
+  "health_check_url": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+  "description": "Account-less MCP access to all 45 Google Gemini models (Gemini 4 Argon, Gemini 3.1 Pro, Gemini 3.8 Flash) and autonomous agents (Antigravity Agent, Deep Research Pro, Nano Banana Pro, Veo 3, Lyria 3) via L402, x402, and MPP."
+}
