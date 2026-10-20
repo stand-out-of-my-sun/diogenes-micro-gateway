@@ -1,13 +1,11 @@
 {
-  "name": "diogenes-gateway",
-  "version": "3.1.0",
-  "description": "Diogenes Autonomous AI Gateway (55 Live Endpoints): Account-less access to Gemini suite, Antigravity Agent, Deep Research Pro, Nano Banana & edge microservices via L402, x402, and MPP",
-  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev",
-  "url": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp.json",
-  "protocols": [
-    "L402",
-    "x402",
-    "MPP",
-    "MCP"
-  ]
+  "mcpServers": {
+    "diogenes-gateway": {
+      "transport": "streamable-http",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp",
+      "auth": "none",
+      "description": "Autonomous AI Gateway: Account-less access to 45 Gemini models & autonomous agents (Antigravity, Deep Research Pro, Nano Banana), 61 edge microservices & 9 EVE: Frontier APIs",
+      "headers": {}
+    }
+  }
 }
