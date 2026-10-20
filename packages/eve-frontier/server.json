@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.stand-out-of-my-sun/diogenes-eve-frontier",
+  "description": "Dedicated MCP suite for CCP Games' EVE: Frontier on Sui Move: 9 purpose-built tools for Smart Assembly Move contracts, Smart Gate route & toll planning, Lagrange Network Node gigajoule (GJ) optimizati",
+  "version": "1.4.0",
+  "license": "MIT",
+  "maintainer": "@stand-out-of-my-sun",
+  "category": "Gaming",
+  "auth": {
+    "type": "none",
+    "accountless": true,
+    "optional_payment_headers": [
+      "Authorization: L402",
+      "X-Payment-Signature",
+      "X-Payment-TxHash"
+    ]
+  },
+  "install_confidence": "high",
+  "verification": {
+    "status": "verified",
+    "package_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/eve-frontier.json",
+    "tensorblock_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/tensorblock.json",
+    "health_check": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health"
+  },
+  "repository": {
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-eve-frontier-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "transport_type": "streamable-http",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/eve-frontier",
+      "auth": "none"
+    }
+  ]
+}
