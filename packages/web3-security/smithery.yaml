@@ -1,0 +1,20 @@
+# Smithery & TensorBlock MCP Index Installation Manifest (web3-security)
+name: diogenes-web3-security-mcp
+displayName: "Diogenes Web3, DeFi & HTTP 402 Security MCP"
+description: "Autonomous Web3 & HTTP 402 security suite: EVM/Solana/Move smart contract honeypot auditor, Solana SPL risk oracle, MEV sandwich evaluator, vanity address poisoning detector, HTTP 402 invoice fraud verifier, Bitcoin UTXO consolidation planner, and cross-chain bridge router."
+author: "stand-out-of-my-sun"
+license: MIT
+homepage: "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages"
+repository: "https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp"
+category: "Blockchain & Web3"
+transport: streamable-http
+auth: none
+installConfidence: high
+verification: verified
+startCommand:
+  type: http
+  url: "https://diogenes-micro-gateway.corinth.workers.dev/mcp/web3-security"
+  configSchema:
+    type: object
+    properties: {}
+    required: []
