@@ -1,0 +1,49 @@
+{
+  "name": "@stand-out-of-my-sun/diogenes-dev-utilities-mcp",
+  "version": "1.4.0",
+  "description": "Deterministic developer & data reliability MCP utilities: malformed JSON syntax healer, linear-time O(n) ReDoS-safe regex synthesizer, XML system prompt compiler, strict JSON Schema enforcer, context compaction verifier, hallucination factuality auditor, and CSV/JSON data sanitizer.",
+  "license": "MIT",
+  "author": "@stand-out-of-my-sun",
+  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-dev-utilities-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-dev-utilities-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "developer-tools",
+    "json-schema",
+    "regex",
+    "prompt-engineering",
+    "data-cleaning",
+    "context-compaction",
+    "hallucination-detection",
+    "ai-engineering",
+    "glama",
+    "tensorblock",
+    "llm-tools",
+    "json-repair",
+    "redos",
+    "autonomous-agents",
+    "validation",
+    "l402",
+    "x402",
+    "streamable-http"
+  ],
+  "mcp": {
+    "serverId": "io.github.stand-out-of-my-sun/diogenes-dev-utilities",
+    "packageSlug": "dev-utilities",
+    "transport": "streamable-http",
+    "endpoint": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/dev-utilities",
+    "manifestEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/dev-utilities.json",
+    "healthEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+    "auth": "none",
+    "installConfidence": "high",
+    "verification": "verified",
+    "toolsCount": 7
+  }
+}
