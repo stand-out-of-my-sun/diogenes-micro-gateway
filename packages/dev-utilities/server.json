@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.stand-out-of-my-sun/diogenes-dev-utilities",
+  "description": "Deterministic developer & data reliability MCP utilities: malformed JSON syntax healer, linear-time O(n) ReDoS-safe regex synthesizer, XML system prompt compiler, strict JSON Schema enforcer, context ",
+  "version": "1.4.0",
+  "license": "MIT",
+  "maintainer": "@stand-out-of-my-sun",
+  "category": "Developer Tools",
+  "auth": {
+    "type": "none",
+    "accountless": true,
+    "optional_payment_headers": [
+      "Authorization: L402",
+      "X-Payment-Signature",
+      "X-Payment-TxHash"
+    ]
+  },
+  "install_confidence": "high",
+  "verification": {
+    "status": "verified",
+    "package_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/dev-utilities.json",
+    "tensorblock_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/tensorblock.json",
+    "health_check": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health"
+  },
+  "repository": {
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-dev-utilities-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "transport_type": "streamable-http",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/dev-utilities",
+      "auth": "none"
+    }
+  ]
+}
