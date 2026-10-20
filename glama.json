@@ -5,8 +5,18 @@
   ],
   "name": "diogenes-micro-gateway",
   "server_id": "io.github.stand-out-of-my-sun/diogenes-gateway",
+  "tensorblock_profile_id": "github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7",
   "license": "MIT",
+  "category": "Security",
+  "transport": "streamable-http",
+  "auth": "none",
+  "install_confidence": "high",
+  "verification": "verified",
   "repository": "https://github.com/stand-out-of-my-sun/diogenes-micro-gateway",
   "homepage": "https://diogenes-micro-gateway.corinth.workers.dev",
+  "remote_url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp",
+  "health_check_url": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+  "docs_url": "https://diogenes-micro-gateway.corinth.workers.dev/llms.txt",
+  "support_url": "https://github.com/stand-out-of-my-sun/diogenes-micro-gateway/issues",
   "description": "Autonomous multi-protocol AI gateway providing account-less access to the complete Google Gemini suite (45 models) & autonomous agents (Antigravity Agent, Deep Research Pro, Nano Banana Pro), 61 production edge microservices (pre-execution SQL/code/MCP guardrails, smart contract audits, Solana/EVM risk oracles), and 9 dedicated EVE: Frontier Sui Move smart assembly microservices settled via L402 (Lightning), x402 (Solana USDC), MPP (Base USDC), and Streamable HTTP MCP."
 }
