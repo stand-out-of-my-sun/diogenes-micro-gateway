@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.stand-out-of-my-sun/diogenes-gemini-suite",
+  "description": "Account-less MCP access to all 45 Google Gemini models (Gemini 4 Argon, Gemini 3.1 Pro, Gemini 3.8 Flash) and autonomous agents (Antigravity Agent, Deep Research Pro, Nano Banana Pro, Veo 3, Lyria 3) ",
+  "version": "1.4.0",
+  "license": "MIT",
+  "maintainer": "@stand-out-of-my-sun",
+  "category": "AI & LLM Integration",
+  "auth": {
+    "type": "none",
+    "accountless": true,
+    "optional_payment_headers": [
+      "Authorization: L402",
+      "X-Payment-Signature",
+      "X-Payment-TxHash"
+    ]
+  },
+  "install_confidence": "high",
+  "verification": {
+    "status": "verified",
+    "package_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/gemini-suite.json",
+    "tensorblock_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/tensorblock.json",
+    "health_check": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health"
+  },
+  "repository": {
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "transport_type": "streamable-http",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/gemini-suite",
+      "auth": "none"
+    }
+  ]
+}
