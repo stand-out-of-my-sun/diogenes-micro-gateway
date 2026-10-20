@@ -1,0 +1,1632 @@
+[
+  {
+    "name": "x402_token_meta",
+    "description": "Solana SPL Token Metadata & Liquidity Depth ($0.02 USDC via x402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "mint": {
+          "type": "string",
+          "description": "Solana SPL mint Base58 address"
+        }
+      },
+      "required": [
+        "mint"
+      ]
+    },
+    "annotations": {
+      "title": "X402 TOKEN META",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "x402_whale_radar",
+    "description": "Solana Whale & Insider Cluster Tracker ($0.05 USDC via x402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "token_address": {
+          "type": "string",
+          "description": "Solana mint address"
+        },
+        "min_usd": {
+          "type": "number",
+          "description": "Minimum transaction threshold in USD"
+        }
+      },
+      "required": [
+        "token_address"
+      ]
+    },
+    "annotations": {
+      "title": "X402 WHALE RADAR",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "x402_embeddings",
+    "description": "Agent Semantic Vector Embeddings ($0.01 USDC via x402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text to embed"
+        },
+        "dimensions": {
+          "type": "integer",
+          "default": 3072
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "annotations": {
+      "title": "X402 EMBEDDINGS",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "mpp_session_infer",
+    "description": "Streaming Agent Reasoning & Session Inference ($0.05 USDC via MPP).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Prompt for reasoning"
+        },
+        "model": {
+          "type": "string",
+          "description": "Model identifier"
+        },
+        "session_id": {
+          "type": "string",
+          "description": "Streaming session ID"
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "annotations": {
+      "title": "MPP SESSION INFER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "mpp_deep_search",
+    "description": "Deep research dossier with live citations ($0.10 USDC via MPP on Base).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Investigation target"
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "annotations": {
+      "title": "MPP DEEP SEARCH",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "code_sandbox",
+    "description": "Secure Python code execution sandbox ($0.15 USDC via MPP on Base).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Python code to execute"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "annotations": {
+      "title": "CODE SANDBOX",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "guardrail_verify",
+    "description": "Pre-execution security gate to detect prompt injection, wallet drain, and key exfiltration (100 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "payload": {
+          "type": "string",
+          "description": "Command, script, or prompt to inspect"
+        },
+        "action_type": {
+          "type": "string",
+          "description": "Action type (e.g. bash, tool_call)"
+        }
+      },
+      "required": [
+        "payload"
+      ]
+    },
+    "annotations": {
+      "title": "GUARDRAIL VERIFY",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "contract_audit",
+    "description": "Smart contract honeypot, tax, and mint backdoor audit (250 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "code_or_address": {
+          "type": "string",
+          "description": "Contract code or address"
+        },
+        "network": {
+          "type": "string",
+          "description": "base, ethereum, or solana"
+        }
+      },
+      "required": [
+        "code_or_address"
+      ]
+    },
+    "annotations": {
+      "title": "CONTRACT AUDIT",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "web_brief",
+    "description": "Grounded real-time market intelligence brief with live Google Search citations in strict JSON (200 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "description": "Research query or topic"
+        }
+      },
+      "required": [
+        "topic"
+      ]
+    },
+    "annotations": {
+      "title": "WEB BRIEF",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "solana_risk",
+    "description": "Solana SPL token and wallet risk evaluation ($0.02 USDC via x402 / 100 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "token_address": {
+          "type": "string",
+          "description": "Solana mint or wallet pubkey"
+        }
+      },
+      "required": [
+        "token_address"
+      ]
+    },
+    "annotations": {
+      "title": "SOLANA RISK",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "json_repair",
+    "description": "Autonomous malformed JSON healer and syntax repair (50 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "malformed_json": {
+          "type": "string",
+          "description": "Malformed JSON string"
+        }
+      },
+      "required": [
+        "malformed_json"
+      ]
+    },
+    "annotations": {
+      "title": "JSON REPAIR",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "regex_oracle",
+    "description": "ReDoS-safe regex synthesizer with automated test validation (50 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Pattern requirements"
+        }
+      },
+      "required": [
+        "description"
+      ]
+    },
+    "annotations": {
+      "title": "REGEX ORACLE",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "mev_risk",
+    "description": "Pre-swap MEV sandwich and frontrunning risk auditor (150 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "dex": {
+          "type": "string"
+        },
+        "token_in": {
+          "type": "string"
+        },
+        "token_out": {
+          "type": "string"
+        },
+        "slippage_bps": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "dex",
+        "token_in",
+        "token_out"
+      ]
+    },
+    "annotations": {
+      "title": "MEV RISK",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "agent_prompt_compiler",
+    "description": "Production-Grade XML Agent Prompt Optimizer (100 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "raw_prompt": {
+          "type": "string",
+          "description": "Raw unformatted instructions"
+        },
+        "strict_xml": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "required": [
+        "raw_prompt"
+      ]
+    },
+    "annotations": {
+      "title": "AGENT PROMPT COMPILER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "mempool_fee",
+    "description": "Live Bitcoin recommended feerates across priority tiers (50 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "network": {
+          "type": "string",
+          "description": "mainnet or testnet",
+          "default": "mainnet"
+        }
+      }
+    },
+    "annotations": {
+      "title": "MEMPOOL FEE",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "swap_rate",
+    "description": "Cross-chain swap rate estimation across BTC, ETH, SOL, SUI, and USDC (100 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "from_asset": {
+          "type": "string",
+          "description": "Source asset ticker"
+        },
+        "to_asset": {
+          "type": "string",
+          "description": "Destination asset ticker"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount to swap"
+        }
+      },
+      "required": [
+        "from_asset",
+        "to_asset",
+        "amount"
+      ]
+    },
+    "annotations": {
+      "title": "SWAP RATE",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "scrub_pii",
+    "description": "Zero-PII Privacy Redaction Engine for untrusted agent inputs (150 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Raw text containing potential PII"
+        },
+        "redact_emails": {
+          "type": "boolean",
+          "default": true
+        },
+        "redact_phones": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "annotations": {
+      "title": "SCRUB PII",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "clean_data",
+    "description": "Text deduplication, normalization, and dataset cleanup (100 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "raw_data": {
+          "type": "string",
+          "description": "Untrusted raw CSV or JSON"
+        },
+        "format": {
+          "type": "string",
+          "description": "csv or json"
+        }
+      },
+      "required": [
+        "raw_data"
+      ]
+    },
+    "annotations": {
+      "title": "CLEAN DATA",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_code_gen",
+    "description": "Python Script & Scraper Synthesis using Gemini models (300 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Specification for code synthesis"
+        },
+        "language": {
+          "type": "string",
+          "default": "python"
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "annotations": {
+      "title": "AI CODE GEN",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_extract",
+    "description": "Structured JSON Entity Extractor from arbitrary unformatted text (150 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Raw unstructured text"
+        },
+        "target_entities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Entities to extract"
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "annotations": {
+      "title": "AI EXTRACT",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_summarize",
+    "description": "Executive technical summarizer and brief generator (100 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Text or document content"
+        },
+        "max_tokens": {
+          "type": "integer",
+          "default": 500
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
+    "annotations": {
+      "title": "AI SUMMARIZE",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_antigravity_agent",
+    "description": "Google Antigravity autonomous agent with remote execution and tool use (500 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "goal": {
+          "type": "string",
+          "description": "High-level goal for the autonomous agent"
+        },
+        "sandbox_mode": {
+          "type": "string",
+          "default": "cloud_secure"
+        }
+      },
+      "required": [
+        "goal"
+      ]
+    },
+    "annotations": {
+      "title": "AI ANTIGRAVITY AGENT",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_deep_research",
+    "description": "Deep Research Pro multi-hour investigative analysis engine (1000 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "target_query": {
+          "type": "string",
+          "description": "Comprehensive research investigation topic"
+        },
+        "depth": {
+          "type": "string",
+          "default": "thorough"
+        }
+      },
+      "required": [
+        "target_query"
+      ]
+    },
+    "annotations": {
+      "title": "AI DEEP RESEARCH",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_computer_use",
+    "description": "OS-level desktop, GUI, and browser automated interaction agent (800 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "click, type, key, or screenshot"
+        },
+        "coordinate": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "action"
+      ]
+    },
+    "annotations": {
+      "title": "AI COMPUTER USE",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_generate",
+    "description": "Universal Tier 1 model generator supporting 45 foundation models (250 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Prompt for reasoning"
+        },
+        "model": {
+          "type": "string",
+          "default": "gemini-2.5-flash"
+        },
+        "grounding": {
+          "type": "string",
+          "description": "search or maps"
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "annotations": {
+      "title": "AI GENERATE",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_image_gen",
+    "description": "Photorealistic and vector asset generation via Nano Banana / Pro (350 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Visual prompt"
+        },
+        "model": {
+          "type": "string",
+          "default": "gemini-2.5-flash-image"
+        },
+        "aspect_ratio": {
+          "type": "string",
+          "default": "1:1"
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "annotations": {
+      "title": "AI IMAGE GEN",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_tts",
+    "description": "Natural expressive voice synthesis across Gemini TTS models (200 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Script to synthesize"
+        },
+        "voice": {
+          "type": "string",
+          "default": "en-US-Standard"
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "annotations": {
+      "title": "AI TTS",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_music_gen",
+    "description": "Musical composition and instrumental audio generation via Lyria (500 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Music generation prompt"
+        },
+        "genre": {
+          "type": "string"
+        },
+        "duration_seconds": {
+          "type": "integer",
+          "default": 30
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "annotations": {
+      "title": "AI MUSIC GEN",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_video_gen",
+    "description": "High-definition cinematic video synthesis via Veo 3 (1500 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Cinematic scene description"
+        },
+        "resolution": {
+          "type": "string",
+          "default": "1080p"
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "annotations": {
+      "title": "AI VIDEO GEN",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_audio_live",
+    "description": "Direct audio-to-audio conversational intelligence without STT/TTS cascade (300 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "audio_base64": {
+          "type": "string",
+          "description": "Base64 encoded audio input"
+        },
+        "format": {
+          "type": "string",
+          "default": "pcm"
+        }
+      },
+      "required": [
+        "audio_base64"
+      ]
+    },
+    "annotations": {
+      "title": "AI AUDIO LIVE",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_omni",
+    "description": "Unified multimodal model handling simultaneous text, audio, and video (300 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Multimodal prompt"
+        },
+        "media_url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "annotations": {
+      "title": "AI OMNI",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_robotics",
+    "description": "Spatial reasoning, kinematics trajectory calculation, and robotics task planning (450 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "scene_description": {
+          "type": "string"
+        },
+        "target_object": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "scene_description"
+      ]
+    },
+    "annotations": {
+      "title": "AI ROBOTICS",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_embeddings",
+    "description": "High-dimensional 3,072-vector text embeddings for semantic search (50 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text to embed"
+        },
+        "model": {
+          "type": "string",
+          "default": "gemini-embedding-2"
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "annotations": {
+      "title": "AI EMBEDDINGS",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_grounded_search",
+    "description": "Frontier reasoning grounded directly in live Google Search results (200 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Real-time search question"
+        },
+        "search_mode": {
+          "type": "string",
+          "default": "live"
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "annotations": {
+      "title": "AI GROUNDED SEARCH",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "ai_grounded_maps",
+    "description": "Grounded reasoning with live Google Maps place details and spatial context (250 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "place_query": {
+          "type": "string",
+          "description": "Place or spatial query"
+        },
+        "location": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "place_query"
+      ]
+    },
+    "annotations": {
+      "title": "AI GROUNDED MAPS",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "http402_challenge_verifier",
+    "description": "Pre-payment HTTP 402 (L402 / x402 / MPP) challenge and BOLT11 invoice fraud auditor (60 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "www_authenticate_header": {
+          "type": "string"
+        },
+        "advertised_max_sats": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "www_authenticate_header"
+      ]
+    },
+    "annotations": {
+      "title": "HTTP402 CHALLENGE VERIFIER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "crypto_utxo_consolidation_planner",
+    "description": "Bitcoin UTXO Dust Consolidation & Fee Optimizer (80 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "utxos": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "UTXO array"
+        },
+        "target_fee_rate": {
+          "type": "number",
+          "description": "Target sat/vB"
+        }
+      },
+      "required": [
+        "utxos"
+      ]
+    },
+    "annotations": {
+      "title": "CRYPTO UTXO CONSOLIDATION PLANNER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "mcp_rugpull_diff",
+    "description": "MCP tools/list rug-pull and mid-session schema mutation detector (85 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "baseline_tools_list": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "current_tools_list": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "baseline_tools_list",
+        "current_tools_list"
+      ]
+    },
+    "annotations": {
+      "title": "MCP RUGPULL DIFF",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "tool_output_firewall",
+    "description": "Indirect prompt-injection, invisible Unicode (U+E0000), and exfiltration-beacon tool output scrubber (75 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "raw_tool_output": {
+          "type": "string"
+        },
+        "source_tool_name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "raw_tool_output"
+      ]
+    },
+    "annotations": {
+      "title": "TOOL OUTPUT FIREWALL",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "mcp_sampling_guard",
+    "description": "MCP sampling/createMessage reverse-injection and quota-hijack firewall (100 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "sampling_request": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "sampling_request"
+      ]
+    },
+    "annotations": {
+      "title": "MCP SAMPLING GUARD",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "eve_sui_ptb_simulator",
+    "description": "EVE Frontier & Sui Move Programmable Transaction Block (PTB) coin-drain and HotPotato auditor (150 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "ptb_commands": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "expected_max_outflow_mist": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "ptb_commands"
+      ]
+    },
+    "annotations": {
+      "title": "EVE SUI PTB SIMULATOR",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "agent_loop_circuit_breaker",
+    "description": "Autonomous agent action-trace semantic loop and token-burn circuit breaker ($0.02 USDC via x402 / 70 sats).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "recent_action_trace": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "recent_action_trace"
+      ]
+    },
+    "annotations": {
+      "title": "AGENT LOOP CIRCUIT BREAKER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "agent_context_compaction_verifier",
+    "description": "Autonomous LLM Context Compaction Integrity Verifier (90 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "original_transcript": {
+          "type": "string"
+        },
+        "compacted_summary": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "original_transcript",
+        "compacted_summary"
+      ]
+    },
+    "annotations": {
+      "title": "AGENT CONTEXT COMPACTION VERIFIER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "mpp_agent_escrow_arbiter",
+    "description": "Multi-Agent Task Deliverable & Schema Escrow Arbiter ($0.15 USDC via MPP).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "deliverable": {
+          "type": "object"
+        },
+        "assertions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "deliverable",
+        "assertions"
+      ]
+    },
+    "annotations": {
+      "title": "MPP AGENT ESCROW ARBITER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "x402_solana_priority_fee_oracle",
+    "description": "Solana Priority Fee & Jito MEV Tip Oracle ($0.005 USDC via x402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "priority_level": {
+          "type": "string",
+          "description": "low, medium, high, extreme",
+          "default": "high"
+        }
+      }
+    },
+    "annotations": {
+      "title": "X402 SOLANA PRIORITY FEE ORACLE",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "eve_sovereignty_fuel_radar",
+    "description": "Solar System Sovereignty & Fuel Radar (140 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "solar_system_id": {
+          "type": "string"
+        },
+        "tribe_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "solar_system_id"
+      ]
+    },
+    "annotations": {
+      "title": "EVE SOVEREIGNTY FUEL RADAR",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "eve_zklogin_character_verifier",
+    "description": "Frontier Vault zkLogin & Character Verifier (100 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "jwt_proof": {
+          "type": "string"
+        },
+        "ephemeral_public_key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "jwt_proof",
+        "ephemeral_public_key"
+      ]
+    },
+    "annotations": {
+      "title": "EVE ZKLOGIN CHARACTER VERIFIER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "crypto_eip712_permit_decoder",
+    "description": "EIP-712 Typed Data & Permit2 Phishing Decoder (100 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "typed_data": {
+          "type": "object"
+        },
+        "spender": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "typed_data"
+      ]
+    },
+    "annotations": {
+      "title": "CRYPTO EIP712 PERMIT DECODER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "agent_mcp_manifest_auditor",
+    "description": "Autonomous MCP Manifest & Tool Poisoning Auditor (150 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "manifest_url_or_json": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "manifest_url_or_json"
+      ]
+    },
+    "annotations": {
+      "title": "AGENT MCP MANIFEST AUDITOR",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "eve_turret_target_matrix",
+    "description": "Smart Turret Friend-or-Foe & Target Matrix (125 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "ship_signatures": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "turret_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ship_signatures"
+      ]
+    },
+    "annotations": {
+      "title": "EVE TURRET TARGET MATRIX",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "eve_killmail_threat_intel",
+    "description": "Killmail Threat Intel & Ambush Radar (150 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "solar_system_id": {
+          "type": "string"
+        },
+        "lookback_hours": {
+          "type": "integer",
+          "default": 24
+        }
+      },
+      "required": [
+        "solar_system_id"
+      ]
+    },
+    "annotations": {
+      "title": "EVE KILLMAIL THREAT INTEL",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "eve_ssu_market_maker",
+    "description": "SSU Automated Market Maker & Vending Pricer (120 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "ssu_id": {
+          "type": "string"
+        },
+        "item_id": {
+          "type": "string"
+        },
+        "inventory_count": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "ssu_id",
+        "item_id"
+      ]
+    },
+    "annotations": {
+      "title": "EVE SSU MARKET MAKER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "agent_hallucination_auditor",
+    "description": "Agent Hallucination & Factuality Auditor (150 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "claim": {
+          "type": "string"
+        },
+        "retrieved_evidence": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim",
+        "retrieved_evidence"
+      ]
+    },
+    "annotations": {
+      "title": "AGENT HALLUCINATION AUDITOR",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "crypto_address_poisoning_check",
+    "description": "Address Poisoning & Vanity Scam Detector (100 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "target_address": {
+          "type": "string"
+        },
+        "transaction_history": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "target_address"
+      ]
+    },
+    "annotations": {
+      "title": "CRYPTO ADDRESS POISONING CHECK",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "agent_sql_guard",
+    "description": "AST-Level SQL Injection & Safety Guard (75 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "sql_query": {
+          "type": "string"
+        },
+        "dialect": {
+          "type": "string",
+          "default": "ansi"
+        }
+      },
+      "required": [
+        "sql_query"
+      ]
+    },
+    "annotations": {
+      "title": "AGENT SQL GUARD",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "eve_network_node_gj_optimizer",
+    "description": "Lagrange Network Node fuel burn, gigajoule (GJ) energy reservations, and offline-threat windows (100 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "node_id": {
+          "type": "string"
+        },
+        "reserve_gj": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "node_id"
+      ]
+    },
+    "annotations": {
+      "title": "EVE NETWORK NODE GJ OPTIMIZER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "eve_gate_route_planner",
+    "description": "Smart gate toll and fuel routing optimizer across EVE Frontier star systems (100 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "origin_system": {
+          "type": "string"
+        },
+        "destination_system": {
+          "type": "string"
+        },
+        "optimize_for": {
+          "type": "string",
+          "description": "fewest_jumps, lowest_fuel, or lowest_toll"
+        }
+      },
+      "required": [
+        "origin_system",
+        "destination_system"
+      ]
+    },
+    "annotations": {
+      "title": "EVE GATE ROUTE PLANNER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "eve_move_assembly_coder",
+    "description": "Synthesizes and audits Sui Move smart contract extensions for EVE Frontier Smart Assemblies (200 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "contract_type": {
+          "type": "string",
+          "description": "turret_guard, gate_lock, storage_vault, or fuel_distributor"
+        },
+        "assembly_id": {
+          "type": "string",
+          "description": "Smart Assembly ID"
+        }
+      },
+      "required": [
+        "contract_type"
+      ]
+    },
+    "annotations": {
+      "title": "EVE MOVE ASSEMBLY CODER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "crypto_bridge_quote",
+    "description": "Compares non-KYC cross-chain settlement routes (THORChain, Blockstream Liquid, Maya) (100 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "from_asset": {
+          "type": "string"
+        },
+        "to_asset": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "from_asset",
+        "to_asset",
+        "amount"
+      ]
+    },
+    "annotations": {
+      "title": "CRYPTO BRIDGE QUOTE",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "agent_schema_enforcer",
+    "description": "Strict JSON Schema validation, type healing, and hallucination pruning (75 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "raw_output": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "raw_output"
+      ]
+    },
+    "annotations": {
+      "title": "AGENT SCHEMA ENFORCER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "agent_mcp_router",
+    "description": "Maps autonomous agent goals to deterministic MCP tool call sequences and JSON-RPC 2.0 payloads (100 sats via L402).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "objective": {
+          "type": "string",
+          "description": "Agent task objective"
+        }
+      },
+      "required": [
+        "objective"
+      ]
+    },
+    "annotations": {
+      "title": "AGENT MCP ROUTER",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  }
+]
