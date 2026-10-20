@@ -25,9 +25,24 @@
 
 ---
 
+## 1-Click Modular MCP Packages (Install Only What You Need)
+
+Instead of loading all 61 gateway endpoints into your LLM's context window at once, connect Cursor, Claude Desktop, Zed, or Windsurf to a **purpose-built domain package**:
+
+| Domain Package | Scoped 1-Click MCP Endpoint | Dedicated Spoke Repository | Scope |
+| :--- | :--- | :--- | :--- |
+| **1. Gemini Suite & Autonomous Agents** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/gemini-suite` | [`stand-out-of-my-sun/diogenes-gemini-suite-mcp`](https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp) | 18 Tools (All 45 Gemini Models, Antigravity, Deep Research, Nano Banana Pro, Veo 3, Lyria 3) |
+| **2. Agent Guardrails & Sandbox** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails` | [`stand-out-of-my-sun/diogenes-agent-guardrails-mcp`](https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp) | 11 Tools (Pre-exec bash gate, MCP rugpull diff, sampling guard, output firewall, loop breaker, SQL guard, Python sandbox, PII scrubber) |
+| **3. Web3, DeFi & 402 Security** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/web3-security` | [`stand-out-of-my-sun/diogenes-web3-security-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp) | 13 Tools (Contract audit, Solana risk, MEV risk, EIP-712 decoder, address poisoning, HTTP 402 verifier, UTXO planner, bridge quote, whale radar) |
+| **4. EVE: Frontier Sui Move Suite** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/eve-frontier` | [`stand-out-of-my-sun/diogenes-eve-frontier-mcp`](https://github.com/stand-out-of-my-sun/diogenes-eve-frontier-mcp) | 9 Tools (All 9 dedicated EVE: Frontier Sui Move Smart Assembly, Gate, Lagrange GJ, SSU, Turret, Killmail, zkLogin & PTB tools) |
+| **5. Dev & Data Utilities** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/dev-utilities` | [`stand-out-of-my-sun/diogenes-dev-utilities-mcp`](https://github.com/stand-out-of-my-sun/diogenes-dev-utilities-mcp) | 10 Tools (JSON healer, O(n) ReDoS regex, XML prompt compiler, schema enforcer, MCP router, compaction verifier, hallucination auditor, CSV cleaner) |
+| **6. Full Master Gateway** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp` | [`stand-out-of-my-sun/diogenes-micro-gateway`](https://github.com/stand-out-of-my-sun/diogenes-micro-gateway) | All 61 Tools |
+
+---
+
 ## Model Context Protocol (MCP) & Public Directory Profiles
 
-Diogenes Gateway exposes **21 production autonomous tools** natively via **Streamable HTTP** (`https://diogenes-micro-gateway.corinth.workers.dev/mcp`) for Cursor, Claude Desktop, Windsurf, VS Code, and autonomous agents:
+Diogenes Gateway exposes **61 production autonomous tools** natively via **Streamable HTTP** (`https://diogenes-micro-gateway.corinth.workers.dev/mcp`) for Cursor, Claude Desktop, Windsurf, VS Code, and autonomous agents:
 
 - **Glama MCP Directory Profile**: [https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway)
 - **TensorBlock MCP Index Profile**: [https://www.tensorblock.co/mcp/servers/github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7?client=cursor](https://www.tensorblock.co/mcp/servers/github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7?client=cursor)
@@ -36,12 +51,29 @@ Diogenes Gateway exposes **21 production autonomous tools** natively via **Strea
 - **Glama Ownership Manifest**: `https://diogenes-micro-gateway.corinth.workers.dev/.well-known/glama.json`
 - **Report a Bug / Request a Service**: [GitHub Issues](https://github.com/stand-out-of-my-sun/diogenes-micro-gateway/issues/new?labels=bug)
 
+### TensorBlock & MCP Index Profile Metadata
+
+| Field | Value |
+| :--- | :--- |
+| **Category** | `Security` |
+| **Transport** | `streamable-http` |
+| **Endpoint** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp` |
+| **Health Check** | `https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health` |
+| **Auth** | `none` (No auth required for free tier, MCP discovery, or `?demo=true` previews; optional `L402`, `x402`, or `MPP` request headers for paid production calls) |
+| **Install Confidence** | `high` (Zero-install remote Streamable HTTP endpoint + root `package.json`, `smithery.yaml`, `server.json`, `glama.json`, and `mcp.json`) |
+| **License** | `MIT` |
+| **Verification** | `verified` (`@stand-out-of-my-sun` verified via `https://diogenes-micro-gateway.corinth.workers.dev/.well-known/tensorblock.json` & `https://diogenes-micro-gateway.corinth.workers.dev/.well-known/glama.json`) |
+| **Maintainer** | `@stand-out-of-my-sun` |
+| **Docs** | `https://diogenes-micro-gateway.corinth.workers.dev/llms.txt` |
+| **Support** | `https://github.com/stand-out-of-my-sun/diogenes-micro-gateway/issues` |
+
 ### 1-Click Cursor / Claude Desktop Configuration (`mcp.json`)
 
 ```json
 {
   "mcpServers": {
     "diogenes-gateway": {
+      "transport": "streamable-http",
       "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp"
     }
   }
