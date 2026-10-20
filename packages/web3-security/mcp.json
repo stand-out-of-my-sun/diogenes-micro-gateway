@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "diogenes-web3-security": {
+      "transport": "streamable-http",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/web3-security",
+      "auth": "none",
+      "description": "Autonomous Web3 & HTTP 402 security suite: EVM/Solana/Move smart contract honeypot auditor, Solana SPL risk oracle, MEV sandwich evaluator, vanity address poisoning detector, HTTP 402 invoice fraud verifier, Bitcoin UTXO consolidation planner, and cross-chain bridge router.",
+      "headers": {}
+    }
+  }
+}
