@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "diogenes-agent-guardrails": {
+      "transport": "streamable-http",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails",
+      "auth": "none",
+      "description": "Pre-execution security guardrails and command sandboxing for AI agents: bash/tool injection gate, MCP rugpull schema diff, MCP sampling firewall, indirect prompt-injection scrubber, loop circuit breaker, SQL AST guard, PII redactor, and ephemeral Python sandbox.",
+      "headers": {}
+    }
+  }
+}
