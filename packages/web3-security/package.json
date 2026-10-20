@@ -1,0 +1,49 @@
+{
+  "name": "@stand-out-of-my-sun/diogenes-web3-security-mcp",
+  "version": "1.4.0",
+  "description": "Autonomous Web3 & HTTP 402 security suite: EVM/Solana/Move smart contract honeypot auditor, Solana SPL risk oracle, MEV sandwich evaluator, vanity address poisoning detector, HTTP 402 invoice fraud verifier, Bitcoin UTXO consolidation planner, and cross-chain bridge router.",
+  "license": "MIT",
+  "author": "@stand-out-of-my-sun",
+  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "web3",
+    "smart-contracts",
+    "solidity",
+    "solana",
+    "bitcoin",
+    "lightning-network",
+    "l402",
+    "x402",
+    "defi",
+    "mev",
+    "security-audit",
+    "glama",
+    "tensorblock",
+    "utxo",
+    "blockchain-security",
+    "crypto",
+    "base",
+    "streamable-http"
+  ],
+  "mcp": {
+    "serverId": "io.github.stand-out-of-my-sun/diogenes-web3-security",
+    "packageSlug": "web3-security",
+    "transport": "streamable-http",
+    "endpoint": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/web3-security",
+    "manifestEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/web3-security.json",
+    "healthEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+    "auth": "none",
+    "installConfidence": "high",
+    "verification": "verified",
+    "toolsCount": 8
+  }
+}
