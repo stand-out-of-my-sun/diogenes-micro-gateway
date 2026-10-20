@@ -1,0 +1,49 @@
+{
+  "name": "@stand-out-of-my-sun/diogenes-gemini-suite-mcp",
+  "version": "1.4.0",
+  "description": "Account-less MCP access to all 45 Google Gemini models (Gemini 4 Argon, Gemini 3.1 Pro, Gemini 3.8 Flash) and autonomous agents (Antigravity Agent, Deep Research Pro, Nano Banana Pro, Veo 3, Lyria 3) via L402, x402, and MPP.",
+  "license": "MIT",
+  "author": "@stand-out-of-my-sun",
+  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "gemini",
+    "google-gemini",
+    "autonomous-agents",
+    "antigravity",
+    "deep-research",
+    "nano-banana",
+    "multimodal-ai",
+    "llm",
+    "glama",
+    "tensorblock",
+    "l402",
+    "x402",
+    "streamable-http",
+    "ai-agents",
+    "image-generation",
+    "video-generation",
+    "embeddings",
+    "grounding"
+  ],
+  "mcp": {
+    "serverId": "io.github.stand-out-of-my-sun/diogenes-gemini-suite",
+    "packageSlug": "gemini-suite",
+    "transport": "streamable-http",
+    "endpoint": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/gemini-suite",
+    "manifestEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/gemini-suite.json",
+    "healthEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+    "auth": "none",
+    "installConfidence": "high",
+    "verification": "verified",
+    "toolsCount": 7
+  }
+}
