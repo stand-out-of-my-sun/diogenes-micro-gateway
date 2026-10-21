@@ -8,13 +8,16 @@
 
 Instead of loading all 85 gateway endpoints into your LLM's context window, installing this package exposes **only the 15 specialized `gemini-suite` tools** needed for **AI & LLM Integration**:
 
-15 TDQS 5.0/5.0 MCP tools providing account-less access to all 45 Google Gemini models (Gemini 4 Argon, 3.1 Pro, 3.8 Flash) and autonomous agents (Antigravity Agent, Deep Research Pro, Computer Use, Nano Banana Pro, Veo 3, Lyria 3) via L402, x402, and MPP.
+15 MCP tools providing account-less access to all 45 Google Gemini models (Gemini 4 Argon, 3.1 Pro, 3.8 Flash) and autonomous agents (Antigravity Agent, Deep Research Pro, Computer Use, Nano Banana Pro, Veo 3, Lyria 3) via L402, x402, and MPP.
 
 ---
 
-## 1-Click Install (`mcp.json`) for Cursor, Claude Desktop & Windsurf
+## ⚡ 1-Click Install for Cursor & Claude Desktop
 
-No API keys, user accounts, or local dependencies required. Add this scoped endpoint to `.cursor/mcp.json` or `claude_desktop_config.json`:
+No API keys, user accounts, or local dependencies required. Zero setup — paste directly into your client config:
+
+### 🖱️ Cursor IDE (`.cursor/mcp.json`)
+Add to `.cursor/mcp.json` in your project root or global Cursor settings:
 
 ```json
 {
@@ -26,6 +29,25 @@ No API keys, user accounts, or local dependencies required. Add this scoped endp
   }
 }
 ```
+
+### 🧠 Claude Desktop (`claude_desktop_config.json`)
+Add to `claude_desktop_config.json` (Mac: `~/Library/Application Support/Claude/claude_desktop_config.json` | Windows: `%APPDATA%\Claude\claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "diogenes-gemini-suite": {
+      "transport": "streamable-http",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/gemini-suite"
+    }
+  }
+}
+```
+
+> **Prefer local stdio?** Run via npx:
+> ```bash
+> npx -y @stand-out-of-my-sun/diogenes-gemini-suite-mcp
+> ```
 
 ---
 

@@ -1,7 +1,7 @@
 # Smithery & TensorBlock MCP Index Installation Manifest (web3-security)
 name: diogenes-web3-security-mcp
 displayName: "Diogenes Web3, DeFi & HTTP 402 Security MCP"
-description: "15 TDQS 5.0/5.0 Web3, DeFi & HTTP 402 security tools: EVM/Move contract auditor, Solana Anchor CPI scanner, SPL risk & liquidity inspectors, whale flow tracker, Jito fee estimator, EIP-712 & EVM calldata decoders, MEV evaluator, address-poisoning detector, 402 verifier, Bitcoin UTXO planner, and non-KYC bridge comparator."
+description: "15 Web3, DeFi & HTTP 402 security tools: EVM/Move contract auditor, Solana Anchor CPI scanner, SPL risk & liquidity inspectors, whale flow tracker, Jito fee estimator, EIP-712 & EVM calldata decoders, MEV evaluator, address-poisoning detector, 402 verifier, Bitcoin UTXO planner, and non-KYC bridge comparator."
 author: "stand-out-of-my-sun"
 license: MIT
 homepage: "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages"

@@ -8,13 +8,16 @@
 
 Instead of loading all 85 gateway endpoints into your LLM's context window, installing this package exposes **only the 15 specialized `web3-security` tools** needed for **Blockchain & Web3**:
 
-15 TDQS 5.0/5.0 Web3, DeFi & HTTP 402 security tools: EVM/Move contract auditor, Solana Anchor CPI scanner, SPL risk & liquidity inspectors, whale flow tracker, Jito fee estimator, EIP-712 & EVM calldata decoders, MEV evaluator, address-poisoning detector, 402 verifier, Bitcoin UTXO planner, and non-KYC bridge comparator.
+15 Web3, DeFi & HTTP 402 security tools: EVM/Move contract auditor, Solana Anchor CPI scanner, SPL risk & liquidity inspectors, whale flow tracker, Jito fee estimator, EIP-712 & EVM calldata decoders, MEV evaluator, address-poisoning detector, 402 verifier, Bitcoin UTXO planner, and non-KYC bridge comparator.
 
 ---
 
-## 1-Click Install (`mcp.json`) for Cursor, Claude Desktop & Windsurf
+## ⚡ 1-Click Install for Cursor & Claude Desktop
 
-No API keys, user accounts, or local dependencies required. Add this scoped endpoint to `.cursor/mcp.json` or `claude_desktop_config.json`:
+No API keys, user accounts, or local dependencies required. Zero setup — paste directly into your client config:
+
+### 🖱️ Cursor IDE (`.cursor/mcp.json`)
+Add to `.cursor/mcp.json` in your project root or global Cursor settings:
 
 ```json
 {
@@ -26,6 +29,25 @@ No API keys, user accounts, or local dependencies required. Add this scoped endp
   }
 }
 ```
+
+### 🧠 Claude Desktop (`claude_desktop_config.json`)
+Add to `claude_desktop_config.json` (Mac: `~/Library/Application Support/Claude/claude_desktop_config.json` | Windows: `%APPDATA%\Claude\claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "diogenes-web3-security": {
+      "transport": "streamable-http",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/web3-security"
+    }
+  }
+}
+```
+
+> **Prefer local stdio?** Run via npx:
+> ```bash
+> npx -y @stand-out-of-my-sun/diogenes-web3-security-mcp
+> ```
 
 ---
 

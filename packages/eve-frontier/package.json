@@ -1,7 +1,7 @@
 {
   "name": "@stand-out-of-my-sun/diogenes-eve-frontier-mcp",
   "version": "1.4.0",
-  "description": "14 TDQS 5.0/5.0 EVE: Frontier Sui Move tools covering the complete Smart Assembly lifecycle: assembly state inspector, Tribe standings auditor, Move contract generator, Smart Gate ACL compiler, PTB drain simulator, zkLogin verifier, route planner, Lagrange GJ & siege simulators, fuel radar, SSU pricer, arbitrage finder, killmail analyzer, and turret target matrix.",
+  "description": "14 EVE: Frontier Sui Move tools covering the complete Smart Assembly lifecycle: assembly state inspector, Tribe standings auditor, Move contract generator, Smart Gate ACL compiler, PTB drain simulator, zkLogin verifier, route planner, Lagrange GJ & siege simulators, fuel radar, SSU pricer, arbitrage finder, killmail analyzer, and turret target matrix.",
   "license": "MIT",
   "author": "@stand-out-of-my-sun",
   "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
@@ -11,6 +11,13 @@
   },
   "bugs": {
     "url": "https://github.com/stand-out-of-my-sun/diogenes-eve-frontier-mcp/issues"
+  },
+  "main": "index.js",
+  "bin": {
+    "diogenes-eve-frontier-mcp": "index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
   },
   "keywords": [
     "mcp",

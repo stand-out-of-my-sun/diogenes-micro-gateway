@@ -16,5 +16,5 @@
   "remote_url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/gemini-suite",
   "manifest_url": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/gemini-suite.json",
   "health_check_url": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
-  "description": "15 TDQS 5.0/5.0 MCP tools providing account-less access to all 45 Google Gemini models (Gemini 4 Argon, 3.1 Pro, 3.8 Flash) and autonomous agents (Antigravity Agent, Deep Research Pro, Computer Use, Nano Banana Pro, Veo 3, Lyria 3) via L402, x402, and MPP."
+  "description": "15 MCP tools providing account-less access to all 45 Google Gemini models (Gemini 4 Argon, 3.1 Pro, 3.8 Flash) and autonomous agents (Antigravity Agent, Deep Research Pro, Computer Use, Nano Banana Pro, Veo 3, Lyria 3) via L402, x402, and MPP."
 }

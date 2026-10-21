@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
   "name": "io.github.stand-out-of-my-sun/diogenes-eve-frontier",
-  "description": "14 TDQS 5.0/5.0 EVE: Frontier Sui Move tools covering the complete Smart Assembly lifecycle: assembly state inspector, Tribe standings auditor, Move contract generator, Smart Gate ACL compiler, PTB dr",
+  "description": "14 EVE: Frontier Sui Move tools covering the complete Smart Assembly lifecycle: assembly state inspector, Tribe standings auditor, Move contract generator, Smart Gate ACL compiler, PTB drain simulator",
   "version": "1.4.0",
   "license": "MIT",
   "maintainer": "@stand-out-of-my-sun",

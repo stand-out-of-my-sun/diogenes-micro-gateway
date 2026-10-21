@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
   "name": "io.github.stand-out-of-my-sun/diogenes-dev-utilities",
-  "description": "14 TDQS 5.0/5.0 data extraction, schema healing & workflow orchestration tools: malformed JSON healer, JSON Schema type enforcer, unstructured entity extractor, tabular dataset cleaner, O(n) ReDoS-saf",
+  "description": "14 data extraction, schema healing & workflow orchestration tools: malformed JSON healer, JSON Schema type enforcer, unstructured entity extractor, tabular dataset cleaner, O(n) ReDoS-safe regex synth",
   "version": "1.4.0",
   "license": "MIT",
   "maintainer": "@stand-out-of-my-sun",

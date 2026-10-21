@@ -4,7 +4,7 @@
       "transport": "streamable-http",
       "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/dev-utilities",
       "auth": "none",
-      "description": "14 TDQS 5.0/5.0 data extraction, schema healing & workflow orchestration tools: malformed JSON healer, JSON Schema type enforcer, unstructured entity extractor, tabular dataset cleaner, O(n) ReDoS-safe regex synthesizer, XML prompt compiler, Python script synthesizer, RFC summarizer, grounded web brief, context compaction verifier, MCP workflow router, escrow arbiter, MPP session planner, and x402 embedding generator.",
+      "description": "14 data extraction, schema healing & workflow orchestration tools: malformed JSON healer, JSON Schema type enforcer, unstructured entity extractor, tabular dataset cleaner, O(n) ReDoS-safe regex synthesizer, XML prompt compiler, Python script synthesizer, RFC summarizer, grounded web brief, context compaction verifier, MCP workflow router, escrow arbiter, MPP session planner, and x402 embedding generator.",
       "headers": {}
     }
   }

@@ -1,7 +1,7 @@
 {
   "name": "@stand-out-of-my-sun/diogenes-context-code-solver-mcp",
   "version": "1.4.0",
-  "description": "15 TDQS 5.0/5.0 deterministic AI agent & developer tools: AST context skeleton pruner, BPE token budget planner, BM25+RRF+MMR hybrid reranker, self-healing fuzzy diff patcher, polyglot AST symbol & complexity analyzer, Tarjan circular dependency detector, stack-trace root-cause isolator, polyglot TypeScript/Zod/Pydantic compiler, Shunting-Yard math & IRR/NPV solver, Critical Path (CPM) scheduler, Welch/Bayesian A/B judge, RFC 7396 memory differ, OpenAPI breaking-change detector, boundary test-vector generator, and seeded Monte Carlo VaR/CVaR simulator.",
+  "description": "15 deterministic AI agent & developer tools: AST context skeleton pruner, BPE token budget planner, BM25+RRF+MMR hybrid reranker, self-healing fuzzy diff patcher, polyglot AST symbol & complexity analyzer, Tarjan circular dependency detector, stack-trace root-cause isolator, polyglot TypeScript/Zod/Pydantic compiler, Shunting-Yard math & IRR/NPV solver, Critical Path (CPM) scheduler, Welch/Bayesian A/B judge, RFC 7396 memory differ, OpenAPI breaking-change detector, boundary test-vector generator, and seeded Monte Carlo VaR/CVaR simulator.",
   "license": "MIT",
   "author": "@stand-out-of-my-sun",
   "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
@@ -11,6 +11,13 @@
   },
   "bugs": {
     "url": "https://github.com/stand-out-of-my-sun/diogenes-context-code-solver-mcp/issues"
+  },
+  "main": "index.js",
+  "bin": {
+    "diogenes-context-code-solver-mcp": "index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
   },
   "keywords": [
     "mcp",

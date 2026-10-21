@@ -1,7 +1,7 @@
 # Smithery & TensorBlock MCP Index Installation Manifest (context-code-solver)
 name: diogenes-context-code-solver-mcp
 displayName: "Diogenes Context Compression, Code Patching & Deterministic Solver MCP"
-description: "15 TDQS 5.0/5.0 deterministic AI agent & developer tools: AST context skeleton pruner, BPE token budget planner, BM25+RRF+MMR hybrid reranker, self-healing fuzzy diff patcher, polyglot AST symbol & complexity analyzer, Tarjan circular dependency detector, stack-trace root-cause isolator, polyglot TypeScript/Zod/Pydantic compiler, Shunting-Yard math & IRR/NPV solver, Critical Path (CPM) scheduler, Welch/Bayesian A/B judge, RFC 7396 memory differ, OpenAPI breaking-change detector, boundary test-vector generator, and seeded Monte Carlo VaR/CVaR simulator."
+description: "15 deterministic AI agent & developer tools: AST context skeleton pruner, BPE token budget planner, BM25+RRF+MMR hybrid reranker, self-healing fuzzy diff patcher, polyglot AST symbol & complexity analyzer, Tarjan circular dependency detector, stack-trace root-cause isolator, polyglot TypeScript/Zod/Pydantic compiler, Shunting-Yard math & IRR/NPV solver, Critical Path (CPM) scheduler, Welch/Bayesian A/B judge, RFC 7396 memory differ, OpenAPI breaking-change detector, boundary test-vector generator, and seeded Monte Carlo VaR/CVaR simulator."
 author: "stand-out-of-my-sun"
 license: MIT
 homepage: "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages"

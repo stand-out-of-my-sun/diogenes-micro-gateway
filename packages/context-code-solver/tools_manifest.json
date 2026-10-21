@@ -1,0 +1,1059 @@
+[
+  {
+    "name": "prune_context_skeleton",
+    "title": "AST-Aware Context Window & Source Code Skeleton Pruner",
+    "endpoint": "/api/v1/context/smart-pruner",
+    "price": "50 sats (L402)",
+    "price_sats": 50,
+    "protocol": "L402",
+    "description": "Compresses large source files, logs, or transcripts by 50\u201380% to fit an LLM context budget while preserving 100% of function/class/type signatures, imports, error frames, and query-matched lines. Use when shrinking oversized source files or logs before feeding them into an LLM prompt; for counting BPE tokens across prompt segments and calculating multi-model inference costs without altering text, use plan_context_token_budget instead. Read-only edge call (32 KB, 60 RPM): accepts 'content' (with enum defaults), uses '?demo=true' or L402 (50 sats); HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Raw source code, document, or multi-turn transcript to compress."
+        },
+        "target_ratio": {
+          "type": "number",
+          "description": "Target token retention ratio between 0.15 and 0.85; defaults to 0.45 when omitted."
+        },
+        "focus_query": {
+          "type": "string",
+          "description": "Optional symbol or keyword query whose matching lines receive maximum retention priority."
+        },
+        "pruning_mode": {
+          "type": "string",
+          "description": "Salience weighting preset; defaults to 'ast_signatures_first' when omitted.",
+          "enum": [
+            "ast_signatures_first",
+            "errors_and_stackframes",
+            "prose_headings_first"
+          ]
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for prune_context_skeleton.",
+      "properties": {
+        "original_tokens_est": {
+          "type": "integer",
+          "description": "Estimated BPE token count of the unpruned input."
+        },
+        "compressed_tokens_est": {
+          "type": "integer",
+          "description": "Estimated BPE token count after structural pruning."
+        },
+        "tokens_saved": {
+          "type": "integer",
+          "description": "Net BPE tokens eliminated."
+        },
+        "preserved_symbols": {
+          "type": "array",
+          "description": "Function, class, interface, and struct identifiers retained."
+        },
+        "compressed_content": {
+          "type": "string",
+          "description": "Pruned text with elision markers where low-salience lines were removed."
+        }
+      },
+      "required": [
+        "original_tokens_est",
+        "compressed_tokens_est",
+        "tokens_saved",
+        "preserved_symbols",
+        "compressed_content"
+      ]
+    },
+    "annotations": {
+      "title": "AST-Aware Context Window & Source Code Skeleton Pruner",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "plan_context_token_budget",
+    "title": "BPE Token Budget, Attention Trough & Multi-Model Cost Planner",
+    "endpoint": "/api/v1/context/token-budget-planner",
+    "price": "30 sats (L402)",
+    "price_sats": 30,
+    "protocol": "L402",
+    "description": "Counts subword BPE tokens across prompt segments, detects high-priority instructions trapped in the 35%\u201372% Lost-in-the-Middle attention trough, and calculates USD/satoshi costs across frontier LLMs. Use when auditing prompt token budgets, reordering prompt sections for primacy/recency attention, or comparing model API costs; for actively compressing and stripping low-salience lines from a single large file, use prune_context_skeleton instead. Read-only edge call (32 KB, 60 RPM): accepts 'segments_json' (with enum defaults), uses '?demo=true' or L402 (30 sats); HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "segments_json": {
+          "type": "string",
+          "description": "JSON string or array of prompt segments '[{\"name\":\"sys\",\"text\":\"...\",\"priority\":10}]' to analyze."
+        },
+        "max_context_tokens": {
+          "type": "number",
+          "description": "Target model context window limit in tokens; defaults to 128000 when omitted."
+        },
+        "target_model_family": {
+          "type": "string",
+          "description": "Primary model family for token-Window calibration; defaults to 'gemini_3_1' when omitted.",
+          "enum": [
+            "gemini_3_1",
+            "claude_4_5",
+            "gpt_5",
+            "deepseek_r1"
+          ]
+        }
+      },
+      "required": [
+        "segments_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for plan_context_token_budget.",
+      "properties": {
+        "total_input_tokens_est": {
+          "type": "integer",
+          "description": "Total BPE tokens summed across all prompt segments."
+        },
+        "within_budget": {
+          "type": "boolean",
+          "description": "True when total_input_tokens_est fits inside available_input_budget."
+        },
+        "lost_in_the_middle_warnings": {
+          "type": "array",
+          "description": "Warnings for high-priority segments positioned in the 35%\u201372% attention trough."
+        },
+        "optimal_primacy_recency_order": {
+          "type": "array",
+          "description": "Recommended segment ordering placing critical instructions at prompt boundaries."
+        },
+        "multi_model_cost_comparison": {
+          "type": "array",
+          "description": "Estimated USD and satoshi inference cost across 5 frontier models."
+        }
+      },
+      "required": [
+        "total_input_tokens_est",
+        "within_budget",
+        "lost_in_the_middle_warnings",
+        "optimal_primacy_recency_order",
+        "multi_model_cost_comparison"
+      ]
+    },
+    "annotations": {
+      "title": "BPE Token Budget, Attention Trough & Multi-Model Cost Planner",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "rerank_hybrid_rag_chunks",
+    "title": "Okapi BM25 + Reciprocal Rank Fusion (RRF) + MMR Chunk Reranker",
+    "endpoint": "/api/v1/context/hybrid-reranker",
+    "price": "50 sats (L402)",
+    "price_sats": 50,
+    "protocol": "L402",
+    "description": "Reranks and deduplicates candidate RAG or search chunks against a query using Okapi BM25 (k1=1.5, b=0.75), Reciprocal Rank Fusion (RRF), and Maximal Marginal Relevance (MMR) Jaccard diversity filtering. Use when selecting the top-K highest-signal, non-redundant passages from vector search or grep results; for compressing a single contiguous source file while keeping its original line order, use prune_context_skeleton instead. Read-only edge call (32 KB, 60 RPM): accepts 'query' ('documents_json' defaults to 'standard'), uses '?demo=true' or L402 (50 sats); HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Technical search query or question used to score candidate chunks."
+        },
+        "documents_json": {
+          "type": "string",
+          "description": "JSON string or array of candidate chunks '[{\"id\":\"c1\",\"text\":\"...\"}]' to rerank."
+        },
+        "top_k": {
+          "type": "number",
+          "description": "Maximum number of deduplicated chunks to return; defaults to 5 when omitted."
+        },
+        "ranking_mode": {
+          "type": "string",
+          "description": "Fusion weighting between lexical BM25 and diversity penalty; defaults to 'bm25_rrf_mmr' when omitted.",
+          "enum": [
+            "bm25_rrf_mmr",
+            "pure_bm25_lexical",
+            "high_diversity_mmr"
+          ]
+        }
+      },
+      "required": [
+        "query",
+        "documents_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for rerank_hybrid_rag_chunks.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Evaluated search query."
+        },
+        "total_candidates": {
+          "type": "integer",
+          "description": "Number of input candidate chunks scored."
+        },
+        "returned_count": {
+          "type": "integer",
+          "description": "Number of deduplicated top-K chunks returned."
+        },
+        "ranked_chunks": {
+          "type": "array",
+          "description": "Ordered top-K chunks with bm25_score, rrf_score, and mmr_score."
+        }
+      },
+      "required": [
+        "query",
+        "total_candidates",
+        "returned_count",
+        "ranked_chunks"
+      ]
+    },
+    "annotations": {
+      "title": "Okapi BM25 + Reciprocal Rank Fusion (RRF) + MMR Chunk Reranker",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "apply_fuzzy_code_patch",
+    "title": "Self-Healing Fuzzy Unified Diff & Search/Replace Code Patcher",
+    "endpoint": "/api/v1/code/fuzzy-diff-patcher",
+    "price": "75 sats (L402)",
+    "price_sats": 75,
+    "protocol": "L402",
+    "description": "Applies unified diffs (@@ ... @@) or SEARCH/REPLACE blocks to source code using sliding-window token similarity to resolve drifted line numbers, align indentation, and verify bracket balance. Use when healing and applying a code edit or diff that failed exact line matching due to line-number drift or whitespace differences; for inspecting function signatures, call trees, and cyclomatic complexity without modifying code, use analyze_ast_symbol_graph instead. Read-only call (32 KB, 60 RPM): accepts 'original_code' (with enum defaults), uses '?demo=true' or L402 (75 sats); HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "original_code": {
+          "type": "string",
+          "description": "Complete original source file content before patching."
+        },
+        "patch": {
+          "type": "string",
+          "description": "Unified diff hunk or <<<<<<< SEARCH ... ======= ... >>>>>>> REPLACE block to apply."
+        },
+        "fuzz_strategy": {
+          "type": "string",
+          "description": "Line-matching tolerance and indentation behavior; defaults to 'whitespace_normalized_auto_indent' when omitted.",
+          "enum": [
+            "whitespace_normalized_auto_indent",
+            "exact_line_match",
+            "aggressive_token_fuzzy"
+          ]
+        }
+      },
+      "required": [
+        "original_code",
+        "patch"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for apply_fuzzy_code_patch.",
+      "properties": {
+        "hunks_total": {
+          "type": "integer",
+          "description": "Total patch hunks parsed from the input patch."
+        },
+        "hunks_applied": {
+          "type": "integer",
+          "description": "Number of hunks successfully anchored and applied."
+        },
+        "syntax_balance_verified": {
+          "type": "boolean",
+          "description": "True when post-patch {}, (), and [] delimiters remain balanced."
+        },
+        "patched_code": {
+          "type": "string",
+          "description": "Resulting source code after applying all matched hunks."
+        }
+      },
+      "required": [
+        "hunks_total",
+        "hunks_applied",
+        "syntax_balance_verified",
+        "patched_code"
+      ]
+    },
+    "annotations": {
+      "title": "Self-Healing Fuzzy Unified Diff & Search/Replace Code Patcher",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "analyze_ast_symbol_graph",
+    "title": "Polyglot AST Symbol Extractor, Call Graph & Complexity Analyzer",
+    "endpoint": "/api/v1/code/ast-symbol-graph",
+    "price": "75 sats (L402)",
+    "price_sats": 75,
+    "protocol": "L402",
+    "description": "Extracts imports, exports, classes, interfaces, and functions with line numbers, intra-file call edges, McCabe cyclomatic complexity, and Halstead volume across TypeScript, Python, Rust, Go, and Move. Use when mapping the internal functions, call graph, and complexity hotspots of a source file before refactoring; for analyzing cross-file import DAGs, circular dependencies, and topological build order across multiple modules, use audit_module_dependency_cycles instead. Read-only call (32 KB, 60 RPM): accepts 'code' (with enum defaults), uses '?demo=true' or L402 (75 sats); HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Source code file content to parse for symbols and complexity metrics."
+        },
+        "language": {
+          "type": "string",
+          "description": "Programming language grammar used for symbol extraction; defaults to 'typescript' when omitted.",
+          "enum": [
+            "typescript",
+            "python",
+            "rust",
+            "go",
+            "sui_move"
+          ]
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for analyze_ast_symbol_graph.",
+      "properties": {
+        "lines_of_code": {
+          "type": "integer",
+          "description": "Total line count of the analyzed source code."
+        },
+        "functions": {
+          "type": "array",
+          "description": "Extracted functions with line number, cyclomatic_complexity, and outgoing calls."
+        },
+        "high_complexity_hotspots": {
+          "type": "array",
+          "description": "Functions with McCabe cyclomatic complexity >= 8 flagged for refactoring."
+        },
+        "halstead_metrics": {
+          "type": "object",
+          "description": "Halstead vocabulary_size, program_length, volume, and estimated_bugs."
+        }
+      },
+      "required": [
+        "lines_of_code",
+        "functions",
+        "high_complexity_hotspots",
+        "halstead_metrics"
+      ]
+    },
+    "annotations": {
+      "title": "Polyglot AST Symbol Extractor, Call Graph & Complexity Analyzer",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "audit_module_dependency_cycles",
+    "title": "Tarjan SCC Circular Import Detector & Topological Blast-Radius Solver",
+    "endpoint": "/api/v1/code/dependency-cycle-audit",
+    "price": "75 sats (L402)",
+    "price_sats": 75,
+    "protocol": "L402",
+    "description": "Runs Tarjan's Strongly Connected Components (SCC) algorithm on a module import map to detect circular dependencies, compute parallel topological build waves, and trace downstream change blast radius. Use when auditing multi-file import graphs for circular cycles or determining which downstream files must be re-tested after an edit; for extracting function-level symbols and cyclomatic complexity inside a single source file, use analyze_ast_symbol_graph instead. Read-only call (32 KB, 60 RPM): accepts 'modules_json' (with enum defaults), uses '?demo=true' or L402 (75 sats); HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "modules_json": {
+          "type": "string",
+          "description": "JSON string or object mapping each module name to its array of imported module names (e.g. '{\"a\":[\"b\"],\"b\":[]}')."
+        },
+        "analysis_scope": {
+          "type": "string",
+          "description": "Graph analysis output mode; defaults to 'cycles_waves_and_blast_radius' when omitted.",
+          "enum": [
+            "cycles_waves_and_blast_radius",
+            "cycles_only",
+            "topological_waves_only"
+          ]
+        }
+      },
+      "required": [
+        "modules_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for audit_module_dependency_cycles.",
+      "properties": {
+        "total_modules": {
+          "type": "integer",
+          "description": "Total number of graph vertices analyzed."
+        },
+        "circular_dependencies_detected": {
+          "type": "boolean",
+          "description": "True if one or more circular dependency cycles exist."
+        },
+        "circular_scc_groups": {
+          "type": "array",
+          "description": "Strongly connected component cycles discovered via Tarjan's algorithm."
+        },
+        "topological_build_waves": {
+          "type": "array",
+          "description": "Dependency-ordered parallel build/test execution waves."
+        },
+        "transitive_blast_radius": {
+          "type": "array",
+          "description": "All upstream callers transitively impacted by the modified modules."
+        }
+      },
+      "required": [
+        "total_modules",
+        "circular_dependencies_detected",
+        "circular_scc_groups",
+        "topological_build_waves",
+        "transitive_blast_radius"
+      ]
+    },
+    "annotations": {
+      "title": "Tarjan SCC Circular Import Detector & Topological Blast-Radius Solver",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "isolate_stacktrace_root_cause",
+    "title": "Stack-Trace Root-Cause Frame Isolator & Drain Log Deduplicator",
+    "endpoint": "/api/v1/code/stacktrace-root-cause",
+    "price": "50 sats (L402)",
+    "price_sats": 50,
+    "protocol": "L402",
+    "description": "Parses noisy CI/terminal logs and multi-language stack traces (Node/TS, Python, Rust, Go), strips node_modules/stdlib frames to isolate the innermost failing user-code frame, and clusters repetitive logs into Drain templates. Use when triage-debugging test failures, crash dumps, or repetitive server error logs; for compressing general source code files or prose transcripts, use prune_context_skeleton instead. Read-only edge call (32 KB, 60 RPM): accepts 'raw_log' ('runtime_hint' defaults to 'auto_detect'), supports '?demo=true' or L402 (50 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "raw_log": {
+          "type": "string",
+          "description": "Raw terminal output, CI failure log, or exception traceback to analyze."
+        },
+        "runtime_hint": {
+          "type": "string",
+          "description": "Runtime stack format hint; defaults to 'auto_detect' when omitted.",
+          "enum": [
+            "auto_detect",
+            "nodejs_v8",
+            "python_traceback",
+            "rust_panic",
+            "go_goroutine"
+          ]
+        }
+      },
+      "required": [
+        "raw_log"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for isolate_stacktrace_root_cause.",
+      "properties": {
+        "error_headline": {
+          "type": "string",
+          "description": "Extracted primary exception class and error message."
+        },
+        "root_cause_frame": {
+          "type": "object",
+          "description": "Innermost user-code stack frame (function_name, file, line, column)."
+        },
+        "stripped_library_frames_count": {
+          "type": "integer",
+          "description": "Number of node_modules, stdlib, or internal frames filtered out."
+        },
+        "deduplicated_log_templates": {
+          "type": "array",
+          "description": "Drain-clustered log patterns with occurrence counts."
+        },
+        "root_cause_fingerprint": {
+          "type": "string",
+          "description": "Deterministic hash of the error class and root user frame."
+        }
+      },
+      "required": [
+        "error_headline",
+        "root_cause_frame",
+        "stripped_library_frames_count",
+        "deduplicated_log_templates",
+        "root_cause_fingerprint"
+      ]
+    },
+    "annotations": {
+      "title": "Stack-Trace Root-Cause Frame Isolator & Drain Log Deduplicator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "compile_polyglot_type_schemas",
+    "title": "Polyglot JSON -> TypeScript, Zod, Pydantic v2 & JSON Schema Compiler",
+    "endpoint": "/api/v1/code/polyglot-type-compiler",
+    "price": "60 sats (L402)",
+    "price_sats": 60,
+    "protocol": "L402",
+    "description": "Inspects a sample JSON payload (inferring UUID, ISO-8601 datetime, email, integer vs float, and array item types) and compiles strict TypeScript interfaces, Zod schemas, Python Pydantic v2 models, and JSON Schema Draft 2020-12. Use when generating static type definitions and runtime validators in TypeScript and Python from a sample JSON response; for extracting existing function/class symbols and complexity metrics from source code, use analyze_ast_symbol_graph instead. Read-only call (32 KB, 60 RPM): accepts 'sample_json' (with enum defaults), uses '?demo=true' or L402 (60 sats); HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "sample_json": {
+          "type": "string",
+          "description": "JSON string or object representing the sample payload to infer types from."
+        },
+        "root_name": {
+          "type": "string",
+          "description": "Identifier used for the generated root interface/class; defaults to 'GeneratedPayload' when omitted."
+        },
+        "strictness": {
+          "type": "string",
+          "description": "Schema additionalProperties and format constraint mode; defaults to 'strict_formats' when omitted.",
+          "enum": [
+            "strict_formats",
+            "passthrough_open",
+            "partial_optional"
+          ]
+        }
+      },
+      "required": [
+        "sample_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for compile_polyglot_type_schemas.",
+      "properties": {
+        "root_name": {
+          "type": "string",
+          "description": "Sanitized root type/class identifier."
+        },
+        "typescript_interface": {
+          "type": "string",
+          "description": "Compiled TypeScript export interface definition."
+        },
+        "zod_schema": {
+          "type": "string",
+          "description": "Compiled TypeScript Zod runtime validator schema."
+        },
+        "python_pydantic_v2": {
+          "type": "string",
+          "description": "Compiled Python Pydantic v2 BaseModel class."
+        },
+        "json_schema_draft_2020_12": {
+          "type": "object",
+          "description": "Complete JSON Schema Draft 2020-12 specification."
+        }
+      },
+      "required": [
+        "root_name",
+        "typescript_interface",
+        "zod_schema",
+        "python_pydantic_v2",
+        "json_schema_draft_2020_12"
+      ]
+    },
+    "annotations": {
+      "title": "Polyglot JSON -> TypeScript, Zod, Pydantic v2 & JSON Schema Compiler",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "evaluate_deterministic_math",
+    "title": "Shunting-Yard Algebraic Math, Financial IRR/NPV & Descriptive Stats Solver",
+    "endpoint": "/api/v1/solver/deterministic-math",
+    "price": "40 sats (L402)",
+    "price_sats": 40,
+    "protocol": "L402",
+    "description": "Evaluates algebraic and scientific formulas via a Shunting-Yard AST parser and computes exact financial NPV, Newton-Raphson IRR, Kelly criterion, and dataset stats. Use when computing exact arithmetic formulas, cashflow NPV/IRR, or descriptive statistics without LLM floating-point guesswork; for running two-sample A/B hypothesis tests between control and treatment arms, use evaluate_ab_statistical_significance instead. Read-only edge call (32 KB, 60 RPM): accepts 'expression' ('precision_digits' defaults to '2_decimals'), uses '?demo=true' or L402 (40 sats); HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "Algebraic or scientific formula to evaluate (e.g. '(125000 * (1 + 0.0725/12)^60) - 98450.50')."
+        },
+        "precision_digits": {
+          "type": "string",
+          "description": "Decimal rounding precision for returned numbers; defaults to '8_decimals' when omitted.",
+          "enum": [
+            "2_decimals",
+            "4_decimals",
+            "8_decimals"
+          ]
+        }
+      },
+      "required": [
+        "expression"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for evaluate_deterministic_math.",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "Evaluated mathematical expression."
+        },
+        "exact_result": {
+          "type": "number",
+          "description": "Deterministic floating-point result of the expression."
+        },
+        "financial_analysis": {
+          "type": "object",
+          "description": "Optional NPV, Newton-Raphson IRR, and Kelly fraction when financial parameters are supplied."
+        },
+        "dataset_statistics": {
+          "type": "object",
+          "description": "Optional count, mean, median, std_dev, min, and max when a dataset array is supplied."
+        }
+      },
+      "required": [
+        "expression",
+        "exact_result",
+        "financial_analysis",
+        "dataset_statistics"
+      ]
+    },
+    "annotations": {
+      "title": "Shunting-Yard Algebraic Math, Financial IRR/NPV & Descriptive Stats Solver",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "schedule_critical_path_tasks",
+    "title": "Critical Path Method (CPM) DAG & Resource Constraint Scheduler",
+    "endpoint": "/api/v1/solver/constraint-scheduler",
+    "price": "80 sats (L402)",
+    "price_sats": 80,
+    "protocol": "L402",
+    "description": "Solves a task dependency DAG via the Critical Path Method (CPM) to compute ES/EF/LS/LF, Total Float/Slack, optimal makespan, and the Critical Path. Use when scheduling dependent engineering milestones or workflow steps to find the minimum project duration and zero-slack bottleneck path; for detecting circular code imports and file blast radius without task durations, use audit_module_dependency_cycles instead. Read-only edge call (32 KB, 60 RPM): accepts 'tasks_json' ('time_unit' defaults to 'minutes'), supports '?demo=true' or L402 (80 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "tasks_json": {
+          "type": "string",
+          "description": "JSON string or array of tasks '[{\"id\":\"t1\",\"duration\":3,\"dependencies\":[]}]' to schedule."
+        },
+        "time_unit": {
+          "type": "string",
+          "description": "Duration unit label attached to the schedule; defaults to 'hours' when omitted.",
+          "enum": [
+            "minutes",
+            "hours",
+            "days",
+            "sprints"
+          ]
+        }
+      },
+      "required": [
+        "tasks_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for schedule_critical_path_tasks.",
+      "properties": {
+        "total_tasks": {
+          "type": "integer",
+          "description": "Number of DAG tasks scheduled."
+        },
+        "optimal_makespan_duration": {
+          "type": "number",
+          "description": "Minimum total duration required to complete all tasks."
+        },
+        "critical_path": {
+          "type": "array",
+          "description": "Ordered task IDs with zero slack that determine the overall project duration."
+        },
+        "task_schedule": {
+          "type": "array",
+          "description": "Per-task earliest_start, earliest_finish, latest_start, latest_finish, and total_float_slack."
+        }
+      },
+      "required": [
+        "total_tasks",
+        "optimal_makespan_duration",
+        "critical_path",
+        "task_schedule"
+      ]
+    },
+    "annotations": {
+      "title": "Critical Path Method (CPM) DAG & Resource Constraint Scheduler",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "evaluate_ab_statistical_significance",
+    "title": "Welch's t-Test, Two-Proportion z-Test & Bayesian A/B Eval Judge",
+    "endpoint": "/api/v1/solver/statistical-ab-judge",
+    "price": "60 sats (L402)",
+    "price_sats": 60,
+    "protocol": "L402",
+    "description": "Computes Welch's two-sample t-test or two-proportion z-test, returning two-tailed p-values, Cohen's d effect size, relative lift %, and Bayesian P(Treatment > Control). Use when determining whether a prompt change, model benchmark, or A/B experiment produced a statistically significant improvement; for evaluating single algebraic formulas or NPV/IRR cashflows, use evaluate_deterministic_math instead. Read-only edge call (32 KB, 60 RPM): accepts 'control_json' ('treatment_json' defaults to 'standard'), supports '?demo=true' or L402 (60 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "control_json": {
+          "type": "string",
+          "description": "JSON string or object for the baseline control arm (e.g. '{\"conversions\":142,\"total\":1000}' or '{\"samples\":[12,15,14]}')."
+        },
+        "treatment_json": {
+          "type": "string",
+          "description": "JSON string or object for the candidate treatment arm (e.g. '{\"conversions\":186,\"total\":1000}')."
+        },
+        "significance_level": {
+          "type": "string",
+          "description": "Type-I error alpha threshold for statistical significance; defaults to 'alpha_0_05' when omitted.",
+          "enum": [
+            "alpha_0_01",
+            "alpha_0_05",
+            "alpha_0_10"
+          ]
+        }
+      },
+      "required": [
+        "control_json",
+        "treatment_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for evaluate_ab_statistical_significance.",
+      "properties": {
+        "test_type": {
+          "type": "string",
+          "description": "Statistical test applied ('welch_two_sample_t_test' or 'two_proportion_z_test_and_bayesian')."
+        },
+        "relative_lift_pct": {
+          "type": "number",
+          "description": "Percentage lift of treatment over control."
+        },
+        "p_value": {
+          "type": "number",
+          "description": "Two-tailed frequentist p-value."
+        },
+        "bayesian_prob_treatment_superior": {
+          "type": "number",
+          "description": "Posterior probability P(Treatment > Control) from 0.0 to 1.0."
+        },
+        "verdict": {
+          "type": "string",
+          "description": "Experiment decision ('SIGNIFICANT_TREATMENT_WIN', 'SIGNIFICANT_CONTROL_WIN', or 'INCONCLUSIVE_UNDERPOWERED')."
+        }
+      },
+      "required": [
+        "test_type",
+        "relative_lift_pct",
+        "p_value",
+        "bayesian_prob_treatment_superior",
+        "verdict"
+      ]
+    },
+    "annotations": {
+      "title": "Welch's t-Test, Two-Proportion z-Test & Bayesian A/B Eval Judge",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "detect_openapi_breaking_changes",
+    "title": "OpenAPI 3.1, JSON Schema & MCP Contract Breaking-Change Detector",
+    "endpoint": "/api/v1/code/openapi-breaking-changes",
+    "price": "75 sats (L402)",
+    "price_sats": 75,
+    "protocol": "L402",
+    "description": "Compares baseline and candidate OpenAPI 3.1 specs, JSON Schemas, or MCP tool manifests to detect breaking changes (removed fields, new required inputs, narrowed enums, type mutations). Use when auditing API, JSON Schema, or MCP contract revisions for backward compatibility before deployment; for compiling new TypeScript, Zod, and Pydantic schemas from a single sample JSON payload, use compile_polyglot_type_schemas instead. Read-only edge call (32 KB, 60 RPM): accepts 'baseline_schema_json' (with enum defaults), uses '?demo=true' or L402 (75 sats); HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "baseline_schema_json": {
+          "type": "string",
+          "description": "JSON string of the baseline OpenAPI 3.1 spec, JSON Schema, or MCP tools array."
+        },
+        "candidate_schema_json": {
+          "type": "string",
+          "description": "JSON string of the proposed candidate schema or contract revision to compare."
+        },
+        "contract_format": {
+          "type": "string",
+          "description": "Contract specification format; defaults to 'auto_detect' when omitted.",
+          "enum": [
+            "auto_detect",
+            "json_schema",
+            "openapi_3_1",
+            "mcp_tools_manifest"
+          ]
+        }
+      },
+      "required": [
+        "baseline_schema_json",
+        "candidate_schema_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for detect_openapi_breaking_changes.",
+      "properties": {
+        "breaking_changes_detected": {
+          "type": "boolean",
+          "description": "True if any backward-incompatible contract change is found."
+        },
+        "breaking_changes": {
+          "type": "array",
+          "description": "Detailed list of breaking removals, type changes, or new required parameters."
+        },
+        "non_breaking_additions": {
+          "type": "array",
+          "description": "Backward-compatible optional fields or endpoints added."
+        },
+        "recommended_semver_bump": {
+          "type": "string",
+          "description": "Recommended Semantic Version bump ('MAJOR_BREAKING', 'MINOR_ADDITIVE', or 'PATCH_COMPATIBLE')."
+        }
+      },
+      "required": [
+        "breaking_changes_detected",
+        "breaking_changes",
+        "non_breaking_additions",
+        "recommended_semver_bump"
+      ]
+    },
+    "annotations": {
+      "title": "OpenAPI 3.1, JSON Schema & MCP Contract Breaking-Change Detector",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "generate_boundary_test_vectors",
+    "title": "JSON Schema & Function Signature Boundary-Value Test Vector Generator",
+    "endpoint": "/api/v1/code/boundary-test-vectors",
+    "price": "65 sats (L402)",
+    "price_sats": 65,
+    "protocol": "L402",
+    "description": "Synthesizes deterministic unit-test vectors from a JSON Schema or function signature covering valid equivalence partitions, numeric/length boundaries, and adversarial Unicode/null inputs. Use when generating exhaustive edge-case unit test payloads and fuzz vectors for an API endpoint or function; for healing and applying unified diffs or search/replace edits to source code, use apply_fuzzy_code_patch instead. Read-only edge call (32 KB, 60 RPM): accepts 'schema_or_signature_json' (with enum defaults), uses '?demo=true' or L402 (65 sats); HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "schema_or_signature_json": {
+          "type": "string",
+          "description": "JSON Schema object or function parameter specification to generate test vectors for."
+        },
+        "vector_suite_profile": {
+          "type": "string",
+          "description": "Test generation coverage profile; defaults to 'equivalence_boundary_and_fuzz' when omitted.",
+          "enum": [
+            "equivalence_boundary_and_fuzz",
+            "boundary_values_only",
+            "adversarial_security_fuzz"
+          ]
+        }
+      },
+      "required": [
+        "schema_or_signature_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for generate_boundary_test_vectors.",
+      "properties": {
+        "total_vectors_generated": {
+          "type": "integer",
+          "description": "Total number of deterministic test vectors produced."
+        },
+        "valid_partition_vectors": {
+          "type": "array",
+          "description": "Valid happy-path payloads covering required and optional equivalence classes."
+        },
+        "boundary_edge_vectors": {
+          "type": "array",
+          "description": "Edge payloads testing zero, negative, MAX_SAFE_INTEGER, and empty/max length boundaries."
+        },
+        "adversarial_fuzz_vectors": {
+          "type": "array",
+          "description": "Negative test vectors testing missing required fields, wrong types, and Unicode/injection strings."
+        }
+      },
+      "required": [
+        "total_vectors_generated",
+        "valid_partition_vectors",
+        "boundary_edge_vectors",
+        "adversarial_fuzz_vectors"
+      ]
+    },
+    "annotations": {
+      "title": "JSON Schema & Function Signature Boundary-Value Test Vector Generator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "simulate_monte_carlo_risk",
+    "title": "Seeded Mulberry32 Monte Carlo Percentile, VaR & Tail-Risk Simulator",
+    "endpoint": "/api/v1/solver/monte-carlo-risk",
+    "price": "70 sats (L402)",
+    "price_sats": 70,
+    "protocol": "L402",
+    "description": "Runs a reproducible seeded Mulberry32 Monte Carlo simulation over uncertain cost, latency, or duration variables to compute P10/P50/P90/P95 percentiles, Value-at-Risk (VaR), and CVaR. Use when modeling stochastic uncertainty, tail risk (VaR/CVaR), and probability of meeting a budget or SLA target; for evaluating deterministic single-point algebraic formulas or exact NPV/IRR cashflows, use evaluate_deterministic_math instead. Read-only edge call (32 KB, 60 RPM): accepts 'variables_json' (with enum defaults), uses '?demo=true' or L402 (70 sats); HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "variables_json": {
+          "type": "string",
+          "description": "JSON array of stochastic variables (e.g. name, min, mode, max) to simulate."
+        },
+        "distribution_model": {
+          "type": "string",
+          "description": "Probability distribution family applied to each variable; defaults to 'triangular_pert' when omitted.",
+          "enum": [
+            "triangular_pert",
+            "normal_gaussian",
+            "uniform_range"
+          ]
+        }
+      },
+      "required": [
+        "variables_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for simulate_monte_carlo_risk.",
+      "properties": {
+        "trials_executed": {
+          "type": "integer",
+          "description": "Number of seeded Monte Carlo trials executed."
+        },
+        "percentiles": {
+          "type": "object",
+          "description": "Computed p10, p50_median, p90, p95, and p99 outcome distribution percentiles."
+        },
+        "value_at_risk_95": {
+          "type": "number",
+          "description": "95% Value-at-Risk (VaR_95) threshold."
+        },
+        "conditional_tail_expectation_95": {
+          "type": "number",
+          "description": "95% Conditional Tail Expectation (CVaR_95 / Expected Shortfall) across the worst 5% of trials."
+        }
+      },
+      "required": [
+        "trials_executed",
+        "percentiles",
+        "value_at_risk_95",
+        "conditional_tail_expectation_95"
+      ]
+    },
+    "annotations": {
+      "title": "Seeded Mulberry32 Monte Carlo Percentile, VaR & Tail-Risk Simulator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "diff_agent_memory_checkpoint",
+    "title": "Agent State Graph Differ, Belief Conflict Resolver & SHA-256 Hasher",
+    "endpoint": "/api/v1/agent/memory-checkpoint-diff",
+    "price": "50 sats (L402)",
+    "price_sats": 50,
+    "protocol": "L402",
+    "description": "Computes structural diffs between two agent state snapshots ('added_keys', 'mutated_keys', 'removed_keys'), flags boolean belief contradictions, generates an RFC 7396 JSON Merge Patch delta, and computes a canonical checkpoint hash. Use when checkpointing agent state or transmitting minimal RFC 7396 state deltas across multi-agent handoffs; for counting BPE tokens and auditing Lost-in-the-Middle prompt attention, use plan_context_token_budget instead. Read-only call (32 KB, 60 RPM): accepts 'previous_state_json' (with enum defaults), uses '?demo=true' or L402 (50 sats); HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "previous_state_json": {
+          "type": "string",
+          "description": "JSON string or object representing the prior agent state snapshot."
+        },
+        "current_state_json": {
+          "type": "string",
+          "description": "JSON string or object representing the updated agent state snapshot."
+        },
+        "conflict_strategy": {
+          "type": "string",
+          "description": "Resolution policy when keys conflict; defaults to 'prefer_current' when omitted.",
+          "enum": [
+            "prefer_current",
+            "prefer_previous",
+            "flag_only"
+          ]
+        }
+      },
+      "required": [
+        "previous_state_json",
+        "current_state_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for diff_agent_memory_checkpoint.",
+      "properties": {
+        "added_keys": {
+          "type": "array",
+          "description": "State keys newly introduced in current_state."
+        },
+        "mutated_keys": {
+          "type": "array",
+          "description": "Modified keys with before/after values and belief_contradiction flag."
+        },
+        "rfc7396_json_merge_patch_delta": {
+          "type": "object",
+          "description": "Minimal RFC 7396 JSON Merge Patch payload transforming previous into current."
+        },
+        "checkpoint_digest": {
+          "type": "string",
+          "description": "Deterministic cryptographic hash of the canonicalized merged state."
+        }
+      },
+      "required": [
+        "added_keys",
+        "mutated_keys",
+        "rfc7396_json_merge_patch_delta",
+        "checkpoint_digest"
+      ]
+    },
+    "annotations": {
+      "title": "Agent State Graph Differ, Belief Conflict Resolver & SHA-256 Hasher",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  }
+]

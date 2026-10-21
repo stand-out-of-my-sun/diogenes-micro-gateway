@@ -16,5 +16,5 @@
   "remote_url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/eve-frontier",
   "manifest_url": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/eve-frontier.json",
   "health_check_url": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
-  "description": "14 TDQS 5.0/5.0 EVE: Frontier Sui Move tools covering the complete Smart Assembly lifecycle: assembly state inspector, Tribe standings auditor, Move contract generator, Smart Gate ACL compiler, PTB drain simulator, zkLogin verifier, route planner, Lagrange GJ & siege simulators, fuel radar, SSU pricer, arbitrage finder, killmail analyzer, and turret target matrix."
+  "description": "14 EVE: Frontier Sui Move tools covering the complete Smart Assembly lifecycle: assembly state inspector, Tribe standings auditor, Move contract generator, Smart Gate ACL compiler, PTB drain simulator, zkLogin verifier, route planner, Lagrange GJ & siege simulators, fuel radar, SSU pricer, arbitrage finder, killmail analyzer, and turret target matrix."
 }

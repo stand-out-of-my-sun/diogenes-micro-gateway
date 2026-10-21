@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
   "name": "io.github.stand-out-of-my-sun/diogenes-context-code-solver",
-  "description": "15 TDQS 5.0/5.0 deterministic AI agent & developer tools: AST context skeleton pruner, BPE token budget planner, BM25+RRF+MMR hybrid reranker, self-healing fuzzy diff patcher, polyglot AST symbol & co",
+  "description": "15 deterministic AI agent & developer tools: AST context skeleton pruner, BPE token budget planner, BM25+RRF+MMR hybrid reranker, self-healing fuzzy diff patcher, polyglot AST symbol & complexity anal",
   "version": "1.4.0",
   "license": "MIT",
   "maintainer": "@stand-out-of-my-sun",

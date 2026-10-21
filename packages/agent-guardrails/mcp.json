@@ -4,7 +4,7 @@
       "transport": "streamable-http",
       "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails",
       "auth": "none",
-      "description": "12 TDQS 5.0/5.0 pre-execution and post-execution AI agent security tools: command injection gate, AST SQL validator, Python sandbox, MCP manifest & rug-pull auditors, sampling firewall, output scrubber, PII redactor, loop breaker, A2A card verifier, egress SSRF guard, and factuality auditor.",
+      "description": "12 pre-execution and post-execution AI agent security tools: command injection gate, AST SQL validator, Python sandbox, MCP manifest & rug-pull auditors, sampling firewall, output scrubber, PII redactor, loop breaker, A2A card verifier, egress SSRF guard, and factuality auditor.",
       "headers": {}
     }
   }
