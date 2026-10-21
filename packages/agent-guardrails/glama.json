@@ -16,5 +16,5 @@
   "remote_url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails",
   "manifest_url": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/agent-guardrails.json",
   "health_check_url": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
-  "description": "Pre-execution security guardrails and command sandboxing for AI agents: bash/tool injection gate, MCP rugpull schema diff, MCP sampling firewall, indirect prompt-injection scrubber, loop circuit breaker, SQL AST guard, PII redactor, and ephemeral Python sandbox."
+  "description": "12 TDQS 5.0/5.0 pre-execution and post-execution AI agent security tools: command injection gate, AST SQL validator, Python sandbox, MCP manifest & rug-pull auditors, sampling firewall, output scrubber, PII redactor, loop breaker, A2A card verifier, egress SSRF guard, and factuality auditor."
 }

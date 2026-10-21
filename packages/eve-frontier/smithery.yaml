@@ -1,7 +1,7 @@
 # Smithery & TensorBlock MCP Index Installation Manifest (eve-frontier)
 name: diogenes-eve-frontier-mcp
 displayName: "Diogenes EVE: Frontier Sui Move & Smart Assembly MCP"
-description: "Dedicated MCP suite for CCP Games' EVE: Frontier on Sui Move: 9 purpose-built tools for Smart Assembly Move contracts, Smart Gate route & toll planning, Lagrange Network Node gigajoule (GJ) optimization, Smart Turret targeting, Killmail intel, SSU AMM pricing, zkLogin verification, Sovereignty fuel radar, and Sui PTB drain simulation."
+description: "14 TDQS 5.0/5.0 EVE: Frontier Sui Move tools covering the complete Smart Assembly lifecycle: assembly state inspector, Tribe standings auditor, Move contract generator, Smart Gate ACL compiler, PTB drain simulator, zkLogin verifier, route planner, Lagrange GJ & siege simulators, fuel radar, SSU pricer, arbitrage finder, killmail analyzer, and turret target matrix."
 author: "stand-out-of-my-sun"
 license: MIT
 homepage: "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages"

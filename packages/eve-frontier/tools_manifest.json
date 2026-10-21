@@ -1,0 +1,192 @@
+[
+  {
+    "name": "eve_move_assembly_coder",
+    "endpoint": "/api/v1/eve-frontier/move-assembly-coder",
+    "price": "200 sats via L402",
+    "description": "Synthesizes and audits Sui Move smart contract extensions (Witness, HotPotato, Capability guards) for EVE Frontier Smart Assemblies.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "contract_type": {
+          "type": "string",
+          "description": "turret_guard, gate_lock, storage_vault, or fuel_distributor"
+        },
+        "assembly_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "contract_type"
+      ]
+    }
+  },
+  {
+    "name": "eve_gate_route_planner",
+    "endpoint": "/api/v1/eve-frontier/gate-route-planner",
+    "price": "100 sats via L402",
+    "description": "Computes optimal stargate jump routes across public and Tribe-gated Smart Gates minimizing fuel burn and toll tariffs.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "origin_system": {
+          "type": "string"
+        },
+        "destination_system": {
+          "type": "string"
+        },
+        "optimize_for": {
+          "type": "string",
+          "description": "fewest_jumps, lowest_fuel, or lowest_toll"
+        }
+      },
+      "required": [
+        "origin_system",
+        "destination_system"
+      ]
+    }
+  },
+  {
+    "name": "eve_network_node_gj_optimizer",
+    "endpoint": "/api/v1/eve-frontier/network-node-gj-optimizer",
+    "price": "100 sats via L402",
+    "description": "Calculates Lagrange Network Node fuel burn rates, gigajoule (GJ) energy reservations, and offline-threat windows.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "node_id": {
+          "type": "string"
+        },
+        "reserve_gj": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "node_id"
+      ]
+    }
+  },
+  {
+    "name": "eve_turret_target_matrix",
+    "endpoint": "/api/v1/eve-frontier/turret-target-matrix",
+    "price": "125 sats via L402",
+    "description": "Evaluates Smart Turret friend-or-foe standings, aggression flags, and deterministic target priority queues.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "turret_id": {
+          "type": "string"
+        },
+        "grid_entities": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "turret_id"
+      ]
+    }
+  },
+  {
+    "name": "eve_killmail_threat_intel",
+    "endpoint": "/api/v1/eve-frontier/killmail-threat-intel",
+    "price": "150 sats via L402",
+    "description": "Analyzes on-chain EVE Frontier killmails to map hostile tribe doctrines, gatecamp windows, and system threat scores.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "solar_system_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "solar_system_id"
+      ]
+    }
+  },
+  {
+    "name": "eve_ssu_market_maker",
+    "endpoint": "/api/v1/eve-frontier/ssu-market-maker",
+    "price": "120 sats via L402",
+    "description": "Computes dynamic bid-ask spreads and inventory curves for Smart Storage Unit (SSU) autonomous vending machines.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "ssu_id": {
+          "type": "string"
+        },
+        "item_type": {
+          "type": "string"
+        },
+        "current_stock": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "ssu_id",
+        "item_type"
+      ]
+    }
+  },
+  {
+    "name": "eve_zklogin_character_verifier",
+    "endpoint": "/api/v1/eve-frontier/zklogin-character-verifier",
+    "price": "100 sats via L402",
+    "description": "Verifies Sui zkLogin proofs, Character object ownership, and Tribe membership capabilities for Diplomacy & Gate ACLs.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "character_address": {
+          "type": "string"
+        },
+        "tribe_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "character_address"
+      ]
+    }
+  },
+  {
+    "name": "eve_sovereignty_fuel_radar",
+    "endpoint": "/api/v1/eve-frontier/sovereignty-fuel-radar",
+    "price": "140 sats via L402",
+    "description": "Tracks constellation-wide Network Node fuel exhaustion timelines and vulnerability windows.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "constellation_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "constellation_id"
+      ]
+    }
+  },
+  {
+    "name": "eve_sui_ptb_simulator",
+    "endpoint": "/api/v1/eve-frontier/sui-ptb-simulator",
+    "price": "150 sats via L402",
+    "description": "Statically simulates Sui Programmable Transaction Block (PTB) command arrays before signing to block coin drains and unconsumed HotPotato traps.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "ptb_commands": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "expected_max_outflow_mist": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "ptb_commands"
+      ]
+    }
+  }
+]

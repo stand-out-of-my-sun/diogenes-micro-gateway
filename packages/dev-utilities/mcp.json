@@ -4,7 +4,7 @@
       "transport": "streamable-http",
       "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/dev-utilities",
       "auth": "none",
-      "description": "Deterministic developer & data reliability MCP utilities: malformed JSON syntax healer, linear-time O(n) ReDoS-safe regex synthesizer, XML system prompt compiler, strict JSON Schema enforcer, context compaction verifier, hallucination factuality auditor, and CSV/JSON data sanitizer.",
+      "description": "14 TDQS 5.0/5.0 data extraction, schema healing & workflow orchestration tools: malformed JSON healer, JSON Schema type enforcer, unstructured entity extractor, tabular dataset cleaner, O(n) ReDoS-safe regex synthesizer, XML prompt compiler, Python script synthesizer, RFC summarizer, grounded web brief, context compaction verifier, MCP workflow router, escrow arbiter, MPP session planner, and x402 embedding generator.",
       "headers": {}
     }
   }

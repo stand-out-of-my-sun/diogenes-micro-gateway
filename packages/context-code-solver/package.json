@@ -1,0 +1,49 @@
+{
+  "name": "@stand-out-of-my-sun/diogenes-context-code-solver-mcp",
+  "version": "1.4.0",
+  "description": "15 TDQS 5.0/5.0 deterministic AI agent & developer tools: AST context skeleton pruner, BPE token budget planner, BM25+RRF+MMR hybrid reranker, self-healing fuzzy diff patcher, polyglot AST symbol & complexity analyzer, Tarjan circular dependency detector, stack-trace root-cause isolator, polyglot TypeScript/Zod/Pydantic compiler, Shunting-Yard math & IRR/NPV solver, Critical Path (CPM) scheduler, Welch/Bayesian A/B judge, RFC 7396 memory differ, OpenAPI breaking-change detector, boundary test-vector generator, and seeded Monte Carlo VaR/CVaR simulator.",
+  "license": "MIT",
+  "author": "@stand-out-of-my-sun",
+  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-context-code-solver-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-context-code-solver-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "context-compression",
+    "ast",
+    "diff-patcher",
+    "code-analysis",
+    "constraint-solver",
+    "bm25",
+    "reranker",
+    "token-counter",
+    "ai-agents",
+    "claude-code",
+    "cursor",
+    "l402",
+    "glama",
+    "tensorblock",
+    "smithery",
+    "typescript",
+    "deterministic-solver"
+  ],
+  "mcp": {
+    "serverId": "io.github.stand-out-of-my-sun/diogenes-context-code-solver",
+    "packageSlug": "context-code-solver",
+    "transport": "streamable-http",
+    "endpoint": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/context-code-solver",
+    "manifestEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/context-code-solver.json",
+    "healthEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+    "auth": "none",
+    "installConfidence": "high",
+    "verification": "verified",
+    "toolsCount": 15
+  }
+}

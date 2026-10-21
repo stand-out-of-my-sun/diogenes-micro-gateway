@@ -16,5 +16,5 @@
   "remote_url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/web3-security",
   "manifest_url": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/web3-security.json",
   "health_check_url": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
-  "description": "Autonomous Web3 & HTTP 402 security suite: EVM/Solana/Move smart contract honeypot auditor, Solana SPL risk oracle, MEV sandwich evaluator, vanity address poisoning detector, HTTP 402 invoice fraud verifier, Bitcoin UTXO consolidation planner, and cross-chain bridge router."
+  "description": "15 TDQS 5.0/5.0 Web3, DeFi & HTTP 402 security tools: EVM/Move contract auditor, Solana Anchor CPI scanner, SPL risk & liquidity inspectors, whale flow tracker, Jito fee estimator, EIP-712 & EVM calldata decoders, MEV evaluator, address-poisoning detector, 402 verifier, Bitcoin UTXO planner, and non-KYC bridge comparator."
 }

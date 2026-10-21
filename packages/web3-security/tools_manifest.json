@@ -1,0 +1,178 @@
+[
+  {
+    "name": "contract_audit",
+    "endpoint": "/api/v1/agent/contract-audit",
+    "price": "250 sats via L402",
+    "description": "Smart contract honeypot, hidden transfer tax, proxy upgrade, and mint backdoor auditor across EVM, Solana, and Move.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "code_or_address": {
+          "type": "string",
+          "description": "Contract source or address"
+        },
+        "network": {
+          "type": "string",
+          "description": "base, ethereum, solana, or sui"
+        }
+      },
+      "required": [
+        "code_or_address"
+      ]
+    }
+  },
+  {
+    "name": "solana_risk",
+    "endpoint": "/api/v1/crypto/solana-risk",
+    "price": "100 sats / $0.02 USDC",
+    "description": "Audits Solana SPL token mint authority, freeze authority, top-holder concentration, and LP lock status.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "token_address": {
+          "type": "string",
+          "description": "Solana mint or wallet pubkey"
+        }
+      },
+      "required": [
+        "token_address"
+      ]
+    }
+  },
+  {
+    "name": "mev_risk",
+    "endpoint": "/api/v1/crypto/mev-risk",
+    "price": "150 sats via L402",
+    "description": "Pre-swap MEV sandwich and frontrunning risk evaluator returning optimal slippage in basis points.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "dex": {
+          "type": "string"
+        },
+        "token_in": {
+          "type": "string"
+        },
+        "token_out": {
+          "type": "string"
+        },
+        "slippage_bps": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "dex",
+        "token_in",
+        "token_out"
+      ]
+    }
+  },
+  {
+    "name": "address_poisoning_detector",
+    "endpoint": "/api/v1/crypto/address-poisoning-check",
+    "price": "100 sats via L402",
+    "description": "Detects zero-value transfer spoofing and prefix/suffix vanity lookalike address poisoning attacks.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "candidate_address": {
+          "type": "string"
+        },
+        "known_trusted_addresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "candidate_address"
+      ]
+    }
+  },
+  {
+    "name": "http402_challenge_verifier",
+    "endpoint": "/api/v1/crypto/http402-challenge-verifier",
+    "price": "60 sats via L402",
+    "description": "Verifies inbound HTTP 402 (L402 BOLT11, x402 Solana, MPP Base) payment challenges against overcharge and recipient spoofing.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "www_authenticate_header": {
+          "type": "string"
+        },
+        "advertised_max_sats": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "www_authenticate_header"
+      ]
+    }
+  },
+  {
+    "name": "utxo_consolidation_planner",
+    "endpoint": "/api/v1/crypto/utxo-consolidation-planner",
+    "price": "75 sats via L402",
+    "description": "Computes exact SegWit/Taproot vByte weights, dust thresholds, and optimal mempool fee windows for UTXO batching.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "utxos": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "current_mempool_sat_vb": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "utxos"
+      ]
+    }
+  },
+  {
+    "name": "crypto_bridge_quote",
+    "endpoint": "/api/v1/crypto/bridge-quote",
+    "price": "100 sats via L402",
+    "description": "Compares non-KYC cross-chain settlement routes (THORChain, Liquid, Maya) for BTC, SOL, ETH, SUI, and USDC.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "from_asset": {
+          "type": "string"
+        },
+        "to_asset": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "from_asset",
+        "to_asset",
+        "amount"
+      ]
+    }
+  },
+  {
+    "name": "solana_whale_radar",
+    "endpoint": "/api/v1/x402/whale-radar",
+    "price": "$0.05 USDC via x402",
+    "description": "Tracks high-conviction Solana whale wallets and insider accumulation clusters.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "token_address": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "token_address"
+      ]
+    }
+  }
+]

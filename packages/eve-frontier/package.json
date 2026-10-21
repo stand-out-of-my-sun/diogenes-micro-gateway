@@ -1,7 +1,7 @@
 {
   "name": "@stand-out-of-my-sun/diogenes-eve-frontier-mcp",
   "version": "1.4.0",
-  "description": "Dedicated MCP suite for CCP Games' EVE: Frontier on Sui Move: 9 purpose-built tools for Smart Assembly Move contracts, Smart Gate route & toll planning, Lagrange Network Node gigajoule (GJ) optimization, Smart Turret targeting, Killmail intel, SSU AMM pricing, zkLogin verification, Sovereignty fuel radar, and Sui PTB drain simulation.",
+  "description": "14 TDQS 5.0/5.0 EVE: Frontier Sui Move tools covering the complete Smart Assembly lifecycle: assembly state inspector, Tribe standings auditor, Move contract generator, Smart Gate ACL compiler, PTB drain simulator, zkLogin verifier, route planner, Lagrange GJ & siege simulators, fuel radar, SSU pricer, arbitrage finder, killmail analyzer, and turret target matrix.",
   "license": "MIT",
   "author": "@stand-out-of-my-sun",
   "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
@@ -19,20 +19,20 @@
     "sui",
     "sui-move",
     "smart-assemblies",
-    "ccp-games",
-    "web3-gaming",
     "autonomous-worlds",
-    "blockchain-gaming",
+    "ccp-games",
+    "gaming",
+    "web3-gaming",
+    "smart-contracts",
+    "zklogin",
     "glama",
     "tensorblock",
-    "zklogin",
-    "programmable-transaction-blocks",
-    "move-lang",
-    "stargate",
-    "game-ai",
     "l402",
-    "x402",
-    "streamable-http"
+    "streamable-http",
+    "ai-agents",
+    "pathfinding",
+    "market-maker",
+    "telemetry"
   ],
   "mcp": {
     "serverId": "io.github.stand-out-of-my-sun/diogenes-eve-frontier",
@@ -44,6 +44,6 @@
     "auth": "none",
     "installConfidence": "high",
     "verification": "verified",
-    "toolsCount": 9
+    "toolsCount": 14
   }
 }

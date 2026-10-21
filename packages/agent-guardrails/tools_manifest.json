@@ -1,0 +1,162 @@
+[
+  {
+    "name": "guardrail_verify",
+    "endpoint": "/api/v1/agent/guardrail-verify",
+    "price": "100 sats via L402",
+    "description": "Pre-execution security gate to detect prompt injection, destructive bash commands, wallet drain, and key exfiltration.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "payload": {
+          "type": "string",
+          "description": "Command, script, or prompt to inspect"
+        },
+        "action_type": {
+          "type": "string",
+          "description": "Action type (e.g. bash, tool_call)"
+        }
+      },
+      "required": [
+        "payload"
+      ]
+    }
+  },
+  {
+    "name": "mcp_rugpull_diff",
+    "endpoint": "/api/v1/agent/mcp-rugpull-diff",
+    "price": "85 sats via L402",
+    "description": "Detects mid-session MCP tools/list rug-pulls, shadow parameter injections, and coercive description mutations.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "baseline_tools_list": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "current_tools_list": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "baseline_tools_list",
+        "current_tools_list"
+      ]
+    }
+  },
+  {
+    "name": "mcp_sampling_guard",
+    "endpoint": "/api/v1/agent/mcp-sampling-guard",
+    "price": "100 sats via L402",
+    "description": "Audits inbound MCP sampling/createMessage requests to block systemPrompt hijacking and recursive quota drain.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "sampling_request": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "sampling_request"
+      ]
+    }
+  },
+  {
+    "name": "tool_output_firewall",
+    "endpoint": "/api/v1/agent/tool-output-firewall",
+    "price": "75 sats via L402",
+    "description": "Sanitizes untrusted tool outputs, stripping invisible Unicode tags (U+E0000), markdown exfiltration beacons, and indirect prompt injections.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "raw_tool_output": {
+          "type": "string"
+        },
+        "source_tool_name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "raw_tool_output"
+      ]
+    }
+  },
+  {
+    "name": "agent_loop_circuit_breaker",
+    "endpoint": "/api/v1/agent/loop-circuit-breaker",
+    "price": "70 sats / $0.02 USDC",
+    "description": "Analyzes recent tool-call traces to trip a circuit breaker on cyclic retries, A/B deadlocks, and runaway token burn.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "recent_action_trace": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "recent_action_trace"
+      ]
+    }
+  },
+  {
+    "name": "sql_injection_ast_guard",
+    "endpoint": "/api/v1/agent/sql-guard",
+    "price": "75 sats via L402",
+    "description": "Statically validates LLM-generated SQL queries via AST inspection to block SQLi tautologies, UNION leaks, and DROP/TRUNCATE.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "sql_query": {
+          "type": "string",
+          "description": "SQL query to audit"
+        }
+      },
+      "required": [
+        "sql_query"
+      ]
+    }
+  },
+  {
+    "name": "code_sandbox",
+    "endpoint": "/api/v1/mpp/code-sandbox",
+    "price": "$0.15 USDC via MPP",
+    "description": "Executes untrusted Python snippets inside an ephemeral sandbox with static AST safety auditing.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Python code to audit and run"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    }
+  },
+  {
+    "name": "scrub_pii_firewall",
+    "endpoint": "/api/v1/scrub-pii",
+    "price": "150 sats via L402",
+    "description": "Redacts emails, SSNs, phone numbers, API keys, and wallet seed phrases before external LLM calls.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Raw text to scrub"
+        }
+      },
+      "required": [
+        "text"
+      ]
+    }
+  }
+]

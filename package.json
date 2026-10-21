@@ -1,14 +1,7 @@
 {
   "name": "@stand-out-of-my-sun/diogenes-micro-gateway",
   "version": "1.3.0",
-  "description": "Autonomous AI Gateway: Account-less access to 45 Gemini models & autonomous agents (Antigravity, Deep Research Pro, Nano Banana), 66 edge microservices & 9 EVE: Frontier APIs",
-  "main": "index.js",
-  "bin": {
-    "diogenes-gateway": "./index.js"
-  },
-  "scripts": {
-    "start": "node index.js"
-  },
+  "description": "Autonomous AI Gateway: Account-less access to 45 Gemini models & autonomous agents (Antigravity, Deep Research Pro, Nano Banana), 90 edge microservices & 14 EVE: Frontier APIs",
   "license": "MIT",
   "author": "@stand-out-of-my-sun",
   "homepage": "https://diogenes-micro-gateway.corinth.workers.dev",
@@ -40,6 +33,6 @@
     "auth": "none",
     "installConfidence": "high",
     "verification": "verified",
-    "toolsCount": 66
+    "toolsCount": 90
   }
 }

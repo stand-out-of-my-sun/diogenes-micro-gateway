@@ -1,0 +1,140 @@
+[
+  {
+    "name": "gemini_universal_generate",
+    "endpoint": "/api/v1/ai/generate",
+    "price": "150\u2013250 sats / $0.14 USDC",
+    "description": "Account-less inference across all 45 Google Gemini models (Gemini 4 Argon, Gemini 3.1 Pro, Gemini 3.8 Flash) with configurable thinking budgets.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Prompt or instruction for Gemini"
+        },
+        "model": {
+          "type": "string",
+          "description": "Model ID (e.g. gemini-4-argon, gemini-3.1-pro, gemini-3.8-flash)"
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    }
+  },
+  {
+    "name": "antigravity_autonomous_agent",
+    "endpoint": "/api/v1/ai/antigravity-agent",
+    "price": "500 sats / $0.48 USDC",
+    "description": "Executes multi-step autonomous agent reasoning, code synthesis, and tool orchestration via Google Antigravity Agent.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "goal": {
+          "type": "string",
+          "description": "High-level autonomous task objective"
+        }
+      },
+      "required": [
+        "goal"
+      ]
+    }
+  },
+  {
+    "name": "deep_research_pro_dossier",
+    "endpoint": "/api/v1/ai/deep-research",
+    "price": "1000 sats / $0.95 USDC",
+    "description": "Synthesizes multi-hop grounded technical and market research dossiers with verified citations.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Deep research topic or investigation query"
+        }
+      },
+      "required": [
+        "query"
+      ]
+    }
+  },
+  {
+    "name": "nano_banana_pro_image_gen",
+    "endpoint": "/api/v1/ai/image-gen",
+    "price": "350\u2013600 sats / $0.33 USDC",
+    "description": "Generates high-resolution images, diagrams, and UI assets using Nano Banana Pro (Gemini 3 Pro Image) and Nano Banana 2.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Visual generation prompt"
+        },
+        "model": {
+          "type": "string",
+          "description": "gemini-3-pro-image or gemini-2.5-flash-image"
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    }
+  },
+  {
+    "name": "veo3_and_lyria3_media_gen",
+    "endpoint": "/api/v1/ai/video-gen",
+    "price": "500\u20131500 sats",
+    "description": "Generates cinematic video clips via Veo 3 or studio audio tracks via Lyria 3.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Video or music synthesis prompt"
+        },
+        "media_type": {
+          "type": "string",
+          "description": "video or music"
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    }
+  },
+  {
+    "name": "gemini_grounded_search_maps",
+    "endpoint": "/api/v1/ai/grounded-search",
+    "price": "200 sats / $0.19 USDC",
+    "description": "Real-time Google Search and Google Maps grounded reasoning returning structured JSON with source URLs.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "description": "Search or geospatial query"
+        }
+      },
+      "required": [
+        "topic"
+      ]
+    }
+  },
+  {
+    "name": "gemini_vector_embeddings",
+    "endpoint": "/api/v1/ai/embeddings",
+    "price": "50 sats / $0.01 USDC",
+    "description": "Generates 3072-dimensional semantic vector embeddings via Gemini Embedding 2 for RAG and agent memory.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text to embed"
+        }
+      },
+      "required": [
+        "text"
+      ]
+    }
+  }
+]

@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
   "name": "io.github.stand-out-of-my-sun/diogenes-web3-security",
-  "description": "Autonomous Web3 & HTTP 402 security suite: EVM/Solana/Move smart contract honeypot auditor, Solana SPL risk oracle, MEV sandwich evaluator, vanity address poisoning detector, HTTP 402 invoice fraud ve",
+  "description": "15 TDQS 5.0/5.0 Web3, DeFi & HTTP 402 security tools: EVM/Move contract auditor, Solana Anchor CPI scanner, SPL risk & liquidity inspectors, whale flow tracker, Jito fee estimator, EIP-712 & EVM calld",
   "version": "1.4.0",
   "license": "MIT",
   "maintainer": "@stand-out-of-my-sun",

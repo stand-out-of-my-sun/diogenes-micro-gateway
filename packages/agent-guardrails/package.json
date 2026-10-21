@@ -1,7 +1,7 @@
 {
   "name": "@stand-out-of-my-sun/diogenes-agent-guardrails-mcp",
   "version": "1.4.0",
-  "description": "Pre-execution security guardrails and command sandboxing for AI agents: bash/tool injection gate, MCP rugpull schema diff, MCP sampling firewall, indirect prompt-injection scrubber, loop circuit breaker, SQL AST guard, PII redactor, and ephemeral Python sandbox.",
+  "description": "12 TDQS 5.0/5.0 pre-execution and post-execution AI agent security tools: command injection gate, AST SQL validator, Python sandbox, MCP manifest & rug-pull auditors, sampling firewall, output scrubber, PII redactor, loop breaker, A2A card verifier, egress SSRF guard, and factuality auditor.",
   "license": "MIT",
   "author": "@stand-out-of-my-sun",
   "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
@@ -16,23 +16,23 @@
     "mcp",
     "mcp-server",
     "security",
-    "ai-safety",
-    "guardrails",
+    "ai-security",
     "prompt-injection",
+    "guardrails",
     "sandbox",
-    "mcp-security",
     "sql-injection",
     "pii-redaction",
+    "a2a",
+    "ssrf",
     "glama",
     "tensorblock",
-    "circuit-breaker",
-    "firewall",
-    "autonomous-agents",
-    "llm-security",
-    "devsecops",
     "l402",
     "x402",
-    "streamable-http"
+    "streamable-http",
+    "ai-agents",
+    "zero-trust",
+    "firewall",
+    "devsecops"
   ],
   "mcp": {
     "serverId": "io.github.stand-out-of-my-sun/diogenes-agent-guardrails",
@@ -44,6 +44,6 @@
     "auth": "none",
     "installConfidence": "high",
     "verification": "verified",
-    "toolsCount": 8
+    "toolsCount": 12
   }
 }

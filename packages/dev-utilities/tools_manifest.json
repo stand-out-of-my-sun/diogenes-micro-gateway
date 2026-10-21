@@ -1,0 +1,137 @@
+[
+  {
+    "name": "json_repair",
+    "endpoint": "/api/v1/agent/json-repair",
+    "price": "50 sats via L402",
+    "description": "Deterministically heals truncated or malformed JSON strings, unescaped quotes, and trailing commas.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "malformed_json": {
+          "type": "string",
+          "description": "Malformed JSON string"
+        }
+      },
+      "required": [
+        "malformed_json"
+      ]
+    }
+  },
+  {
+    "name": "regex_oracle",
+    "endpoint": "/api/v1/agent/regex-oracle",
+    "price": "50 sats via L402",
+    "description": "Synthesizes linear-time O(n) ReDoS-safe regular expressions with positive/negative test validation.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Pattern requirements"
+        }
+      },
+      "required": [
+        "description"
+      ]
+    }
+  },
+  {
+    "name": "agent_prompt_compiler",
+    "endpoint": "/api/v1/agent/prompt-compiler",
+    "price": "100 sats via L402",
+    "description": "Compiles raw instructions into structured, hallucination-resistant XML system prompts with guardrails.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "raw_instructions": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "raw_instructions"
+      ]
+    }
+  },
+  {
+    "name": "agent_schema_enforcer",
+    "endpoint": "/api/v1/agent/schema-enforcer",
+    "price": "75 sats via L402",
+    "description": "Enforces strict JSON Schema compliance, automatic type coercion, and extraneous field pruning on LLM outputs.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "raw_output": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "raw_output"
+      ]
+    }
+  },
+  {
+    "name": "context_compaction_verifier",
+    "endpoint": "/api/v1/agent/context-compaction-verifier",
+    "price": "90 sats via L402",
+    "description": "Audits pre-compaction vs. post-compaction state summaries to ensure zero dropped constraints, wallet addresses, or IDs.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "original_context": {
+          "type": "string"
+        },
+        "compacted_summary": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "original_context",
+        "compacted_summary"
+      ]
+    }
+  },
+  {
+    "name": "hallucination_auditor",
+    "endpoint": "/api/v1/agent/hallucination-auditor",
+    "price": "150 sats via L402",
+    "description": "Cross-references agent claims and numbers against provided source passages to compute grounded factuality scores.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "draft_response": {
+          "type": "string"
+        },
+        "source_documents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "draft_response"
+      ]
+    }
+  },
+  {
+    "name": "clean_tabular_data",
+    "endpoint": "/api/v1/clean-data",
+    "price": "100 sats via L402",
+    "description": "Normalizes, deduplicates, and strips injection payloads from untrusted CSV and JSON tabular datasets.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "dataset": {
+          "type": "string",
+          "description": "Raw CSV or JSON dataset"
+        }
+      },
+      "required": [
+        "dataset"
+      ]
+    }
+  }
+]
