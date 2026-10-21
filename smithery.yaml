@@ -1,7 +1,7 @@
 # Smithery & TensorBlock MCP Index Installation Manifest
 name: diogenes-micro-gateway
 displayName: Diogenes Autonomous Microservice Gateway
-description: "Autonomous AI Gateway: Account-less access to 45 Gemini models & autonomous agents (Antigravity, Deep Research Pro, Nano Banana), 90 edge microservices & 14 EVE: Frontier APIs"
+description: "Autonomous AI Gateway: Account-less access to 45 Gemini models & autonomous agents (Antigravity, Deep Research Pro, Nano Banana), 85 edge microservices & 14 EVE: Frontier APIs"
 author: "stand-out-of-my-sun"
 license: MIT
 homepage: "https://diogenes-micro-gateway.corinth.workers.dev"
