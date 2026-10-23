@@ -1,178 +1,937 @@
 [
   {
-    "name": "contract_audit",
-    "endpoint": "/api/v1/agent/contract-audit",
-    "price": "250 sats via L402",
-    "description": "Smart contract honeypot, hidden transfer tax, proxy upgrade, and mint backdoor auditor across EVM, Solana, and Move.",
+    "name": "audit_smart_contract_code",
+    "title": "EVM & Move Smart Contract Honeypot, Tax & Reentrancy Auditor",
+    "description": "Statically audits Solidity, Vyper, or Move smart contract source code for honeypot transfer taxes, hidden mint backdoors, proxy upgrade traps, and reentrancy. Use when auditing smart contract source code or bytecode before deploying or interacting with a protocol; for scanning Solana Anchor/Rust programs specifically for Cross-Program Invocation (CPI) signer/account vulnerabilities, use scan_solana_cpi_reentrancy instead. Read-only edge call (32 KB, 60 RPM): accepts 'code_or_address' ('chain' defaults to 'evm_solidity'), uses '?demo=true' or L402 (250 sats); HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "code_or_address": {
           "type": "string",
-          "description": "Contract source or address"
+          "description": "Smart contract source code snippet, ABI, or contract address to audit."
         },
-        "network": {
+        "chain": {
           "type": "string",
-          "description": "base, ethereum, solana, or sui"
+          "description": "Target blockchain VM architecture; defaults to 'evm_solidity' when omitted.",
+          "enum": [
+            "evm_solidity",
+            "sui_move",
+            "base_evm",
+            "arbitrum_evm"
+          ]
         }
       },
       "required": [
         "code_or_address"
       ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for audit_smart_contract_code.",
+      "properties": {
+        "security_score": {
+          "type": "integer",
+          "description": "Composite contract safety score from 0 (critical exploit) to 100 (verified safe)."
+        },
+        "risk_level": {
+          "type": "string",
+          "description": "Severity classification ('LOW', 'MEDIUM', 'HIGH', or 'CRITICAL')."
+        },
+        "is_honeypot": {
+          "type": "boolean",
+          "description": "True if transfer restrictions or excessive sell taxes (>10%) are present."
+        },
+        "vulnerabilities": {
+          "type": "array",
+          "description": "Specific vulnerability findings and line-level remediation advice."
+        }
+      },
+      "required": [
+        "security_score",
+        "risk_level",
+        "is_honeypot",
+        "vulnerabilities"
+      ]
+    },
+    "annotations": {
+      "title": "EVM & Move Smart Contract Honeypot, Tax & Reentrancy Auditor",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   },
   {
-    "name": "solana_risk",
-    "endpoint": "/api/v1/crypto/solana-risk",
-    "price": "100 sats / $0.02 USDC",
-    "description": "Audits Solana SPL token mint authority, freeze authority, top-holder concentration, and LP lock status.",
+    "name": "scan_solana_cpi_reentrancy",
+    "title": "Solana Anchor & Rust Cross-Program Invocation (CPI) Vulnerability Scanner",
+    "description": "Scans Solana Anchor and native Rust program instructions for unverified Cross-Program Invocation (CPI) program IDs, missing signer checks, and PDA bump seed canonicalization bugs. Use when auditing Solana Rust/Anchor source code or instruction account structs for CPI privilege escalation; for checking live SPL token mint/freeze authorities and rug-pull risk by mint address, use evaluate_solana_token_risk instead. Read-only edge call (32 KB, 60 RPM): accepts 'rust_source_or_idl' ('framework' defaults to 'anchor'), uses '?demo=true' or L402 (160 sats); HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "rust_source_or_idl": {
+          "type": "string",
+          "description": "Solana Rust/Anchor source code or IDL JSON string to scan for CPI vulnerabilities."
+        },
+        "framework": {
+          "type": "string",
+          "description": "Solana program framework used; defaults to 'anchor' when omitted.",
+          "enum": [
+            "anchor",
+            "native_rust_solana",
+            "pinocchio"
+          ]
+        }
+      },
+      "required": [
+        "rust_source_or_idl"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for scan_solana_cpi_reentrancy.",
+      "properties": {
+        "arbitrary_cpi_detected": {
+          "type": "boolean",
+          "description": "True if invoke/invoke_signed is called without validating the target program account."
+        },
+        "missing_signer_checks": {
+          "type": "array",
+          "description": "Accounts mutated without enforcing Signer<'info> or has_one constraints."
+        },
+        "pda_bump_safe": {
+          "type": "boolean",
+          "description": "True when canonical bump seeds are enforced on all PDA derivations."
+        },
+        "audit_verdict": {
+          "type": "string",
+          "description": "Overall Solana program verdict ('SAFE_ANCHOR_PROGRAM' or 'CRITICAL_CPI_VULNERABILITY')."
+        }
+      },
+      "required": [
+        "arbitrary_cpi_detected",
+        "missing_signer_checks",
+        "pda_bump_safe",
+        "audit_verdict"
+      ]
+    },
+    "annotations": {
+      "title": "Solana Anchor & Rust Cross-Program Invocation (CPI) Vulnerability Scanner",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "evaluate_solana_token_risk",
+    "title": "Solana SPL Token Mint/Freeze Authority & Rug-Pull Risk Evaluator",
+    "description": "Evaluates a Solana SPL token's rug-pull probability by checking active mint authority, freeze authority, mutable metadata, and top-holder concentration. Use when making a pre-trade security decision on whether a Solana SPL token is safe to buy; for retrieving SPL token symbol, decimals, and DEX liquidity pool metadata via x402, use inspect_solana_token_liquidity instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'token_address' ('risk_profile' defaults to 'strict_decentralized'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "token_address": {
           "type": "string",
-          "description": "Solana mint or wallet pubkey"
+          "description": "Base58-encoded Solana SPL token mint address (32\u201344 characters)."
+        },
+        "risk_profile": {
+          "type": "string",
+          "description": "Tolerance policy for centralized freeze authorities; defaults to 'strict_decentralized' when omitted.",
+          "enum": [
+            "strict_decentralized",
+            "allow_regulated_stablecoins",
+            "memecoin_sniping"
+          ]
         }
       },
       "required": [
         "token_address"
       ]
-    }
-  },
-  {
-    "name": "mev_risk",
-    "endpoint": "/api/v1/crypto/mev-risk",
-    "price": "150 sats via L402",
-    "description": "Pre-swap MEV sandwich and frontrunning risk evaluator returning optimal slippage in basis points.",
-    "inputSchema": {
+    },
+    "outputSchema": {
       "type": "object",
+      "description": "Deterministic response schema for evaluate_solana_token_risk.",
       "properties": {
-        "dex": {
-          "type": "string"
+        "valid_base58": {
+          "type": "boolean",
+          "description": "True when the provided address is a valid Base58 Solana public key."
         },
-        "token_in": {
-          "type": "string"
+        "risk_score": {
+          "type": "number",
+          "description": "Rug-pull risk score from 0.0 (renounced/safe) to 1.0 (critical danger)."
         },
-        "token_out": {
-          "type": "string"
+        "should_transact": {
+          "type": "boolean",
+          "description": "True when the token passes authority and concentration safety checks."
         },
-        "slippage_bps": {
-          "type": "integer"
+        "freeze_authority_present": {
+          "type": "boolean",
+          "description": "True if an active authority can freeze holder token accounts."
         }
       },
       "required": [
-        "dex",
-        "token_in",
-        "token_out"
+        "valid_base58",
+        "risk_score",
+        "should_transact",
+        "freeze_authority_present"
       ]
+    },
+    "annotations": {
+      "title": "Solana SPL Token Mint/Freeze Authority & Rug-Pull Risk Evaluator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   },
   {
-    "name": "address_poisoning_detector",
-    "endpoint": "/api/v1/crypto/address-poisoning-check",
-    "price": "100 sats via L402",
-    "description": "Detects zero-value transfer spoofing and prefix/suffix vanity lookalike address poisoning attacks.",
+    "name": "inspect_solana_token_liquidity",
+    "title": "Solana SPL Token Metadata, Decimals & Authority Registry Lookup",
+    "description": "Retrieves canonical Solana SPL token metadata including name, ticker symbol, decimal precision, and current mint/freeze authority addresses. Use when resolving SPL token decimals, ticker symbols, and registry metadata for portfolio or swap formatting; for computing a composite security risk score and binary should_transact verdict, use evaluate_solana_token_risk instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'mint' ('network' defaults to 'mainnet-beta'), supports '?demo=true' or x402 (200 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
-        "candidate_address": {
-          "type": "string"
+        "mint": {
+          "type": "string",
+          "description": "Base58-encoded Solana SPL token mint address (e.g. 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v')."
         },
-        "known_trusted_addresses": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "network": {
+          "type": "string",
+          "description": "Solana cluster to query; defaults to 'mainnet-beta' when omitted.",
+          "enum": [
+            "mainnet-beta",
+            "devnet"
+          ]
         }
       },
       "required": [
-        "candidate_address"
+        "mint"
       ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for inspect_solana_token_liquidity.",
+      "properties": {
+        "mint": {
+          "type": "string",
+          "description": "Queried Base58 SPL token mint address."
+        },
+        "symbol": {
+          "type": "string",
+          "description": "Canonical token ticker symbol (e.g. 'USDC', 'SOL', 'JUP')."
+        },
+        "decimals": {
+          "type": "integer",
+          "description": "Token decimal precision used for raw lamport/atomic unit conversion."
+        },
+        "authorities_renounced": {
+          "type": "boolean",
+          "description": "True when both mint_authority and freeze_authority are null."
+        }
+      },
+      "required": [
+        "mint",
+        "symbol",
+        "decimals",
+        "authorities_renounced"
+      ]
+    },
+    "annotations": {
+      "title": "Solana SPL Token Metadata, Decimals & Authority Registry Lookup",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   },
   {
-    "name": "http402_challenge_verifier",
-    "endpoint": "/api/v1/crypto/http402-challenge-verifier",
-    "price": "60 sats via L402",
-    "description": "Verifies inbound HTTP 402 (L402 BOLT11, x402 Solana, MPP Base) payment challenges against overcharge and recipient spoofing.",
+    "name": "track_solana_whale_flows",
+    "title": "Solana Whale Wallet Net-Flow & Insider Cluster Tracker",
+    "description": "Tracks 24-hour net accumulation or distribution flows across top Solana whale wallets and flags coordinated insider wallet clusters for a given SPL token. Use when analyzing on-chain smart-money order flow and holder clustering on Solana; for checking static SPL contract mint/freeze authority permissions, use evaluate_solana_token_risk instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'token' ('window' defaults to '1h'), supports '?demo=true' or x402 (500 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
-        "www_authenticate_header": {
-          "type": "string"
+        "token": {
+          "type": "string",
+          "description": "Base58 Solana SPL token mint address or ticker symbol to track whale flows for."
         },
-        "advertised_max_sats": {
-          "type": "number"
+        "window": {
+          "type": "string",
+          "description": "Aggregation lookback window for net whale flow; defaults to '24h' when omitted.",
+          "enum": [
+            "1h",
+            "6h",
+            "24h",
+            "7d"
+          ]
         }
       },
       "required": [
-        "www_authenticate_header"
+        "token"
       ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for track_solana_whale_flows.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "Tracked Solana token identifier."
+        },
+        "net_flow_24h_usd": {
+          "type": "string",
+          "description": "Signed 24-hour net whale flow denominated in USD."
+        },
+        "signal": {
+          "type": "string",
+          "description": "Order-flow classification ('ACCUMULATION' or 'DISTRIBUTION')."
+        },
+        "insider_cluster_detected": {
+          "type": "boolean",
+          "description": "True if synchronized funding patterns indicate an insider wallet cluster."
+        }
+      },
+      "required": [
+        "token",
+        "net_flow_24h_usd",
+        "signal",
+        "insider_cluster_detected"
+      ]
+    },
+    "annotations": {
+      "title": "Solana Whale Wallet Net-Flow & Insider Cluster Tracker",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
     }
   },
   {
-    "name": "utxo_consolidation_planner",
-    "endpoint": "/api/v1/crypto/utxo-consolidation-planner",
-    "price": "75 sats via L402",
-    "description": "Computes exact SegWit/Taproot vByte weights, dust thresholds, and optimal mempool fee windows for UTXO batching.",
+    "name": "estimate_solana_priority_fees",
+    "title": "Solana Compute-Unit Priority Fee & Jito MEV Tip Estimator",
+    "description": "Calculates optimal Solana compute-unit (CU) microlamport priority fees and Jito bundle tip lamports to achieve target block-inclusion probability. Use when setting SetComputeUnitPrice and Jito tips before broadcasting a Solana transaction; for querying Bitcoin L1 sat/vB mempool fee rates, use estimate_bitcoin_mempool_fees instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'priority_level' ('tx_type' defaults to 'simple_transfer'), supports '?demo=true' or x402 (50 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
-        "utxos": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
+        "priority_level": {
+          "type": "string",
+          "description": "Target inclusion urgency tier on Solana mainnet-beta.",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "ultra"
+          ]
         },
-        "current_mempool_sat_vb": {
-          "type": "number"
+        "tx_type": {
+          "type": "string",
+          "description": "Transaction category used to estimate compute unit limit; defaults to 'dex_swap' when omitted.",
+          "enum": [
+            "simple_transfer",
+            "dex_swap",
+            "nft_mint",
+            "arbitrary_cpi"
+          ]
         }
       },
       "required": [
-        "utxos"
+        "priority_level"
       ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for estimate_solana_priority_fees.",
+      "properties": {
+        "recommended_micro_lamports_per_cu": {
+          "type": "integer",
+          "description": "Recommended priority fee in microlamports per compute unit."
+        },
+        "recommended_jito_tip_lamports": {
+          "type": "integer",
+          "description": "Recommended Jito block-engine tip in lamports for MEV-protected landing."
+        },
+        "estimated_landing_probability": {
+          "type": "number",
+          "description": "Projected next-block inclusion probability (0.0 to 1.0)."
+        },
+        "recommended_compute_unit_limit": {
+          "type": "integer",
+          "description": "Suggested ComputeBudget compute unit ceiling."
+        }
+      },
+      "required": [
+        "recommended_micro_lamports_per_cu",
+        "recommended_jito_tip_lamports",
+        "estimated_landing_probability",
+        "recommended_compute_unit_limit"
+      ]
+    },
+    "annotations": {
+      "title": "Solana Compute-Unit Priority Fee & Jito MEV Tip Estimator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
     }
   },
   {
-    "name": "crypto_bridge_quote",
-    "endpoint": "/api/v1/crypto/bridge-quote",
-    "price": "100 sats via L402",
-    "description": "Compares non-KYC cross-chain settlement routes (THORChain, Liquid, Maya) for BTC, SOL, ETH, SUI, and USDC.",
+    "name": "decode_eip712_permit_signature",
+    "title": "EIP-712 Typed Data & Uniswap Permit2 Phishing Signature Decoder",
+    "description": "Decodes EIP-712 and Uniswap Permit2 off-chain typed-data payloads to verify spender identity, detect unlimited (uint256.max) token approvals, and flag expired deadlines. Use when inspecting an off-chain eth_signTypedData_v4 or Permit2 payload before signing; for decoding raw on-chain hex transaction calldata (0x...) for eth_sendTransaction, use simulate_evm_transaction_calldata instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'typed_data_json' ('chain_id' defaults to '1'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "typed_data_json": {
+          "type": "string",
+          "description": "JSON string or object containing the EIP-712 / Permit2 message (spender, amount, deadline)."
+        },
+        "chain_id": {
+          "type": "string",
+          "description": "EVM chain ID used to verify canonical router spender addresses; defaults to '8453' (Base) when omitted.",
+          "enum": [
+            "1",
+            "8453",
+            "42161",
+            "10"
+          ]
+        }
+      },
+      "required": [
+        "typed_data_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for decode_eip712_permit_signature.",
+      "properties": {
+        "spender_address": {
+          "type": "string",
+          "description": "Normalized lowercase EVM address of the permit spender."
+        },
+        "spender_identity": {
+          "type": "string",
+          "description": "Identified protocol router label or 'Unknown Third-Party Spender'."
+        },
+        "unlimited_approval_detected": {
+          "type": "boolean",
+          "description": "True if the approval value equals uint256.max / uint160.max."
+        },
+        "signing_verdict": {
+          "type": "string",
+          "description": "Safety recommendation ('SAFE_BOUNDED_PERMIT' or 'CRITICAL_UNLIMITED_APPROVAL_UNVERIFIED_SPENDER')."
+        }
+      },
+      "required": [
+        "spender_address",
+        "spender_identity",
+        "unlimited_approval_detected",
+        "signing_verdict"
+      ]
+    },
+    "annotations": {
+      "title": "EIP-712 Typed Data & Uniswap Permit2 Phishing Signature Decoder",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "simulate_evm_transaction_calldata",
+    "title": "Pre-Sign EVM Hex Calldata Selector Decoder & Drain Simulator",
+    "description": "Decodes raw EVM hexadecimal transaction calldata (0x...) by 4-byte function selector to expose hidden ERC-20 approve/transferFrom calls, setApprovalForAll drains, and multicall bundles. Use when auditing raw hex transaction data (to, value, data) before broadcasting an on-chain EVM transaction; for inspecting off-chain EIP-712 JSON typed-data signatures, use decode_eip712_permit_signature instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'calldata_hex' ('network' defaults to 'base_mainnet'), supports '?demo=true' or L402 (90 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "calldata_hex": {
+          "type": "string",
+          "description": "Hexadecimal EVM transaction data string starting with '0x' (e.g. '0x095ea7b3000000000000000000000000...')."
+        },
+        "network": {
+          "type": "string",
+          "description": "Target EVM network for simulation context; defaults to 'base_mainnet' when omitted.",
+          "enum": [
+            "base_mainnet",
+            "ethereum_mainnet",
+            "arbitrum_one",
+            "optimism"
+          ]
+        }
+      },
+      "required": [
+        "calldata_hex"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for simulate_evm_transaction_calldata.",
+      "properties": {
+        "selector_hex": {
+          "type": "string",
+          "description": "Extracted 4-byte function selector (e.g. '0x095ea7b3')."
+        },
+        "decoded_method": {
+          "type": "string",
+          "description": "Human-readable ABI function signature matched to the selector."
+        },
+        "approval_or_drain_risk": {
+          "type": "boolean",
+          "description": "True if the call grants token/NFT allowances or transfers assets to an untrusted target."
+        },
+        "simulation_verdict": {
+          "type": "string",
+          "description": "Pre-sign safety recommendation ('SAFE_CALLDATA' or 'HIGH_RISK_APPROVAL_DETECTED')."
+        }
+      },
+      "required": [
+        "selector_hex",
+        "decoded_method",
+        "approval_or_drain_risk",
+        "simulation_verdict"
+      ]
+    },
+    "annotations": {
+      "title": "Pre-Sign EVM Hex Calldata Selector Decoder & Drain Simulator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "evaluate_dex_mev_risk",
+    "title": "Pre-Swap DEX MEV Sandwich & Frontrunning Risk Evaluator",
+    "description": "Evaluates decentralized exchange (DEX) swap parameters against pool depth and mempool visibility to quantify MEV sandwich risk and compute optimal slippage tolerance in basis points. Use when configuring slippage tolerance and private-RPC routing before executing an on-chain DEX token swap; for comparing cross-chain bridge settlement routes across different L1 blockchains, use compare_crosschain_bridge_routes instead. Read-only edge call (32 KB, 60 RPM): accepts 'pair' ('execution_venue' defaults to 'uniswap_v3_public'), uses '?demo=true' or L402 (150 sats); HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "pair": {
+          "type": "string",
+          "description": "Trading pair symbol or pool identifier (e.g. 'ETH/USDC' or 'SOL/USDC')."
+        },
+        "execution_venue": {
+          "type": "string",
+          "description": "Target DEX protocol or RPC relay; defaults to 'uniswap_v3_public' when omitted.",
+          "enum": [
+            "uniswap_v3_public",
+            "flashbots_protect",
+            "aerodrome_base",
+            "jupiter_jito"
+          ]
+        }
+      },
+      "required": [
+        "pair"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for evaluate_dex_mev_risk.",
+      "properties": {
+        "sandwich_risk": {
+          "type": "string",
+          "description": "Assessed MEV extraction risk tier ('LOW', 'MEDIUM', or 'HIGH')."
+        },
+        "frontrunning_detected": {
+          "type": "boolean",
+          "description": "True if public mempool broadcast exposes the swap to predatory bots."
+        },
+        "optimal_slippage_bps": {
+          "type": "integer",
+          "description": "Recommended maximum slippage tolerance in basis points (1 bps = 0.01%)."
+        },
+        "recommended_rpc": {
+          "type": "string",
+          "description": "Suggested MEV-protected broadcast endpoint."
+        }
+      },
+      "required": [
+        "sandwich_risk",
+        "frontrunning_detected",
+        "optimal_slippage_bps",
+        "recommended_rpc"
+      ]
+    },
+    "annotations": {
+      "title": "Pre-Swap DEX MEV Sandwich & Frontrunning Risk Evaluator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "detect_address_poisoning_scam",
+    "title": "Counterparty Address Poisoning & Vanity Prefix/Suffix Spoof Detector",
+    "description": "Compares a target recipient wallet address against recent transaction history to detect vanity prefix/suffix lookalike spoofing and zero-value dusting attacks. Use when verifying a recipient EVM or Solana wallet address before sending funds; for decoding hex smart contract calldata payloads, use simulate_evm_transaction_calldata instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'target_address' ('address_standard' defaults to 'auto_detect'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "target_address": {
+          "type": "string",
+          "description": "Candidate recipient EVM (0x...) or Solana Base58 wallet address to verify."
+        },
+        "address_standard": {
+          "type": "string",
+          "description": "Address encoding format; defaults to 'auto_detect' when omitted.",
+          "enum": [
+            "auto_detect",
+            "evm_hex",
+            "solana_base58"
+          ]
+        }
+      },
+      "required": [
+        "target_address"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for detect_address_poisoning_scam.",
+      "properties": {
+        "target_address": {
+          "type": "string",
+          "description": "Audited recipient address."
+        },
+        "poisoning_detected": {
+          "type": "boolean",
+          "description": "True if a prefix/suffix collision with a different middle body is found."
+        },
+        "prefix_suffix_collision_score": {
+          "type": "number",
+          "description": "Similarity score (0.0 to 1.0) against known counterparty addresses."
+        },
+        "verdict": {
+          "type": "string",
+          "description": "Transfer safety decision ('SAFE_VERIFIED' or 'DANGER_POISONING_ATTACK')."
+        }
+      },
+      "required": [
+        "target_address",
+        "poisoning_detected",
+        "prefix_suffix_collision_score",
+        "verdict"
+      ]
+    },
+    "annotations": {
+      "title": "Counterparty Address Poisoning & Vanity Prefix/Suffix Spoof Detector",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "verify_http402_payment_challenge",
+    "title": "Pre-Payment HTTP 402 (L402 / x402 / MPP) Invoice & Macaroon Fraud Verifier",
+    "description": "Decodes inbound HTTP 402 Payment Required challenges (L402 BOLT11 + Macaroon, x402 Solana USDC, MPP Base intents) to verify cryptographic payment-hash binding and block overcharge fraud. Use when auditing a 402 challenge header before an autonomous agent pays a Lightning invoice or USDC transfer; for checking on-chain Bitcoin L1 mempool feerates, use estimate_bitcoin_mempool_fees instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'www_authenticate' ('protocol_hint' defaults to 'L402'), supports '?demo=true' or L402 (60 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "www_authenticate": {
+          "type": "string",
+          "description": "Raw WWW-Authenticate or Payment-Required HTTP header string from a 402 response."
+        },
+        "protocol_hint": {
+          "type": "string",
+          "description": "Expected HTTP 402 payment protocol; defaults to 'L402' when omitted.",
+          "enum": [
+            "L402",
+            "x402",
+            "MPP"
+          ]
+        }
+      },
+      "required": [
+        "www_authenticate"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for verify_http402_payment_challenge.",
+      "properties": {
+        "protocol_detected": {
+          "type": "string",
+          "description": "Identified 402 settlement protocol ('L402', 'x402', or 'MPP')."
+        },
+        "macaroon_payment_hash_matches_bolt11": {
+          "type": "boolean",
+          "description": "True when the macaroon caveat hash matches the BOLT11 invoice payment hash."
+        },
+        "overcharge_detected": {
+          "type": "boolean",
+          "description": "True if the invoice amount exceeds the declared endpoint price ceiling."
+        },
+        "payment_safety_verdict": {
+          "type": "string",
+          "description": "Authorization recommendation ('SAFE_TO_PAY' or 'REJECT_HASH_MISMATCH')."
+        }
+      },
+      "required": [
+        "protocol_detected",
+        "macaroon_payment_hash_matches_bolt11",
+        "overcharge_detected",
+        "payment_safety_verdict"
+      ]
+    },
+    "annotations": {
+      "title": "Pre-Payment HTTP 402 (L402 / x402 / MPP) Invoice & Macaroon Fraud Verifier",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "estimate_bitcoin_mempool_fees",
+    "title": "Bitcoin Mainnet Mempool Feerate Estimator (sat/vB)",
+    "description": "Fetches real-time Bitcoin mainnet mempool feerate recommendations in satoshis per virtual byte (sat/vB) across fastest, half-hour, hour, and economy confirmation tiers. Use when checking current Bitcoin L1 network congestion before broadcasting an on-chain BTC transaction; for calculating exact SegWit/Taproot UTXO batch consolidation vByte weights and dust thresholds, use plan_bitcoin_utxo_consolidation instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'confirmation_target', supports '?demo=true' or L402 (50 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "confirmation_target": {
+          "type": "string",
+          "description": "Target confirmation speed tier; defaults to 'half_hour' when omitted.",
+          "enum": [
+            "fastest_block",
+            "half_hour",
+            "one_hour",
+            "economy"
+          ]
+        }
+      },
+      "required": []
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for estimate_bitcoin_mempool_fees.",
+      "properties": {
+        "fastestFee": {
+          "type": "integer",
+          "description": "Recommended feerate in sat/vB for next-block (~10 min) inclusion."
+        },
+        "halfHourFee": {
+          "type": "integer",
+          "description": "Recommended feerate in sat/vB for ~30-minute confirmation."
+        },
+        "hourFee": {
+          "type": "integer",
+          "description": "Recommended feerate in sat/vB for ~60-minute confirmation."
+        },
+        "economyFee": {
+          "type": "integer",
+          "description": "Low-priority feerate in sat/vB for non-urgent batch sweeps."
+        }
+      },
+      "required": [
+        "fastestFee",
+        "halfHourFee",
+        "hourFee",
+        "economyFee"
+      ]
+    },
+    "annotations": {
+      "title": "Bitcoin Mainnet Mempool Feerate Estimator (sat/vB)",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "plan_bitcoin_utxo_consolidation",
+    "title": "Bitcoin SegWit/Taproot UTXO Dust Consolidation & Fee-Window Planner",
+    "description": "Analyzes a set of Bitcoin UTXO balances in satoshis to compute exact vByte transaction weight, identify uneconomical dust inputs, and recommend whether to consolidate now or hold. Use when optimizing on-chain Bitcoin treasury UTXO sets to minimize long-term miner fee drag; for fetching current live Bitcoin mempool sat/vB feerates alone, use estimate_bitcoin_mempool_fees instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'utxos_sats_json' ('script_type' defaults to 'p2wpkh_segwit'), supports '?demo=true' or L402 (80 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "utxos_sats_json": {
+          "type": "string",
+          "description": "JSON array or comma-separated list of UTXO values in satoshis (e.g. '[1200, 45000, 85000]')."
+        },
+        "script_type": {
+          "type": "string",
+          "description": "Bitcoin input script type determining vByte weight per input; defaults to 'p2wpkh_segwit' when omitted.",
+          "enum": [
+            "p2wpkh_segwit",
+            "p2tr_taproot",
+            "p2sh_nested"
+          ]
+        }
+      },
+      "required": [
+        "utxos_sats_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for plan_bitcoin_utxo_consolidation.",
+      "properties": {
+        "utxo_count": {
+          "type": "integer",
+          "description": "Number of UTXO inputs analyzed."
+        },
+        "estimated_consolidation_vbytes": {
+          "type": "integer",
+          "description": "Total virtual byte (vB) size of the consolidation transaction."
+        },
+        "high_fee_dust_utxos": {
+          "type": "integer",
+          "description": "Count of UTXOs whose input weight costs more than 3% of their value."
+        },
+        "recommended_action": {
+          "type": "string",
+          "description": "Execution timing advice ('CONSOLIDATE_NOW' or 'HOLD_UNTIL_SUB_15_SAT_VB')."
+        }
+      },
+      "required": [
+        "utxo_count",
+        "estimated_consolidation_vbytes",
+        "high_fee_dust_utxos",
+        "recommended_action"
+      ]
+    },
+    "annotations": {
+      "title": "Bitcoin SegWit/Taproot UTXO Dust Consolidation & Fee-Window Planner",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "calculate_spot_swap_rate",
+    "title": "Cross-Asset Spot Exchange Rate & Satoshi Conversion Calculator",
+    "description": "Calculates instantaneous spot exchange rates and equivalent USD, BTC, and satoshi values across BTC, ETH, SOL, SUI, and USDC. Use when converting a token amount into USD or satoshis for invoice pricing or accounting; for quoting executable non-KYC cross-chain bridge routes with bridge fees and settlement times, use compare_crosschain_bridge_routes instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'currency' ('amount' defaults to 'standard'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "Source asset ticker symbol to convert from.",
+          "enum": [
+            "USDC",
+            "BTC",
+            "ETH",
+            "SOL",
+            "SUI"
+          ]
+        },
+        "amount": {
+          "type": "number",
+          "description": "Quantity of the source asset to convert; defaults to 100 when omitted."
+        }
+      },
+      "required": [
+        "currency"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for calculate_spot_swap_rate.",
+      "properties": {
+        "source_currency": {
+          "type": "string",
+          "description": "Input asset symbol converted."
+        },
+        "source_amount": {
+          "type": "number",
+          "description": "Input asset quantity."
+        },
+        "total_usd_value": {
+          "type": "number",
+          "description": "Equivalent spot value in US Dollars (USD)."
+        },
+        "equivalent_sats": {
+          "type": "integer",
+          "description": "Equivalent value denominated in Bitcoin satoshis."
+        }
+      },
+      "required": [
+        "source_currency",
+        "source_amount",
+        "total_usd_value",
+        "equivalent_sats"
+      ]
+    },
+    "annotations": {
+      "title": "Cross-Asset Spot Exchange Rate & Satoshi Conversion Calculator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "compare_crosschain_bridge_routes",
+    "title": "Non-KYC Cross-Chain Bridge Route & Settlement Fee Comparator",
+    "description": "Compares non-custodial, non-KYC cross-chain swap routes (THORChain native L1 swaps, Maya Protocol, Blockstream Liquid) by basis-point fee, net output sats, and settlement time. Use when routing cross-chain treasury settlements (e.g. Solana USDC or Base ETH into native Bitcoin); for calculating mid-market spot exchange rates without bridge routing fees, use calculate_spot_swap_rate instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'from_asset' ('to_asset' defaults to 'BTC_NATIVE'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "from_asset": {
-          "type": "string"
+          "type": "string",
+          "description": "Origin chain asset identifier to bridge from.",
+          "enum": [
+            "USDC_SOL",
+            "USDC_BASE",
+            "ETH_BASE",
+            "SOL_NATIVE",
+            "BTC_NATIVE"
+          ]
         },
         "to_asset": {
-          "type": "string"
+          "type": "string",
+          "description": "Destination chain asset identifier; defaults to 'BTC_NATIVE' when omitted.",
+          "enum": [
+            "BTC_NATIVE",
+            "USDC_SOL",
+            "USDC_BASE",
+            "ETH_BASE"
+          ]
         },
         "amount": {
-          "type": "number"
+          "type": "number",
+          "description": "Input asset amount to quote; defaults to 100.0 when omitted."
         }
       },
       "required": [
-        "from_asset",
-        "to_asset",
-        "amount"
+        "from_asset"
       ]
-    }
-  },
-  {
-    "name": "solana_whale_radar",
-    "endpoint": "/api/v1/x402/whale-radar",
-    "price": "$0.05 USDC via x402",
-    "description": "Tracks high-conviction Solana whale wallets and insider accumulation clusters.",
-    "inputSchema": {
+    },
+    "outputSchema": {
       "type": "object",
+      "description": "Deterministic response schema for compare_crosschain_bridge_routes.",
       "properties": {
-        "token_address": {
-          "type": "string"
+        "best_route": {
+          "type": "string",
+          "description": "Optimal non-KYC bridge protocol selected (e.g. 'THORCHAIN_NATIVE_SWAP')."
+        },
+        "fee_bps": {
+          "type": "integer",
+          "description": "Total protocol and slip fee in basis points."
+        },
+        "estimated_output_sats": {
+          "type": "integer",
+          "description": "Net settled output denominated in Bitcoin satoshis."
+        },
+        "kyc_required": {
+          "type": "boolean",
+          "description": "Always false; only non-custodial permissionless routes are returned."
         }
       },
       "required": [
-        "token_address"
+        "best_route",
+        "fee_bps",
+        "estimated_output_sats",
+        "kyc_required"
       ]
+    },
+    "annotations": {
+      "title": "Non-KYC Cross-Chain Bridge Route & Settlement Fee Comparator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   }
 ]
