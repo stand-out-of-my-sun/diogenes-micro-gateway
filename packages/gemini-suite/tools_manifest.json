@@ -1,140 +1,921 @@
 [
   {
-    "name": "gemini_universal_generate",
-    "endpoint": "/api/v1/ai/generate",
-    "price": "150\u2013250 sats / $0.14 USDC",
-    "description": "Account-less inference across all 45 Google Gemini models (Gemini 4 Argon, Gemini 3.1 Pro, Gemini 3.8 Flash) with configurable thinking budgets.",
+    "name": "generate_gemini_completion",
+    "title": "Account-Less Google Gemini 4 Argon & 3.1 Pro Universal Text Generator",
+    "description": "Generates text completions and structured reasoning across all 45 Google Gemini foundation models (Gemini 4 Argon, 3.1 Pro, 3.8 Flash) with zero Google account or API key required. Use when running single-turn reasoning, coding, or analytical prompts on a specific Gemini model; for delegating multi-step autonomous tasks that require remote tool execution, use execute_antigravity_agent instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'prompt' ('model' defaults to 'gemini-4-argon'), supports '?demo=true' or L402 (250 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "prompt": {
           "type": "string",
-          "description": "Prompt or instruction for Gemini"
+          "description": "Primary user instruction or reasoning prompt to send to the selected Gemini model."
         },
         "model": {
           "type": "string",
-          "description": "Model ID (e.g. gemini-4-argon, gemini-3.1-pro, gemini-3.8-flash)"
+          "description": "Target Gemini foundation model identifier; defaults to 'gemini-4-argon' when omitted.",
+          "enum": [
+            "gemini-4-argon",
+            "gemini-3.1-pro",
+            "gemini-3.8-flash",
+            "gemini-2.5-pro"
+          ]
         }
       },
       "required": [
         "prompt"
       ]
-    }
-  },
-  {
-    "name": "antigravity_autonomous_agent",
-    "endpoint": "/api/v1/ai/antigravity-agent",
-    "price": "500 sats / $0.48 USDC",
-    "description": "Executes multi-step autonomous agent reasoning, code synthesis, and tool orchestration via Google Antigravity Agent.",
-    "inputSchema": {
+    },
+    "outputSchema": {
       "type": "object",
+      "description": "Deterministic response schema for generate_gemini_completion.",
       "properties": {
-        "goal": {
+        "model": {
           "type": "string",
-          "description": "High-level autonomous task objective"
+          "description": "Gemini model identifier that executed the completion."
+        },
+        "output": {
+          "type": "string",
+          "description": "Generated model response text."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "True when inference completed without upstream errors."
+        },
+        "grounding_metadata": {
+          "type": "object",
+          "description": "Optional citation metadata if search grounding was enabled."
         }
       },
       "required": [
-        "goal"
+        "model",
+        "output",
+        "success",
+        "grounding_metadata"
       ]
+    },
+    "annotations": {
+      "title": "Account-Less Google Gemini 4 Argon & 3.1 Pro Universal Text Generator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   },
   {
-    "name": "deep_research_pro_dossier",
-    "endpoint": "/api/v1/ai/deep-research",
-    "price": "1000 sats / $0.95 USDC",
-    "description": "Synthesizes multi-hop grounded technical and market research dossiers with verified citations.",
+    "name": "execute_antigravity_agent",
+    "title": "Google Antigravity Multi-Step Autonomous Coding & Workflow Agent",
+    "description": "Dispatches a complex engineering or operational task to Google's Antigravity autonomous agent for multi-step planning, tool orchestration, and verified execution. Use when solving multi-stage software engineering or workflow tasks that require autonomous planning; for compiling exhaustive multi-source literature and market research dossiers, use conduct_deep_research_investigation instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'input' ('execution_mode' defaults to 'autonomous_verified'), supports '?demo=true' or L402 (500 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "High-level task objective and constraints for the Antigravity autonomous agent."
+        },
+        "execution_mode": {
+          "type": "string",
+          "description": "Autonomy policy for subtask execution; defaults to 'autonomous_verified' when omitted.",
+          "enum": [
+            "autonomous_verified",
+            "plan_only",
+            "strict_sandbox"
+          ]
+        }
+      },
+      "required": [
+        "input"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for execute_antigravity_agent.",
+      "properties": {
+        "agent": {
+          "type": "string",
+          "description": "Autonomous agent identifier ('antigravity-preview-latest')."
+        },
+        "environment": {
+          "type": "string",
+          "description": "Execution environment ('remote')."
+        },
+        "output": {
+          "type": "string",
+          "description": "Synthesized final deliverable and action trace summary."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "True when the agent completed all planned steps."
+        }
+      },
+      "required": [
+        "agent",
+        "environment",
+        "output",
+        "success"
+      ]
+    },
+    "annotations": {
+      "title": "Google Antigravity Multi-Step Autonomous Coding & Workflow Agent",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "conduct_deep_research_investigation",
+    "title": "Gemini Deep Research Pro Multi-Hop Investigative Analyst",
+    "description": "Runs an iterative, multi-hop investigative research session via Gemini Deep Research Pro, cross-examining primary sources to produce a cited technical report. Use when investigating complex scientific, architectural, or market questions requiring deep multi-hop synthesis; for running a fast single-turn Google Search grounded fact lookup, use search_gemini_grounded_web instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'input' ('depth_tier' defaults to 'quick_synthesis'), supports '?demo=true' or L402 (1000 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "Investigative research question, scope, and specific aspects to analyze."
+        },
+        "depth_tier": {
+          "type": "string",
+          "description": "Research breadth and citation density; defaults to 'exhaustive_report' when omitted.",
+          "enum": [
+            "quick_synthesis",
+            "standard_brief",
+            "exhaustive_report"
+          ]
+        }
+      },
+      "required": [
+        "input"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for conduct_deep_research_investigation.",
+      "properties": {
+        "agent": {
+          "type": "string",
+          "description": "Deep Research engine identifier ('deep-research-preview-04-2026')."
+        },
+        "output": {
+          "type": "string",
+          "description": "Comprehensive multi-section investigative report with inline citations."
+        },
+        "sources_count": {
+          "type": "integer",
+          "description": "Number of independent sources cross-referenced."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "True when the research synthesis completed."
+        }
+      },
+      "required": [
+        "agent",
+        "output",
+        "sources_count",
+        "success"
+      ]
+    },
+    "annotations": {
+      "title": "Gemini Deep Research Pro Multi-Hop Investigative Analyst",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "operate_computer_use_agent",
+    "title": "Gemini Computer Use GUI & Browser Action Planner",
+    "description": "Plans and executes OS-level desktop, browser DOM, and GUI coordinate actions (click, type, scroll, wait) using the Gemini Computer Use agent. Use when automating interactive web UIs or desktop workflows that lack a direct REST API; for running code-first API and terminal automation tasks, use execute_antigravity_agent instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'input' ('viewport_preset' defaults to 'desktop_1080p'), supports '?demo=true' or L402 (800 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "UI automation goal and target webpage or application context."
+        },
+        "viewport_preset": {
+          "type": "string",
+          "description": "Target screen resolution for coordinate grounding; defaults to 'desktop_1080p' when omitted.",
+          "enum": [
+            "desktop_1080p",
+            "laptop_720p",
+            "mobile_viewport"
+          ]
+        }
+      },
+      "required": [
+        "input"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for operate_computer_use_agent.",
+      "properties": {
+        "agent": {
+          "type": "string",
+          "description": "Computer Use model identifier ('computer-use-preview-2026')."
+        },
+        "output": {
+          "type": "string",
+          "description": "Executed UI action sequence and extracted screen state."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "True when the UI workflow reached the target state."
+        },
+        "steps_executed": {
+          "type": "integer",
+          "description": "Number of GUI interaction steps performed."
+        }
+      },
+      "required": [
+        "agent",
+        "output",
+        "success",
+        "steps_executed"
+      ]
+    },
+    "annotations": {
+      "title": "Gemini Computer Use GUI & Browser Action Planner",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "search_gemini_grounded_web",
+    "title": "Google Search Grounded Real-Time Fact & Citation Engine",
+    "description": "Answers factual queries with live Google Search grounding, returning verified up-to-date answers accompanied by source URLs and grounding metadata. Use when verifying live web facts, documentation updates, or current events in a single low-latency call; for querying geographic places, coordinates, directions, and local business data via Google Maps grounding, use search_gemini_grounded_maps instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'prompt' ('recency_bias' defaults to 'past_24h'), supports '?demo=true' or L402 (200 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Factual question or search query to ground against live Google Search results."
+        },
+        "recency_bias": {
+          "type": "string",
+          "description": "Temporal preference for search snippets; defaults to 'any_time' when omitted.",
+          "enum": [
+            "past_24h",
+            "past_week",
+            "past_year",
+            "any_time"
+          ]
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for search_gemini_grounded_web.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Gemini model used for grounded synthesis."
+        },
+        "grounding": {
+          "type": "string",
+          "description": "Grounding source ('google_search')."
+        },
+        "output": {
+          "type": "string",
+          "description": "Grounded factual answer text."
+        },
+        "citations": {
+          "type": "object",
+          "description": "Structured Google Search grounding chunks and source URLs."
+        }
+      },
+      "required": [
+        "model",
+        "grounding",
+        "output",
+        "citations"
+      ]
+    },
+    "annotations": {
+      "title": "Google Search Grounded Real-Time Fact & Citation Engine",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "search_gemini_grounded_maps",
+    "title": "Google Maps Grounded Geospatial & Place Intelligence Engine",
+    "description": "Executes geospatial and point-of-interest queries grounded in live Google Maps data, returning verified addresses, coordinates, operating hours, and spatial context. Use when resolving physical locations, venues, transit distances, or regional infrastructure data; for searching general web articles, documentation, and news, use search_gemini_grounded_web instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'prompt' ('distance_units' defaults to 'metric_km'), supports '?demo=true' or L402 (250 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Geospatial query, place name, or regional routing question."
+        },
+        "distance_units": {
+          "type": "string",
+          "description": "Preferred unit system for distances; defaults to 'metric_km' when omitted.",
+          "enum": [
+            "metric_km",
+            "imperial_miles"
+          ]
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for search_gemini_grounded_maps.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Gemini model used for geospatial synthesis."
+        },
+        "grounding": {
+          "type": "string",
+          "description": "Grounding source ('google_maps')."
+        },
+        "output": {
+          "type": "string",
+          "description": "Geospatially grounded response with place details."
+        },
+        "places": {
+          "type": "object",
+          "description": "Structured Google Maps place identifiers and coordinates."
+        }
+      },
+      "required": [
+        "model",
+        "grounding",
+        "output",
+        "places"
+      ]
+    },
+    "annotations": {
+      "title": "Google Maps Grounded Geospatial & Place Intelligence Engine",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
+    }
+  },
+  {
+    "name": "compile_mpp_research_dossier",
+    "title": "Base MPP Session-Metered Multi-Source Research Dossier Compiler",
+    "description": "Compiles a structured JSON research dossier ('key_findings', 'synthesis_quality_score', 'sources_cited') settled via Base EVM Machine Payments Protocol (MPP). Use when generating a strict-JSON cited intelligence brief paid via Base USDC MPP session headers; for running long-form narrative research reports via L402 Lightning, use conduct_deep_research_investigation instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'research_topic' ('output_density' defaults to 'concise_5_points'), supports '?demo=true' or MPP (1000 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "query": {
           "type": "string",
-          "description": "Deep research topic or investigation query"
-        }
-      },
-      "required": [
-        "query"
-      ]
-    }
-  },
-  {
-    "name": "nano_banana_pro_image_gen",
-    "endpoint": "/api/v1/ai/image-gen",
-    "price": "350\u2013600 sats / $0.33 USDC",
-    "description": "Generates high-resolution images, diagrams, and UI assets using Nano Banana Pro (Gemini 3 Pro Image) and Nano Banana 2.",
-    "inputSchema": {
-      "type": "object",
-      "properties": {
-        "prompt": {
-          "type": "string",
-          "description": "Visual generation prompt"
+          "description": "Research topic or technical question to investigate and structure into JSON."
         },
-        "model": {
+        "output_density": {
           "type": "string",
-          "description": "gemini-3-pro-image or gemini-2.5-flash-image"
+          "description": "Granularity of the key_findings array; defaults to 'executive_10_points' when omitted.",
+          "enum": [
+            "concise_5_points",
+            "executive_10_points",
+            "comprehensive_20_points"
+          ]
         }
       },
       "required": [
-        "prompt"
+        "research_topic"
       ]
-    }
-  },
-  {
-    "name": "veo3_and_lyria3_media_gen",
-    "endpoint": "/api/v1/ai/video-gen",
-    "price": "500\u20131500 sats",
-    "description": "Generates cinematic video clips via Veo 3 or studio audio tracks via Lyria 3.",
-    "inputSchema": {
+    },
+    "outputSchema": {
       "type": "object",
+      "description": "Deterministic response schema for compile_mpp_research_dossier.",
       "properties": {
-        "prompt": {
+        "query": {
           "type": "string",
-          "description": "Video or music synthesis prompt"
+          "description": "Investigated research query."
         },
-        "media_type": {
-          "type": "string",
-          "description": "video or music"
+        "key_findings": {
+          "type": "array",
+          "description": "High-density factual bullet strings synthesized from live sources."
+        },
+        "synthesis_quality_score": {
+          "type": "integer",
+          "description": "Self-audit completeness score from 90 to 100."
+        },
+        "sources_cited": {
+          "type": "array",
+          "description": "Verified grounding source references."
         }
       },
       "required": [
-        "prompt"
+        "search_prompt",
+        "key_findings",
+        "synthesis_quality_score",
+        "sources_cited"
       ]
+    },
+    "annotations": {
+      "title": "Base MPP Session-Metered Multi-Source Research Dossier Compiler",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": true
     }
   },
   {
-    "name": "gemini_grounded_search_maps",
-    "endpoint": "/api/v1/ai/grounded-search",
-    "price": "200 sats / $0.19 USDC",
-    "description": "Real-time Google Search and Google Maps grounded reasoning returning structured JSON with source URLs.",
-    "inputSchema": {
-      "type": "object",
-      "properties": {
-        "topic": {
-          "type": "string",
-          "description": "Search or geospatial query"
-        }
-      },
-      "required": [
-        "topic"
-      ]
-    }
-  },
-  {
-    "name": "gemini_vector_embeddings",
-    "endpoint": "/api/v1/ai/embeddings",
-    "price": "50 sats / $0.01 USDC",
-    "description": "Generates 3072-dimensional semantic vector embeddings via Gemini Embedding 2 for RAG and agent memory.",
+    "name": "generate_gemini_embeddings",
+    "title": "Gemini Embedding 2 High-Dimensional (3,072-D) Vector Generator",
+    "description": "Generates normalized 3,072-dimensional or 768-dimensional semantic vector embeddings via Google Gemini Embedding 2 for RAG indexing and cosine-similarity search. Use when embedding text passages or queries via L402 Lightning with configurable Matryoshka dimensions; for running live Google Search grounded factual queries, use search_gemini_grounded_web instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'text' ('model' defaults to 'gemini-embedding-2'), supports '?demo=true' or L402 (50 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "text": {
           "type": "string",
-          "description": "Text to embed"
+          "description": "Input text passage, code snippet, or search query to embed into a float vector."
+        },
+        "model": {
+          "type": "string",
+          "description": "Gemini embedding model version; defaults to 'gemini-embedding-2' when omitted.",
+          "enum": [
+            "gemini-embedding-2",
+            "gemini-embedding-1"
+          ]
         }
       },
       "required": [
         "text"
       ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for generate_gemini_embeddings.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Embedding model executed."
+        },
+        "dimensions": {
+          "type": "integer",
+          "description": "Vector dimensionality returned (e.g. 3072 or 768)."
+        },
+        "embedding": {
+          "type": "array",
+          "description": "Normalized floating-point embedding vector."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "True when vector generation succeeded."
+        }
+      },
+      "required": [
+        "model",
+        "dimensions",
+        "embedding",
+        "success"
+      ]
+    },
+    "annotations": {
+      "title": "Gemini Embedding 2 High-Dimensional (3,072-D) Vector Generator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "analyze_omni_multimodal_input",
+    "title": "Gemini Omni Unified Text, Audio & Video Multimodal Analyzer",
+    "description": "Analyzes combined multimodal prompts spanning text, image descriptors, audio transcripts, and video temporal events using Gemini Omni Flash. Use when correlating information across multiple media modalities in a single reasoning pass; for running pure text-only reasoning or coding prompts, use generate_gemini_completion instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'input' ('modality_focus' defaults to 'cross_modal_synthesis'), supports '?demo=true' or L402 (300 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "Multimodal prompt or media scene description to analyze."
+        },
+        "modality_focus": {
+          "type": "string",
+          "description": "Primary analytical lens applied to the multimodal input; defaults to 'cross_modal_synthesis' when omitted.",
+          "enum": [
+            "cross_modal_synthesis",
+            "visual_ocr_extraction",
+            "temporal_event_timeline"
+          ]
+        }
+      },
+      "required": [
+        "input"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for analyze_omni_multimodal_input.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Executed multimodal model ('gemini-omni-flash')."
+        },
+        "output": {
+          "type": "string",
+          "description": "Unified multimodal analysis and extracted timeline."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "True when multimodal processing succeeded."
+        },
+        "modalities_processed": {
+          "type": "array",
+          "description": "Modalities integrated during inference."
+        }
+      },
+      "required": [
+        "model",
+        "output",
+        "success",
+        "modalities_processed"
+      ]
+    },
+    "annotations": {
+      "title": "Gemini Omni Unified Text, Audio & Video Multimodal Analyzer",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "plan_robotics_spatial_trajectory",
+    "title": "Gemini Robotics ER 2 Embodied Spatial & Kinematics Trajectory Planner",
+    "description": "Computes 3D spatial affordances, obstacle-avoidance waypoints, and manipulator grasp sequences using Gemini Robotics ER 2 embodied reasoning. Use when planning physical robot arm kinematics, mobile navigation waypoints, or spatial scene task orders; for interacting with 2D desktop or browser GUI screens, use operate_computer_use_agent instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'prompt' ('coordinate_frame' defaults to 'cartesian_xyz_meters'), supports '?demo=true' or L402 (450 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Spatial environment description, obstacle coordinates, and physical manipulation goal."
+        },
+        "coordinate_frame": {
+          "type": "string",
+          "description": "Reference coordinate convention; defaults to 'cartesian_xyz_meters' when omitted.",
+          "enum": [
+            "cartesian_xyz_meters",
+            "joint_angles_radians",
+            "normalized_voxel_grid"
+          ]
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for plan_robotics_spatial_trajectory.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Embodied reasoning model ('gemini-robotics-er-2-preview')."
+        },
+        "output": {
+          "type": "string",
+          "description": "Synthesized trajectory plan, collision checks, and grasp sequence."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "True when a collision-free trajectory was generated."
+        },
+        "coordinate_frame": {
+          "type": "string",
+          "description": "Coordinate convention used in the output."
+        }
+      },
+      "required": [
+        "model",
+        "output",
+        "success",
+        "coordinate_frame"
+      ]
+    },
+    "annotations": {
+      "title": "Gemini Robotics ER 2 Embodied Spatial & Kinematics Trajectory Planner",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "generate_nano_banana_image",
+    "title": "Nano Banana Pro (Gemini Image) Visual Asset & Diagram Generator",
+    "description": "Generates photorealistic illustrations, UI mockups, and technical diagrams from text prompts using the Nano Banana Pro (Gemini 2.5 Flash Image) model family. Use when creating static visual assets, icons, or architecture diagrams from text descriptions; for synthesizing animated multi-second video clips with motion, use generate_veo_cinematic_video instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'prompt' ('aspect_ratio' defaults to '1:1'), supports '?demo=true' or L402 (350 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Detailed visual scene, composition, lighting, and typography description to render."
+        },
+        "aspect_ratio": {
+          "type": "string",
+          "description": "Output image aspect ratio; defaults to '16:9' when omitted.",
+          "enum": [
+            "1:1",
+            "16:9",
+            "9:16",
+            "4:3"
+          ]
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for generate_nano_banana_image.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Image generation model executed ('gemini-2.5-flash-image')."
+        },
+        "output": {
+          "type": "string",
+          "description": "Generated image payload or asset descriptor."
+        },
+        "notice": {
+          "type": "string",
+          "description": "Execution confirmation notice."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "True when visual asset synthesis succeeded."
+        }
+      },
+      "required": [
+        "model",
+        "output",
+        "notice",
+        "success"
+      ]
+    },
+    "annotations": {
+      "title": "Nano Banana Pro (Gemini Image) Visual Asset & Diagram Generator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "generate_veo_cinematic_video",
+    "title": "Google Veo 3 High-Definition Cinematic Video Generator",
+    "description": "Synthesizes high-definition cinematic video sequences with temporally coherent camera motion and physics using Google Veo 3. Use when generating moving video clips, product B-roll, or animated scene renders from text prompts; for rendering static single-frame images or diagrams at lower cost, use generate_nano_banana_image instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'prompt' ('motion_style' defaults to 'static_tripod'), supports '?demo=true' or L402 (1500 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Cinematic scene description including subject motion, camera trajectory, and lighting."
+        },
+        "motion_style": {
+          "type": "string",
+          "description": "Camera movement preset; defaults to 'smooth_tracking_shot' when omitted.",
+          "enum": [
+            "static_tripod",
+            "smooth_tracking_shot",
+            "drone_fpv_flyover",
+            "macro_slow_motion"
+          ]
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for generate_veo_cinematic_video.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Video synthesis model executed ('veo-3-generate')."
+        },
+        "output": {
+          "type": "string",
+          "description": "Generated video stream descriptor and frame metadata."
+        },
+        "notice": {
+          "type": "string",
+          "description": "Execution status summary."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "True when Veo 3 synthesis completed."
+        }
+      },
+      "required": [
+        "model",
+        "output",
+        "notice",
+        "success"
+      ]
+    },
+    "annotations": {
+      "title": "Google Veo 3 High-Definition Cinematic Video Generator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "compose_lyria_music_track",
+    "title": "Google Lyria 3 Instrumental Music & Audio Stem Composer",
+    "description": "Composes studio-grade instrumental music tracks, ambient loops, and multi-instrument arrangements from genre, tempo, and mood prompts using Google Lyria 3. Use when generating musical scores, soundtrack stems, or rhythmic audio loops; for converting written text into spoken human voice narration (TTS), use synthesize_gemini_speech_audio instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'prompt' ('genre_preset' defaults to 'cinematic_synth'), supports '?demo=true' or L402 (500 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Musical style, instrumentation, BPM tempo, and harmonic mood description."
+        },
+        "genre_preset": {
+          "type": "string",
+          "description": "Primary acoustic or electronic genre; defaults to 'cinematic_synth' when omitted.",
+          "enum": [
+            "cinematic_synth",
+            "lo_fi_hiphop",
+            "orchestral_ambient",
+            "industrial_techno"
+          ]
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for compose_lyria_music_track.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Music generation model executed ('lyria-3-clip')."
+        },
+        "output": {
+          "type": "string",
+          "description": "Generated audio track payload and arrangement metadata."
+        },
+        "notice": {
+          "type": "string",
+          "description": "Composition completion notice."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "True when Lyria 3 audio synthesis succeeded."
+        }
+      },
+      "required": [
+        "model",
+        "output",
+        "notice",
+        "success"
+      ]
+    },
+    "annotations": {
+      "title": "Google Lyria 3 Instrumental Music & Audio Stem Composer",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "synthesize_gemini_speech_audio",
+    "title": "Gemini Neural Text-to-Speech (TTS) Expressive Voice Synthesizer",
+    "description": "Converts written text into natural, prosody-controlled spoken voice audio using Gemini 3.8 Flash Neural Text-to-Speech. Use when rendering voiceover narration or spoken agent replies from a deterministic text script; for conducting bidirectional conversational audio dialog comprehension, use process_live_audio_dialogue instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'text' ('voice_persona' defaults to 'neutral_broadcast'), supports '?demo=true' or L402 (200 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Exact written script or paragraph to synthesize into spoken voice audio."
+        },
+        "voice_persona": {
+          "type": "string",
+          "description": "Expressive vocal timbre preset; defaults to 'neutral_broadcast' when omitted.",
+          "enum": [
+            "neutral_broadcast",
+            "warm_conversational",
+            "technical_lecturer",
+            "urgent_alert"
+          ]
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for synthesize_gemini_speech_audio.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Neural TTS model executed ('gemini-3.8-flash-tts')."
+        },
+        "output": {
+          "type": "string",
+          "description": "Synthesized speech audio descriptor and phoneme duration summary."
+        },
+        "notice": {
+          "type": "string",
+          "description": "Audio synthesis status message."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "True when TTS synthesis completed."
+        }
+      },
+      "required": [
+        "model",
+        "output",
+        "notice",
+        "success"
+      ]
+    },
+    "annotations": {
+      "title": "Gemini Neural Text-to-Speech (TTS) Expressive Voice Synthesizer",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "process_live_audio_dialogue",
+    "title": "Gemini 3.8 Live Native Audio-to-Audio Conversational Processor",
+    "description": "Processes real-time conversational dialog turns with native acoustic emotion, interruption handling, and paralinguistic cue comprehension via Gemini 3.8 Live. Use when handling interactive voice-agent dialog turns that require tone and turn-taking awareness; for performing one-way text-to-speech readout of a static text string, use synthesize_gemini_speech_audio instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'input' ('response_tone' defaults to 'direct_peer'), supports '?demo=true' or L402 (300 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "Conversational audio transcript or dialog turn payload to process."
+        },
+        "response_tone": {
+          "type": "string",
+          "description": "Target paralinguistic delivery style; defaults to 'direct_peer' when omitted.",
+          "enum": [
+            "direct_peer",
+            "concise_tactical",
+            "empathetic_support"
+          ]
+        }
+      },
+      "required": [
+        "input"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for process_live_audio_dialogue.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Live dialog model executed ('gemini-3.8-live')."
+        },
+        "output": {
+          "type": "string",
+          "description": "Conversational response turn and paralinguistic cues."
+        },
+        "success": {
+          "type": "boolean",
+          "description": "True when live dialog turn processing succeeded."
+        },
+        "turn_complete": {
+          "type": "boolean",
+          "description": "True when the response turn is finalized."
+        }
+      },
+      "required": [
+        "model",
+        "output",
+        "success",
+        "turn_complete"
+      ]
+    },
+    "annotations": {
+      "title": "Gemini 3.8 Live Native Audio-to-Audio Conversational Processor",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   }
 ]
