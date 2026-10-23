@@ -1,192 +1,868 @@
 [
   {
-    "name": "eve_move_assembly_coder",
-    "endpoint": "/api/v1/eve-frontier/move-assembly-coder",
-    "price": "200 sats via L402",
-    "description": "Synthesizes and audits Sui Move smart contract extensions (Witness, HotPotato, Capability guards) for EVE Frontier Smart Assemblies.",
+    "name": "inspect_eve_assembly_state",
+    "title": "EVE Frontier Smart Assembly On-Chain State & Capability Inspector",
+    "description": "Inspects live EVE Frontier Smart Assembly on-chain object metadata, owner capability ID, online power status, and attached Sui Move package digest. Use when verifying whether a Smart Turret, Smart Gate, or Smart Storage Unit is online and checking its bound Move module before interacting; for generating or auditing custom Sui Move assembly source code, use generate_eve_assembly_move instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'assembly_id' ('assembly_class' defaults to 'smart_gate'), supports '?demo=true' or L402 (80 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "assembly_id": {
+          "type": "string",
+          "description": "Hexadecimal Sui object ID or Frontier Smart Assembly identifier (e.g. '0x8f4a...c201' or 'assembly-alpha-01')."
+        },
+        "assembly_class": {
+          "type": "string",
+          "description": "Smart Assembly hardware class used to validate expected capability fields; defaults to 'smart_gate' when omitted.",
+          "enum": [
+            "smart_gate",
+            "smart_turret",
+            "smart_storage_unit",
+            "network_node"
+          ]
+        }
+      },
+      "required": [
+        "assembly_id"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for inspect_eve_assembly_state.",
+      "properties": {
+        "assembly_id": {
+          "type": "string",
+          "description": "Canonical Smart Assembly object identifier inspected."
+        },
+        "online_status": {
+          "type": "string",
+          "description": "Operational state ('ONLINE_POWERED', 'LOW_CAPACITOR', or 'OFFLINE_UNANCHORED')."
+        },
+        "owner_cap_id": {
+          "type": "string",
+          "description": "Bound Sui Move OwnerCap object ID controlling administrative permissions."
+        },
+        "attached_package_digest": {
+          "type": "string",
+          "description": "SHA-256 bytecode digest of the custom Move extension attached to this assembly."
+        }
+      },
+      "required": [
+        "assembly_id",
+        "online_status",
+        "owner_cap_id",
+        "attached_package_digest"
+      ]
+    },
+    "annotations": {
+      "title": "EVE Frontier Smart Assembly On-Chain State & Capability Inspector",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "audit_eve_tribe_standings",
+    "title": "EVE Frontier Tribe Diplomatic Standings & Access Matrix Auditor",
+    "description": "Audits EVE Frontier Tribe diplomatic standings, friendly/hostile reputation scores, and pilot override entries across solar systems. Use when checking diplomatic relations or detecting conflicting friendly-fire rules across tribe registries; for compiling those standings into executable Sui Move Smart Gate ACL bytecode, use compile_eve_gate_acl instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'tribe_id' ('standing_filter' defaults to 'all'), supports '?demo=true' or L402 (80 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "tribe_id": {
+          "type": "string",
+          "description": "Primary Tribe identifier or registry object ID to audit (e.g. 'tribe-corinth-01')."
+        },
+        "standing_filter": {
+          "type": "string",
+          "description": "Filter returned diplomatic relationships by tier; defaults to 'all' when omitted.",
+          "enum": [
+            "all",
+            "allied_only",
+            "hostile_only",
+            "neutral_only"
+          ]
+        }
+      },
+      "required": [
+        "tribe_id"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for audit_eve_tribe_standings.",
+      "properties": {
+        "tribe_id": {
+          "type": "string",
+          "description": "Audited Tribe registry identifier."
+        },
+        "allied_tribes_count": {
+          "type": "integer",
+          "description": "Count of tribes holding positive diplomatic standing."
+        },
+        "hostile_tribes_count": {
+          "type": "integer",
+          "description": "Count of tribes flagged as hostile targets."
+        },
+        "acl_conflicts_detected": {
+          "type": "boolean",
+          "description": "True if a pilot override contradicts their parent tribe standing."
+        }
+      },
+      "required": [
+        "tribe_id",
+        "allied_tribes_count",
+        "hostile_tribes_count",
+        "acl_conflicts_detected"
+      ]
+    },
+    "annotations": {
+      "title": "EVE Frontier Tribe Diplomatic Standings & Access Matrix Auditor",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "generate_eve_assembly_move",
+    "title": "EVE Frontier Sui Move Smart Assembly Contract Generator & Auditor",
+    "description": "Generates and statically audits Sui Move smart contract modules for EVE Frontier Smart Assemblies using Witness, Capability, and HotPotato patterns. Use when authoring custom Sui Move extensions for Smart Gates, Smart Turrets, or Smart Storage Units; for simulating pre-signed Programmable Transaction Block command arrays before wallet execution, use simulate_eve_sui_ptb instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'contract_type' ('assembly_id' defaults to 'standard'), supports '?demo=true' or L402 (200 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "contract_type": {
           "type": "string",
-          "description": "turret_guard, gate_lock, storage_vault, or fuel_distributor"
+          "description": "Target EVE Frontier Smart Assembly archetype to synthesize and audit.",
+          "enum": [
+            "smart_gate",
+            "smart_turret",
+            "smart_storage_unit",
+            "fuel_distributor"
+          ]
         },
         "assembly_id": {
-          "type": "string"
+          "type": "string",
+          "description": "Optional Smart Assembly identifier to bind into module constants; defaults to 'frontier-assembly-01' when omitted."
         }
       },
       "required": [
         "contract_type"
       ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for generate_eve_assembly_move.",
+      "properties": {
+        "module_name": {
+          "type": "string",
+          "description": "Fully qualified Sui Move module identifier (e.g. 'frontier::smart_gate')."
+        },
+        "sui_move_code": {
+          "type": "string",
+          "description": "Complete, syntactically valid Sui Move smart contract source code."
+        },
+        "move_patterns_used": {
+          "type": "array",
+          "description": "Verified Sui Move safety patterns enforced in the module."
+        },
+        "security_audit_passed": {
+          "type": "boolean",
+          "description": "True when Witness drop and Capability access checks pass static verification."
+        }
+      },
+      "required": [
+        "module_name",
+        "sui_move_code",
+        "move_patterns_used",
+        "security_audit_passed"
+      ]
+    },
+    "annotations": {
+      "title": "EVE Frontier Sui Move Smart Assembly Contract Generator & Auditor",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   },
   {
-    "name": "eve_gate_route_planner",
-    "endpoint": "/api/v1/eve-frontier/gate-route-planner",
-    "price": "100 sats via L402",
-    "description": "Computes optimal stargate jump routes across public and Tribe-gated Smart Gates minimizing fuel burn and toll tariffs.",
+    "name": "compile_eve_gate_acl",
+    "title": "EVE Frontier Smart Gate Tribe ACL & Dynamic Toll Bytecode Compiler",
+    "description": "Compiles EVE Frontier Tribe access control lists, diplomatic standings, and surge-pricing toll rules into Sui Move Smart Gate AccessPolicy constraints. Use when configuring on-chain jump permissions and LUX/SUI toll schedules for a player-owned Smart Gate; for calculating optimal multi-system jump routes across existing stargates, use plan_eve_gate_route instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'gate_assembly_id' ('toll_mode' defaults to 'standing_tiered'), supports '?demo=true' or L402 (130 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "gate_assembly_id": {
+          "type": "string",
+          "description": "Target Smart Gate assembly identifier (e.g. 'gate-lagrange-04')."
+        },
+        "toll_mode": {
+          "type": "string",
+          "description": "Pricing curve applied to non-allied jumpers; defaults to 'standing_tiered' when omitted.",
+          "enum": [
+            "standing_tiered",
+            "flat_fee",
+            "congestion_surge",
+            "allies_only_lockdown"
+          ]
+        }
+      },
+      "required": [
+        "gate_assembly_id"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for compile_eve_gate_acl.",
+      "properties": {
+        "gate_assembly_id": {
+          "type": "string",
+          "description": "Target Smart Gate object identifier."
+        },
+        "access_policy_move_struct": {
+          "type": "string",
+          "description": "Compiled Sui Move AccessPolicy struct definition and entry verifier."
+        },
+        "base_toll_mist": {
+          "type": "integer",
+          "description": "Calculated base jump toll denominated in MIST/LUX units."
+        },
+        "hostile_block_enforced": {
+          "type": "boolean",
+          "description": "True when hostile tribes are rejected at the Move witness gate."
+        }
+      },
+      "required": [
+        "gate_assembly_id",
+        "access_policy_move_struct",
+        "base_toll_mist",
+        "hostile_block_enforced"
+      ]
+    },
+    "annotations": {
+      "title": "EVE Frontier Smart Gate Tribe ACL & Dynamic Toll Bytecode Compiler",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "simulate_eve_sui_ptb",
+    "title": "EVE Frontier Sui Move PTB Coin-Drain & HotPotato Safety Simulator",
+    "description": "Simulates Sui Programmable Transaction Block (PTB) command sequences to detect unauthorized coin splits, object transfers, and unconsumed HotPotato receipts. Use when auditing an untrusted EVE Frontier transaction bundle before signing with a pilot wallet; for verifying pilot zkLogin JWT proofs and character ownership capabilities, use verify_eve_zklogin_character instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'ptb_commands_json' ('strictness_mode' defaults to 'strict_zero_drain'), supports '?demo=true' or L402 (150 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "ptb_commands_json": {
+          "type": "string",
+          "description": "JSON-serialized array of PTB commands or comma-separated Move calls (e.g. '[{\"kind\":\"SplitCoins\"},{\"kind\":\"MoveCall\"}]')."
+        },
+        "strictness_mode": {
+          "type": "string",
+          "description": "Simulation policy controlling whether multi-transfer PTBs are blocked; defaults to 'strict_zero_drain' when omitted.",
+          "enum": [
+            "strict_zero_drain",
+            "allow_known_escrow",
+            "audit_only"
+          ]
+        }
+      },
+      "required": [
+        "ptb_commands_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for simulate_eve_sui_ptb.",
+      "properties": {
+        "ptb_command_count": {
+          "type": "integer",
+          "description": "Number of PTB commands statically simulated."
+        },
+        "hot_potato_receipts_balanced": {
+          "type": "boolean",
+          "description": "True if every Move HotPotato struct created in the PTB is consumed before exit."
+        },
+        "hidden_coin_transfer_detected": {
+          "type": "boolean",
+          "description": "True if unauthorized SplitCoins or TransferObjects drains are detected."
+        },
+        "signing_verdict": {
+          "type": "string",
+          "description": "Final safety recommendation ('SAFE_EVE_FRONTIER_PTB' or 'BLOCK_SUSPICIOUS_PTB_DRAIN')."
+        }
+      },
+      "required": [
+        "ptb_command_count",
+        "hot_potato_receipts_balanced",
+        "hidden_coin_transfer_detected",
+        "signing_verdict"
+      ]
+    },
+    "annotations": {
+      "title": "EVE Frontier Sui Move PTB Coin-Drain & HotPotato Safety Simulator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "verify_eve_zklogin_character",
+    "title": "EVE Frontier Sui zkLogin BN254 Proof & SmartCharacter Verifier",
+    "description": "Verifies EVE Frontier Sui zkLogin BN254 zero-knowledge proofs, ephemeral session signatures, and SmartCharacter ownership capabilities. Use when authenticating a pilot's off-chain OAuth/zkLogin session before granting tribe vault or dApp access; for auditing tribe-wide diplomatic standings and reputation registries, use audit_eve_tribe_standings instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'jwt_proof' ('ephemeral_scheme' defaults to 'ED25519'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "jwt_proof": {
+          "type": "string",
+          "description": "Encoded Sui zkLogin proof payload or JWT session token string (minimum 20 characters)."
+        },
+        "ephemeral_scheme": {
+          "type": "string",
+          "description": "Cryptographic signature scheme of the ephemeral session key; defaults to 'ED25519' when omitted.",
+          "enum": [
+            "ED25519",
+            "Secp256k1",
+            "Secp256r1"
+          ]
+        }
+      },
+      "required": [
+        "jwt_proof"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for verify_eve_zklogin_character.",
+      "properties": {
+        "character_verified": {
+          "type": "boolean",
+          "description": "True when the zkLogin BN254 proof and salt derivation are valid."
+        },
+        "sui_address_derived": {
+          "type": "string",
+          "description": "Deterministic 32-byte Sui address derived from the zkLogin issuer and salt."
+        },
+        "tribe_acl_eligible": {
+          "type": "boolean",
+          "description": "True if the verified SmartCharacter holds active Tribe membership."
+        },
+        "verification_verdict": {
+          "type": "string",
+          "description": "Authentication result ('AUTHENTICATED_FRONTIER_PILOT' or 'INVALID_ZK_PROOF')."
+        }
+      },
+      "required": [
+        "character_verified",
+        "sui_address_derived",
+        "tribe_acl_eligible",
+        "verification_verdict"
+      ]
+    },
+    "annotations": {
+      "title": "EVE Frontier Sui zkLogin BN254 Proof & SmartCharacter Verifier",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "plan_eve_gate_route",
+    "title": "EVE Frontier Multi-Hop Smart Gate Fuel & Toll Route Planner",
+    "description": "Calculates optimal stargate jump routes between EVE Frontier solar systems minimizing gigajoule fuel consumption, LUX gate tolls, or jump count. Use when plotting a ship transit path across public and tribe-restricted Smart Gates; for identifying multi-system commodity arbitrage trade loops across Smart Storage Units, use find_eve_ssu_arbitrage instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'origin_system' ('destination_system' defaults to 'standard'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "origin_system": {
-          "type": "string"
+          "type": "string",
+          "description": "Starting solar system identifier (e.g. 'System-Alpha')."
         },
         "destination_system": {
-          "type": "string"
+          "type": "string",
+          "description": "Target destination solar system identifier (e.g. 'System-Omega')."
         },
         "optimize_for": {
           "type": "string",
-          "description": "fewest_jumps, lowest_fuel, or lowest_toll"
+          "description": "Routing objective function weighting fuel burn vs tolls; defaults to 'lowest_fuel' when omitted.",
+          "enum": [
+            "lowest_fuel",
+            "fewest_jumps",
+            "lowest_toll",
+            "avoid_hostile_camps"
+          ]
         }
       },
       "required": [
         "origin_system",
         "destination_system"
       ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for plan_eve_gate_route.",
+      "properties": {
+        "optimal_hops": {
+          "type": "integer",
+          "description": "Total number of stargate jumps along the selected path."
+        },
+        "waypoints": {
+          "type": "array",
+          "description": "Ordered list of solar systems and Lagrange Smart Gates traversed."
+        },
+        "estimated_fuel_burn_gj": {
+          "type": "number",
+          "description": "Total ship fuel consumption in gigajoules (GJ) across the route."
+        },
+        "total_gate_tolls_lux": {
+          "type": "number",
+          "description": "Cumulative Smart Gate transit tolls required in LUX."
+        }
+      },
+      "required": [
+        "optimal_hops",
+        "waypoints",
+        "estimated_fuel_burn_gj",
+        "total_gate_tolls_lux"
+      ]
+    },
+    "annotations": {
+      "title": "EVE Frontier Multi-Hop Smart Gate Fuel & Toll Route Planner",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   },
   {
-    "name": "eve_network_node_gj_optimizer",
-    "endpoint": "/api/v1/eve-frontier/network-node-gj-optimizer",
-    "price": "100 sats via L402",
-    "description": "Calculates Lagrange Network Node fuel burn rates, gigajoule (GJ) energy reservations, and offline-threat windows.",
+    "name": "optimize_eve_node_power",
+    "title": "EVE Frontier Lagrange Network Node Gigajoule & Fuel Burn Optimizer",
+    "description": "Calculates Lagrange Network Node hourly gigajoule (GJ) fuel burn rates, capacity headroom, and offline vulnerability windows for connected Smart Assemblies. Use when balancing steady-state power allocations on a single Lagrange Network Node; for stress-testing node capacitor depletion under active hostile fleet bombardment, use simulate_eve_capacitor_siege instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'node_id' ('operating_profile' defaults to 'balanced'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "node_id": {
-          "type": "string"
+          "type": "string",
+          "description": "Lagrange Network Node identifier (e.g. 'node-frontier-01')."
         },
-        "reserve_gj": {
-          "type": "number"
+        "operating_profile": {
+          "type": "string",
+          "description": "Power allocation profile across connected assemblies; defaults to 'balanced' when omitted.",
+          "enum": [
+            "balanced",
+            "max_defense_turrets",
+            "eco_conservation"
+          ]
         }
       },
       "required": [
         "node_id"
       ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for optimize_eve_node_power.",
+      "properties": {
+        "node_id": {
+          "type": "string",
+          "description": "Evaluated Lagrange Network Node identifier."
+        },
+        "burn_rate_gj_per_hr": {
+          "type": "number",
+          "description": "Hourly gigajoule (GJ) energy consumption across attached assemblies."
+        },
+        "hours_until_fuel_depletion": {
+          "type": "number",
+          "description": "Remaining operational hours before fuel reserves reach zero."
+        },
+        "offline_threat_window_hours": {
+          "type": "string",
+          "description": "Safety classification ('SAFE' or 'CRITICAL_OFFLINE_IMMINENT')."
+        }
+      },
+      "required": [
+        "node_id",
+        "burn_rate_gj_per_hr",
+        "hours_until_fuel_depletion",
+        "offline_threat_window_hours"
+      ]
+    },
+    "annotations": {
+      "title": "EVE Frontier Lagrange Network Node Gigajoule & Fuel Burn Optimizer",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   },
   {
-    "name": "eve_turret_target_matrix",
-    "endpoint": "/api/v1/eve-frontier/turret-target-matrix",
-    "price": "125 sats via L402",
-    "description": "Evaluates Smart Turret friend-or-foe standings, aggression flags, and deterministic target priority queues.",
+    "name": "simulate_eve_capacitor_siege",
+    "title": "EVE Frontier Lagrange Node Siege Capacitor Depletion Simulator",
+    "description": "Simulates Lagrange Network Node gigajoule (GJ) capacitor drain under sustained hostile fleet siege and computes optimal assembly load-shedding order. Use when preparing base defense power-shedding schedules against an incoming hostile fleet; for calculating routine peacetime fuel burn and reserve headroom, use optimize_eve_node_power instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'node_id' ('siege_intensity' defaults to 'skirmish_frigate_squad'), supports '?demo=true' or L402 (135 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
-        "turret_id": {
-          "type": "string"
+        "node_id": {
+          "type": "string",
+          "description": "Target Lagrange Network Node identifier under siege simulation."
         },
-        "grid_entities": {
+        "siege_intensity": {
+          "type": "string",
+          "description": "Hostile fleet DPS and electronic-warfare drain tier; defaults to 'heavy_cruiser_wing' when omitted.",
+          "enum": [
+            "skirmish_frigate_squad",
+            "heavy_cruiser_wing",
+            "capital_dreadnought_siege"
+          ]
+        }
+      },
+      "required": [
+        "node_id"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for simulate_eve_capacitor_siege.",
+      "properties": {
+        "node_id": {
+          "type": "string",
+          "description": "Simulated Lagrange Network Node identifier."
+        },
+        "capacitor_survival_minutes": {
+          "type": "number",
+          "description": "Minutes before capacitor reserves drop below turret firing threshold."
+        },
+        "load_shedding_sequence": {
           "type": "array",
-          "items": {
-            "type": "object"
-          }
-        }
-      },
-      "required": [
-        "turret_id"
-      ]
-    }
-  },
-  {
-    "name": "eve_killmail_threat_intel",
-    "endpoint": "/api/v1/eve-frontier/killmail-threat-intel",
-    "price": "150 sats via L402",
-    "description": "Analyzes on-chain EVE Frontier killmails to map hostile tribe doctrines, gatecamp windows, and system threat scores.",
-    "inputSchema": {
-      "type": "object",
-      "properties": {
-        "solar_system_id": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "solar_system_id"
-      ]
-    }
-  },
-  {
-    "name": "eve_ssu_market_maker",
-    "endpoint": "/api/v1/eve-frontier/ssu-market-maker",
-    "price": "120 sats via L402",
-    "description": "Computes dynamic bid-ask spreads and inventory curves for Smart Storage Unit (SSU) autonomous vending machines.",
-    "inputSchema": {
-      "type": "object",
-      "properties": {
-        "ssu_id": {
-          "type": "string"
+          "description": "Ordered list of non-essential assemblies to power down first."
         },
-        "item_type": {
-          "type": "string"
-        },
-        "current_stock": {
-          "type": "integer"
+        "defense_verdict": {
+          "type": "string",
+          "description": "Siege readiness assessment ('HOLDS_UNTIL_REINFORCEMENT' or 'SHED_SSU_LOAD_IMMEDIATELY')."
         }
       },
       "required": [
-        "ssu_id",
-        "item_type"
+        "node_id",
+        "capacitor_survival_minutes",
+        "load_shedding_sequence",
+        "defense_verdict"
       ]
+    },
+    "annotations": {
+      "title": "EVE Frontier Lagrange Node Siege Capacitor Depletion Simulator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   },
   {
-    "name": "eve_zklogin_character_verifier",
-    "endpoint": "/api/v1/eve-frontier/zklogin-character-verifier",
-    "price": "100 sats via L402",
-    "description": "Verifies Sui zkLogin proofs, Character object ownership, and Tribe membership capabilities for Diplomacy & Gate ACLs.",
-    "inputSchema": {
-      "type": "object",
-      "properties": {
-        "character_address": {
-          "type": "string"
-        },
-        "tribe_id": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "character_address"
-      ]
-    }
-  },
-  {
-    "name": "eve_sovereignty_fuel_radar",
-    "endpoint": "/api/v1/eve-frontier/sovereignty-fuel-radar",
-    "price": "140 sats via L402",
-    "description": "Tracks constellation-wide Network Node fuel exhaustion timelines and vulnerability windows.",
+    "name": "monitor_eve_constellation_fuel",
+    "title": "EVE Frontier Constellation Sovereignty & Multi-Node Fuel Radar",
+    "description": "Monitors constellation-wide Lagrange Network Node fuel reserves, identifies the weakest sovereignty node, and calculates logistics convoy resupply urgency. Use when auditing multi-system sovereignty fuel health across an entire tribe constellation; for optimizing gigajoule load on a single individual Lagrange Network Node, use optimize_eve_node_power instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'constellation_id' ('alert_threshold_hours' defaults to '24h'), supports '?demo=true' or L402 (140 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "constellation_id": {
-          "type": "string"
+          "type": "string",
+          "description": "Constellation or solar system cluster identifier (e.g. 'Frontier-Delta-09')."
+        },
+        "alert_threshold_hours": {
+          "type": "string",
+          "description": "Minimum remaining fuel horizon before triggering convoy dispatch; defaults to '36h' when omitted.",
+          "enum": [
+            "24h",
+            "36h",
+            "48h",
+            "72h"
+          ]
         }
       },
       "required": [
         "constellation_id"
       ]
-    }
-  },
-  {
-    "name": "eve_sui_ptb_simulator",
-    "endpoint": "/api/v1/eve-frontier/sui-ptb-simulator",
-    "price": "150 sats via L402",
-    "description": "Statically simulates Sui Programmable Transaction Block (PTB) command arrays before signing to block coin drains and unconsumed HotPotato traps.",
-    "inputSchema": {
+    },
+    "outputSchema": {
       "type": "object",
+      "description": "Deterministic response schema for monitor_eve_constellation_fuel.",
       "properties": {
-        "ptb_commands": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
+        "constellation_id": {
+          "type": "string",
+          "description": "Monitored constellation identifier."
         },
-        "expected_max_outflow_mist": {
-          "type": "number"
+        "sovereignty_health_index": {
+          "type": "number",
+          "description": "Normalized sovereignty stability score from 0.0 to 1.0."
+        },
+        "weakest_node_id": {
+          "type": "string",
+          "description": "Identifier of the Network Node closest to fuel exhaustion."
+        },
+        "logistics_urgency": {
+          "type": "string",
+          "description": "Convoy dispatch recommendation ('STABLE' or 'DISPATCH_CONVOY_IMMEDIATELY')."
         }
       },
       "required": [
-        "ptb_commands"
+        "constellation_id",
+        "sovereignty_health_index",
+        "weakest_node_id",
+        "logistics_urgency"
       ]
+    },
+    "annotations": {
+      "title": "EVE Frontier Constellation Sovereignty & Multi-Node Fuel Radar",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "quote_eve_ssu_market",
+    "title": "EVE Frontier Smart Storage Unit (SSU) Bonding-Curve Market Pricer",
+    "description": "Computes dynamic bonding-curve bid/ask quotes in LUX and per-transaction anti-drain caps for a player-owned Smart Storage Unit (SSU). Use when setting automated market-maker buy/sell prices for a single SSU vending inventory; for scanning multiple SSUs across star systems to find profitable trade routes, use find_eve_ssu_arbitrage instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'resource_type' ('pricing_regime' defaults to 'inventory_balanced'), supports '?demo=true' or L402 (120 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "resource_type": {
+          "type": "string",
+          "description": "EVE Frontier commodity or ore name to price (e.g. 'Crude Fuel Ore', 'Carbonaceous Alloy')."
+        },
+        "pricing_regime": {
+          "type": "string",
+          "description": "Bonding-curve slope aggressiveness; defaults to 'inventory_balanced' when omitted.",
+          "enum": [
+            "inventory_balanced",
+            "scarcity_surge",
+            "liquidation_discount"
+          ]
+        }
+      },
+      "required": [
+        "resource_type"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for quote_eve_ssu_market.",
+      "properties": {
+        "resource_type": {
+          "type": "string",
+          "description": "Priced EVE Frontier commodity name."
+        },
+        "recommended_buy_price_lux": {
+          "type": "number",
+          "description": "Bid price in LUX to offer pilots selling into the SSU."
+        },
+        "recommended_sell_price_lux": {
+          "type": "number",
+          "description": "Ask price in LUX charged to pilots buying from the SSU."
+        },
+        "anti_drain_cap_per_tx": {
+          "type": "integer",
+          "description": "Maximum units allowed per single transaction to prevent inventory sweeps."
+        }
+      },
+      "required": [
+        "resource_type",
+        "recommended_buy_price_lux",
+        "recommended_sell_price_lux",
+        "anti_drain_cap_per_tx"
+      ]
+    },
+    "annotations": {
+      "title": "EVE Frontier Smart Storage Unit (SSU) Bonding-Curve Market Pricer",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "find_eve_ssu_arbitrage",
+    "title": "EVE Frontier Multi-System SSU Commodity Arbitrage Route Finder",
+    "description": "Scans Smart Storage Unit (SSU) bid/ask spreads across star systems against ship cargo capacity and stargate fuel costs to rank net-profitable arbitrage loops. Use when planning multi-system trade runs to maximize net LUX profit per gigajoule of fuel burned; for calculating internal bid/ask market-maker quotes for your own SSU, use quote_eve_ssu_market instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'origin_system' ('hull_cargo_class' defaults to 'light_courier'), supports '?demo=true' or L402 (140 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "origin_system": {
+          "type": "string",
+          "description": "Starting solar system for the trade vessel (e.g. 'System-Alpha')."
+        },
+        "hull_cargo_class": {
+          "type": "string",
+          "description": "Trade vessel hull class determining cargo volume and fuel mass; defaults to 'medium_hauler' when omitted.",
+          "enum": [
+            "light_courier",
+            "medium_hauler",
+            "heavy_freighter"
+          ]
+        }
+      },
+      "required": [
+        "origin_system"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for find_eve_ssu_arbitrage.",
+      "properties": {
+        "best_commodity": {
+          "type": "string",
+          "description": "Highest-margin commodity identified across reachable SSUs."
+        },
+        "buy_ssu_system": {
+          "type": "string",
+          "description": "Solar system where the commodity should be purchased."
+        },
+        "sell_ssu_system": {
+          "type": "string",
+          "description": "Solar system where the commodity should be sold."
+        },
+        "net_profit_lux_after_tolls": {
+          "type": "number",
+          "description": "Net LUX profit after deducting gate tolls and fuel replacement cost."
+        }
+      },
+      "required": [
+        "best_commodity",
+        "buy_ssu_system",
+        "sell_ssu_system",
+        "net_profit_lux_after_tolls"
+      ]
+    },
+    "annotations": {
+      "title": "EVE Frontier Multi-System SSU Commodity Arbitrage Route Finder",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "analyze_eve_killmail_threats",
+    "title": "EVE Frontier On-Chain Killmail Threat & Gatecamp Ambush Analyzer",
+    "description": "Analyzes on-chain EVE Frontier killmail.move events in a solar system to quantify gatecamp ambush probability and identify dominant hostile hull doctrines. Use when assessing solar system PvP danger before jumping a hauler or fleet into a system; for computing real-time weapon target-lock priorities during active grid combat, use prioritize_eve_turret_targets instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'system_id' ('time_window' defaults to '1h'), supports '?demo=true' or L402 (150 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "system_id": {
+          "type": "string",
+          "description": "Solar system identifier to analyze for recent killmail activity (e.g. 'System-Frontier-01')."
+        },
+        "time_window": {
+          "type": "string",
+          "description": "Historical lookback window for killmail aggregation; defaults to '24h' when omitted.",
+          "enum": [
+            "1h",
+            "6h",
+            "24h",
+            "7d"
+          ]
+        }
+      },
+      "required": [
+        "system_id"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for analyze_eve_killmail_threats.",
+      "properties": {
+        "system_id": {
+          "type": "string",
+          "description": "Analyzed solar system identifier."
+        },
+        "killmails_24h": {
+          "type": "integer",
+          "description": "Total verified ship destructions recorded in the window."
+        },
+        "ambush_probability": {
+          "type": "number",
+          "description": "Estimated probability (0.0 to 1.0) of an active stargate camp."
+        },
+        "threat_level": {
+          "type": "string",
+          "description": "Tactical hazard classification ('MINIMAL', 'MODERATE', or 'CRITICAL_HAZARD')."
+        }
+      },
+      "required": [
+        "system_id",
+        "killmails_24h",
+        "ambush_probability",
+        "threat_level"
+      ]
+    },
+    "annotations": {
+      "title": "EVE Frontier On-Chain Killmail Threat & Gatecamp Ambush Analyzer",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "prioritize_eve_turret_targets",
+    "title": "EVE Frontier Smart Turret Angular Tracking & Target Priority Calculator",
+    "description": "Evaluates radar contacts by range, transversal velocity, and Tribe standing to output deterministic Smart Turret target-lock priorities and fire authorizations. Use when ranking active grid radar contacts for automated Smart Turret engagement; for reviewing historical solar system killmails and ambush probabilities before transit, use analyze_eve_killmail_threats instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'turret_id' ('engagement_doctrine' defaults to 'highest_threat'), supports '?demo=true' or L402 (125 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "turret_id": {
+          "type": "string",
+          "description": "Smart Turret assembly identifier (e.g. 'turret-alpha-01')."
+        },
+        "engagement_doctrine": {
+          "type": "string",
+          "description": "Target selection doctrine weighting range vs angular tracking; defaults to 'highest_threat' when omitted.",
+          "enum": [
+            "highest_threat",
+            "anti_tackle_fast_lock",
+            "capital_focus"
+          ]
+        }
+      },
+      "required": [
+        "turret_id"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for prioritize_eve_turret_targets.",
+      "properties": {
+        "turret_id": {
+          "type": "string",
+          "description": "Smart Turret identifier."
+        },
+        "primary_target_lock": {
+          "type": "string",
+          "description": "Contact ID of the highest-priority hostile vessel to engage."
+        },
+        "fire_verdict": {
+          "type": "string",
+          "description": "Engagement command ('ENGAGE_IMMEDIATELY' or 'HOLD_FIRE')."
+        },
+        "sui_move_witness_verdict": {
+          "type": "string",
+          "description": "On-chain witness authorization status ('AUTHORIZED_HOSTILE')."
+        }
+      },
+      "required": [
+        "turret_id",
+        "primary_target_lock",
+        "fire_verdict",
+        "sui_move_witness_verdict"
+      ]
+    },
+    "annotations": {
+      "title": "EVE Frontier Smart Turret Angular Tracking & Target Priority Calculator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   }
 ]
