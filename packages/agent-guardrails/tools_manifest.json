@@ -1,162 +1,746 @@
 [
   {
-    "name": "guardrail_verify",
-    "endpoint": "/api/v1/agent/guardrail-verify",
-    "price": "100 sats via L402",
-    "description": "Pre-execution security gate to detect prompt injection, destructive bash commands, wallet drain, and key exfiltration.",
+    "name": "verify_agent_command_safety",
+    "title": "Autonomous Agent Pre-Execution Command & Prompt Injection Gate",
+    "description": "Evaluates untrusted agent prompts, bash commands, and tool arguments to block prompt injection, destructive shell commands, and private-key exfiltration. Use when screening a general shell command or user prompt before agent execution; for statically validating SQL database queries at the AST level, use validate_sql_query_ast instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'payload' ('action_type' defaults to 'bash_command'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "payload": {
           "type": "string",
-          "description": "Command, script, or prompt to inspect"
+          "description": "Raw command string, script snippet, or untrusted prompt to inspect for safety violations."
         },
         "action_type": {
           "type": "string",
-          "description": "Action type (e.g. bash, tool_call)"
+          "description": "Execution context of the payload; defaults to 'bash_command' when omitted.",
+          "enum": [
+            "bash_command",
+            "tool_call",
+            "user_prompt",
+            "webhook_payload"
+          ]
         }
       },
       "required": [
         "payload"
       ]
-    }
-  },
-  {
-    "name": "mcp_rugpull_diff",
-    "endpoint": "/api/v1/agent/mcp-rugpull-diff",
-    "price": "85 sats via L402",
-    "description": "Detects mid-session MCP tools/list rug-pulls, shadow parameter injections, and coercive description mutations.",
-    "inputSchema": {
+    },
+    "outputSchema": {
       "type": "object",
+      "description": "Deterministic response schema for verify_agent_command_safety.",
       "properties": {
-        "baseline_tools_list": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
+        "safe": {
+          "type": "boolean",
+          "description": "True when zero injection, exfiltration, or destructive patterns are found."
         },
-        "current_tools_list": {
+        "risk_score": {
+          "type": "number",
+          "description": "Normalized threat probability from 0.0 (benign) to 1.0 (critical)."
+        },
+        "verdict": {
+          "type": "string",
+          "description": "Enforcement decision ('ALLOW', 'BLOCK', or 'QUARANTINE')."
+        },
+        "threats_detected": {
           "type": "array",
-          "items": {
-            "type": "object"
-          }
+          "description": "List of specific threat categories triggered by the payload."
         }
       },
       "required": [
-        "baseline_tools_list",
-        "current_tools_list"
+        "safe",
+        "risk_score",
+        "verdict",
+        "threats_detected"
       ]
+    },
+    "annotations": {
+      "title": "Autonomous Agent Pre-Execution Command & Prompt Injection Gate",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   },
   {
-    "name": "mcp_sampling_guard",
-    "endpoint": "/api/v1/agent/mcp-sampling-guard",
-    "price": "100 sats via L402",
-    "description": "Audits inbound MCP sampling/createMessage requests to block systemPrompt hijacking and recursive quota drain.",
+    "name": "validate_sql_query_ast",
+    "title": "AST-Level Read-Only SQL Query & Injection Safety Validator",
+    "description": "Performs static AST syntax tree parsing on SQL statements to verify strictly read-only SELECT clauses and reject mutations, stacked queries, or comment bypasses. Use when verifying that an agent-authored SQL statement is strictly read-only before running it on a database; for screening non-SQL bash commands or general agent prompts, use verify_agent_command_safety instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'sql_statement' ('dialect' defaults to 'postgres'), supports '?demo=true' or L402 (75 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
-        "sampling_request": {
-          "type": "object"
+        "sql_statement": {
+          "type": "string",
+          "description": "SQL statement string to statically parse and audit for read-only SELECT compliance (e.g. 'SELECT id, email FROM users WHERE active = 1')."
+        },
+        "dialect": {
+          "type": "string",
+          "description": "SQL dialect ruleset used for AST token inspection; defaults to 'postgres' when omitted.",
+          "enum": [
+            "postgres",
+            "mysql",
+            "sqlite",
+            "snowflake"
+          ]
         }
       },
       "required": [
-        "sampling_request"
+        "sql_statement"
       ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for validate_sql_query_ast.",
+      "properties": {
+        "safe_read_only": {
+          "type": "boolean",
+          "description": "True when the query is a pure SELECT statement with zero injection clauses."
+        },
+        "blocked_clauses": {
+          "type": "array",
+          "description": "List of destructive or injection SQL tokens detected."
+        },
+        "tables_accessed": {
+          "type": "array",
+          "description": "Table identifiers referenced in FROM and JOIN clauses."
+        },
+        "verdict": {
+          "type": "string",
+          "description": "Execution decision ('ALLOW_EXECUTION' or 'BLOCK_EXECUTION')."
+        }
+      },
+      "required": [
+        "safe_read_only",
+        "blocked_clauses",
+        "tables_accessed",
+        "verdict"
+      ]
+    },
+    "annotations": {
+      "title": "AST-Level Read-Only SQL Query & Injection Safety Validator",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   },
   {
-    "name": "tool_output_firewall",
-    "endpoint": "/api/v1/agent/tool-output-firewall",
-    "price": "75 sats via L402",
-    "description": "Sanitizes untrusted tool outputs, stripping invisible Unicode tags (U+E0000), markdown exfiltration beacons, and indirect prompt injections.",
+    "name": "execute_python_sandbox",
+    "title": "AST-Audited Ephemeral Python Code Execution Sandbox",
+    "description": "Audits Python source code for forbidden syscalls (os, subprocess, socket, open, eval) inside an AST-governed WebAssembly sandbox with no host filesystem access. Use when executing LLM-generated Python snippets safely; for checking shell commands without executing code, use verify_agent_command_safety instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'python_script' ('timeout_profile' defaults to 'fast_1s'), supports '?demo=true' or MPP (1500 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "python_script": {
+          "type": "string",
+          "description": "Python 3 source script to audit and execute strictly inside an isolated AST-governed, non-privileged WebAssembly sandbox with no host filesystem access."
+        },
+        "timeout_profile": {
+          "type": "string",
+          "description": "Execution resource ceiling; defaults to 'standard_5s' when omitted.",
+          "enum": [
+            "fast_1s",
+            "standard_5s",
+            "extended_15s"
+          ]
+        }
+      },
+      "required": [
+        "python_script"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for execute_python_sandbox.",
+      "properties": {
+        "syntax_valid": {
+          "type": "boolean",
+          "description": "True if the Python source parses without syntax errors."
+        },
+        "ast_security_audit": {
+          "type": "object",
+          "description": "Static syscall audit summary including flagged_calls and safety_verdict."
+        },
+        "simulated_stdout": {
+          "type": "string",
+          "description": "Captured standard output from the isolated execution."
+        },
+        "exit_code": {
+          "type": "integer",
+          "description": "Process exit status (0 on clean execution, 1 on security block)."
+        }
+      },
+      "required": [
+        "syntax_valid",
+        "ast_security_audit",
+        "simulated_stdout",
+        "exit_code"
+      ]
+    },
+    "annotations": {
+      "title": "AST-Audited Ephemeral Python Code Execution Sandbox",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "audit_mcp_server_manifest",
+    "title": "External MCP Server Manifest & Tool-Poisoning Security Auditor",
+    "description": "Scans an external MCP server's initial tools/list manifest to detect tool-name shadowing (read_file, bash) and hidden prompt-injection directives in descriptions. Use when vetting a newly discovered third-party MCP server before mounting it into an agent session; for comparing a previously pinned MCP baseline against a live mid-session tools/list response, use detect_mcp_schema_rugpull instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'manifest_json' ('audit_profile' defaults to 'strict'), supports '?demo=true' or L402 (150 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "manifest_json": {
+          "type": "string",
+          "description": "JSON string or object containing the external MCP server's tools array to audit."
+        },
+        "audit_profile": {
+          "type": "string",
+          "description": "Sensitivity level for flagging system-tool name shadowing; defaults to 'strict' when omitted.",
+          "enum": [
+            "strict",
+            "permissive_local",
+            "enterprise_zero_trust"
+          ]
+        }
+      },
+      "required": [
+        "manifest_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for audit_mcp_server_manifest.",
+      "properties": {
+        "manifest_safe": {
+          "type": "boolean",
+          "description": "True if zero shadowed tools or description injections are found."
+        },
+        "shadowed_tools": {
+          "type": "array",
+          "description": "Tool names attempting to shadow host privileges (e.g. 'bash', 'read_file')."
+        },
+        "suspicious_tools": {
+          "type": "array",
+          "description": "Tools containing covert prompt-injection or exfiltration instructions."
+        },
+        "security_grade": {
+          "type": "string",
+          "description": "Overall manifest safety grade ('A+', 'C', or 'F')."
+        }
+      },
+      "required": [
+        "manifest_safe",
+        "shadowed_tools",
+        "suspicious_tools",
+        "security_grade"
+      ]
+    },
+    "annotations": {
+      "title": "External MCP Server Manifest & Tool-Poisoning Security Auditor",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "detect_mcp_schema_rugpull",
+    "title": "Mid-Session MCP tools/list Rug-Pull & Schema Mutation Detector",
+    "description": "Computes structural diffs between a pinned baseline MCP tools/list snapshot and a live server response to catch mid-session description or schema tampering. Use when verifying that a connected MCP server has not mutated its tool definitions mid-session; for performing a first-time static security audit on a single MCP manifest, use audit_mcp_server_manifest instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'baseline_tools_json' ('current_tools_json' defaults to 'standard'), supports '?demo=true' or L402 (85 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "baseline_tools_json": {
+          "type": "string",
+          "description": "JSON-serialized baseline tools/list array captured when the MCP server was first trusted."
+        },
+        "current_tools_json": {
+          "type": "string",
+          "description": "JSON-serialized live tools/list array to compare against the baseline; defaults to '[]' when omitted."
+        },
+        "diff_mode": {
+          "type": "string",
+          "description": "Comparison strictness across descriptions and inputSchema; defaults to 'full_structural' when omitted.",
+          "enum": [
+            "full_structural",
+            "schema_only",
+            "descriptions_only"
+          ]
+        }
+      },
+      "required": [
+        "baseline_tools_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for detect_mcp_schema_rugpull.",
+      "properties": {
+        "rugpull_detected": {
+          "type": "boolean",
+          "description": "True if any tool was surreptitiously added or had its description/schema altered."
+        },
+        "mutated_tools": {
+          "type": "array",
+          "description": "Detailed list of modified tools and their exact mutation type."
+        },
+        "verdict": {
+          "type": "string",
+          "description": "Connection verdict ('SCHEMA_INTEGRITY_VERIFIED' or 'REVOKE_MCP_SERVER_IMMEDIATELY')."
+        },
+        "timestamp_utc": {
+          "type": "string",
+          "description": "ISO-8601 UTC timestamp of the diff audit."
+        }
+      },
+      "required": [
+        "rugpull_detected",
+        "mutated_tools",
+        "verdict",
+        "timestamp_utc"
+      ]
+    },
+    "annotations": {
+      "title": "Mid-Session MCP tools/list Rug-Pull & Schema Mutation Detector",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "validate_mcp_sampling_request",
+    "title": "Inbound MCP sampling/createMessage Reverse-Injection Firewall",
+    "description": "Audits inbound MCP sampling/createMessage callbacks from connected servers to block cross-server context snooping (includeContext='allServers') and token quota hijacking. Use when filtering a connected MCP server's request to sample the host LLM; for scrubbing text returned from a standard synchronous tools/call response, use sanitize_tool_output_stream instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'sampling_request_json' ('max_tokens_ceiling' defaults to '512'), supports '?demo=true' or L402 (100 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "sampling_request_json": {
+          "type": "string",
+          "description": "JSON string or object representing the inbound MCP sampling/createMessage payload."
+        },
+        "max_tokens_ceiling": {
+          "type": "string",
+          "description": "Maximum completion token quota allowed for server callbacks; defaults to '2048' when omitted.",
+          "enum": [
+            "512",
+            "1024",
+            "2048",
+            "4096"
+          ]
+        }
+      },
+      "required": [
+        "sampling_request_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for validate_mcp_sampling_request.",
+      "properties": {
+        "sampling_safe": {
+          "type": "boolean",
+          "description": "True if the sampling request respects context isolation and token caps."
+        },
+        "violations_detected": {
+          "type": "array",
+          "description": "Specific policy violations found in the sampling request."
+        },
+        "recommended_action": {
+          "type": "string",
+          "description": "Host enforcement action ('APPROVE_SAMPLING_REQUEST' or 'REJECT_SAMPLING_REQUEST')."
+        },
+        "timestamp_utc": {
+          "type": "string",
+          "description": "ISO-8601 UTC timestamp of the inspection."
+        }
+      },
+      "required": [
+        "sampling_safe",
+        "violations_detected",
+        "recommended_action",
+        "timestamp_utc"
+      ]
+    },
+    "annotations": {
+      "title": "Inbound MCP sampling/createMessage Reverse-Injection Firewall",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "sanitize_tool_output_stream",
+    "title": "Indirect Prompt-Injection, Invisible Unicode & Beacon Output Scrubber",
+    "description": "Sanitizes untrusted external tool or web-scrape outputs by stripping invisible Unicode Tag characters (U+E0000), neutralizing Markdown tracking image beacons, and defusing indirect prompt overrides. Use when cleaning raw third-party tool outputs or scraped web text before inserting it into the LLM context window; for redacting personal identifiable information (emails, SSNs, keys) from outbound text, use redact_sensitive_pii instead. Read-only edge call (32 KB, 60 RPM): accepts 'raw_tool_output' (with enum defaults), uses '?demo=true' or L402 (75 sats); HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "raw_tool_output": {
-          "type": "string"
+          "type": "string",
+          "description": "Untrusted text returned by an external tool, webhook, or web scraper."
         },
-        "source_tool_name": {
-          "type": "string"
+        "wrap_tag": {
+          "type": "string",
+          "description": "XML isolation wrapper applied around the sanitized text; defaults to 'tool_data' when omitted.",
+          "enum": [
+            "tool_data",
+            "untrusted_context",
+            "none"
+          ]
         }
       },
       "required": [
         "raw_tool_output"
       ]
-    }
-  },
-  {
-    "name": "agent_loop_circuit_breaker",
-    "endpoint": "/api/v1/agent/loop-circuit-breaker",
-    "price": "70 sats / $0.02 USDC",
-    "description": "Analyzes recent tool-call traces to trip a circuit breaker on cyclic retries, A/B deadlocks, and runaway token burn.",
-    "inputSchema": {
+    },
+    "outputSchema": {
       "type": "object",
+      "description": "Deterministic response schema for sanitize_tool_output_stream.",
       "properties": {
-        "recent_action_trace": {
+        "sanitized_output": {
+          "type": "string",
+          "description": "Cleaned text with invisible Unicode, tracking beacons, and overrides neutralized."
+        },
+        "threats_neutralized": {
           "type": "array",
-          "items": {
-            "type": "object"
-          }
+          "description": "List of smuggling or injection vectors stripped from the input."
+        },
+        "injection_risk_score": {
+          "type": "number",
+          "description": "Threat score from 0.0 to 0.99 prior to sanitization."
+        },
+        "safe_for_context_ingestion": {
+          "type": "boolean",
+          "description": "True once the sanitized payload is safe to feed to the LLM."
         }
       },
       "required": [
-        "recent_action_trace"
+        "sanitized_output",
+        "threats_neutralized",
+        "injection_risk_score",
+        "safe_for_context_ingestion"
       ]
+    },
+    "annotations": {
+      "title": "Indirect Prompt-Injection, Invisible Unicode & Beacon Output Scrubber",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   },
   {
-    "name": "sql_injection_ast_guard",
-    "endpoint": "/api/v1/agent/sql-guard",
-    "price": "75 sats via L402",
-    "description": "Statically validates LLM-generated SQL queries via AST inspection to block SQLi tautologies, UNION leaks, and DROP/TRUNCATE.",
-    "inputSchema": {
-      "type": "object",
-      "properties": {
-        "sql_query": {
-          "type": "string",
-          "description": "SQL query to audit"
-        }
-      },
-      "required": [
-        "sql_query"
-      ]
-    }
-  },
-  {
-    "name": "code_sandbox",
-    "endpoint": "/api/v1/mpp/code-sandbox",
-    "price": "$0.15 USDC via MPP",
-    "description": "Executes untrusted Python snippets inside an ephemeral sandbox with static AST safety auditing.",
-    "inputSchema": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Python code to audit and run"
-        }
-      },
-      "required": [
-        "code"
-      ]
-    }
-  },
-  {
-    "name": "scrub_pii_firewall",
-    "endpoint": "/api/v1/scrub-pii",
-    "price": "150 sats via L402",
-    "description": "Redacts emails, SSNs, phone numbers, API keys, and wallet seed phrases before external LLM calls.",
+    "name": "redact_sensitive_pii",
+    "title": "Zero-PII & Secret Credential Redaction Engine",
+    "description": "Redacts emails, phone numbers, SSNs, credit cards, API keys, and crypto private keys from text before logging or external transmission. Use when stripping personal data or secret credentials from prompts, logs, or outbound messages; for neutralizing indirect prompt injections and invisible Unicode in inbound tool responses, use sanitize_tool_output_stream instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'text' ('redaction_style' defaults to 'typed_token'), supports '?demo=true' or L402 (150 sats), and returns HTTP 400 if invalid.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "text": {
           "type": "string",
-          "description": "Raw text to scrub"
+          "description": "Input text containing potential PII or secret keys to redact."
+        },
+        "redaction_style": {
+          "type": "string",
+          "description": "Placeholder format used for redacted spans; defaults to 'typed_token' when omitted.",
+          "enum": [
+            "typed_token",
+            "asterisk_mask",
+            "sha256_pseudonym"
+          ]
         }
       },
       "required": [
         "text"
       ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for redact_sensitive_pii.",
+      "properties": {
+        "scrubbed_text": {
+          "type": "string",
+          "description": "Sanitized text with all sensitive entities replaced by redaction tokens."
+        },
+        "redactions_count": {
+          "type": "integer",
+          "description": "Total number of sensitive entities redacted."
+        },
+        "categories_redacted": {
+          "type": "array",
+          "description": "Types of sensitive data detected (e.g. 'EMAIL', 'SSN', 'PRIVATE_KEY')."
+        },
+        "zero_pii_certified": {
+          "type": "boolean",
+          "description": "True when post-scan verification confirms zero residual PII patterns."
+        }
+      },
+      "required": [
+        "scrubbed_text",
+        "redactions_count",
+        "categories_redacted",
+        "zero_pii_certified"
+      ]
+    },
+    "annotations": {
+      "title": "Zero-PII & Secret Credential Redaction Engine",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "detect_agent_action_loop",
+    "title": "Autonomous Agent Action-Trace Loop & Token-Burn Circuit Breaker",
+    "description": "Analyzes an agent's recent tool-call trace to detect identical retry spins, A/B state oscillation, and runaway token burn. Use when monitoring multi-step agent execution loops to decide whether to continue or halt and escalate; for inspecting a single command payload for security threats before execution, use verify_agent_command_safety instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'action_trace_json' ('sensitivity' defaults to 'strict_2_repeats'), supports '?demo=true' or L402 (70 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action_trace_json": {
+          "type": "string",
+          "description": "JSON-serialized array of recent agent actions (e.g. '[{\"tool\":\"search\",\"status\":\"err\"}]')."
+        },
+        "sensitivity": {
+          "type": "string",
+          "description": "Cycle detection threshold; defaults to 'standard_3_repeats' when omitted.",
+          "enum": [
+            "strict_2_repeats",
+            "standard_3_repeats",
+            "lenient_5_repeats"
+          ]
+        }
+      },
+      "required": [
+        "action_trace_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for detect_agent_action_loop.",
+      "properties": {
+        "loop_detected": {
+          "type": "boolean",
+          "description": "True if a repetitive retry spin or A/B oscillation cycle is active."
+        },
+        "loop_pattern": {
+          "type": "string",
+          "description": "Detected cycle topology ('NONE', 'IDENTICAL_RETRY_SPIN', or 'ABAB_STATE_OSCILLATION')."
+        },
+        "circuit_breaker_action": {
+          "type": "string",
+          "description": "Recommended control action ('CONTINUE_EXECUTION' or 'HALT_AND_ESCALATE_OR_SWITCH_TOOL')."
+        },
+        "estimated_tokens_saved": {
+          "type": "integer",
+          "description": "Projected token burn prevented by tripping the circuit breaker."
+        }
+      },
+      "required": [
+        "loop_detected",
+        "loop_pattern",
+        "circuit_breaker_action",
+        "estimated_tokens_saved"
+      ]
+    },
+    "annotations": {
+      "title": "Autonomous Agent Action-Trace Loop & Token-Burn Circuit Breaker",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "verify_a2a_agent_card",
+    "title": "A2A /.well-known/agent.json Identity & Capability Card Verifier",
+    "description": "Verifies a remote agent's A2A /.well-known/agent.json discovery card, checking JWS/DID signature binding, endpoint HTTPS enforcement, and capability spoofing. Use when authenticating a peer autonomous agent before delegating subtasks or exchanging payments over A2A; for auditing an MCP tool server's tools/list manifest rather than a peer agent's A2A card, use audit_mcp_server_manifest instead. Read-only edge call (32 KB, 60 RPM): accepts 'agent_card_json' ('trust_policy' defaults to 'require_https_and_did'), supports '?demo=true' or L402 (90 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "agent_card_json": {
+          "type": "string",
+          "description": "JSON string or object of the peer agent's /.well-known/agent.json descriptor."
+        },
+        "trust_policy": {
+          "type": "string",
+          "description": "Verification policy for DID/DNS binding; defaults to 'require_https_and_did' when omitted.",
+          "enum": [
+            "require_https_and_did",
+            "allow_unsigned_https",
+            "strict_payment_rail_match"
+          ]
+        }
+      },
+      "required": [
+        "agent_card_json"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for verify_a2a_agent_card.",
+      "properties": {
+        "card_valid": {
+          "type": "boolean",
+          "description": "True when the A2A agent card schema, transport, and identity claims pass verification."
+        },
+        "agent_id": {
+          "type": "string",
+          "description": "Canonical identifier of the verified peer agent."
+        },
+        "spoofing_flags": {
+          "type": "array",
+          "description": "List of impersonation or downgrade anomalies detected."
+        },
+        "delegation_verdict": {
+          "type": "string",
+          "description": "Handshake decision ('SAFE_TO_DELEGATE_A2A' or 'REJECT_UNVERIFIED_AGENT')."
+        }
+      },
+      "required": [
+        "card_valid",
+        "agent_id",
+        "spoofing_flags",
+        "delegation_verdict"
+      ]
+    },
+    "annotations": {
+      "title": "A2A /.well-known/agent.json Identity & Capability Card Verifier",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "audit_outbound_egress_url",
+    "title": "Outbound Agent URL SSRF, Metadata & Secret Exfiltration Firewall",
+    "description": "Static validation firewall for outbound network destination URIs against cloud metadata IP addresses (169.254.169.254), RFC 1918 private IP blocks, and query-string secret exfiltration before agent dispatch. Use when validating a user-supplied or tool-supplied URI destination before network dispatch; for auditing local shell commands or general prompts, use verify_agent_command_safety instead. Read-only edge call (32 KB, 60 RPM): accepts 'destination_uri' ('egress_policy' defaults to 'block_private_and_metadata'), supports '?demo=true' or L402 (65 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "destination_uri": {
+          "type": "string",
+          "description": "Outbound HTTP/HTTPS destination URI to inspect before fetching (e.g. 'https://api.example.com/v1/webhook')."
+        },
+        "egress_policy": {
+          "type": "string",
+          "description": "Network egress policy; defaults to 'block_private_and_metadata' when omitted.",
+          "enum": [
+            "block_private_and_metadata",
+            "https_public_only",
+            "strict_allowlist_domains"
+          ]
+        }
+      },
+      "required": [
+        "destination_uri"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for audit_outbound_egress_url.",
+      "properties": {
+        "egress_allowed": {
+          "type": "boolean",
+          "description": "True if the URL targets a safe public endpoint with no exfiltration tokens."
+        },
+        "ssrf_risk_detected": {
+          "type": "boolean",
+          "description": "True if loopback, RFC1918 private IP, or cloud metadata IP is targeted."
+        },
+        "exfiltration_query_params": {
+          "type": "array",
+          "description": "Query parameters suspected of carrying leaked secrets or base64 payloads."
+        },
+        "verdict": {
+          "type": "string",
+          "description": "Firewall decision ('ALLOW_EGRESS_REQUEST' or 'BLOCK_SSRF_OR_EXFIL')."
+        }
+      },
+      "required": [
+        "egress_allowed",
+        "ssrf_risk_detected",
+        "exfiltration_query_params",
+        "verdict"
+      ]
+    },
+    "annotations": {
+      "title": "Outbound Agent URL SSRF, Metadata & Secret Exfiltration Firewall",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
+  },
+  {
+    "name": "audit_response_factuality",
+    "title": "Draft Agent Response Groundedness & Hallucination Auditor",
+    "description": "Cross-references factual claims, numbers, and citations in a draft agent response against retrieved source passages to flag unsupported hallucinations before delivery. Use when verifying that a generated answer is 100% grounded in source evidence before returning it to the user; for scrubbing inbound tool outputs for prompt-injection and invisible Unicode, use sanitize_tool_output_stream instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'claim' ('context' defaults to 'standard'), supports '?demo=true' or L402 (150 sats), and returns HTTP 400 if invalid.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "claim": {
+          "type": "string",
+          "description": "Draft agent response or factual statement to verify for hallucinations."
+        },
+        "context": {
+          "type": "string",
+          "description": "Authoritative source text or retrieved RAG passages that the claim must be grounded in."
+        },
+        "strictness": {
+          "type": "string",
+          "description": "Entailment threshold required for numbers and dates; defaults to 'exact_entailment' when omitted.",
+          "enum": [
+            "exact_entailment",
+            "semantic_paraphrase",
+            "citations_only"
+          ]
+        }
+      },
+      "required": [
+        "claim",
+        "context"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Deterministic response schema for audit_response_factuality.",
+      "properties": {
+        "groundedness_score": {
+          "type": "number",
+          "description": "Factual support ratio from 0.0 (fabricated) to 1.0 (fully entailed)."
+        },
+        "verdict": {
+          "type": "string",
+          "description": "Audit outcome ('PASS', 'SUSPICIOUS', or 'FAIL')."
+        },
+        "verified_claims": {
+          "type": "array",
+          "description": "Assertions directly entailed by the provided source context."
+        },
+        "unverified_claims": {
+          "type": "array",
+          "description": "Hallucinated or unsupported assertions flagged for removal."
+        }
+      },
+      "required": [
+        "groundedness_score",
+        "verdict",
+        "verified_claims",
+        "unverified_claims"
+      ]
+    },
+    "annotations": {
+      "title": "Draft Agent Response Groundedness & Hallucination Auditor",
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
     }
   }
 ]
