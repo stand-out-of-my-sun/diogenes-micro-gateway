@@ -1,0 +1,20 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "maintainers": [
+    "stand-out-of-my-sun"
+  ],
+  "name": "diogenes-neural-search-engine-mcp",
+  "server_id": "io.github.stand-out-of-my-sun/diogenes-neural-search-engine",
+  "license": "MIT",
+  "category": "Search & Deep Research",
+  "transport": "streamable-http",
+  "auth": "none",
+  "install_confidence": "high",
+  "verification": "verified",
+  "repository": "https://github.com/stand-out-of-my-sun/diogenes-neural-search-engine-mcp",
+  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "remote_url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/neural-search-engine",
+  "manifest_url": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/neural-search-engine.json",
+  "health_check_url": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+  "description": "12 real-time neural search, grounded research & factual verification tools: neural search synthesizer, deep research dossier compiler, Boolean & semantic query expander, curated domain registry filter, breaking news recency & velocity tracker, factual consensus claim verifier, scholarly citation compiler (BibTeX/APA/IEEE), topic subgraph clusterer, bull/bear media sentiment oracle, expert source ranker, chronological timeline synthesizer, and competitive landscape matrix."
+}
