@@ -1,7 +1,7 @@
 # Smithery & TensorBlock MCP Index Installation Manifest (gemini-suite)
 name: diogenes-gemini-suite-mcp
-displayName: "Diogenes Gemini Suite & Autonomous Agents MCP"
-description: "15 MCP tools providing account-less access to all 45 Google Gemini models (Gemini 4 Argon, 3.1 Pro, 3.8 Flash) and autonomous agents (Antigravity Agent, Deep Research Pro, Computer Use, Nano Banana Pro, Veo 3, Lyria 3) via L402, x402, and MPP."
+displayName: "Diogenes Gemini Suite & AI Agents MCP"
+description: "15 MCP tools providing account-less access to all 45 Google Gemini models (Gemini 4 Argon, 3.1 Pro, 3.8 Flash) and AI agents (Antigravity Agent, Deep Research Pro, Computer Use, Nano Banana Pro, Veo 3, Lyria 3) via L402, x402, and MPP."
 author: "stand-out-of-my-sun"
 license: MIT
 homepage: "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages"
