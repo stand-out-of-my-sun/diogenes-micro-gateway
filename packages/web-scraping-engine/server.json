@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.stand-out-of-my-sun/diogenes-web-scraping-engine",
+  "description": "12 high-performance web extraction, readability & markdown tools: clean LLM markdown compiler, readable article extractor, OpenGraph & JSON-LD metadata parser, HTML table to JSON/Markdown converter, C",
+  "version": "1.4.0",
+  "license": "MIT",
+  "maintainer": "@stand-out-of-my-sun",
+  "category": "Web Extraction & Scraping",
+  "auth": {
+    "type": "none",
+    "accountless": true,
+    "optional_payment_headers": [
+      "Authorization: L402",
+      "X-Payment-Signature",
+      "X-Payment-TxHash"
+    ]
+  },
+  "install_confidence": "high",
+  "verification": {
+    "status": "verified",
+    "package_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/web-scraping-engine.json",
+    "tensorblock_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/tensorblock.json",
+    "health_check": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health"
+  },
+  "repository": {
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-web-scraping-engine-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "transport_type": "streamable-http",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/web-scraping-engine",
+      "auth": "none"
+    }
+  ]
+}
