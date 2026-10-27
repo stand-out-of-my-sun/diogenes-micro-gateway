@@ -1,0 +1,20 @@
+# Smithery & TensorBlock MCP Index Installation Manifest (database-intelligence)
+name: diogenes-database-intelligence-mcp
+displayName: "Diogenes Database Intelligence, SQL Engine & Schema Guard MCP"
+description: "12 deterministic database intelligence, AST SQL & schema reliability tools: natural language to SQL synthesizer, AST SQL injection & tautology auditor, query plan EXPLAIN optimizer, breaking schema migration differ, polyglot SQL transpiler (PostgreSQL/MySQL/SQLite), composite B-tree index advisor, relational 3NF/BCNF normalization validator, SQL telemetry PII scrubber, relational mock seed fixture generator, connection pool headroom calculator, transaction isolation hazard auditor, and ORM model compiler (Prisma/Drizzle/Zod)."
+author: "stand-out-of-my-sun"
+license: MIT
+homepage: "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages"
+repository: "https://github.com/stand-out-of-my-sun/diogenes-database-intelligence-mcp"
+category: "Database & SQL Intelligence"
+transport: streamable-http
+auth: none
+installConfidence: high
+verification: verified
+startCommand:
+  type: http
+  url: "https://diogenes-micro-gateway.corinth.workers.dev/mcp/database-intelligence"
+  configSchema:
+    type: object
+    properties: {}
+    required: []
