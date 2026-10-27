@@ -1,0 +1,20 @@
+# Smithery & TensorBlock MCP Index Installation Manifest (web-scraping-engine)
+name: diogenes-web-scraping-engine-mcp
+displayName: "Diogenes Web Extraction, Readability & Markdown Engine MCP"
+description: "12 high-performance web extraction, readability & markdown tools: clean LLM markdown compiler, readable article extractor, OpenGraph & JSON-LD metadata parser, HTML table to JSON/Markdown converter, CSS selector isolator, paywall & overlay bypass auditor, XML sitemap crawler, hyperlink extractor, HTML XSS sanitizer, contact & lead info parser, SEO heading diagnostics, and RSS/Atom feed compiler."
+author: "stand-out-of-my-sun"
+license: MIT
+homepage: "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages"
+repository: "https://github.com/stand-out-of-my-sun/diogenes-web-scraping-engine-mcp"
+category: "Web Extraction & Scraping"
+transport: streamable-http
+auth: none
+installConfidence: high
+verification: verified
+startCommand:
+  type: http
+  url: "https://diogenes-micro-gateway.corinth.workers.dev/mcp/web-scraping-engine"
+  configSchema:
+    type: object
+    properties: {}
+    required: []
