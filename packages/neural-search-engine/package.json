@@ -1,0 +1,49 @@
+{
+  "name": "@stand-out-of-my-sun/diogenes-neural-search-engine-mcp",
+  "version": "1.4.0",
+  "description": "12 real-time neural search, grounded research & factual verification tools: neural search synthesizer, deep research dossier compiler, Boolean & semantic query expander, curated domain registry filter, breaking news recency & velocity tracker, factual consensus claim verifier, scholarly citation compiler (BibTeX/APA/IEEE), topic subgraph clusterer, bull/bear media sentiment oracle, expert source ranker, chronological timeline synthesizer, and competitive landscape matrix.",
+  "license": "MIT",
+  "author": "@stand-out-of-my-sun",
+  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-neural-search-engine-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-neural-search-engine-mcp/issues"
+  },
+  "main": "index.js",
+  "bin": {
+    "diogenes-neural-search-engine-mcp": "index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "neural-search",
+    "deep-research",
+    "fact-checking",
+    "sentiment-analysis",
+    "citations",
+    "search-engine",
+    "streamable-http",
+    "glama",
+    "tensorblock",
+    "l402",
+    "x402"
+  ],
+  "mcp": {
+    "serverId": "io.github.stand-out-of-my-sun/diogenes-neural-search-engine",
+    "packageSlug": "neural-search-engine",
+    "transport": "streamable-http",
+    "endpoint": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/neural-search-engine",
+    "manifestEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/neural-search-engine.json",
+    "healthEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+    "auth": "none",
+    "installConfidence": "high",
+    "verification": "verified",
+    "toolsCount": 12
+  }
+}
