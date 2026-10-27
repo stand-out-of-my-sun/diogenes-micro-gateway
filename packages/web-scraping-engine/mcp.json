@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "diogenes-web-scraping-engine": {
+      "transport": "streamable-http",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/web-scraping-engine",
+      "auth": "none",
+      "description": "12 high-performance web extraction, readability & markdown tools: clean LLM markdown compiler, readable article extractor, OpenGraph & JSON-LD metadata parser, HTML table to JSON/Markdown converter, CSS selector isolator, paywall & overlay bypass auditor, XML sitemap crawler, hyperlink extractor, HTML XSS sanitizer, contact & lead info parser, SEO heading diagnostics, and RSS/Atom feed compiler.",
+      "headers": {}
+    }
+  }
+}
