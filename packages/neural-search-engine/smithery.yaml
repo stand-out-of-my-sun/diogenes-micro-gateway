@@ -1,0 +1,20 @@
+# Smithery & TensorBlock MCP Index Installation Manifest (neural-search-engine)
+name: diogenes-neural-search-engine-mcp
+displayName: "Diogenes Neural Search, Grounded Research & Deep Intelligence MCP"
+description: "12 real-time neural search, grounded research & factual verification tools: neural search synthesizer, deep research dossier compiler, Boolean & semantic query expander, curated domain registry filter, breaking news recency & velocity tracker, factual consensus claim verifier, scholarly citation compiler (BibTeX/APA/IEEE), topic subgraph clusterer, bull/bear media sentiment oracle, expert source ranker, chronological timeline synthesizer, and competitive landscape matrix."
+author: "stand-out-of-my-sun"
+license: MIT
+homepage: "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages"
+repository: "https://github.com/stand-out-of-my-sun/diogenes-neural-search-engine-mcp"
+category: "Search & Deep Research"
+transport: streamable-http
+auth: none
+installConfidence: high
+verification: verified
+startCommand:
+  type: http
+  url: "https://diogenes-micro-gateway.corinth.workers.dev/mcp/neural-search-engine"
+  configSchema:
+    type: object
+    properties: {}
+    required: []
