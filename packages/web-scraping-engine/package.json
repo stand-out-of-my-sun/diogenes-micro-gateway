@@ -1,0 +1,50 @@
+{
+  "name": "@stand-out-of-my-sun/diogenes-web-scraping-engine-mcp",
+  "version": "1.4.0",
+  "description": "12 high-performance web extraction, readability & markdown tools: clean LLM markdown compiler, readable article extractor, OpenGraph & JSON-LD metadata parser, HTML table to JSON/Markdown converter, CSS selector isolator, paywall & overlay bypass auditor, XML sitemap crawler, hyperlink extractor, HTML XSS sanitizer, contact & lead info parser, SEO heading diagnostics, and RSS/Atom feed compiler.",
+  "license": "MIT",
+  "author": "@stand-out-of-my-sun",
+  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-web-scraping-engine-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-web-scraping-engine-mcp/issues"
+  },
+  "main": "index.js",
+  "bin": {
+    "diogenes-web-scraping-engine-mcp": "index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "web-scraping",
+    "html-to-markdown",
+    "readability",
+    "metadata-extractor",
+    "seo",
+    "rss",
+    "crawler",
+    "streamable-http",
+    "glama",
+    "tensorblock",
+    "l402",
+    "x402"
+  ],
+  "mcp": {
+    "serverId": "io.github.stand-out-of-my-sun/diogenes-web-scraping-engine",
+    "packageSlug": "web-scraping-engine",
+    "transport": "streamable-http",
+    "endpoint": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/web-scraping-engine",
+    "manifestEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/web-scraping-engine.json",
+    "healthEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+    "auth": "none",
+    "installConfidence": "high",
+    "verification": "verified",
+    "toolsCount": 12
+  }
+}
