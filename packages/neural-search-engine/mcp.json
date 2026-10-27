@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "diogenes-neural-search-engine": {
+      "transport": "streamable-http",
+      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/neural-search-engine",
+      "auth": "none",
+      "description": "12 real-time neural search, grounded research & factual verification tools: neural search synthesizer, deep research dossier compiler, Boolean & semantic query expander, curated domain registry filter, breaking news recency & velocity tracker, factual consensus claim verifier, scholarly citation compiler (BibTeX/APA/IEEE), topic subgraph clusterer, bull/bear media sentiment oracle, expert source ranker, chronological timeline synthesizer, and competitive landscape matrix.",
+      "headers": {}
+    }
+  }
+}
