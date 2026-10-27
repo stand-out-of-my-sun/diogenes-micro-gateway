@@ -4,7 +4,7 @@
       "transport": "streamable-http",
       "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp",
       "auth": "none",
-      "description": "Autonomous AI Gateway: Account-less access to 45 Gemini models & autonomous agents (Antigravity, Deep Research Pro, Nano Banana), 85 edge microservices & 14 EVE: Frontier APIs",
+      "description": "Account-less access to 45 Gemini models & AI agents (Antigravity, Deep Research Pro, Nano Banana), 121 edge microservices across 9 modular domain packages.",
       "headers": {}
     }
   }
