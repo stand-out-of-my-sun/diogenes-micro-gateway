@@ -1,14 +1,15 @@
-# Diogenes Gemini Suite & Autonomous Agents MCP (`diogenes-gemini-suite-mcp`)
+# Diogenes Gemini Suite & AI Agents MCP (`diogenes-gemini-suite-mcp`)
 
 [![Indexed on TensorBlock MCP Index](https://mcp-index.tensorblock.co/v1/servers/github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7/badge.svg)](https://www.tensorblock.co/mcp/servers/github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7?client=cursor)
 [![Glama MCP Server](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-gemini-suite-mcp/badges/score.svg)](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-gemini-suite-mcp)
+[![M8ven Score](https://m8ven.ai/badge/mcp/stand-out-of-my-sun-diogenes-gemini-suite-mcp-mzy1q5?v=98175884a1b7e16f813a65c2f7d70cad)](https://m8ven.ai/mcp/stand-out-of-my-sun-diogenes-gemini-suite-mcp-mzy1q5?s=readme)
 [![Master Gateway](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway/badges/score.svg)](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway)
 
-**Diogenes Gemini Suite & Autonomous Agents MCP** is a focused, zero-bloat Model Context Protocol (`streamable-http`) package powered by the [Diogenes Autonomous Microservice Gateway](https://diogenes-micro-gateway.corinth.workers.dev).
+**Diogenes Gemini Suite & AI Agents MCP** is a focused, zero-bloat Model Context Protocol (`streamable-http`) package powered by the [Diogenes Microservice Gateway](https://diogenes-micro-gateway.corinth.workers.dev).
 
-Instead of loading all 85 gateway endpoints into your LLM's context window, installing this package exposes **only the 15 specialized `gemini-suite` tools** needed for **AI & LLM Integration**:
+Instead of loading all 121 gateway endpoints into your LLM's context window, installing this package exposes **only the 15 specialized `gemini-suite` tools** needed for **AI & LLM Integration**:
 
-15 MCP tools providing account-less access to all 45 Google Gemini models (Gemini 4 Argon, 3.1 Pro, 3.8 Flash) and autonomous agents (Antigravity Agent, Deep Research Pro, Computer Use, Nano Banana Pro, Veo 3, Lyria 3) via L402, x402, and MPP.
+15 MCP tools providing account-less access to all 45 Google Gemini models (Gemini 4 Argon, 3.1 Pro, 3.8 Flash) and AI agents (Antigravity Agent, Deep Research Pro, Computer Use, Nano Banana Pro, Veo 3, Lyria 3) via L402, x402, and MPP.
 
 ---
 
@@ -56,7 +57,7 @@ Add to `claude_desktop_config.json` (Mac: `~/Library/Application Support/Claude/
 | MCP Tool Name | Underlying REST Route | Settlement | Capability |
 | :--- | :--- | :--- | :--- |
 | `generate_gemini_completion` | `POST /api/v1/ai/generate` | 250 sats (L402) | Generates text completions and structured reasoning across all 45 Google Gemini foundation models (Gemini 4 Argon, 3.1 Pro, 3.8 Flash) with zero Google account or API key required. Use when running single-turn reasoning, coding, or analytical prompts on a specific Gemini model; for delegating multi-step autonomous tasks that require remote tool execution, use execute_antigravity_agent instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'prompt' ('model' defaults to 'gemini-4-argon'), supports '?demo=true' or L402 (250 sats), and returns HTTP 400 if invalid. |
-| `execute_antigravity_agent` | `POST /api/v1/ai/antigravity-agent` | 500 sats (L402) | Dispatches a complex engineering or operational task to Google's Antigravity autonomous agent for multi-step planning, tool orchestration, and verified execution. Use when solving multi-stage software engineering or workflow tasks that require autonomous planning; for compiling exhaustive multi-source literature and market research dossiers, use conduct_deep_research_investigation instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'input' ('execution_mode' defaults to 'autonomous_verified'), supports '?demo=true' or L402 (500 sats), and returns HTTP 400 if invalid. |
+| `execute_antigravity_agent` | `POST /api/v1/ai/antigravity-agent` | 500 sats (L402) | Dispatches a complex engineering or operational task to Google's Antigravity autonomous agent for multi-step planning, tool orchestration, and verified execution. Use when solving multi-stage software engineering or workflow tasks that require autonomous planning; for compiling exhaustive multi-source literature and market research dossiers, use conduct_deep_research_investigation instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'input' ('execution_mode' defaults to 'verified_execution'), supports '?demo=true' or L402 (500 sats), and returns HTTP 400 if invalid. |
 | `conduct_deep_research_investigation` | `POST /api/v1/ai/deep-research` | 1000 sats (L402) | Runs an iterative, multi-hop investigative research session via Gemini Deep Research Pro, cross-examining primary sources to produce a cited technical report. Use when investigating complex scientific, architectural, or market questions requiring deep multi-hop synthesis; for running a fast single-turn Google Search grounded fact lookup, use search_gemini_grounded_web instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'input' ('depth_tier' defaults to 'quick_synthesis'), supports '?demo=true' or L402 (1000 sats), and returns HTTP 400 if invalid. |
 | `operate_computer_use_agent` | `POST /api/v1/ai/computer-use` | 800 sats (L402) | Plans and executes OS-level desktop, browser DOM, and GUI coordinate actions (click, type, scroll, wait) using the Gemini Computer Use agent. Use when automating interactive web UIs or desktop workflows that lack a direct REST API; for running code-first API and terminal automation tasks, use execute_antigravity_agent instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'input' ('viewport_preset' defaults to 'desktop_1080p'), supports '?demo=true' or L402 (800 sats), and returns HTTP 400 if invalid. |
 | `search_gemini_grounded_web` | `POST /api/v1/ai/grounded-search` | 200 sats (L402) | Answers factual queries with live Google Search grounding, returning verified up-to-date answers accompanied by source URLs and grounding metadata. Use when verifying live web facts, documentation updates, or current events in a single low-latency call; for querying geographic places, coordinates, directions, and local business data via Google Maps grounding, use search_gemini_grounded_maps instead. Stateless read-only edge call (max 32 KB, 60 RPM): accepts 'prompt' ('recency_bias' defaults to 'past_24h'), supports '?demo=true' or L402 (200 sats), and returns HTTP 400 if invalid. |
@@ -81,13 +82,16 @@ Install only the domain packages relevant to your workflow:
 
 | Package | Scoped MCP Endpoint | Spoke Repository |
 | :--- | :--- | :--- |
-| **1. Gemini Suite & Agents** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/gemini-suite` | [`stand-out-of-my-sun/diogenes-gemini-suite-mcp`](https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp) |
-| **2. Agent Guardrails & Sandbox** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails` | [`stand-out-of-my-sun/diogenes-agent-guardrails-mcp`](https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp) |
-| **3. Web3, DeFi & 402 Security** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/web3-security` | [`stand-out-of-my-sun/diogenes-web3-security-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp) |
-| **4. EVE: Frontier Sui Move Suite** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/eve-frontier` | [`stand-out-of-my-sun/diogenes-eve-frontier-mcp`](https://github.com/stand-out-of-my-sun/diogenes-eve-frontier-mcp) |
+| **1. EVE: Frontier Sui Move Suite (14 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/eve-frontier` | [`stand-out-of-my-sun/diogenes-eve-frontier-mcp`](https://github.com/stand-out-of-my-sun/diogenes-eve-frontier-mcp) |
+| **2. Agent Guardrails & Sandbox (12 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails` | [`stand-out-of-my-sun/diogenes-agent-guardrails-mcp`](https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp) |
+| **3. Web3, DeFi & 402 Security (15 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/web3-security` | [`stand-out-of-my-sun/diogenes-web3-security-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp) |
+| **4. Gemini Suite & AI Agents (15 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/gemini-suite` | [`stand-out-of-my-sun/diogenes-gemini-suite-mcp`](https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp) |
 | **5. Context, Code & Solvers (15 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/context-code-solver` | [`stand-out-of-my-sun/diogenes-context-code-solver-mcp`](https://github.com/stand-out-of-my-sun/diogenes-context-code-solver-mcp) |
 | **6. Dev, Data & Workflow Utilities (14 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/dev-utilities` | [`stand-out-of-my-sun/diogenes-dev-utilities-mcp`](https://github.com/stand-out-of-my-sun/diogenes-dev-utilities-mcp) |
-| **7. Full Master Gateway (All 85 Services)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp` | [`stand-out-of-my-sun/diogenes-micro-gateway`](https://github.com/stand-out-of-my-sun/diogenes-micro-gateway) |
+| **7. Web Extraction, Readability & Markdown Engine (12 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/web-scraping-engine` | [`stand-out-of-my-sun/diogenes-web-scraping-engine-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web-scraping-engine-mcp) |
+| **8. Neural Search, Grounded Research & Deep Intelligence (12 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/neural-search-engine` | [`stand-out-of-my-sun/diogenes-neural-search-engine-mcp`](https://github.com/stand-out-of-my-sun/diogenes-neural-search-engine-mcp) |
+| **9. Database Intelligence, SQL Engine & Schema Guard (12 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/database-intelligence` | [`stand-out-of-my-sun/diogenes-database-intelligence-mcp`](https://github.com/stand-out-of-my-sun/diogenes-database-intelligence-mcp) |
+| **10. Full Master Gateway (All 121 Services)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp` | [`stand-out-of-my-sun/diogenes-micro-gateway`](https://github.com/stand-out-of-my-sun/diogenes-micro-gateway) |
 
 ---
 
@@ -100,7 +104,7 @@ Install only the domain packages relevant to your workflow:
 | **Endpoint** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/gemini-suite` |
 | **Manifest** | `https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/gemini-suite.json` |
 | **Health Check** | `https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health` |
-| **Auth** | `none` (100% account-less free tier, MCP discovery & `?demo=true` previews; optional `L402`, `x402`, or `MPP` request headers for production calls) |
+| **Auth** | `none` (100% account-less free tier, MCP discovery & `?demo=true` previews; optional 6 flexible crypto payment rails for production calls: L402, x402, Base MPP, Garlicoin 0-Conf, BSC WGRLC, or Prepaid GRLC session API keys) |
 | **Install Confidence** | `high` (Zero-install remote Streamable HTTP endpoint + root `package.json`, `smithery.yaml`, `server.json`, `glama.json`, and `mcp.json`) |
 | **License** | `MIT` |
 | **Verification** | `verified` (`@stand-out-of-my-sun` verified via `https://diogenes-micro-gateway.corinth.workers.dev/.well-known/tensorblock.json` & `https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/gemini-suite.json`) |
