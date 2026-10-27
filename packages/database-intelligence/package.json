@@ -1,0 +1,51 @@
+{
+  "name": "@stand-out-of-my-sun/diogenes-database-intelligence-mcp",
+  "version": "1.4.0",
+  "description": "12 deterministic database intelligence, AST SQL & schema reliability tools: natural language to SQL synthesizer, AST SQL injection & tautology auditor, query plan EXPLAIN optimizer, breaking schema migration differ, polyglot SQL transpiler (PostgreSQL/MySQL/SQLite), composite B-tree index advisor, relational 3NF/BCNF normalization validator, SQL telemetry PII scrubber, relational mock seed fixture generator, connection pool headroom calculator, transaction isolation hazard auditor, and ORM model compiler (Prisma/Drizzle/Zod).",
+  "license": "MIT",
+  "author": "@stand-out-of-my-sun",
+  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-database-intelligence-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-database-intelligence-mcp/issues"
+  },
+  "main": "index.js",
+  "bin": {
+    "diogenes-database-intelligence-mcp": "index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "database",
+    "sql",
+    "nl-to-sql",
+    "ast-parser",
+    "query-optimizer",
+    "schema-migrations",
+    "orm",
+    "prisma",
+    "streamable-http",
+    "glama",
+    "tensorblock",
+    "l402",
+    "x402"
+  ],
+  "mcp": {
+    "serverId": "io.github.stand-out-of-my-sun/diogenes-database-intelligence",
+    "packageSlug": "database-intelligence",
+    "transport": "streamable-http",
+    "endpoint": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/database-intelligence",
+    "manifestEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/database-intelligence.json",
+    "healthEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+    "auth": "none",
+    "installConfidence": "high",
+    "verification": "verified",
+    "toolsCount": 12
+  }
+}
