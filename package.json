@@ -1,6 +1,6 @@
 {
   "name": "@stand-out-of-my-sun/diogenes-micro-gateway",
-  "version": "1.3.0",
+  "version": "4.4.0",
   "description": "Account-less access to 45 Gemini models & AI agents (Antigravity, Deep Research Pro, Nano Banana), 121 edge microservices across 9 modular domain packages.",
   "license": "MIT",
   "author": "@stand-out-of-my-sun",
