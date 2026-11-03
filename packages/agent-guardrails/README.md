@@ -73,6 +73,13 @@ Add to `claude_desktop_config.json` (Mac: `~/Library/Application Support/Claude/
 
 ---
 
+## 🚀 Upgrade to Frontier AI Models & Autonomous Agent Pipelines
+
+Looking for multi-model reasoning or live web retrieval? Pair `agent-guardrails` with our paid Gemini Suite & Frontier Reasoning packages (45 models including Gemini 2.5 Pro, Antigravity Agent, Deep Research Pro, and Web Scraping) starting at only 10 sats / 1 GRLC / $0.01 with account-less pay-per-call micropayments:
+👉 [Explore Full Gateway & Frontier AI Suite](https://diogenes-micro-gateway.corinth.workers.dev)
+
+---
+
 ## Other Modular Diogenes MCP Packages
 
 Install only the domain packages relevant to your workflow:
