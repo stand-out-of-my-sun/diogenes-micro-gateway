@@ -4,7 +4,7 @@
       "transport": "streamable-http",
       "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp",
       "auth": "none",
-      "description": "100% Free Developer Tier for 15 coding & AST tools, plus account-less pay-per-call access to 45 Gemini models & AI agents (Antigravity, Deep Research Pro, Nano Banana), 121 edge microservices across 9 modular domain packages.",
+      "description": "21 Free Developer Tier tools (AST pruner, token planner, fuzzy patcher, ReDoS oracle, guardrails) + account-less pay-per-call access to 45 Gemini models, AI agents, and 121 edge microservices across 9 modular domain packages.",
       "headers": {}
     }
   }
