@@ -4,7 +4,7 @@
   "description": "12 pre-execution and post-execution AI agent security tools: command injection gate, AST SQL validator, Python sandbox, MCP manifest & rug-pull auditors, sampling firewall, output scrubber, PII redactor, loop breaker, A2A card verifier, egress SSRF guard, and factuality auditor.",
   "license": "MIT",
   "author": "@stand-out-of-my-sun",
-  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "homepage": "https://diogenesgateway.com#mcp-packages",
   "repository": {
     "type": "git",
     "url": "https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp.git"
@@ -46,9 +46,9 @@
     "serverId": "io.github.stand-out-of-my-sun/diogenes-agent-guardrails",
     "packageSlug": "agent-guardrails",
     "transport": "streamable-http",
-    "endpoint": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails",
-    "manifestEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/agent-guardrails.json",
-    "healthEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+    "endpoint": "https://diogenesgateway.com/mcp/agent-guardrails",
+    "manifestEndpoint": "https://diogenesgateway.com/.well-known/mcp/agent-guardrails.json",
+    "healthEndpoint": "https://diogenesgateway.com/api/v1/health",
     "auth": "none",
     "installConfidence": "high",
     "verification": "verified",
