@@ -4,7 +4,7 @@ displayName: "Diogenes Agent Guardrails & Command Sandbox MCP"
 description: "12 pre-execution and post-execution AI agent security tools: command injection gate, AST SQL validator, Python sandbox, MCP manifest & rug-pull auditors, sampling firewall, output scrubber, PII redactor, loop breaker, A2A card verifier, egress SSRF guard, and factuality auditor."
 author: "stand-out-of-my-sun"
 license: MIT
-homepage: "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages"
+homepage: "https://diogenesgateway.com#mcp-packages"
 repository: "https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp"
 category: "Security"
 transport: streamable-http
@@ -13,7 +13,7 @@ installConfidence: high
 verification: verified
 startCommand:
   type: http
-  url: "https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails"
+  url: "https://diogenesgateway.com/mcp/agent-guardrails"
   configSchema:
     type: object
     properties: {}
