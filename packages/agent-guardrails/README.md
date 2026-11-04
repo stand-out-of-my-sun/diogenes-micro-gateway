@@ -5,7 +5,7 @@
 [![M8ven Score](https://m8ven.ai/badge/mcp/stand-out-of-my-sun-diogenes-agent-guardrails-mcp-1twuib?v=37891da2f795c432774a419a6e58fb03)](https://m8ven.ai/mcp/stand-out-of-my-sun-diogenes-agent-guardrails-mcp-1twuib?s=readme)
 [![Master Gateway](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway/badges/score.svg)](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway)
 
-**Diogenes Agent Guardrails & Command Sandbox MCP** is a focused, zero-bloat Model Context Protocol (`streamable-http`) package powered by the [Diogenes Microservice Gateway](https://diogenes-micro-gateway.corinth.workers.dev).
+**Diogenes Agent Guardrails & Command Sandbox MCP** is a focused, zero-bloat Model Context Protocol (`streamable-http`) package powered by the [Diogenes Microservice Gateway](https://diogenesgateway.com).
 
 Instead of loading all 121 gateway endpoints into your LLM's context window, installing this package exposes **only the 12 specialized `agent-guardrails` tools** needed for **Security**:
 
@@ -25,7 +25,7 @@ Add to `.cursor/mcp.json` in your project root or global Cursor settings:
   "mcpServers": {
     "diogenes-agent-guardrails": {
       "transport": "streamable-http",
-      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails"
+      "url": "https://diogenesgateway.com/mcp/agent-guardrails"
     }
   }
 }
@@ -39,7 +39,7 @@ Add to `claude_desktop_config.json` (Mac: `~/Library/Application Support/Claude/
   "mcpServers": {
     "diogenes-agent-guardrails": {
       "transport": "streamable-http",
-      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails"
+      "url": "https://diogenesgateway.com/mcp/agent-guardrails"
     }
   }
 }
@@ -76,7 +76,7 @@ Add to `claude_desktop_config.json` (Mac: `~/Library/Application Support/Claude/
 ## 🚀 Upgrade to Frontier AI Models & Autonomous Agent Pipelines
 
 Looking for multi-model reasoning or live web retrieval? Pair `agent-guardrails` with our paid Gemini Suite & Frontier Reasoning packages (45 models including Gemini 2.5 Pro, Antigravity Agent, Deep Research Pro, and Web Scraping) starting at only 10 sats / 1 GRLC / $0.01 with account-less pay-per-call micropayments:
-👉 [Explore Full Gateway & Frontier AI Suite](https://diogenes-micro-gateway.corinth.workers.dev)
+👉 [Explore Full Gateway & Frontier AI Suite](https://diogenesgateway.com)
 
 ---
 
@@ -86,16 +86,16 @@ Install only the domain packages relevant to your workflow:
 
 | Package | Scoped MCP Endpoint | Spoke Repository |
 | :--- | :--- | :--- |
-| **1. EVE: Frontier Sui Move Suite (14 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/eve-frontier` | [`stand-out-of-my-sun/diogenes-eve-frontier-mcp`](https://github.com/stand-out-of-my-sun/diogenes-eve-frontier-mcp) |
-| **2. Agent Guardrails & Sandbox (12 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails` | [`stand-out-of-my-sun/diogenes-agent-guardrails-mcp`](https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp) |
-| **3. Web3, DeFi & 402 Security (15 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/web3-security` | [`stand-out-of-my-sun/diogenes-web3-security-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp) |
-| **4. Gemini Suite & AI Agents (15 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/gemini-suite` | [`stand-out-of-my-sun/diogenes-gemini-suite-mcp`](https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp) |
-| **5. Context, Code & Solvers (15 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/context-code-solver` | [`stand-out-of-my-sun/diogenes-context-code-solver-mcp`](https://github.com/stand-out-of-my-sun/diogenes-context-code-solver-mcp) |
-| **6. Dev, Data & Workflow Utilities (14 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/dev-utilities` | [`stand-out-of-my-sun/diogenes-dev-utilities-mcp`](https://github.com/stand-out-of-my-sun/diogenes-dev-utilities-mcp) |
-| **7. Web Extraction, Readability & Markdown Engine (12 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/web-scraping-engine` | [`stand-out-of-my-sun/diogenes-web-scraping-engine-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web-scraping-engine-mcp) |
-| **8. Neural Search, Grounded Research & Deep Intelligence (12 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/neural-search-engine` | [`stand-out-of-my-sun/diogenes-neural-search-engine-mcp`](https://github.com/stand-out-of-my-sun/diogenes-neural-search-engine-mcp) |
-| **9. Database Intelligence, SQL Engine & Schema Guard (12 Tools)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/database-intelligence` | [`stand-out-of-my-sun/diogenes-database-intelligence-mcp`](https://github.com/stand-out-of-my-sun/diogenes-database-intelligence-mcp) |
-| **10. Full Master Gateway (All 121 Services)** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp` | [`stand-out-of-my-sun/diogenes-micro-gateway`](https://github.com/stand-out-of-my-sun/diogenes-micro-gateway) |
+| **1. EVE: Frontier Sui Move Suite (14 Tools)** | `https://diogenesgateway.com/mcp/eve-frontier` | [`stand-out-of-my-sun/diogenes-eve-frontier-mcp`](https://github.com/stand-out-of-my-sun/diogenes-eve-frontier-mcp) |
+| **2. Agent Guardrails & Sandbox (12 Tools)** | `https://diogenesgateway.com/mcp/agent-guardrails` | [`stand-out-of-my-sun/diogenes-agent-guardrails-mcp`](https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp) |
+| **3. Web3, DeFi & 402 Security (15 Tools)** | `https://diogenesgateway.com/mcp/web3-security` | [`stand-out-of-my-sun/diogenes-web3-security-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp) |
+| **4. Gemini Suite & AI Agents (15 Tools)** | `https://diogenesgateway.com/mcp/gemini-suite` | [`stand-out-of-my-sun/diogenes-gemini-suite-mcp`](https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp) |
+| **5. Context, Code & Solvers (15 Tools)** | `https://diogenesgateway.com/mcp/context-code-solver` | [`stand-out-of-my-sun/diogenes-context-code-solver-mcp`](https://github.com/stand-out-of-my-sun/diogenes-context-code-solver-mcp) |
+| **6. Dev, Data & Workflow Utilities (14 Tools)** | `https://diogenesgateway.com/mcp/dev-utilities` | [`stand-out-of-my-sun/diogenes-dev-utilities-mcp`](https://github.com/stand-out-of-my-sun/diogenes-dev-utilities-mcp) |
+| **7. Web Extraction, Readability & Markdown Engine (12 Tools)** | `https://diogenesgateway.com/mcp/web-scraping-engine` | [`stand-out-of-my-sun/diogenes-web-scraping-engine-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web-scraping-engine-mcp) |
+| **8. Neural Search, Grounded Research & Deep Intelligence (12 Tools)** | `https://diogenesgateway.com/mcp/neural-search-engine` | [`stand-out-of-my-sun/diogenes-neural-search-engine-mcp`](https://github.com/stand-out-of-my-sun/diogenes-neural-search-engine-mcp) |
+| **9. Database Intelligence, SQL Engine & Schema Guard (12 Tools)** | `https://diogenesgateway.com/mcp/database-intelligence` | [`stand-out-of-my-sun/diogenes-database-intelligence-mcp`](https://github.com/stand-out-of-my-sun/diogenes-database-intelligence-mcp) |
+| **10. Full Master Gateway (All 121 Services)** | `https://diogenesgateway.com/mcp` | [`stand-out-of-my-sun/diogenes-micro-gateway`](https://github.com/stand-out-of-my-sun/diogenes-micro-gateway) |
 
 ---
 
@@ -105,13 +105,13 @@ Install only the domain packages relevant to your workflow:
 | :--- | :--- |
 | **Category** | `Security` |
 | **Transport** | `streamable-http` |
-| **Endpoint** | `https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails` |
-| **Manifest** | `https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/agent-guardrails.json` |
-| **Health Check** | `https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health` |
+| **Endpoint** | `https://diogenesgateway.com/mcp/agent-guardrails` |
+| **Manifest** | `https://diogenesgateway.com/.well-known/mcp/agent-guardrails.json` |
+| **Health Check** | `https://diogenesgateway.com/api/v1/health` |
 | **Auth** | `none` (100% account-less free tier, MCP discovery & `?demo=true` previews; optional 6 flexible crypto payment rails for production calls: L402, x402, Base MPP, Garlicoin 0-Conf, BSC WGRLC, or Prepaid GRLC session API keys) |
 | **Install Confidence** | `high` (Zero-install remote Streamable HTTP endpoint + root `package.json`, `smithery.yaml`, `server.json`, `glama.json`, and `mcp.json`) |
 | **License** | `MIT` |
-| **Verification** | `verified` (`@stand-out-of-my-sun` verified via `https://diogenes-micro-gateway.corinth.workers.dev/.well-known/tensorblock.json` & `https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/agent-guardrails.json`) |
+| **Verification** | `verified` (`@stand-out-of-my-sun` verified via `https://diogenesgateway.com/.well-known/tensorblock.json` & `https://diogenesgateway.com/.well-known/mcp/agent-guardrails.json`) |
 | **Maintainer** | `@stand-out-of-my-sun` |
-| **Docs** | `https://diogenes-micro-gateway.corinth.workers.dev/llms.txt` |
+| **Docs** | `https://diogenesgateway.com/llms.txt` |
 | **Support** | `https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp/issues` |
