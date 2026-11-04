@@ -12,9 +12,9 @@
   "install_confidence": "high",
   "verification": "verified",
   "repository": "https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp",
-  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
-  "remote_url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails",
-  "manifest_url": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/agent-guardrails.json",
-  "health_check_url": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+  "homepage": "https://diogenesgateway.com#mcp-packages",
+  "remote_url": "https://diogenesgateway.com/mcp/agent-guardrails",
+  "manifest_url": "https://diogenesgateway.com/.well-known/mcp/agent-guardrails.json",
+  "health_check_url": "https://diogenesgateway.com/api/v1/health",
   "description": "12 pre-execution and post-execution AI agent security tools: command injection gate, AST SQL validator, Python sandbox, MCP manifest & rug-pull auditors, sampling firewall, output scrubber, PII redactor, loop breaker, A2A card verifier, egress SSRF guard, and factuality auditor."
 }
