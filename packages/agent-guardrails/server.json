@@ -18,9 +18,9 @@
   "install_confidence": "high",
   "verification": {
     "status": "verified",
-    "package_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/agent-guardrails.json",
-    "tensorblock_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/tensorblock.json",
-    "health_check": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health"
+    "package_manifest": "https://diogenesgateway.com/.well-known/mcp/agent-guardrails.json",
+    "tensorblock_manifest": "https://diogenesgateway.com/.well-known/tensorblock.json",
+    "health_check": "https://diogenesgateway.com/api/v1/health"
   },
   "repository": {
     "url": "https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp",
@@ -29,7 +29,7 @@
   "remotes": [
     {
       "transport_type": "streamable-http",
-      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/agent-guardrails",
+      "url": "https://diogenesgateway.com/mcp/agent-guardrails",
       "auth": "none"
     }
   ]
