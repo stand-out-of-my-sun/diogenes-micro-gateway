@@ -4,7 +4,7 @@
   "description": "100% Free Developer Tier (zero API keys, zero wallet required): 15 deterministic AI agent & developer tools: AST context skeleton pruner, BPE token budget planner, BM25+RRF+MMR hybrid reranker, self-healing fuzzy diff patcher, polyglot AST symbol & complexity analyzer, Tarjan circular dependency detector, stack-trace root-cause isolator, polyglot TypeScript/Zod/Pydantic compiler, Shunting-Yard math & IRR/NPV solver, Critical Path (CPM) scheduler, Welch/Bayesian A/B judge, RFC 7396 memory differ, OpenAPI breaking-change detector, boundary test-vector generator, and seeded Monte Carlo VaR/CVaR simulator.",
   "license": "MIT",
   "author": "@stand-out-of-my-sun",
-  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "homepage": "https://diogenesgateway.com#mcp-packages",
   "repository": {
     "type": "git",
     "url": "https://github.com/stand-out-of-my-sun/diogenes-context-code-solver-mcp.git"
@@ -46,9 +46,9 @@
     "serverId": "io.github.stand-out-of-my-sun/diogenes-context-code-solver",
     "packageSlug": "context-code-solver",
     "transport": "streamable-http",
-    "endpoint": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/context-code-solver",
-    "manifestEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/context-code-solver.json",
-    "healthEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+    "endpoint": "https://diogenesgateway.com/mcp/context-code-solver",
+    "manifestEndpoint": "https://diogenesgateway.com/.well-known/mcp/context-code-solver.json",
+    "healthEndpoint": "https://diogenesgateway.com/api/v1/health",
     "auth": "none",
     "installConfidence": "high",
     "verification": "verified",
