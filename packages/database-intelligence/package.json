@@ -4,7 +4,7 @@
   "description": "12 deterministic database intelligence, AST SQL & schema reliability tools: natural language to SQL synthesizer, AST SQL injection & tautology auditor, query plan EXPLAIN optimizer, breaking schema migration differ, polyglot SQL transpiler (PostgreSQL/MySQL/SQLite), composite B-tree index advisor, relational 3NF/BCNF normalization validator, SQL telemetry PII scrubber, relational mock seed fixture generator, connection pool headroom calculator, transaction isolation hazard auditor, and ORM model compiler (Prisma/Drizzle/Zod).",
   "license": "MIT",
   "author": "@stand-out-of-my-sun",
-  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "homepage": "https://diogenesgateway.com#mcp-packages",
   "repository": {
     "type": "git",
     "url": "https://github.com/stand-out-of-my-sun/diogenes-database-intelligence-mcp.git"
@@ -41,9 +41,9 @@
     "serverId": "io.github.stand-out-of-my-sun/diogenes-database-intelligence",
     "packageSlug": "database-intelligence",
     "transport": "streamable-http",
-    "endpoint": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/database-intelligence",
-    "manifestEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/database-intelligence.json",
-    "healthEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+    "endpoint": "https://diogenesgateway.com/mcp/database-intelligence",
+    "manifestEndpoint": "https://diogenesgateway.com/.well-known/mcp/database-intelligence.json",
+    "healthEndpoint": "https://diogenesgateway.com/api/v1/health",
     "auth": "none",
     "installConfidence": "high",
     "verification": "verified",
