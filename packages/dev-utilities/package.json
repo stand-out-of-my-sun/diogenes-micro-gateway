@@ -4,7 +4,7 @@
   "description": "14 data extraction, schema healing & workflow orchestration tools: malformed JSON healer, JSON Schema type enforcer, unstructured entity extractor, tabular dataset cleaner, O(n) ReDoS-safe regex synthesizer, XML prompt compiler, Python script synthesizer, RFC summarizer, grounded web brief, context compaction verifier, MCP workflow router, escrow arbiter, MPP session planner, and x402 embedding generator.",
   "license": "MIT",
   "author": "@stand-out-of-my-sun",
-  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
+  "homepage": "https://diogenesgateway.com#mcp-packages",
   "repository": {
     "type": "git",
     "url": "https://github.com/stand-out-of-my-sun/diogenes-dev-utilities-mcp.git"
@@ -46,9 +46,9 @@
     "serverId": "io.github.stand-out-of-my-sun/diogenes-dev-utilities",
     "packageSlug": "dev-utilities",
     "transport": "streamable-http",
-    "endpoint": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/dev-utilities",
-    "manifestEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/dev-utilities.json",
-    "healthEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+    "endpoint": "https://diogenesgateway.com/mcp/dev-utilities",
+    "manifestEndpoint": "https://diogenesgateway.com/.well-known/mcp/dev-utilities.json",
+    "healthEndpoint": "https://diogenesgateway.com/api/v1/health",
     "auth": "none",
     "installConfidence": "high",
     "verification": "verified",
