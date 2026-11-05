@@ -19,9 +19,9 @@
   "verification": {
     "status": "verified",
     "tensorblock_profile_id": "github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7",
-    "tensorblock_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/tensorblock.json",
-    "glama_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/glama.json",
-    "health_check": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health"
+    "tensorblock_manifest": "https://diogenesgateway.com/.well-known/tensorblock.json",
+    "glama_manifest": "https://diogenesgateway.com/.well-known/glama.json",
+    "health_check": "https://diogenesgateway.com/api/v1/health"
   },
   "repository": {
     "url": "https://github.com/stand-out-of-my-sun/diogenes-micro-gateway",
@@ -30,7 +30,7 @@
   "remotes": [
     {
       "transport_type": "streamable-http",
-      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp",
+      "url": "https://diogenesgateway.com/mcp",
       "auth": "none"
     }
   ]
