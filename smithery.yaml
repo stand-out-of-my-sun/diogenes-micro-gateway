@@ -4,7 +4,7 @@ displayName: Diogenes Microservice Gateway
 description: "21 Free Developer Tier tools (AST pruner, token planner, fuzzy patcher, ReDoS oracle, guardrails) + account-less pay-per-call access to 45 Gemini models, AI agents, and 121 edge microservices across 9 modular domain packages."
 author: "stand-out-of-my-sun"
 license: MIT
-homepage: "https://diogenes-micro-gateway.corinth.workers.dev"
+homepage: "https://diogenesgateway.com"
 repository: "https://github.com/stand-out-of-my-sun/diogenes-micro-gateway"
 category: Security
 transport: streamable-http
@@ -13,7 +13,7 @@ installConfidence: high
 verification: verified
 startCommand:
   type: http
-  url: "https://diogenes-micro-gateway.corinth.workers.dev/mcp"
+  url: "https://diogenesgateway.com/mcp"
   configSchema:
     type: object
     properties: {}
