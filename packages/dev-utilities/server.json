@@ -18,9 +18,9 @@
   "install_confidence": "high",
   "verification": {
     "status": "verified",
-    "package_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/dev-utilities.json",
-    "tensorblock_manifest": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/tensorblock.json",
-    "health_check": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health"
+    "package_manifest": "https://diogenesgateway.com/.well-known/mcp/dev-utilities.json",
+    "tensorblock_manifest": "https://diogenesgateway.com/.well-known/tensorblock.json",
+    "health_check": "https://diogenesgateway.com/api/v1/health"
   },
   "repository": {
     "url": "https://github.com/stand-out-of-my-sun/diogenes-dev-utilities-mcp",
@@ -29,7 +29,7 @@
   "remotes": [
     {
       "transport_type": "streamable-http",
-      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/dev-utilities",
+      "url": "https://diogenesgateway.com/mcp/dev-utilities",
       "auth": "none"
     }
   ]
