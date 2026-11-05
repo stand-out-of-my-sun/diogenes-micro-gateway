@@ -2,7 +2,7 @@
   "mcpServers": {
     "diogenes-eve-frontier": {
       "transport": "streamable-http",
-      "url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/eve-frontier",
+      "url": "https://diogenesgateway.com/mcp/eve-frontier",
       "auth": "none",
       "description": "14 EVE: Frontier Sui Move tools covering the complete Smart Assembly lifecycle: assembly state inspector, Tribe standings auditor, Move contract generator, Smart Gate ACL compiler, PTB drain simulator, zkLogin verifier, route planner, Lagrange GJ & siege simulators, fuel radar, SSU pricer, arbitrage finder, killmail analyzer, and turret target matrix.",
       "headers": {}
