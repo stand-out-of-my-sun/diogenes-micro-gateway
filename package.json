@@ -4,7 +4,7 @@
   "description": "21 Free Developer Tier tools (AST pruner, token planner, fuzzy patcher, ReDoS oracle, guardrails) + account-less pay-per-call access to 45 Gemini models, AI agents, and 121 edge microservices across 9 modular domain packages.",
   "license": "MIT",
   "author": "@stand-out-of-my-sun",
-  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev",
+  "homepage": "https://diogenesgateway.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/stand-out-of-my-sun/diogenes-micro-gateway.git"
@@ -28,8 +28,8 @@
     "serverId": "io.github.stand-out-of-my-sun/diogenes-gateway",
     "tensorblockProfileId": "github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7",
     "transport": "streamable-http",
-    "endpoint": "https://diogenes-micro-gateway.corinth.workers.dev/mcp",
-    "healthEndpoint": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+    "endpoint": "https://diogenesgateway.com/mcp",
+    "healthEndpoint": "https://diogenesgateway.com/api/v1/health",
     "auth": "none",
     "installConfidence": "high",
     "verification": "verified",
