@@ -12,9 +12,9 @@
   "install_confidence": "high",
   "verification": "verified",
   "repository": "https://github.com/stand-out-of-my-sun/diogenes-web-scraping-engine-mcp",
-  "homepage": "https://diogenes-micro-gateway.corinth.workers.dev#mcp-packages",
-  "remote_url": "https://diogenes-micro-gateway.corinth.workers.dev/mcp/web-scraping-engine",
-  "manifest_url": "https://diogenes-micro-gateway.corinth.workers.dev/.well-known/mcp/web-scraping-engine.json",
-  "health_check_url": "https://diogenes-micro-gateway.corinth.workers.dev/api/v1/health",
+  "homepage": "https://diogenesgateway.com#mcp-packages",
+  "remote_url": "https://diogenesgateway.com/mcp/web-scraping-engine",
+  "manifest_url": "https://diogenesgateway.com/.well-known/mcp/web-scraping-engine.json",
+  "health_check_url": "https://diogenesgateway.com/api/v1/health",
   "description": "12 high-performance web extraction, readability & markdown tools: clean LLM markdown compiler, readable article extractor, OpenGraph & JSON-LD metadata parser, HTML table to JSON/Markdown converter, CSS selector isolator, paywall & overlay bypass auditor, XML sitemap crawler, hyperlink extractor, HTML XSS sanitizer, contact & lead info parser, SEO heading diagnostics, and RSS/Atom feed compiler."
 }
