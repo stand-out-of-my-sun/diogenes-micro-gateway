@@ -5,14 +5,14 @@
 
 **Diogenes Microservice Gateway** (`https://diogenesgateway.com`) is an account-less, multi-protocol AI & Web3 edge gateway delivering:
 1. **Account-Less Access to the Complete Google Gemini Suite (45 Models) & AI Agents**: Instant pay-per-request access to **Antigravity Agent**, **Deep Research Pro**, **Nano Banana Pro (Gemini 3 Pro Image)**, **Nano Banana**, **Gemini 4 Argon**, and **Gemini 3.1 Pro** with zero API keys, zero accounts, and zero monthly subscriptions.
-2. **121 Live Edge Microservices at Ultra-Low Micro-Prices (Starting at 10 Sats / 1 GRLC / $0.01 SOL & Base Floor)**: Pre-execution SQL/code/MCP security guardrails, smart contract vulnerability audits, Solana/EVM token risk oracles, HTTP 402 invoice fraud verification, and cross-chain bridge routing settled flexibly across **6 Flexible Payment Rails** — **Bitcoin Lightning (`L402`)**, **Solana Native (`x402`)**, **Base EVM ETH (`MPP`)**, **Garlicoin Native L1 (`<1ms` 0-Conf)**, **BSC `WGRLC` (`BEP-20 MPP`)**, and **Garlicoin Prepaid Session Credit (`grlc_sec_...` Bearer token via `/api/v1/grlc/prepay`)** — plus **Streamable HTTP MCP (`/mcp`)**.
+2. **122 Live Edge Microservices at Ultra-Low Micro-Prices (Starting at 10 Sats / 1 GRLC / $0.01 SOL & Base Floor)**: Pre-execution SQL/code/MCP security guardrails, smart contract vulnerability audits, Solana/EVM token risk oracles, HTTP 402 invoice fraud verification, and cross-chain bridge routing settled flexibly across **6 Flexible Payment Rails** — **Bitcoin Lightning (`L402`)**, **Solana Native (`x402`)**, **Base EVM ETH (`MPP`)**, **Garlicoin Native L1 (`<1ms` 0-Conf)**, **BSC `WGRLC` (`BEP-20 MPP`)**, and **Garlicoin Prepaid Session Credit (`grlc_sec_...` Bearer token via `/api/v1/grlc/prepay`)** — plus **Streamable HTTP MCP (`/mcp`)**.
 3. **14 Dedicated EVE: Frontier Sui Move Microservices**: Sui Move Smart Assembly coder & auditor, Smart Gate route & toll planner, Lagrange Network Node gigajoule (GJ) optimizer, SSU Automated Market Maker, Killmail threat intelligence, Smart Turret target matrix, Vault zkLogin character verifier, Constellation territory & fuel radar, and Sui Programmable Transaction Block (PTB) simulator.
 
 ---
 
 ## 6 Flexible Payment Rails & Sub-Cent Micro-Pricing
 
-All 121 microservices and Gemini models operate with **zero accounts, zero API keys, and zero subscriptions**. Pay only for what you compute via 6 flexible settlement rails:
+All 122 microservices and Gemini models operate with **zero accounts, zero API keys, and zero subscriptions**. Pay only for what you compute via 6 flexible settlement rails:
 
 1. **Bitcoin Lightning (`L402` / LSAT)**: Sub-second satoshi settlement using standard HTTP 402 challenge-response (`Authorization: L402 <macaroon>:<preimage>`). Starting at 10 sats per call.
 2. **Solana Native SOL / SPL (`x402`)**: Micro-lamport transactions settled via Solana with ed25519 signature proof (`X-Payment-Signature: <tx_signature>`).
@@ -25,7 +25,7 @@ All 121 microservices and Gemini models operate with **zero accounts, zero API k
 
 ## 1-Click Modular MCP Packages
 
-Instead of loading all 121 gateway endpoints into your LLM's context window at once, connect Cursor, Claude Desktop, Zed, or Windsurf to a **purpose-built domain package** (12–15 `verb_noun` tools each, `100%` schema description coverage, `outputSchema`, and zero tool shadowing):
+Instead of loading all 122 gateway endpoints into your LLM's context window at once, connect Cursor, Claude Desktop, Zed, or Windsurf to a **purpose-built domain package** (12–15 `verb_noun` tools each, `100%` schema description coverage, `outputSchema`, and zero tool shadowing):
 
 | Domain Package | Scoped 1-Click MCP Endpoint | Dedicated Spoke Repository | Tools |
 | :--- | :--- | :--- | :--- |
@@ -38,13 +38,13 @@ Instead of loading all 121 gateway endpoints into your LLM's context window at o
 | **7. Web Extraction, Readability & Markdown Engine** | `https://diogenesgateway.com/mcp/web-scraping-engine` | [`stand-out-of-my-sun/diogenes-web-scraping-engine-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web-scraping-engine-mcp) | **12 Tools** — Clean LLM markdown compiler, readable article extractor, OpenGraph & JSON-LD parser, HTML table to JSON/Markdown, CSS selector isolator, paywall bypass auditor, XML sitemap crawler, hyperlink extractor, XSS sanitizer, contact/lead parser, SEO diagnostics, RSS/Atom compiler |
 | **8. Neural Search, Grounded Research & Deep Intelligence** | `https://diogenesgateway.com/mcp/neural-search-engine` | [`stand-out-of-my-sun/diogenes-neural-search-engine-mcp`](https://github.com/stand-out-of-my-sun/diogenes-neural-search-engine-mcp) | **12 Tools** — Neural search synthesizer, deep research dossier compiler, query expander, curated domain registry filter, breaking news velocity tracker, factual consensus claim verifier, scholarly citation compiler, topic subgraph clusterer, sentiment oracle, expert source ranker, timeline synthesizer, competitive landscape matrix |
 | **9. Database Intelligence, SQL Engine & Schema Guard** | `https://diogenesgateway.com/mcp/database-intelligence` | [`stand-out-of-my-sun/diogenes-database-intelligence-mcp`](https://github.com/stand-out-of-my-sun/diogenes-database-intelligence-mcp) | **12 Tools** — NL to SQL synthesizer, AST SQL injection & tautology auditor, EXPLAIN query optimizer, breaking migration differ, polyglot SQL transpiler, composite B-tree index advisor, 3NF/BCNF normalizer, SQL telemetry PII scrubber, mock seed fixture generator, pool headroom calculator, isolation hazard auditor, ORM model compiler |
-| **10. Full Master Gateway** | `https://diogenesgateway.com/mcp` | [`stand-out-of-my-sun/diogenes-micro-gateway`](https://github.com/stand-out-of-my-sun/diogenes-micro-gateway) | **All 121 Tools** (`130` Total Capabilities) |
+| **10. Full Master Gateway** | `https://diogenesgateway.com/mcp` | [`stand-out-of-my-sun/diogenes-micro-gateway`](https://github.com/stand-out-of-my-sun/diogenes-micro-gateway) | **All 122 Tools** (`130` Total Capabilities) |
 
 ---
 
 ## Model Context Protocol (MCP) & Public Directory Profiles
 
-Diogenes Gateway exposes **121 production tools** natively via **Streamable HTTP** (`https://diogenesgateway.com/mcp`) for Cursor, Claude Desktop, Windsurf, VS Code, and AI agents:
+Diogenes Gateway exposes **122 production tools** natively via **Streamable HTTP** (`https://diogenesgateway.com/mcp`) for Cursor, Claude Desktop, Windsurf, VS Code, and AI agents:
 
 - **Glama MCP Directory Profile**: [https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway)
 - **TensorBlock MCP Index Profile**: [https://www.tensorblock.co/mcp/servers/github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7?client=cursor](https://www.tensorblock.co/mcp/servers/github-stand-out-of-my-sun-diogenes-l402-gateway-efbd75e7?client=cursor)
