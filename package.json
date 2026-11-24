@@ -1,7 +1,7 @@
 {
   "name": "@stand-out-of-my-sun/diogenes-micro-gateway",
   "version": "4.4.0",
-  "description": "21 Free Developer Tier tools (AST pruner, token planner, fuzzy patcher, ReDoS oracle, guardrails) + account-less pay-per-call access to 51 Gemini models, AI agents, and 122 edge microservices across 9 modular domain packages.",
+  "description": "21 Free Developer Tier tools (AST pruner, token planner, fuzzy patcher, ReDoS oracle, guardrails) + account-less access to 51 Gemini/frontier models and 122 edge microservices. Features Stripe Card/Apple Pay checkout, instant <0.1ms prepaid keys (dg_sec_...), and isolated multi-currency balances across 9 modular MCP packages.",
   "license": "MIT",
   "author": "@stand-out-of-my-sun",
   "homepage": "https://diogenesgateway.com",
