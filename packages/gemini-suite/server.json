@@ -1,38 +1,18 @@
 {
-  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.stand-out-of-my-sun/diogenes-gemini-suite",
-  "description": "15 MCP tools providing account-less access to all 45 Google Gemini models (Gemini 4 Argon, 3.1 Pro, 3.8 Flash) and AI agents (Antigravity Agent, Deep Research Pro, Computer Use, Nano Banana Pro, Veo 3",
+  "title": "Diogenes Gemini Suite & AI Agents MCP",
+  "description": "15 MCP tools providing account-less access to all 45 Google Gemini models (Gemini 4 Argon, 3.1 Pro, ",
   "version": "1.4.0",
-  "license": "MIT",
-  "maintainer": "@stand-out-of-my-sun",
-  "category": "AI & LLM Integration",
-  "auth": {
-    "type": "none",
-    "accountless": true,
-    "optional_payment_headers": [
-      "Authorization: Bearer dg_sec_...",
-      "Authorization: L402",
-      "X-Payment-Signature",
-      "X-Payment-TxHash",
-      "X-Payment-XRP-TxHash"
-    ]
-  },
-  "install_confidence": "high",
-  "verification": {
-    "status": "verified",
-    "package_manifest": "https://diogenesgateway.com/.well-known/mcp/gemini-suite.json",
-    "tensorblock_manifest": "https://diogenesgateway.com/.well-known/tensorblock.json",
-    "health_check": "https://diogenesgateway.com/api/v1/health"
-  },
+  "websiteUrl": "https://diogenesgateway.com",
   "repository": {
     "url": "https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp",
     "source": "github"
   },
   "remotes": [
     {
-      "transport_type": "streamable-http",
-      "url": "https://diogenesgateway.com/mcp/gemini-suite",
-      "auth": "none"
+      "type": "streamable-http",
+      "url": "https://diogenesgateway.com/mcp/gemini-suite"
     }
   ]
 }
