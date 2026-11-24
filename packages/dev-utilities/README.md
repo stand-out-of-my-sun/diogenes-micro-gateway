@@ -4,18 +4,30 @@
 [![Glama MCP Server](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-dev-utilities-mcp/badges/score.svg)](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-dev-utilities-mcp)
 [![M8ven Score](https://m8ven.ai/badge/mcp/stand-out-of-my-sun-diogenes-dev-utilities-mcp-h45t1b?v=c73eaaa6890a00e98675cbdbbf0809f7)](https://m8ven.ai/mcp/stand-out-of-my-sun-diogenes-dev-utilities-mcp-h45t1b?s=readme)
 [![Master Gateway](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway/badges/score.svg)](https://glama.ai/mcp/servers/stand-out-of-my-sun/diogenes-micro-gateway)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Stripe Fiat Checkout](https://img.shields.io/badge/Stripe-Card%20%26%20Apple%20Pay-635bff.svg)](https://diogenesgateway.com#prepay-checkout-widget)
+[![Prepaid Keys](https://img.shields.io/badge/Session%20Keys-%3C0.1ms%20Fast%20Path-orange.svg)](https://diogenesgateway.com#prepay-checkout-widget)
 
 **Diogenes Developer, Data & Workflow Orchestration MCP** is a focused, zero-bloat Model Context Protocol (`streamable-http`) package powered by the [Diogenes Microservice Gateway](https://diogenesgateway.com).
 
-Instead of loading all 121 gateway endpoints into your LLM's context window, installing this package exposes **only the 14 specialized `dev-utilities` tools** needed for **Developer Tools**:
+Instead of loading all 122 gateway endpoints into your LLM's context window, installing this package exposes **only the 14 specialized `dev-utilities` tools** needed for **Developer Tools**:
 
 14 data extraction, schema healing & workflow orchestration tools: malformed JSON healer, JSON Schema type enforcer, unstructured entity extractor, tabular dataset cleaner, O(n) ReDoS-safe regex synthesizer, XML prompt compiler, Python script synthesizer, RFC summarizer, grounded web brief, context compaction verifier, MCP workflow router, escrow arbiter, MPP session planner, and x402 embedding generator.
 
 ---
 
-## ⚡ 1-Click Install for Cursor & Claude Desktop
+## ⚡ 1-Click Install for Cursor, Claude Desktop, Zed & Windsurf
 
-No API keys, user accounts, or local dependencies required. Zero setup — paste directly into your client config:
+No API keys, user accounts, or local dependencies required. Zero setup — install via 1-line script or paste directly into your client config:
+
+### 🚀 1-Line Terminal Auto-Installer
+```bash
+# Auto-configures Cursor, Claude Desktop, Zed, and Windsurf
+curl -sSL "https://diogenesgateway.com/install.sh" | bash
+
+# Or with your authenticated prepaid session key:
+curl -sSL "https://diogenesgateway.com/install.sh?key=dg_sec_..." | bash
+```
 
 ### 🖱️ Cursor IDE (`.cursor/mcp.json`)
 Add to `.cursor/mcp.json` in your project root or global Cursor settings:
@@ -52,6 +64,16 @@ Add to `claude_desktop_config.json` (Mac: `~/Library/Application Support/Claude/
 
 ---
 
+## 💳 Instant Stripe Card Checkout & Prepaid Keys (`<0.1ms` Fast Path)
+
+Need high-throughput execution without per-call on-chain latency or wallet confirmations?
+- **Instant Fiat Checkout**: Top up via **Card, Apple Pay, or Google Pay** (\$5 Starter, \$20 Builder, \$100 Fleet with 10%–25% bonus credits) at [https://diogenesgateway.com/#prepay-checkout-widget](https://diogenesgateway.com#prepay-checkout-widget).
+- **Session Keys (`dg_sec_...`)**: Pass `Authorization: Bearer dg_sec_...` for `<0.1ms` Cloudflare KV resolution, rate-limit exemption, and automatic sub-cent deduction.
+- **Multi-Currency Isolated Balances**: Strict single-asset accounting across USD and 6 crypto rails. Zero cross-currency conversions (*"We are not an exchange"*).
+- **15% Rev-Share Referrals**: Earn 15% lifetime revenue share on referred users and agent swarms via `dg_ref_...`.
+
+---
+
 ## Included Tools in `dev-utilities` (14 Tools)
 
 | MCP Tool Name | Underlying REST Route | Settlement | Capability |
@@ -77,7 +99,7 @@ Add to `claude_desktop_config.json` (Mac: `~/Library/Application Support/Claude/
 
 ## 🚀 Upgrade to Frontier AI Models & Autonomous Agent Pipelines
 
-Looking for multi-model reasoning or live web retrieval? Pair `dev-utilities` with our paid Gemini Suite & Frontier Reasoning packages (45 models including Gemini 2.5 Pro, Antigravity Agent, Deep Research Pro, and Web Scraping) starting at only 10 sats / 1 GRLC / $0.01 with account-less pay-per-call micropayments:
+Looking for multi-model reasoning or live web retrieval? Pair `dev-utilities` with our paid Gemini Suite & Frontier Reasoning packages (51 models including Gemini 4 Argon, Gemini 3.1 Pro, DeepSeek R1, Qwen 2.5 Coder, Antigravity Agent, Deep Research Pro, and Web Scraping) starting at only 10 sats / 1 GRLC / \$0.01 with account-less pay-per-call micropayments:
 👉 [Explore Full Gateway & Frontier AI Suite](https://diogenesgateway.com)
 
 ---
@@ -97,7 +119,7 @@ Install only the domain packages relevant to your workflow:
 | **7. Web Extraction, Readability & Markdown Engine (12 Tools)** | `https://diogenesgateway.com/mcp/web-scraping-engine` | [`stand-out-of-my-sun/diogenes-web-scraping-engine-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web-scraping-engine-mcp) |
 | **8. Neural Search, Grounded Research & Deep Intelligence (12 Tools)** | `https://diogenesgateway.com/mcp/neural-search-engine` | [`stand-out-of-my-sun/diogenes-neural-search-engine-mcp`](https://github.com/stand-out-of-my-sun/diogenes-neural-search-engine-mcp) |
 | **9. Database Intelligence, SQL Engine & Schema Guard (12 Tools)** | `https://diogenesgateway.com/mcp/database-intelligence` | [`stand-out-of-my-sun/diogenes-database-intelligence-mcp`](https://github.com/stand-out-of-my-sun/diogenes-database-intelligence-mcp) |
-| **10. Full Master Gateway (All 121 Services)** | `https://diogenesgateway.com/mcp` | [`stand-out-of-my-sun/diogenes-micro-gateway`](https://github.com/stand-out-of-my-sun/diogenes-micro-gateway) |
+| **10. Full Master Gateway (All 122 Services)** | `https://diogenesgateway.com/mcp` | [`stand-out-of-my-sun/diogenes-micro-gateway`](https://github.com/stand-out-of-my-sun/diogenes-micro-gateway) |
 
 ---
 
@@ -110,7 +132,7 @@ Install only the domain packages relevant to your workflow:
 | **Endpoint** | `https://diogenesgateway.com/mcp/dev-utilities` |
 | **Manifest** | `https://diogenesgateway.com/.well-known/mcp/dev-utilities.json` |
 | **Health Check** | `https://diogenesgateway.com/api/v1/health` |
-| **Auth** | `none` (100% account-less free tier, MCP discovery & `?demo=true` previews; optional 6 flexible crypto payment rails for production calls: L402, x402, Base MPP, Garlicoin 0-Conf, BSC WGRLC, or Prepaid GRLC session API keys) |
+| **Auth** | `none` (100% account-less free tier, MCP discovery & `?demo=true` previews; optional Stripe Card checkout or 6 crypto payment rails for production calls: dg_sec_... prepaid keys, L402, x402, Base MPP, Garlicoin 0-Conf, BSC WGRLC, XRPL XRP) |
 | **Install Confidence** | `high` (Zero-install remote Streamable HTTP endpoint + root `package.json`, `smithery.yaml`, `server.json`, `glama.json`, and `mcp.json`) |
 | **License** | `MIT` |
 | **Verification** | `verified` (`@stand-out-of-my-sun` verified via `https://diogenesgateway.com/.well-known/tensorblock.json` & `https://diogenesgateway.com/.well-known/mcp/dev-utilities.json`) |
