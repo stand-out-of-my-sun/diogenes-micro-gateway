@@ -69,7 +69,7 @@ Add to `claude_desktop_config.json` (Mac: `~/Library/Application Support/Claude/
 Need high-throughput execution without per-call on-chain latency or wallet confirmations?
 - **Instant Fiat Checkout**: Top up via **Card, Apple Pay, or Google Pay** (\$5 Starter, \$20 Builder, \$100 Fleet with 10%–25% bonus credits) at [https://diogenesgateway.com/#prepay-checkout-widget](https://diogenesgateway.com#prepay-checkout-widget).
 - **Session Keys (`dg_sec_...`)**: Pass `Authorization: Bearer dg_sec_...` for `<0.1ms` Cloudflare KV resolution, rate-limit exemption, and automatic sub-cent deduction.
-- **Multi-Currency Isolated Balances**: Strict single-asset accounting across USD and 6 crypto rails. Zero cross-currency conversions (*"We are not an exchange"*).
+- **Multi-Currency Isolated Balances**: Strict single-asset accounting across USD and 6 crypto rails. Zero cross-currency conversions.
 - **15% Rev-Share Referrals**: Earn 15% lifetime revenue share on referred users and agent swarms via `dg_ref_...`.
 
 ---
