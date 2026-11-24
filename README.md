@@ -5,8 +5,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Edge APIs](https://img.shields.io/badge/Edge%20APIs-122%20Live-brightgreen.svg)](https://diogenesgateway.com)
 [![Frontier Models](https://img.shields.io/badge/AI%20Models-51%20Supported-purple.svg)](https://diogenesgateway.com)
-[![Stripe Fiat Checkout](https://img.shields.io/badge/Stripe-Card%20%26%20Apple%20Pay-635bff.svg)](https://diogenesgateway.com#prepay-checkout-widget)
-[![Prepaid Keys](https://img.shields.io/badge/Session%20Keys-%3C0.1ms%20Fast%20Path-orange.svg)](https://diogenesgateway.com#prepay-checkout-widget)
 
 **Diogenes Microservice Gateway** (`https://diogenesgateway.com`) is an account-less, multi-protocol AI & Web3 edge gateway delivering:
 1. **1-Click IDE Auto-Installation**: Instant 1-line setup for Cursor, Claude Desktop, Zed, and Windsurf via `curl -sSL "https://diogenesgateway.com/install.sh" | bash`.
@@ -15,7 +13,7 @@
 4. **100% Free Developer Tier (21 Deterministic Tools)**: Direct access to AST context pruners, BPE token budget planners, hybrid RAG rerankers, fuzzy diff patchers, and security guardrails with **zero API keys, zero dependencies, and zero wallet required**.
 5. **Account-Less Access to 51 Frontier AI Models & Autonomous Agents**: Instant pay-per-request access to **Antigravity Agent**, **Deep Research Pro**, **Nano Banana Pro (Gemini 3 Pro Image)**, **DeepSeek R1**, **Qwen 2.5 Coder 32B**, **Gemini 4 Argon**, and **Gemini 3.1 Pro** with zero subscriptions.
 6. **122 Production Edge Microservices Across 9 Purpose-Built Modular MCP Packages**: Pre-execution security guardrails, smart contract audits, Solana/EVM risk oracles, neural search synthesizers, database query optimizers, and **14 dedicated EVE: Frontier Sui Move microservices** — settled across 7 flexible rails plus **Streamable HTTP MCP (`/mcp`)**.
-7. **15% Rev-Share Referral Program (`dg_ref_...`)**: Earn 15% lifetime revenue share on referred users and agent fleets with zero sign-up friction.
+7. **15% Referral Credit Bonus (`dg_ref_...`)**: Earn a 15% Referral Credit Bonus on referred users and agent fleets with zero sign-up friction.
 
 ---
 
@@ -76,12 +74,12 @@ Every session key displays its segregated balances transparently via `GET /api/v
 
 ---
 
-## 🤝 15% Rev-Share Referral Program (`dg_ref_...`)
+## 🤝 15% Referral Credit Bonus (`dg_ref_...`)
 
-Earn 15% revenue share on all microservice executions and pack purchases driven by your agents, tools, or links:
+Earn a 15% Referral Credit Bonus on all microservice executions and pack purchases driven by your agents, tools, or links:
 - Generate your public referral hash code: `POST /api/v1/referral/create` -> returns `dg_ref_...`.
 - Append `?ref=dg_ref_...` to any checkout URL (`https://diogenesgateway.com/?ref=dg_ref_...`) or API query.
-- **Credited Directly to Account**: All 15% referral earnings are credited **directly to your account balance (`dg_sec_...`)** in the currency deposited (sats, ETH, SOL, XRP, GRLC, or Stripe USD) as spendable gateway execution credit with zero withdrawal fees.
+- **Credited Directly to Account**: All 15% referral bonus credits are credited **directly to your account balance (`dg_sec_...`)** in the currency deposited (sats, ETH, SOL, XRP, GRLC, or Stripe USD) as spendable gateway execution credit with zero withdrawal fees.
 
 ---
 
