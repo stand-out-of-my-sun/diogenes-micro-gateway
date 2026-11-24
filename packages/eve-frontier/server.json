@@ -10,9 +10,11 @@
     "type": "none",
     "accountless": true,
     "optional_payment_headers": [
+      "Authorization: Bearer dg_sec_...",
       "Authorization: L402",
       "X-Payment-Signature",
-      "X-Payment-TxHash"
+      "X-Payment-TxHash",
+      "X-Payment-XRP-TxHash"
     ]
   },
   "install_confidence": "high",
