@@ -1,38 +1,18 @@
 {
-  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.stand-out-of-my-sun/diogenes-dev-utilities",
-  "description": "14 data extraction, schema healing & workflow orchestration tools: malformed JSON healer, JSON Schema type enforcer, unstructured entity extractor, tabular dataset cleaner, O(n) ReDoS-safe regex synth",
+  "title": "Diogenes Developer, Data & Workflow Orchestration MCP",
+  "description": "14 data extraction, schema healing & workflow orchestration tools: malformed JSON healer, JSON Schem",
   "version": "1.4.0",
-  "license": "MIT",
-  "maintainer": "@stand-out-of-my-sun",
-  "category": "Developer Tools",
-  "auth": {
-    "type": "none",
-    "accountless": true,
-    "optional_payment_headers": [
-      "Authorization: Bearer dg_sec_...",
-      "Authorization: L402",
-      "X-Payment-Signature",
-      "X-Payment-TxHash",
-      "X-Payment-XRP-TxHash"
-    ]
-  },
-  "install_confidence": "high",
-  "verification": {
-    "status": "verified",
-    "package_manifest": "https://diogenesgateway.com/.well-known/mcp/dev-utilities.json",
-    "tensorblock_manifest": "https://diogenesgateway.com/.well-known/tensorblock.json",
-    "health_check": "https://diogenesgateway.com/api/v1/health"
-  },
+  "websiteUrl": "https://diogenesgateway.com",
   "repository": {
     "url": "https://github.com/stand-out-of-my-sun/diogenes-dev-utilities-mcp",
     "source": "github"
   },
   "remotes": [
     {
-      "transport_type": "streamable-http",
-      "url": "https://diogenesgateway.com/mcp/dev-utilities",
-      "auth": "none"
+      "type": "streamable-http",
+      "url": "https://diogenesgateway.com/mcp/dev-utilities"
     }
   ]
 }
