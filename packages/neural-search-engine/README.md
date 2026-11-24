@@ -106,16 +106,15 @@ Install only the domain packages relevant to your workflow:
 
 | Package | Scoped MCP Endpoint | Spoke Repository |
 | :--- | :--- | :--- |
-| **1. EVE: Frontier Sui Move Suite (14 Tools)** | `https://diogenesgateway.com/mcp/eve-frontier` | [`stand-out-of-my-sun/diogenes-eve-frontier-mcp`](https://github.com/stand-out-of-my-sun/diogenes-eve-frontier-mcp) |
-| **2. Agent Guardrails & Sandbox (12 Tools)** | `https://diogenesgateway.com/mcp/agent-guardrails` | [`stand-out-of-my-sun/diogenes-agent-guardrails-mcp`](https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp) |
-| **3. Web3, DeFi & 402 Security (15 Tools)** | `https://diogenesgateway.com/mcp/web3-security` | [`stand-out-of-my-sun/diogenes-web3-security-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp) |
-| **4. Gemini Suite & AI Agents (15 Tools)** | `https://diogenesgateway.com/mcp/gemini-suite` | [`stand-out-of-my-sun/diogenes-gemini-suite-mcp`](https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp) |
-| **5. Context, Code & Solvers (15 Tools)** | `https://diogenesgateway.com/mcp/context-code-solver` | [`stand-out-of-my-sun/diogenes-context-code-solver-mcp`](https://github.com/stand-out-of-my-sun/diogenes-context-code-solver-mcp) |
-| **6. Dev, Data & Workflow Utilities (14 Tools)** | `https://diogenesgateway.com/mcp/dev-utilities` | [`stand-out-of-my-sun/diogenes-dev-utilities-mcp`](https://github.com/stand-out-of-my-sun/diogenes-dev-utilities-mcp) |
-| **7. Web Extraction, Readability & Markdown Engine (12 Tools)** | `https://diogenesgateway.com/mcp/web-scraping-engine` | [`stand-out-of-my-sun/diogenes-web-scraping-engine-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web-scraping-engine-mcp) |
-| **8. Neural Search, Grounded Research & Deep Intelligence (12 Tools)** | `https://diogenesgateway.com/mcp/neural-search-engine` | [`stand-out-of-my-sun/diogenes-neural-search-engine-mcp`](https://github.com/stand-out-of-my-sun/diogenes-neural-search-engine-mcp) |
-| **9. Database Intelligence, SQL Engine & Schema Guard (12 Tools)** | `https://diogenesgateway.com/mcp/database-intelligence` | [`stand-out-of-my-sun/diogenes-database-intelligence-mcp`](https://github.com/stand-out-of-my-sun/diogenes-database-intelligence-mcp) |
-| **10. Full Master Gateway (All 122 Services)** | `https://diogenesgateway.com/mcp` | [`stand-out-of-my-sun/diogenes-micro-gateway`](https://github.com/stand-out-of-my-sun/diogenes-micro-gateway) |
+| **1. Agent Guardrails & Sandbox (12 Tools)** | `https://diogenesgateway.com/mcp/agent-guardrails` | [`stand-out-of-my-sun/diogenes-agent-guardrails-mcp`](https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp) |
+| **2. Web3, DeFi & 402 Security (15 Tools)** | `https://diogenesgateway.com/mcp/web3-security` | [`stand-out-of-my-sun/diogenes-web3-security-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp) |
+| **3. Gemini Suite & AI Agents (15 Tools)** | `https://diogenesgateway.com/mcp/gemini-suite` | [`stand-out-of-my-sun/diogenes-gemini-suite-mcp`](https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp) |
+| **4. Context, Code & Solvers (15 Tools)** | `https://diogenesgateway.com/mcp/context-code-solver` | [`stand-out-of-my-sun/diogenes-context-code-solver-mcp`](https://github.com/stand-out-of-my-sun/diogenes-context-code-solver-mcp) |
+| **5. Dev, Data & Workflow Utilities (14 Tools)** | `https://diogenesgateway.com/mcp/dev-utilities` | [`stand-out-of-my-sun/diogenes-dev-utilities-mcp`](https://github.com/stand-out-of-my-sun/diogenes-dev-utilities-mcp) |
+| **6. Web Extraction, Readability & Markdown Engine (12 Tools)** | `https://diogenesgateway.com/mcp/web-scraping-engine` | [`stand-out-of-my-sun/diogenes-web-scraping-engine-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web-scraping-engine-mcp) |
+| **7. Neural Search, Grounded Research & Deep Intelligence (12 Tools)** | `https://diogenesgateway.com/mcp/neural-search-engine` | [`stand-out-of-my-sun/diogenes-neural-search-engine-mcp`](https://github.com/stand-out-of-my-sun/diogenes-neural-search-engine-mcp) |
+| **8. Database Intelligence, SQL Engine & Schema Guard (12 Tools)** | `https://diogenesgateway.com/mcp/database-intelligence` | [`stand-out-of-my-sun/diogenes-database-intelligence-mcp`](https://github.com/stand-out-of-my-sun/diogenes-database-intelligence-mcp) |
+| **9. Full Master Gateway (All 108 Services)** | `https://diogenesgateway.com/mcp` | [`stand-out-of-my-sun/diogenes-micro-gateway`](https://github.com/stand-out-of-my-sun/diogenes-micro-gateway) |
 
 ---
 
