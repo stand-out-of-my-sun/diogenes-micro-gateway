@@ -11,7 +11,7 @@
 **Diogenes Microservice Gateway** (`https://diogenesgateway.com`) is an account-less, multi-protocol AI & Web3 edge gateway delivering:
 1. **1-Click IDE Auto-Installation**: Instant 1-line setup for Cursor, Claude Desktop, Zed, and Windsurf via `curl -sSL "https://diogenesgateway.com/install.sh" | bash`.
 2. **Instant Stripe Card Checkout & Prepaid Session Keys (`dg_sec_...`)**: Top up instantly using Card, Apple Pay, or Google Pay (\$5 Starter, \$20 Builder, \$100 Fleet with 10%–25% bonus credits) or crypto prepay for `<0.1ms` edge execution, zero on-chain confirmation latency, and zero per-call transaction overhead.
-3. **Multi-Currency Isolated Balance Architecture**: Strict single-asset accounting across USD, Bitcoin sats, Ethereum ETH, Solana SOL, Ripple XRP, and Garlicoin GRLC. Zero cross-currency conversions; *"We are not an exchange"*.
+3. **Multi-Currency Isolated Balance Architecture**: Strict single-asset accounting across USD, Bitcoin sats, Ethereum ETH, Solana SOL, Ripple XRP, and Garlicoin GRLC. Zero cross-currency conversions.
 4. **100% Free Developer Tier (21 Deterministic Tools)**: Direct access to AST context pruners, BPE token budget planners, hybrid RAG rerankers, fuzzy diff patchers, and security guardrails with **zero API keys, zero dependencies, and zero wallet required**.
 5. **Account-Less Access to 51 Frontier AI Models & Autonomous Agents**: Instant pay-per-request access to **Antigravity Agent**, **Deep Research Pro**, **Nano Banana Pro (Gemini 3 Pro Image)**, **DeepSeek R1**, **Qwen 2.5 Coder 32B**, **Gemini 4 Argon**, and **Gemini 3.1 Pro** with zero subscriptions.
 6. **122 Production Edge Microservices Across 9 Purpose-Built Modular MCP Packages**: Pre-execution security guardrails, smart contract audits, Solana/EVM risk oracles, neural search synthesizers, database query optimizers, and **14 dedicated EVE: Frontier Sui Move microservices** — settled across 7 flexible rails plus **Streamable HTTP MCP (`/mcp`)**.
@@ -60,9 +60,6 @@ Tired of submitting on-chain transactions or waiting for block confirmations for
 ---
 
 ## 🏛️ Multi-Currency Isolated Balance Architecture
-
-Diogenes Gateway enforces strict single-asset accounting across all settlement rails:
-> **"We are not an exchange."**
 
 - **USD Balance (`creditBalanceUsd`)**: Funded exclusively via Stripe Card / Apple Pay checkout. Deducted exclusively for microservices priced in USD.
 - **Lightning Sats (`creditBalanceSats`)**: Funded via Bitcoin Lightning L402 invoices. Deducted for sat-denominated endpoints.
