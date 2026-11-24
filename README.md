@@ -70,6 +70,10 @@ Tired of submitting on-chain transactions or waiting for block confirmations for
 
 Every session key displays its segregated balances transparently via `GET /api/v1/prepay/balance?key=dg_sec_...`. Balances never convert into other currencies, ensuring zero exchange risk, zero slippage, and zero regulatory ambiguity.
 
+> [!IMPORTANT]
+> **Non-Withdrawable API Credits & Token Display**:
+> Once deposited, funds **cannot be withdrawn**. All balances represent non-refundable API execution credits. Balances are displayed in their raw token values simply to reflect how much you've deposited into each respective rail. Microservice execution prices in sats and tokens adjust dynamically based on live coin market spot prices.
+
 ---
 
 ## 🤝 15% Rev-Share Referral Program (`dg_ref_...`)
@@ -77,7 +81,7 @@ Every session key displays its segregated balances transparently via `GET /api/v
 Earn 15% revenue share on all microservice executions and pack purchases driven by your agents, tools, or links:
 - Generate your public referral hash code: `POST /api/v1/referral/create` -> returns `dg_ref_...`.
 - Append `?ref=dg_ref_...` to any checkout URL (`https://diogenesgateway.com/?ref=dg_ref_...`) or API query.
-- Commissions accrue transparently to your referral balance with instant settlement.
+- **Credited Directly to Account**: All 15% referral earnings are credited **directly to your account balance (`dg_sec_...`)** in the currency deposited (sats, ETH, SOL, XRP, GRLC, or Stripe USD) as spendable gateway execution credit with zero withdrawal fees.
 
 ---
 
@@ -88,7 +92,7 @@ To protect compute resources while maximizing developer access, the gateway enfo
 | Tier | Category & Capabilities | Pricing | Free Quota | Static Preview (`?sample=true`) |
 | :--- | :--- | :--- | :--- | :--- |
 | **Tier 1: Free Dev Utilities** | AST pruners, JSON healers, SQL injection validators, ReDoS regex oracles | **100% Free** (\$0.00) | **Unlimited** (Zero keys/wallet) | Yes |
-| **Tier 2: Micro-Paid APIs** | Security audits, token risk oracles, EVE Frontier tools, neural search | Starting at **10 sats / \$0.01** | **2 Live Free Demos / Day** (`?demo=true`) | Yes |
+| **Tier 2: Micro-Paid APIs** | Security audits, token risk oracles, EVE Frontier tools, neural search | Starting at **10 sats / \$0.01** | **3 Live Free Demos / Day** (`?demo=true`) | Yes |
 | **Tier 3: Heavy Pipelines** | Headless Chromium rendering, deep research dossiers, frontier reasoning | Dynamic marginal cost | Paywall on Call #1 | **Yes (Free static sample)** |
 
 ---
