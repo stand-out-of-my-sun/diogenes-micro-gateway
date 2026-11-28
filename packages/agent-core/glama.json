@@ -1,0 +1,20 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "maintainers": [
+    "stand-out-of-my-sun"
+  ],
+  "name": "diogenes-agent-core-mcp",
+  "server_id": "io.github.stand-out-of-my-sun/diogenes-agent-core",
+  "license": "MIT",
+  "category": "Developer Tools",
+  "transport": "streamable-http",
+  "auth": "none",
+  "install_confidence": "high",
+  "verification": "verified",
+  "repository": "https://github.com/stand-out-of-my-sun/diogenes-agent-core-mcp",
+  "homepage": "https://diogenesgateway.com#mcp-packages",
+  "remote_url": "https://diogenesgateway.com/mcp/agent-core",
+  "manifest_url": "https://diogenesgateway.com/.well-known/mcp/agent-core.json",
+  "health_check_url": "https://diogenesgateway.com/api/v1/health",
+  "description": "Curated 10-tool high-utility MCP package containing the most frequently called agent tools (clean markdown, SQL AST validation, malformed JSON repair, context pruning, mempool feerates, and PII redaction). 100% free developer tier."
+}
