@@ -95,12 +95,13 @@ To protect compute resources while maximizing developer access, the gateway enfo
 
 ---
 
-## 📦 8 Purpose-Built Modular MCP Packages
+## 📦 8 Modular MCP Packages + Curated Essentials Pack
 
 Instead of loading all 108 gateway endpoints into your LLM's context window at once, connect Cursor, Claude Desktop, Zed, or Windsurf to a **purpose-built domain package** (12–15 tools each, `100%` schema coverage, `outputSchema`, and zero tool shadowing):
 
 | Domain Package | Scoped 1-Click MCP Endpoint | Dedicated Spoke Repository | Tools |
 | :--- | :--- | :--- | :--- |
+| **⭐ Agent Core Essentials** | `https://diogenesgateway.com/mcp/agent-core` | [`stand-out-of-my-sun/diogenes-agent-core-mcp`](https://github.com/stand-out-of-my-sun/diogenes-agent-core-mcp) | **10 Tools (100% Free Developer Tier)** — Top 10 breakout agent tools: markdown cleaner, SQL AST validator, JSON repair, context pruner, mempool fee, PII redactor |
 | **1. Gemini Suite & AI Agents** | `https://diogenesgateway.com/mcp/gemini-suite` | [`stand-out-of-my-sun/diogenes-gemini-suite-mcp`](https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp) | **15 Tools** — 51 Google Gemini & frontier models (Gemini 4 Argon, 3.1 Pro, DeepSeek R1, Qwen 2.5 Coder), Antigravity Agent, Deep Research Pro, Nano Banana Pro |
 | **2. Context, Code & Solvers** | `https://diogenesgateway.com/mcp/context-code-solver` | [`stand-out-of-my-sun/diogenes-context-code-solver-mcp`](https://github.com/stand-out-of-my-sun/diogenes-context-code-solver-mcp) | **15 Tools** — 100% Free Developer Tier: AST context pruner, BPE token budget planner, BM25+RRF reranker, fuzzy diff patcher, Tarjan cycle detector, type compiler |
 | **3. Agent Guardrails & Sandbox** | `https://diogenesgateway.com/mcp/agent-guardrails` | [`stand-out-of-my-sun/diogenes-agent-guardrails-mcp`](https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp) | **12 Tools** — Command gate, SQL AST validator, Python sandbox, MCP manifest & rug-pull auditors, sampling firewall, output scrubber, PII redactor |
