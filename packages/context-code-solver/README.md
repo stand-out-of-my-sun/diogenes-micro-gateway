@@ -8,7 +8,7 @@
 
 **Diogenes Context Compression, Code Patching & Deterministic Solver MCP** is a focused, zero-bloat Model Context Protocol (`streamable-http`) package powered by the [Diogenes Microservice Gateway](https://diogenesgateway.com).
 
-Instead of loading all 122 gateway endpoints into your LLM's context window, installing this package exposes **only the 15 specialized `context-code-solver` tools** needed for **Context, Code & Deterministic Solvers**:
+Instead of loading all 108 gateway endpoints into your LLM's context window, installing this package exposes **only the 15 specialized `context-code-solver` tools** needed for **Context, Code & Deterministic Solvers**:
 
 100% Free Developer Tier (zero API keys, zero wallet required): 15 deterministic AI agent & developer tools: AST context skeleton pruner, BPE token budget planner, BM25+RRF+MMR hybrid reranker, self-healing fuzzy diff patcher, polyglot AST symbol & complexity analyzer, Tarjan circular dependency detector, stack-trace root-cause isolator, polyglot TypeScript/Zod/Pydantic compiler, Shunting-Yard math & IRR/NPV solver, Critical Path (CPM) scheduler, Welch/Bayesian A/B judge, RFC 7396 memory differ, OpenAPI breaking-change detector, boundary test-vector generator, and seeded Monte Carlo VaR/CVaR simulator.
 
@@ -109,6 +109,7 @@ Install only the domain packages relevant to your workflow:
 
 | Package | Scoped MCP Endpoint | Spoke Repository |
 | :--- | :--- | :--- |
+| **⭐ Agent Core Essentials (Curated Pack)** | `https://diogenesgateway.com/mcp/agent-core` | [`stand-out-of-my-sun/diogenes-agent-core-mcp`](https://github.com/stand-out-of-my-sun/diogenes-agent-core-mcp) |
 | **1. Agent Guardrails & Sandbox (12 Tools)** | `https://diogenesgateway.com/mcp/agent-guardrails` | [`stand-out-of-my-sun/diogenes-agent-guardrails-mcp`](https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp) |
 | **2. Web3, DeFi & 402 Security (15 Tools)** | `https://diogenesgateway.com/mcp/web3-security` | [`stand-out-of-my-sun/diogenes-web3-security-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp) |
 | **3. Gemini Suite & AI Agents (15 Tools)** | `https://diogenesgateway.com/mcp/gemini-suite` | [`stand-out-of-my-sun/diogenes-gemini-suite-mcp`](https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp) |
