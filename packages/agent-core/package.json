@@ -1,0 +1,52 @@
+{
+  "name": "@stand-out-of-my-sun/diogenes-agent-core-mcp",
+  "version": "1.4.0",
+  "description": "Curated 10-tool high-utility MCP package containing the most frequently called agent tools (clean markdown, SQL AST validation, malformed JSON repair, context pruning, mempool feerates, and PII redaction). 100% free developer tier.",
+  "license": "MIT",
+  "author": "@stand-out-of-my-sun",
+  "homepage": "https://diogenesgateway.com#mcp-packages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-agent-core-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stand-out-of-my-sun/diogenes-agent-core-mcp/issues"
+  },
+  "main": "index.js",
+  "bin": {
+    "diogenes-agent-core-mcp": "index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test test/*.test.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "agent-core",
+    "clean-markdown",
+    "json-repair",
+    "sql-validation",
+    "context-pruner",
+    "mempool-fee",
+    "pii-redaction",
+    "command-safety",
+    "query-expansion",
+    "token-budget",
+    "streamable-http",
+    "glama",
+    "tensorblock"
+  ],
+  "mcp": {
+    "serverId": "io.github.stand-out-of-my-sun/diogenes-agent-core",
+    "packageSlug": "agent-core",
+    "transport": "streamable-http",
+    "endpoint": "https://diogenesgateway.com/mcp/agent-core",
+    "manifestEndpoint": "https://diogenesgateway.com/.well-known/mcp/agent-core.json",
+    "healthEndpoint": "https://diogenesgateway.com/api/v1/health",
+    "auth": "none",
+    "installConfidence": "high",
+    "verification": "verified",
+    "toolsCount": 10
+  }
+}
