@@ -8,7 +8,7 @@
 
 **Diogenes Web3, DeFi & HTTP 402 Security MCP** is a focused, zero-bloat Model Context Protocol (`streamable-http`) package powered by the [Diogenes Microservice Gateway](https://diogenesgateway.com).
 
-Instead of loading all 122 gateway endpoints into your LLM's context window, installing this package exposes **only the 15 specialized `web3-security` tools** needed for **Blockchain & Web3**:
+Instead of loading all 108 gateway endpoints into your LLM's context window, installing this package exposes **only the 15 specialized `web3-security` tools** needed for **Blockchain & Web3**:
 
 15 Web3, DeFi & HTTP 402 security tools: EVM/Move contract auditor, Solana Anchor CPI scanner, SPL risk & liquidity inspectors, whale flow tracker, Jito fee estimator, EIP-712 & EVM calldata decoders, MEV evaluator, address-poisoning detector, 402 verifier, Bitcoin UTXO planner, and non-KYC bridge comparator.
 
@@ -109,6 +109,7 @@ Install only the domain packages relevant to your workflow:
 
 | Package | Scoped MCP Endpoint | Spoke Repository |
 | :--- | :--- | :--- |
+| **⭐ Agent Core Essentials (Curated Pack)** | `https://diogenesgateway.com/mcp/agent-core` | [`stand-out-of-my-sun/diogenes-agent-core-mcp`](https://github.com/stand-out-of-my-sun/diogenes-agent-core-mcp) |
 | **1. Agent Guardrails & Sandbox (12 Tools)** | `https://diogenesgateway.com/mcp/agent-guardrails` | [`stand-out-of-my-sun/diogenes-agent-guardrails-mcp`](https://github.com/stand-out-of-my-sun/diogenes-agent-guardrails-mcp) |
 | **2. Web3, DeFi & 402 Security (15 Tools)** | `https://diogenesgateway.com/mcp/web3-security` | [`stand-out-of-my-sun/diogenes-web3-security-mcp`](https://github.com/stand-out-of-my-sun/diogenes-web3-security-mcp) |
 | **3. Gemini Suite & AI Agents (15 Tools)** | `https://diogenesgateway.com/mcp/gemini-suite` | [`stand-out-of-my-sun/diogenes-gemini-suite-mcp`](https://github.com/stand-out-of-my-sun/diogenes-gemini-suite-mcp) |
