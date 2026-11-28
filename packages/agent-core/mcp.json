@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "diogenes-agent-core": {
+      "transport": "streamable-http",
+      "url": "https://diogenesgateway.com/mcp/agent-core",
+      "auth": "none",
+      "description": "Curated 10-tool high-utility MCP package containing the most frequently called agent tools (clean markdown, SQL AST validation, malformed JSON repair, context pruning, mempool feerates, and PII redaction). 100% free developer tier.",
+      "headers": {}
+    }
+  }
+}
